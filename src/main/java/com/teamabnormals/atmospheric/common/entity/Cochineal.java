@@ -6,6 +6,7 @@ import com.teamabnormals.atmospheric.core.other.tags.AtmosphericBlockTags;
 import com.teamabnormals.atmospheric.core.other.tags.AtmosphericItemTags;
 import com.teamabnormals.atmospheric.core.registry.AtmosphericEntityTypes;
 import com.teamabnormals.atmospheric.core.registry.AtmosphericParticleTypes;
+import com.teamabnormals.atmospheric.core.registry.AtmosphericSoundEvents;
 import com.teamabnormals.blueprint.core.util.NetworkUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -19,6 +20,7 @@ import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
@@ -42,6 +44,7 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
@@ -456,6 +459,10 @@ public class Cochineal extends Animal implements Saddleable {
 				}
 			}
 
+			if (this.isAttachedToCactus() && this.random.nextInt(160) == 0) {
+				this.playSound(AtmosphericSoundEvents.COCHINEAL_SUCKLE.get());
+			}
+
 			if (!this.getEatingStack().isEmpty() && this.tickCount % 12 == 0) {
 				this.playSound(SoundEvents.GENERIC_EAT, 0.5F + 0.5F * (float) this.random.nextInt(2), (this.random.nextFloat() - this.random.nextFloat()) * 0.2F + 1.0F);
 				if (this.level.isClientSide) {
@@ -530,6 +537,20 @@ public class Cochineal extends Animal implements Saddleable {
 		} else {
 			return super.getDimensions(pose);
 		}
+	}
+
+	@Override
+	protected SoundEvent getHurtSound(DamageSource p_29502_) {
+		return AtmosphericSoundEvents.COCHINEAL_HURT.get();
+	}
+
+	@Override
+	protected SoundEvent getDeathSound() {
+		return AtmosphericSoundEvents.COCHINEAL_DEATH.get();
+	}
+
+	@Override
+	protected void playStepSound(BlockPos p_29492_, BlockState p_29493_) {
 	}
 
 	@Override
