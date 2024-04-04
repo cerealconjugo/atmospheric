@@ -459,12 +459,12 @@ public class Cochineal extends Animal implements Saddleable {
 				}
 			}
 
-			if (this.isAttachedToCactus() && this.random.nextInt(160) == 0) {
-				this.playSound(AtmosphericSoundEvents.COCHINEAL_SUCKLE.get());
+			if (this.isAttachedToCactus() && this.random.nextInt(200) == 0) {
+				this.playSound(AtmosphericSoundEvents.COCHINEAL_SUCKLE.get(), 0.85F, 0.4F / (this.getRandom().nextFloat() * 0.4F + 0.8F));
 			}
 
 			if (!this.getEatingStack().isEmpty() && this.tickCount % 12 == 0) {
-				this.playSound(SoundEvents.GENERIC_EAT, 0.5F + 0.5F * (float) this.random.nextInt(2), (this.random.nextFloat() - this.random.nextFloat()) * 0.2F + 1.0F);
+				this.playSound(AtmosphericSoundEvents.COCHINEAL_SUCKLE.get(), 1.4F, 0.4F / (this.getRandom().nextFloat() * 0.4F + 0.8F));
 				if (this.level.isClientSide) {
 					for (int i = 0; i < 6; ++i) {
 						Vec3 vec3 = new Vec3((this.random.nextFloat() - 0.5D) * 0.1D, Math.random() * 0.1D + 0.1D, (this.random.nextFloat() - 0.5D) * 0.1D);
