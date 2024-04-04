@@ -24,5 +24,12 @@
       "atmospheric:mob/cochineal/suckle6"
     ],
     "subtitle": "subtitles.atmospheric.entity.cochineal.suckle"
+  },
+  "entity.passion_fruit_seed.spit": {
+    "sounds": [
+      "mob/llama/spit1",
+      "mob/llama/spit2"
+    ],
+    "subtitle": "subtitles.atmospheric.entity.passion_fruit_seed.spit"
   }
 }
