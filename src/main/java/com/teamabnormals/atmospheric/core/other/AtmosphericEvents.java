@@ -113,6 +113,6 @@ public class AtmosphericEvents {
 
 	public static boolean isAprilFools() {
 		Calendar calendar = Calendar.getInstance();
-		return calendar.get(Calendar.MONTH) + 1 == 4 && calendar.get(Calendar.DATE) == 3;
+		return calendar.get(Calendar.MONTH) + 1 == 4 && calendar.get(Calendar.DATE) == 1;
 	}
 }
