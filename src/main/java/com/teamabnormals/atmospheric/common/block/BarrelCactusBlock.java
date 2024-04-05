@@ -8,6 +8,7 @@ import com.teamabnormals.atmospheric.core.registry.AtmosphericItems;
 import com.teamabnormals.atmospheric.core.registry.AtmosphericMobEffects;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.Direction.Plane;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.RandomSource;
@@ -24,6 +25,7 @@ import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.BonemealableBlock;
+import net.minecraft.world.level.block.CactusBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -117,6 +119,13 @@ public class BarrelCactusBlock extends Block implements IPlantable, Bonemealable
 	@Override
 	public boolean canSurvive(BlockState state, LevelReader worldIn, BlockPos pos) {
 		BlockState downState = worldIn.getBlockState(pos.below());
+
+		for (Direction direction : Plane.HORIZONTAL) {
+			if (worldIn.getBlockState(pos.relative(direction)).getBlock() instanceof CactusBlock) {
+				return false;
+			}
+		}
+
 		return downState.is(AtmosphericBlockTags.BARREL_CACTUS_PLACEABLE) && !worldIn.getBlockState(pos.above()).getMaterial().isLiquid();
 	}
 
