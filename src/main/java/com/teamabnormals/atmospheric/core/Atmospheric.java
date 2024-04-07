@@ -63,6 +63,7 @@ public class Atmospheric {
 		AtmosphericLootConditions.LOOT_CONDITION_TYPES.register(bus);
 		AtmosphericBannerPatterns.BANNER_PATTERNS.register(bus);
 		AtmosphericStructureProcessors.STRUCTURE_PROCESSORS.register(bus);
+		AtmosphericDecoratedPotPatterns.DECORATED_POT_PATTERNS.register(bus);
 
 		bus.addListener(this::commonSetup);
 		bus.addListener(this::clientSetup);
@@ -81,6 +82,7 @@ public class Atmospheric {
 			AtmosphericVillagers.registerVillagerTypes();
 			AtmosphericCompat.registerCompat();
 			AtmosphericMobEffects.registerBrewingRecipes();
+			AtmosphericDecoratedPotPatterns.registerDecoratedPotPatterns();
 		});
 	}
 

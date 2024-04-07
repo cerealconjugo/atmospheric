@@ -40,7 +40,8 @@ public class AtmosphericItemModelProvider extends ItemModelProvider {
 				ALOE_GEL_BOTTLE.get(), ALOE_KERNELS.get(), ALOE_LEAVES.get(), YELLOW_BLOSSOMS.get(), YUCCA_FRUIT.get(), ROASTED_YUCCA_FRUIT.get(),
 				CURRANT.get(), CURRANT_MUFFIN.get(),
 				CARMINE_HUSK.get(), COCHINEAL_BANNER_PATTERN.get(), AtmosphericBlocks.DRAGON_ROOTS.get().asItem(), DRAGON_FRUIT.get(), GOLDEN_DRAGON_FRUIT.get(), ENDER_DRAGON_FRUIT.get(),
-				ORANGE_PUDDING.get(), ORANGE_SORBET.get(), CANDIED_ORANGE_SLICES.get(), BLOOD_ORANGE.get()
+				ORANGE_PUDDING.get(), ORANGE_SORBET.get(), CANDIED_ORANGE_SLICES.get(), BLOOD_ORANGE.get(),
+				SCYTHE_POTTERY_SHERD.get(), SUCCULENT_POTTERY_SHERD.get(), SUN_POTTERY_SHERD.get()
 		);
 
 		this.spawnEggItem(COCHINEAL_SPAWN_EGG.get());

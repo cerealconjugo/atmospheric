@@ -68,6 +68,7 @@ public class AtmosphericItemTagsProvider extends ItemTagsProvider {
 		this.tag(ItemTags.PIGLIN_LOVED).add(AtmosphericItems.SHIMMERING_PASSION_FRUIT.get(), SHIMMERING_PASSION_FRUIT_CRATE.get().asItem(), AtmosphericItems.GOLDEN_DRAGON_FRUIT.get(), GOLDEN_DRAGON_FRUIT_CRATE.get().asItem());
 		this.tag(ItemTags.STONE_TOOL_MATERIALS).addTag(TRAVERTINE);
 		this.tag(ItemTags.STONE_CRAFTING_MATERIALS).addTag(TRAVERTINE);
+		this.tag(ItemTags.DECORATED_POT_SHERDS).add(AtmosphericItems.SCYTHE_POTTERY_SHERD.get(), AtmosphericItems.SUCCULENT_POTTERY_SHERD.get(), AtmosphericItems.SUN_POTTERY_SHERD.get());
 
 		this.copy(Tags.Blocks.CHESTS_WOODEN, Tags.Items.CHESTS_WOODEN);
 		this.copy(Tags.Blocks.CHESTS_TRAPPED, Tags.Items.CHESTS_TRAPPED);

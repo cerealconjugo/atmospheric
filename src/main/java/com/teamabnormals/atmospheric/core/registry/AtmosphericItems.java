@@ -53,6 +53,10 @@ public class AtmosphericItems {
 	public static final RegistryObject<Item> CANDIED_ORANGE_SLICES = HELPER.createItem("candied_orange_slices", () -> new Item(new Item.Properties().food(AtmosphericFoods.CANDIED_ORANGE_SLICES)));
 	public static final RegistryObject<Item> BLOOD_ORANGE = HELPER.createItem("blood_orange", () -> new OrangeBlockItem(AtmosphericBlocks.BLOOD_ORANGE.get(), new Item.Properties().food(AtmosphericFoods.BLOOD_ORANGE)));
 
+	public static final RegistryObject<Item> SCYTHE_POTTERY_SHERD = HELPER.createItem("scythe_pottery_sherd", () -> new Item(new Item.Properties()));
+	public static final RegistryObject<Item> SUCCULENT_POTTERY_SHERD = HELPER.createItem("succulent_pottery_sherd", () -> new Item(new Item.Properties()));
+	public static final RegistryObject<Item> SUN_POTTERY_SHERD = HELPER.createItem("sun_pottery_sherd", () -> new Item(new Item.Properties()));
+
 	public static final Pair<RegistryObject<Item>, RegistryObject<Item>> ROSEWOOD_BOAT = HELPER.createBoatAndChestBoatItem("rosewood", AtmosphericBlocks.ROSEWOOD_PLANKS);
 	public static final RegistryObject<Item> ROSEWOOD_FURNACE_BOAT = HELPER.createItem("rosewood_furnace_boat", ModList.get().isLoaded("boatload") ? AtmosphericBoatTypes.ROSEWOOD_FURNACE_BOAT : () -> new Item(new Item.Properties()));
 	public static final RegistryObject<Item> LARGE_ROSEWOOD_BOAT = HELPER.createItem("large_rosewood_boat", ModList.get().isLoaded("boatload") ? AtmosphericBoatTypes.LARGE_ROSEWOOD_BOAT : () -> new Item(new Item.Properties()));
