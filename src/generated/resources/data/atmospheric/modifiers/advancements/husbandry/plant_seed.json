@@ -6,7 +6,12 @@
         "criteria": {
           "atmospheric:aloe_vera": {
             "conditions": {
-              "block": "atmospheric:aloe_vera"
+              "location": [
+                {
+                  "block": "atmospheric:aloe_vera",
+                  "condition": "minecraft:block_state_property"
+                }
+              ]
             },
             "trigger": "minecraft:placed_block"
           }

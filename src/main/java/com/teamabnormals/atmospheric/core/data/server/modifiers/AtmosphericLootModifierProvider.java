@@ -4,22 +4,24 @@ import com.teamabnormals.atmospheric.core.Atmospheric;
 import com.teamabnormals.atmospheric.core.registry.AtmosphericItems;
 import com.teamabnormals.blueprint.common.loot.modification.LootModifierProvider;
 import com.teamabnormals.blueprint.common.loot.modification.modifiers.LootPoolEntriesModifier;
-import net.minecraft.data.DataGenerator;
+import net.minecraft.core.HolderLookup.Provider;
+import net.minecraft.data.PackOutput;
 import net.minecraft.world.level.storage.loot.BuiltInLootTables;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
 public class AtmosphericLootModifierProvider extends LootModifierProvider {
 
-	public AtmosphericLootModifierProvider(DataGenerator generator) {
-		super(generator, Atmospheric.MOD_ID);
+	public AtmosphericLootModifierProvider(PackOutput output, CompletableFuture<Provider> provider) {
+		super(Atmospheric.MOD_ID, output, provider);
 	}
 
 	@Override
-	protected void registerEntries() {
+	protected void registerEntries(Provider provider) {
 		this.entry("ruined_portal").selects(BuiltInLootTables.RUINED_PORTAL)
 				.addModifier(new LootPoolEntriesModifier(false, 0,
 						List.of(

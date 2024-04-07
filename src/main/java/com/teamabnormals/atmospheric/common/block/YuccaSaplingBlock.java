@@ -1,15 +1,16 @@
 package com.teamabnormals.atmospheric.common.block;
 
-import com.teamabnormals.atmospheric.core.other.AtmosphericDamageSources;
+import com.teamabnormals.atmospheric.core.other.AtmosphericDamageTypes;
 import com.teamabnormals.atmospheric.core.other.tags.AtmosphericBlockTags;
-import com.teamabnormals.blueprint.common.block.wood.BlueprintSaplingBlock;
 import net.minecraft.core.BlockPos;
-import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.damagesource.DamageType;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.SaplingBlock;
 import net.minecraft.world.level.block.grower.AbstractTreeGrower;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.pathfinder.BlockPathTypes;
@@ -18,7 +19,7 @@ import net.minecraftforge.common.PlantType;
 
 import javax.annotation.Nullable;
 
-public class YuccaSaplingBlock extends BlueprintSaplingBlock implements IPlantable, YuccaPlant {
+public class YuccaSaplingBlock extends SaplingBlock implements IPlantable, YuccaPlant {
 	public YuccaSaplingBlock(AbstractTreeGrower tree, Properties properties) {
 		super(tree, properties);
 	}
@@ -39,14 +40,14 @@ public class YuccaSaplingBlock extends BlueprintSaplingBlock implements IPlantab
 	}
 
 	@Override
-	public DamageSource getDamageSource() {
-		return AtmosphericDamageSources.YUCCA_SAPLING;
+	public ResourceKey<DamageType> getDamageTypeKey() {
+		return AtmosphericDamageTypes.YUCCA_SAPLING;
 	}
 
 	@Nullable
 	@Override
 	public BlockPathTypes getBlockPathType(BlockState state, BlockGetter world, BlockPos pos, @Nullable Mob entity) {
-		return BlockPathTypes.DAMAGE_CACTUS;
+		return BlockPathTypes.DANGER_OTHER;
 	}
 
 	@Override

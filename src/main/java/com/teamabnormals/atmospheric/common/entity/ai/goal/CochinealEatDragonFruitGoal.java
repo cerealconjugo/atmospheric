@@ -33,7 +33,7 @@ public class CochinealEatDragonFruitGoal extends Goal {
 		if (this.cochineal.getAge() != 0 || !this.cochineal.canFallInLove() || this.cochineal.getRandom().nextInt(this.adjustedTickDelay(20)) != 0)
 			return false;
 
-		List<ItemEntity> list = this.cochineal.getLevel().getEntitiesOfClass(ItemEntity.class, this.cochineal.getBoundingBox().inflate(12.0D, 4.0D, 12.0D), itemEntity -> this.cochineal.isFood(itemEntity.getItem()));
+		List<ItemEntity> list = this.cochineal.level().getEntitiesOfClass(ItemEntity.class, this.cochineal.getBoundingBox().inflate(12.0D, 4.0D, 12.0D), itemEntity -> this.cochineal.isFood(itemEntity.getItem()));
 		ItemEntity itementity = null;
 		double d0 = Double.MAX_VALUE;
 
@@ -72,12 +72,11 @@ public class CochinealEatDragonFruitGoal extends Goal {
 	@Override
 	public void tick() {
 		if (this.cochineal.getBoundingBox().inflate(0.5D).intersects(this.itemEntity.getBoundingBox())) {
-			if (this.cochineal.isOnGround() || this.cochineal.isInFluidType()) {
+			if (this.cochineal.onGround() || this.cochineal.isInFluidType()) {
 				this.cochineal.setEatingStack(this.itemEntity.getItem());
 				this.cochineal.getLookControl().setLookAt(this.itemEntity, 10.0F, this.cochineal.getMaxHeadXRot());
 				if (this.eatTime-- <= 0) {
-					Player player = this.itemEntity.getThrower() != null ? this.cochineal.level.getPlayerByUUID(this.itemEntity.getThrower()) : null;
-					this.cochineal.setInLove(player);
+					this.cochineal.setInLove(itemEntity.getOwner() instanceof Player player ? player : null);
 					this.cochineal.gameEvent(GameEvent.EAT);
 					if (this.itemEntity.getItem().is(AtmosphericItemTags.COCHINEAL_SUPER_LOVE_FOOD))
 						this.cochineal.setSuperInLove(true);

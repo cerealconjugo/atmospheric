@@ -24,5 +24,6 @@
     [
       "finish_gateau"
     ]
-  ]
+  ],
+  "sends_telemetry_event": true
 }

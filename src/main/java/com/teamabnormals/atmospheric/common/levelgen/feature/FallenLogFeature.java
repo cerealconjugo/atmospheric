@@ -6,6 +6,7 @@ import com.teamabnormals.atmospheric.core.registry.AtmosphericBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Direction.Plane;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.LevelSimulatedReader;
 import net.minecraft.world.level.WorldGenLevel;
@@ -14,7 +15,6 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.level.levelgen.feature.configurations.SimpleBlockConfiguration;
-import net.minecraft.world.level.material.Material;
 
 import java.util.Set;
 
@@ -59,9 +59,6 @@ public class FallenLogFeature extends Feature<SimpleBlockConfiguration> {
 	}
 
 	private static boolean isReplaceablePlant(LevelSimulatedReader level, BlockPos pos) {
-		return level.isStateAtPosition(pos, (state) -> {
-			Material material = state.getMaterial();
-			return material == Material.REPLACEABLE_PLANT || material == Material.REPLACEABLE_WATER_PLANT || material == Material.REPLACEABLE_FIREPROOF_PLANT;
-		});
+		return level.isStateAtPosition(pos, (state) -> state.is(BlockTags.REPLACEABLE));
 	}
 }

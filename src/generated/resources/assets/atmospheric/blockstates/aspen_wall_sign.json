@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "atmospheric:block/aspen_wall_sign"
+      "model": "atmospheric:block/aspen_sign"
     }
   }
 }

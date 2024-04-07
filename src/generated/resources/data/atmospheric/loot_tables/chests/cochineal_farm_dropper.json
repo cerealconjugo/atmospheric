@@ -26,5 +26,6 @@
         "min": 3.0
       }
     }
-  ]
+  ],
+  "random_sequence": "atmospheric:chests/cochineal_farm_dropper"
 }

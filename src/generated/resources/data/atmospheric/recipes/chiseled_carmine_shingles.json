@@ -1,5 +1,6 @@
 {
   "type": "minecraft:crafting_shaped",
+  "category": "building",
   "key": {
     "#": {
       "item": "atmospheric:carmine_shingle_slab"
@@ -11,5 +12,6 @@
   ],
   "result": {
     "item": "atmospheric:chiseled_carmine_shingles"
-  }
+  },
+  "show_notification": true
 }

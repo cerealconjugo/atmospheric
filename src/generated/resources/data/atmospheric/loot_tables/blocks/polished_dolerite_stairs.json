@@ -16,5 +16,6 @@
       ],
       "rolls": 1.0
     }
-  ]
+  ],
+  "random_sequence": "atmospheric:blocks/polished_dolerite_stairs"
 }

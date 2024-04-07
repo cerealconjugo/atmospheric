@@ -38,7 +38,7 @@ public class CochinealRandomHopGoal extends Goal {
 		this.stuckTime = 0;
 
 		BlockPos blockpos = this.cochineal.getLastHabitatBiomePos();
-		if (blockpos != null && !this.cochineal.getLevel().getBiome(this.cochineal.blockPosition()).is(AtmosphericBiomeTags.IS_COCHINEAL_HABITAT))
+		if (blockpos != null && !this.cochineal.level().getBiome(this.cochineal.blockPosition()).is(AtmosphericBiomeTags.IS_COCHINEAL_HABITAT))
 			this.direction = (float) Mth.atan2(blockpos.getZ() - this.cochineal.getZ(), blockpos.getX() - this.cochineal.getX()) - Mth.HALF_PI;
 		else
 			this.direction = this.cochineal.getYRot();

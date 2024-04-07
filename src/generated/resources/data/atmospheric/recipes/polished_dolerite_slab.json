@@ -1,5 +1,6 @@
 {
   "type": "minecraft:crafting_shaped",
+  "category": "building",
   "key": {
     "#": {
       "item": "atmospheric:polished_dolerite"
@@ -11,5 +12,6 @@
   "result": {
     "count": 6,
     "item": "atmospheric:polished_dolerite_slab"
-  }
+  },
+  "show_notification": true
 }

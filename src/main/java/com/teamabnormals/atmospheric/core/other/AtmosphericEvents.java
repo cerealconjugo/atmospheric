@@ -7,7 +7,10 @@ import com.teamabnormals.atmospheric.core.registry.AtmosphericItems;
 import com.teamabnormals.atmospheric.core.registry.AtmosphericMobEffects;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.damagesource.DamageType;
+import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.projectile.Snowball;
@@ -34,7 +37,7 @@ public class AtmosphericEvents {
 	public static void projectileImpact(ProjectileImpactEvent event) {
 		if (event.getProjectile() instanceof Snowball snowball) {
 			if (event.getRayTraceResult() instanceof BlockHitResult result) {
-				Level level = snowball.getLevel();
+				Level level = snowball.level();
 				BlockPos pos = result.getBlockPos();
 				BlockState state = level.getBlockState(pos);
 				Block newBlock = state.is(Blocks.POTTED_BAMBOO) ? AtmosphericBlocks.POTTED_SNOWY_BAMBOO.get() :
@@ -51,7 +54,7 @@ public class AtmosphericEvents {
 
 	@SubscribeEvent
 	public static void onLivingAttack(LivingAttackEvent event) {
-		if (event.getEntity().getType().is(AtmosphericEntityTypeTags.CACTUS_IMMUNE) && event.getSource() == DamageSource.CACTUS) {
+		if (event.getEntity().getType().is(AtmosphericEntityTypeTags.CACTUS_IMMUNE) && event.getSource().is(DamageTypes.CACTUS)) {
 			event.setCanceled(true);
 		}
 	}

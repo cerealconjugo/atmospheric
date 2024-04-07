@@ -4,12 +4,13 @@
     {
       "conditions": [
         {
-          "type": "blueprint:quark_flag",
-          "flag": "golden_apple_crate"
+          "type": "forge:mod_loaded",
+          "modid": "quark"
         }
       ],
       "recipe": {
         "type": "minecraft:crafting_shaped",
+        "category": "building",
         "key": {
           "#": {
             "item": "atmospheric:golden_dragon_fruit"
@@ -22,7 +23,8 @@
         ],
         "result": {
           "item": "atmospheric:golden_dragon_fruit_crate"
-        }
+        },
+        "show_notification": true
       }
     }
   ]

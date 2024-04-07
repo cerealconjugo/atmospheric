@@ -30,5 +30,6 @@
     "recipes": [
       "atmospheric:polished_dolerite"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

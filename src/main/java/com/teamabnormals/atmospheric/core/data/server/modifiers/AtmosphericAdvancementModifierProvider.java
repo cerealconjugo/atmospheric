@@ -7,23 +7,25 @@ import com.teamabnormals.blueprint.common.advancement.modification.modifiers.Cri
 import com.teamabnormals.blueprint.common.advancement.modification.modifiers.EffectsChangedModifier;
 import net.minecraft.advancements.RequirementsStrategy;
 import net.minecraft.advancements.critereon.*;
-import net.minecraft.core.Registry;
-import net.minecraft.data.DataGenerator;
+import net.minecraft.core.HolderLookup.Provider;
+import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.level.biome.Biome;
 import net.minecraftforge.registries.ForgeRegistries;
+
+import java.util.concurrent.CompletableFuture;
 
 public class AtmosphericAdvancementModifierProvider extends AdvancementModifierProvider {
 	private static final EntityType<?>[] BREEDABLE_ANIMALS = new EntityType[]{AtmosphericEntityTypes.COCHINEAL.get()};
 
-	public AtmosphericAdvancementModifierProvider(DataGenerator generator) {
-		super(generator, Atmospheric.MOD_ID);
+	public AtmosphericAdvancementModifierProvider(PackOutput output, CompletableFuture<Provider> provider) {
+		super(Atmospheric.MOD_ID, output, provider);
 	}
 
 	@Override
-	protected void registerEntries() {
+	protected void registerEntries(Provider provider) {
 		this.entry("nether/all_potions").selects("nether/all_potions").addModifier(new EffectsChangedModifier("all_effects", false, MobEffectsPredicate.effects().and(AtmosphericMobEffects.RELIEF.get()).and(AtmosphericMobEffects.WORSENING.get())));
 		this.entry("nether/all_effects").selects("nether/all_effects").addModifier(new EffectsChangedModifier("all_effects", false, MobEffectsPredicate.effects().and(AtmosphericMobEffects.RELIEF.get()).and(AtmosphericMobEffects.WORSENING.get()).and(AtmosphericMobEffects.PERSISTENCE.get()).and(AtmosphericMobEffects.SPITTING.get())));
 
@@ -44,15 +46,13 @@ public class AtmosphericAdvancementModifierProvider extends AdvancementModifierP
 
 
 		CriteriaModifier.Builder adventuringTime = CriteriaModifier.builder(this.modId);
-		AtmosphericBiomes.HELPER.getDeferredRegister().getEntries().forEach(biome -> {
-			ResourceLocation key = ForgeRegistries.BIOMES.getKey(biome.get());
-			if (biome.get() != AtmosphericBiomes.HOT_SPRINGS.get() && biome.get() != AtmosphericBiomes.GRIMWOODS.get())
-				adventuringTime.addCriterion(key.getPath(), PlayerTrigger.TriggerInstance.located(LocationPredicate.inBiome(ResourceKey.create(Registry.BIOME_REGISTRY, key))));
-		});
+		for (ResourceKey<Biome> biome : AtmosphericBiomes.NATURAL_BIOMES) {
+			adventuringTime.addCriterion(biome.location().toString(), PlayerTrigger.TriggerInstance.located(LocationPredicate.inBiome(biome)));
+		}
 		this.entry("adventure/adventuring_time").selects("adventure/adventuring_time").addModifier(adventuringTime.requirements(RequirementsStrategy.AND).build());
 
 		this.entry("husbandry/plant_seed").selects("husbandry/plant_seed").addModifier(CriteriaModifier.builder(this.modId)
-				.addCriterion("aloe_vera", PlacedBlockTrigger.TriggerInstance.placedBlock(AtmosphericBlocks.ALOE_VERA.get()))
+				.addCriterion("aloe_vera", ItemUsedOnLocationTrigger.TriggerInstance.placedBlock(AtmosphericBlocks.ALOE_VERA.get()))
 				.addIndexedRequirements(0, false, "aloe_vera").build());
 	}
 }

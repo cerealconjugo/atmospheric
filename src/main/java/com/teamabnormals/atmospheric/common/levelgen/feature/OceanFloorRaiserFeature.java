@@ -3,6 +3,7 @@ package com.teamabnormals.atmospheric.common.levelgen.feature;
 import com.mojang.serialization.Codec;
 import com.teamabnormals.atmospheric.core.registry.AtmosphericNoiseParameters;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.Mth;
@@ -15,6 +16,7 @@ import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
 import net.minecraft.world.level.levelgen.synth.NormalNoise;
+import net.minecraft.world.level.levelgen.synth.NormalNoise.NoiseParameters;
 import net.minecraftforge.common.Tags;
 
 import java.util.ArrayList;
@@ -38,7 +40,13 @@ public class OceanFloorRaiserFeature extends Feature<NoneFeatureConfiguration> {
 		int maxX = originX + radius;
 		int maxZ = originZ + radius;
 		float radiusSquared = radius * radius;
-		NormalNoise radiusOffsetNoise = NormalNoise.create(new XoroshiroRandomSource(context.random().nextLong()), AtmosphericNoiseParameters.FLOOR_RAISE_RADIUS_OFFSET.get());
+
+		NoiseParameters noise = context.level().registryAccess().registryOrThrow(Registries.NOISE).get(AtmosphericNoiseParameters.FLOOR_RAISE_RADIUS_OFFSET);
+		if (noise == null) {
+			return false;
+		}
+
+		NormalNoise radiusOffsetNoise = NormalNoise.create(new XoroshiroRandomSource(context.random().nextLong()), noise);
 		WorldGenLevel level = context.level();
 		BlockPos.MutableBlockPos mutable = new BlockPos.MutableBlockPos();
 		int heightRaise = 9;

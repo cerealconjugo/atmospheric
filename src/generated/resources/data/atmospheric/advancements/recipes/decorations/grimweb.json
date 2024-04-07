@@ -28,5 +28,6 @@
     "recipes": [
       "atmospheric:grimweb"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

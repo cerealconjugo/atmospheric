@@ -8,7 +8,7 @@ import com.teamabnormals.atmospheric.core.registry.AtmosphericItems;
 import com.teamabnormals.blueprint.core.util.TradeUtil;
 import com.teamabnormals.blueprint.core.util.TradeUtil.BlueprintTrade;
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
-import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.entity.npc.VillagerProfession;
 import net.minecraft.world.entity.npc.VillagerTrades;
 import net.minecraft.world.entity.npc.VillagerTrades.ItemListing;
@@ -91,7 +91,7 @@ public class AtmosphericTrades {
 				if (listing instanceof VillagerTrades.EmeraldsForVillagerTypeItem trade) {
 					HashMap<VillagerType, Item> newTrades = new HashMap<>(trade.trades);
 
-					VillagerType scrubland = Registry.VILLAGER_TYPE.get(Atmospheric.location("scrubland"));
+					VillagerType scrubland = BuiltInRegistries.VILLAGER_TYPE.get(Atmospheric.location("scrubland"));
 					if (!trade.trades.containsKey(scrubland)) {
 						newTrades.put(scrubland, AtmosphericItems.LAUREL_BOAT.getFirst().get());
 					}

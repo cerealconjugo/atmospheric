@@ -3,27 +3,30 @@ package com.teamabnormals.atmospheric.core.data.server.tags;
 import com.teamabnormals.atmospheric.core.Atmospheric;
 import com.teamabnormals.atmospheric.core.other.tags.AtmosphericBlockTags;
 import com.teamabnormals.atmospheric.core.registry.AtmosphericItems;
-import com.teamabnormals.blueprint.core.other.tags.BlueprintBlockTags;
 import com.teamabnormals.blueprint.core.other.tags.BlueprintItemTags;
-import net.minecraft.data.DataGenerator;
-import net.minecraft.data.tags.BlockTagsProvider;
+import net.minecraft.core.HolderLookup.Provider;
+import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.ItemTagsProvider;
+import net.minecraft.data.tags.TagsProvider;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
+import net.minecraft.world.level.block.Block;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.data.ExistingFileHelper;
+
+import java.util.concurrent.CompletableFuture;
 
 import static com.teamabnormals.atmospheric.core.other.tags.AtmosphericItemTags.*;
 import static com.teamabnormals.atmospheric.core.registry.AtmosphericBlocks.*;
 
 public class AtmosphericItemTagsProvider extends ItemTagsProvider {
 
-	public AtmosphericItemTagsProvider(DataGenerator generator, BlockTagsProvider blockTags, ExistingFileHelper existingFileHelper) {
-		super(generator, blockTags, Atmospheric.MOD_ID, existingFileHelper);
+	public AtmosphericItemTagsProvider(PackOutput output, CompletableFuture<Provider> provider, CompletableFuture<TagsProvider.TagLookup<Block>> lookup, ExistingFileHelper helper) {
+		super(output, provider, lookup, Atmospheric.MOD_ID, helper);
 	}
 
 	@Override
-	public void addTags() {
+	public void addTags(Provider provider) {
 		this.tag(COCHINEAL_FOOD).add(AtmosphericItems.DRAGON_FRUIT.get()).addTag(COCHINEAL_SUPER_LOVE_FOOD);
 		this.tag(COCHINEAL_SUPER_LOVE_FOOD).add(AtmosphericItems.GOLDEN_DRAGON_FRUIT.get());
 
@@ -56,7 +59,6 @@ public class AtmosphericItemTagsProvider extends ItemTagsProvider {
 		this.copy(BlockTags.TALL_FLOWERS, ItemTags.TALL_FLOWERS);
 		this.copy(BlockTags.FLOWERS, ItemTags.FLOWERS);
 		this.copy(BlockTags.STANDING_SIGNS, ItemTags.SIGNS);
-		this.copy(BlockTags.OVERWORLD_NATURAL_LOGS, ItemTags.OVERWORLD_NATURAL_LOGS);
 		this.copy(BlockTags.DIRT, ItemTags.DIRT);
 		this.tag(ItemTags.FLOWERS).add(AtmosphericItems.YELLOW_BLOSSOMS.get());
 		this.tag(ItemTags.BOATS).add(AtmosphericItems.ROSEWOOD_BOAT.getFirst().get(), AtmosphericItems.MORADO_BOAT.getFirst().get(), AtmosphericItems.YUCCA_BOAT.getFirst().get(), AtmosphericItems.KOUSA_BOAT.getFirst().get(), AtmosphericItems.ASPEN_BOAT.getFirst().get(), AtmosphericItems.GRIMWOOD_BOAT.getFirst().get(), AtmosphericItems.LAUREL_BOAT.getFirst().get());
@@ -82,12 +84,5 @@ public class AtmosphericItemTagsProvider extends ItemTagsProvider {
 		this.tag(FRUITS_ORANGE).add(AtmosphericItems.ORANGE.get());
 		this.tag(Tags.Items.SEEDS).addTag(SEEDS_ALOE_VERA);
 		this.tag(SEEDS_ALOE_VERA).add(AtmosphericItems.ALOE_KERNELS.get());
-
-		this.copy(BlueprintBlockTags.LADDERS, BlueprintItemTags.LADDERS);
-		this.copy(BlueprintBlockTags.HEDGES, BlueprintItemTags.HEDGES);
-		this.copy(BlueprintBlockTags.VERTICAL_SLABS, BlueprintItemTags.VERTICAL_SLABS);
-		this.copy(BlueprintBlockTags.WOODEN_VERTICAL_SLABS, BlueprintItemTags.WOODEN_VERTICAL_SLABS);
-		this.tag(BlueprintItemTags.BOATABLE_CHESTS).add(ROSEWOOD_CHESTS.getFirst().get().asItem(), MORADO_CHESTS.getFirst().get().asItem(), YUCCA_CHESTS.getFirst().get().asItem(), KOUSA_CHESTS.getFirst().get().asItem(), ASPEN_CHESTS.getFirst().get().asItem(), GRIMWOOD_CHESTS.getFirst().get().asItem(), LAUREL_CHESTS.getFirst().get().asItem());
-		this.tag(BlueprintItemTags.REVERTABLE_CHESTS).add(ROSEWOOD_CHESTS.getFirst().get().asItem(), MORADO_CHESTS.getFirst().get().asItem(), YUCCA_CHESTS.getFirst().get().asItem(), KOUSA_CHESTS.getFirst().get().asItem(), ASPEN_CHESTS.getFirst().get().asItem(), GRIMWOOD_CHESTS.getFirst().get().asItem(), LAUREL_CHESTS.getFirst().get().asItem());
 	}
 }

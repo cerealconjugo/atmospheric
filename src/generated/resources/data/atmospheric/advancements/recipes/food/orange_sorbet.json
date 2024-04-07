@@ -31,7 +31,8 @@
           "recipes": [
             "atmospheric:orange_sorbet"
           ]
-        }
+        },
+        "sends_telemetry_event": false
       },
       "conditions": [
         {

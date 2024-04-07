@@ -44,5 +44,6 @@
       ],
       "rolls": 1.0
     }
-  ]
+  ],
+  "random_sequence": "atmospheric:blocks/yucca_branch"
 }

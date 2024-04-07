@@ -17,9 +17,9 @@ public class AtmosphericClientEvents {
 	//	@SubscribeEvent
 	public static void onRenderFog(RenderFog event) {
 		if (event.getCamera().getEntity() instanceof LocalPlayer player) {
-			Holder<Biome> holder = player.level.getBiome(player.blockPosition());
-			int brightness = player.level.getBrightness(LightLayer.SKY, player.blockPosition());
-			if (holder.is(AtmosphericBiomes.GRIMWOODS.getKey()) && brightness > 0) {
+			Holder<Biome> holder = player.level().getBiome(player.blockPosition());
+			int brightness = player.level().getBrightness(LightLayer.SKY, player.blockPosition());
+			if (holder.is(AtmosphericBiomes.GRIMWOODS) && brightness > 0) {
 				RenderSystem.setShaderFogStart(0.0F);
 				// float inc = (event.getFarPlaneDistance() - 48.0F) / 15.0F;
 				// event.getFarPlaneDistance() - (brightness * inc)

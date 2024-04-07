@@ -3,7 +3,6 @@ package com.teamabnormals.atmospheric.common.block;
 import com.teamabnormals.atmospheric.core.registry.AtmosphericBlocks;
 import com.teamabnormals.atmospheric.core.registry.AtmosphericItems;
 import com.teamabnormals.atmospheric.core.registry.AtmosphericParticleTypes;
-import com.teamabnormals.blueprint.common.block.wood.BlueprintLeavesBlock;
 import com.teamabnormals.blueprint.core.util.BlockUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvents;
@@ -15,12 +14,13 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.LeavesBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
-public class FloweringMoradoLeavesBlock extends BlueprintLeavesBlock {
+public class FloweringMoradoLeavesBlock extends LeavesBlock {
 	public FloweringMoradoLeavesBlock(Properties properties) {
 		super(properties);
 	}

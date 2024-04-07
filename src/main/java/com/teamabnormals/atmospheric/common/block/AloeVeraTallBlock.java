@@ -1,7 +1,7 @@
 package com.teamabnormals.atmospheric.common.block;
 
 import com.teamabnormals.atmospheric.core.other.AtmosphericCriteriaTriggers;
-import com.teamabnormals.atmospheric.core.other.AtmosphericDamageSources;
+import com.teamabnormals.atmospheric.core.other.AtmosphericDamageTypes;
 import com.teamabnormals.atmospheric.core.other.tags.AtmosphericBlockTags;
 import com.teamabnormals.atmospheric.core.registry.AtmosphericBlocks;
 import com.teamabnormals.atmospheric.core.registry.AtmosphericItems;
@@ -86,7 +86,7 @@ public class AloeVeraTallBlock extends DoublePlantBlock implements BonemealableB
 	}
 
 	@Override
-	public void entityInside(BlockState state, Level worldIn, BlockPos pos, Entity entityIn) {
+	public void entityInside(BlockState state, Level level, BlockPos pos, Entity entityIn) {
 		if (entityIn instanceof LivingEntity) {
 			if (!(entityIn instanceof Bee))
 				entityIn.makeStuckInBlock(state, new Vec3(0.8F, 0.75D, 0.8F));
@@ -100,13 +100,13 @@ public class AloeVeraTallBlock extends DoublePlantBlock implements BonemealableB
 				double y = pos.getY() + 0.5D + (rand.nextFloat() * 0.05F);
 				double z = pos.getZ() + 0.65D + offsetZ;
 
-				if (state.getValue(HALF) == DoubleBlockHalf.UPPER && worldIn.isClientSide && worldIn.getGameTime() % (9 / (state.getValue(AGE) - 5)) == 0)
-					worldIn.addParticle(AtmosphericParticleTypes.ALOE_BLOSSOM.get(), x, y, z, 0.03D, 0.0D, 0.03D);
+				if (state.getValue(HALF) == DoubleBlockHalf.UPPER && level.isClientSide && level.getGameTime() % (9 / (state.getValue(AGE) - 5)) == 0)
+					level.addParticle(AtmosphericParticleTypes.ALOE_BLOSSOM.get(), x, y, z, 0.03D, 0.0D, 0.03D);
 			}
 
-			if (!worldIn.isClientSide && state.getValue(AGE) > 3 && Math.random() <= 0.4 && state.getValue(HALF) == DoubleBlockHalf.LOWER && !(entityIn instanceof Bee)) {
+			if (!level.isClientSide && state.getValue(AGE) > 3 && Math.random() <= 0.4 && state.getValue(HALF) == DoubleBlockHalf.LOWER && !(entityIn instanceof Bee)) {
 				entityIn.makeStuckInBlock(state, new Vec3(0.2F, 0.2D, 0.2F));
-				entityIn.hurt(AtmosphericDamageSources.ALOE_LEAVES, 1.0F);
+				entityIn.hurt(AtmosphericDamageTypes.aloeLeaves(level), 1.0F);
 				if (entityIn instanceof ServerPlayer serverplayerentity) {
 					if (!entityIn.getCommandSenderWorld().isClientSide() && !serverplayerentity.isCreative()) {
 						AtmosphericCriteriaTriggers.ALOE_VERA_PRICK.trigger(serverplayerentity);
@@ -183,7 +183,7 @@ public class AloeVeraTallBlock extends DoublePlantBlock implements BonemealableB
 	}
 
 	@Override
-	public boolean isValidBonemealTarget(BlockGetter worldIn, BlockPos pos, BlockState state, boolean isClient) {
+	public boolean isValidBonemealTarget(LevelReader worldIn, BlockPos pos, BlockState state, boolean isClient) {
 		return state.getValue(AGE) < 8;
 	}
 
@@ -195,7 +195,7 @@ public class AloeVeraTallBlock extends DoublePlantBlock implements BonemealableB
 	@Nullable
 	@Override
 	public BlockPathTypes getBlockPathType(BlockState state, BlockGetter world, BlockPos pos, @Nullable Mob entity) {
-		return BlockPathTypes.DAMAGE_CACTUS;
+		return BlockPathTypes.DANGER_OTHER;
 	}
 
 	@Override

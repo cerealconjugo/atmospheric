@@ -6,7 +6,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.WorldGenLevel;
-import net.minecraft.world.level.block.BambooBlock;
+import net.minecraft.world.level.block.BambooStalkBlock;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BambooLeaves;
@@ -22,10 +22,10 @@ public class SnowyBambooFeature extends Feature<ProbabilityFeatureConfiguration>
 	}
 
 	public boolean place(FeaturePlaceContext<ProbabilityFeatureConfiguration> context) {
-		BlockState bambooTrunk = AtmosphericBlocks.SNOWY_BAMBOO.get().defaultBlockState().setValue(BambooBlock.AGE, 1).setValue(BambooBlock.LEAVES, BambooLeaves.NONE).setValue(BambooBlock.STAGE, Integer.valueOf(0));
-		BlockState bambooFinalLarge = bambooTrunk.setValue(BambooBlock.LEAVES, BambooLeaves.LARGE).setValue(BambooBlock.STAGE, 1);
-		BlockState bambooTopLarge = bambooTrunk.setValue(BambooBlock.LEAVES, BambooLeaves.LARGE);
-		BlockState bambooTopSmall = bambooTrunk.setValue(BambooBlock.LEAVES, BambooLeaves.SMALL);
+		BlockState bambooTrunk = AtmosphericBlocks.SNOWY_BAMBOO.get().defaultBlockState().setValue(BambooStalkBlock.AGE, 1).setValue(BambooStalkBlock.LEAVES, BambooLeaves.NONE).setValue(BambooStalkBlock.STAGE, 0);
+		BlockState bambooFinalLarge = bambooTrunk.setValue(BambooStalkBlock.LEAVES, BambooLeaves.LARGE).setValue(BambooStalkBlock.STAGE, 1);
+		BlockState bambooTopLarge = bambooTrunk.setValue(BambooStalkBlock.LEAVES, BambooLeaves.LARGE);
+		BlockState bambooTopSmall = bambooTrunk.setValue(BambooStalkBlock.LEAVES, BambooLeaves.SMALL);
 
 		int i = 0;
 		BlockPos origin = context.origin();

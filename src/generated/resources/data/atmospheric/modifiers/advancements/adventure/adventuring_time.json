@@ -4,7 +4,7 @@
       "type": "criteria",
       "config": {
         "criteria": {
-          "atmospheric:aspen_parkland": {
+          "atmospheric:atmospheric:aspen_parkland": {
             "conditions": {
               "player": [
                 {
@@ -20,7 +20,7 @@
             },
             "trigger": "minecraft:location"
           },
-          "atmospheric:dunes": {
+          "atmospheric:atmospheric:dunes": {
             "conditions": {
               "player": [
                 {
@@ -36,7 +36,7 @@
             },
             "trigger": "minecraft:location"
           },
-          "atmospheric:flourishing_dunes": {
+          "atmospheric:atmospheric:flourishing_dunes": {
             "conditions": {
               "player": [
                 {
@@ -52,7 +52,7 @@
             },
             "trigger": "minecraft:location"
           },
-          "atmospheric:kousa_jungle": {
+          "atmospheric:atmospheric:kousa_jungle": {
             "conditions": {
               "player": [
                 {
@@ -68,7 +68,7 @@
             },
             "trigger": "minecraft:location"
           },
-          "atmospheric:laurel_forest": {
+          "atmospheric:atmospheric:laurel_forest": {
             "conditions": {
               "player": [
                 {
@@ -84,7 +84,7 @@
             },
             "trigger": "minecraft:location"
           },
-          "atmospheric:petrified_dunes": {
+          "atmospheric:atmospheric:petrified_dunes": {
             "conditions": {
               "player": [
                 {
@@ -100,7 +100,7 @@
             },
             "trigger": "minecraft:location"
           },
-          "atmospheric:rainforest": {
+          "atmospheric:atmospheric:rainforest": {
             "conditions": {
               "player": [
                 {
@@ -116,7 +116,7 @@
             },
             "trigger": "minecraft:location"
           },
-          "atmospheric:rainforest_basin": {
+          "atmospheric:atmospheric:rainforest_basin": {
             "conditions": {
               "player": [
                 {
@@ -132,7 +132,7 @@
             },
             "trigger": "minecraft:location"
           },
-          "atmospheric:rocky_dunes": {
+          "atmospheric:atmospheric:rocky_dunes": {
             "conditions": {
               "player": [
                 {
@@ -148,7 +148,7 @@
             },
             "trigger": "minecraft:location"
           },
-          "atmospheric:scrubland": {
+          "atmospheric:atmospheric:scrubland": {
             "conditions": {
               "player": [
                 {
@@ -164,7 +164,7 @@
             },
             "trigger": "minecraft:location"
           },
-          "atmospheric:snowy_scrubland": {
+          "atmospheric:atmospheric:snowy_scrubland": {
             "conditions": {
               "player": [
                 {
@@ -180,7 +180,7 @@
             },
             "trigger": "minecraft:location"
           },
-          "atmospheric:sparse_rainforest": {
+          "atmospheric:atmospheric:sparse_rainforest": {
             "conditions": {
               "player": [
                 {
@@ -196,7 +196,7 @@
             },
             "trigger": "minecraft:location"
           },
-          "atmospheric:sparse_rainforest_basin": {
+          "atmospheric:atmospheric:sparse_rainforest_basin": {
             "conditions": {
               "player": [
                 {
@@ -212,7 +212,7 @@
             },
             "trigger": "minecraft:location"
           },
-          "atmospheric:spiny_thicket": {
+          "atmospheric:atmospheric:spiny_thicket": {
             "conditions": {
               "player": [
                 {
@@ -231,46 +231,46 @@
         },
         "requirements": [
           [
-            "atmospheric:rainforest"
+            "atmospheric:atmospheric:rainforest"
           ],
           [
-            "atmospheric:sparse_rainforest"
+            "atmospheric:atmospheric:sparse_rainforest"
           ],
           [
-            "atmospheric:rainforest_basin"
+            "atmospheric:atmospheric:rainforest_basin"
           ],
           [
-            "atmospheric:sparse_rainforest_basin"
+            "atmospheric:atmospheric:sparse_rainforest_basin"
           ],
           [
-            "atmospheric:dunes"
+            "atmospheric:atmospheric:dunes"
           ],
           [
-            "atmospheric:flourishing_dunes"
+            "atmospheric:atmospheric:flourishing_dunes"
           ],
           [
-            "atmospheric:rocky_dunes"
+            "atmospheric:atmospheric:rocky_dunes"
           ],
           [
-            "atmospheric:petrified_dunes"
+            "atmospheric:atmospheric:petrified_dunes"
           ],
           [
-            "atmospheric:spiny_thicket"
+            "atmospheric:atmospheric:spiny_thicket"
           ],
           [
-            "atmospheric:scrubland"
+            "atmospheric:atmospheric:scrubland"
           ],
           [
-            "atmospheric:snowy_scrubland"
+            "atmospheric:atmospheric:snowy_scrubland"
           ],
           [
-            "atmospheric:aspen_parkland"
+            "atmospheric:atmospheric:aspen_parkland"
           ],
           [
-            "atmospheric:kousa_jungle"
+            "atmospheric:atmospheric:laurel_forest"
           ],
           [
-            "atmospheric:laurel_forest"
+            "atmospheric:atmospheric:kousa_jungle"
           ]
         ],
         "should_replace_requirements": false

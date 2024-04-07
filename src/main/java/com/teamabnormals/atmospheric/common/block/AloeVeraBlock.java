@@ -1,7 +1,7 @@
 package com.teamabnormals.atmospheric.common.block;
 
 import com.teamabnormals.atmospheric.core.other.AtmosphericCriteriaTriggers;
-import com.teamabnormals.atmospheric.core.other.AtmosphericDamageSources;
+import com.teamabnormals.atmospheric.core.other.AtmosphericDamageTypes;
 import com.teamabnormals.atmospheric.core.other.tags.AtmosphericBlockTags;
 import com.teamabnormals.atmospheric.core.registry.AtmosphericBlocks;
 import com.teamabnormals.atmospheric.core.registry.AtmosphericItems;
@@ -87,7 +87,7 @@ public class AloeVeraBlock extends BushBlock implements BonemealableBlock {
 	}
 
 	@Override
-	public void entityInside(BlockState state, Level worldIn, BlockPos pos, Entity entityIn) {
+	public void entityInside(BlockState state, Level level, BlockPos pos, Entity entityIn) {
 		if (entityIn instanceof LivingEntity && !(entityIn instanceof Bee)) {
 			double chance = 0.1;
 
@@ -95,12 +95,12 @@ public class AloeVeraBlock extends BushBlock implements BonemealableBlock {
 			if (state.getValue(AGE) == 4) chance = 0.2;
 			if (state.getValue(AGE) == 5) chance = 0.4;
 
-			if (!worldIn.isClientSide && state.getValue(AGE) > 2 && Math.random() <= chance) {
+			if (!level.isClientSide && state.getValue(AGE) > 2 && Math.random() <= chance) {
 				entityIn.makeStuckInBlock(state, new Vec3(0.2F, 0.2D, 0.2F));
-				entityIn.hurt(AtmosphericDamageSources.ALOE_LEAVES, 1.0F);
-				if (entityIn instanceof ServerPlayer serverplayerentity) {
-					if (!entityIn.getCommandSenderWorld().isClientSide() && !serverplayerentity.isCreative()) {
-						AtmosphericCriteriaTriggers.ALOE_VERA_PRICK.trigger(serverplayerentity);
+				entityIn.hurt(AtmosphericDamageTypes.aloeLeaves(level), 1.0F);
+				if (entityIn instanceof ServerPlayer serverPlayer) {
+					if (!entityIn.getCommandSenderWorld().isClientSide() && !serverPlayer.isCreative()) {
+						AtmosphericCriteriaTriggers.ALOE_VERA_PRICK.trigger(serverPlayer);
 					}
 				}
 			}
@@ -119,7 +119,7 @@ public class AloeVeraBlock extends BushBlock implements BonemealableBlock {
 	}
 
 	@Override
-	public boolean isValidBonemealTarget(BlockGetter level, BlockPos pos, BlockState state, boolean isClient) {
+	public boolean isValidBonemealTarget(LevelReader level, BlockPos pos, BlockState state, boolean isClient) {
 		return level.getBlockState(pos.below()).is(AtmosphericBlockTags.TALL_ALOE_GROWABLE_ON) || state.getValue(AGE) < 5;
 	}
 
@@ -156,7 +156,7 @@ public class AloeVeraBlock extends BushBlock implements BonemealableBlock {
 	@Nullable
 	@Override
 	public BlockPathTypes getBlockPathType(BlockState state, BlockGetter world, BlockPos pos, @Nullable Mob entity) {
-		return BlockPathTypes.DAMAGE_CACTUS;
+		return BlockPathTypes.DANGER_OTHER;
 	}
 
 	public void placeAt(LevelAccessor world, BlockPos pos, int flags) {

@@ -25,33 +25,33 @@ public class AtmosphericGeneration {
 		BiomeDefaultFeatures.addJungleGrass(generation);
 		BiomeDefaultFeatures.addDefaultMushrooms(generation);
 		BiomeDefaultFeatures.addDefaultExtraVegetation(generation);
-		generation.addFeature(Decoration.VEGETAL_DECORATION, PODZOL.getHolder().get());
-		generation.addFeature(Decoration.VEGETAL_DECORATION, PASSION_VINES.getHolder().get());
-		generation.addFeature(Decoration.VEGETAL_DECORATION, MONKEY_BRUSH.getHolder().get());
+		generation.addFeature(Decoration.VEGETAL_DECORATION, PODZOL);
+		generation.addFeature(Decoration.VEGETAL_DECORATION, PASSION_VINES);
+		generation.addFeature(Decoration.VEGETAL_DECORATION, MONKEY_BRUSH);
 
 		if (!basin) {
 			if (!sparse) {
-				generation.addFeature(Decoration.VEGETAL_DECORATION, TREES_RAINFOREST.getHolder().get());
-				generation.addFeature(Decoration.VEGETAL_DECORATION, BUSHES_RAINFOREST.getHolder().get());
+				generation.addFeature(Decoration.VEGETAL_DECORATION, TREES_RAINFOREST);
+				generation.addFeature(Decoration.VEGETAL_DECORATION, BUSHES_RAINFOREST);
 			} else {
-				generation.addFeature(Decoration.VEGETAL_DECORATION, TREES_SPARSE_RAINFOREST.getHolder().get());
-				generation.addFeature(Decoration.VEGETAL_DECORATION, BUSHES_SPARSE_RAINFOREST.getHolder().get());
+				generation.addFeature(Decoration.VEGETAL_DECORATION, TREES_SPARSE_RAINFOREST);
+				generation.addFeature(Decoration.VEGETAL_DECORATION, BUSHES_SPARSE_RAINFOREST);
 			}
 
-			generation.addFeature(Decoration.VEGETAL_DECORATION, PATCH_WATER_HYACINTH.getHolder().get());
-			generation.addFeature(Decoration.VEGETAL_DECORATION, PATCH_WATERLILY_RAINFOREST.getHolder().get());
+			generation.addFeature(Decoration.VEGETAL_DECORATION, PATCH_WATER_HYACINTH);
+			generation.addFeature(Decoration.VEGETAL_DECORATION, PATCH_WATERLILY_RAINFOREST);
 			generation.addFeature(Decoration.VEGETAL_DECORATION, AquaticPlacements.SEAGRASS_SWAMP);
 		} else {
-			generation.addFeature(Decoration.VEGETAL_DECORATION, BUSHES_RAINFOREST.getHolder().get());
+			generation.addFeature(Decoration.VEGETAL_DECORATION, BUSHES_RAINFOREST);
 			generation.addFeature(Decoration.VEGETAL_DECORATION, AquaticPlacements.SEAGRASS_DEEP_WARM);
-			generation.addFeature(Decoration.VEGETAL_DECORATION, PATCH_WATERLILY_RAINFOREST_BASIN.getHolder().get());
+			generation.addFeature(Decoration.VEGETAL_DECORATION, PATCH_WATERLILY_RAINFOREST_BASIN);
 			if (!sparse) {
-				generation.addFeature(Decoration.LOCAL_MODIFICATIONS, OCEAN_FLOOR_RAISER.getHolder().get());
-				generation.addFeature(Decoration.VEGETAL_DECORATION, TREES_RAINFOREST_BASIN.getHolder().get());
-				generation.addFeature(Decoration.VEGETAL_DECORATION, PATCH_WATER_HYACINTH.getHolder().get());
+				generation.addFeature(Decoration.LOCAL_MODIFICATIONS, OCEAN_FLOOR_RAISER);
+				generation.addFeature(Decoration.VEGETAL_DECORATION, TREES_RAINFOREST_BASIN);
+				generation.addFeature(Decoration.VEGETAL_DECORATION, PATCH_WATER_HYACINTH);
 			} else {
-				generation.addFeature(Decoration.VEGETAL_DECORATION, TREES_SPARSE_RAINFOREST_BASIN.getHolder().get());
-				generation.addFeature(Decoration.VEGETAL_DECORATION, PATCH_WATER_HYACINTH_SPARSE.getHolder().get());
+				generation.addFeature(Decoration.VEGETAL_DECORATION, TREES_SPARSE_RAINFOREST_BASIN);
+				generation.addFeature(Decoration.VEGETAL_DECORATION, PATCH_WATER_HYACINTH_SPARSE);
 			}
 		}
 	}
@@ -64,38 +64,38 @@ public class AtmosphericGeneration {
 		generation.addFeature(Decoration.VEGETAL_DECORATION, VegetationPlacements.PATCH_DEAD_BUSH_2);
 		BiomeDefaultFeatures.addDefaultMushrooms(generation);
 		BiomeDefaultFeatures.addDefaultExtraVegetation(generation);
-		generation.addFeature(Decoration.VEGETAL_DECORATION, PATCH_ARID_SPROUTS.getHolder().get());
+		generation.addFeature(Decoration.VEGETAL_DECORATION, PATCH_ARID_SPROUTS);
 
 		if (!rocky) {
 			if (!variant) {
-				generation.addFeature(Decoration.LOCAL_MODIFICATIONS, DUNE_ROCK.getHolder().get());
-				generation.addFeature(Decoration.VEGETAL_DECORATION, TREES_DUNES.getHolder().get());
-				generation.addFeature(Decoration.VEGETAL_DECORATION, PATCH_YUCCA_FLOWER.getHolder().get());
-				generation.addFeature(Decoration.VEGETAL_DECORATION, PATCH_ALOE_VERA.getHolder().get());
-				generation.addFeature(Decoration.VEGETAL_DECORATION, PATCH_BARREL_CACTUS_DUNES.getHolder().get());
+				generation.addFeature(Decoration.LOCAL_MODIFICATIONS, DUNE_ROCK);
+				generation.addFeature(Decoration.VEGETAL_DECORATION, TREES_DUNES);
+				generation.addFeature(Decoration.VEGETAL_DECORATION, PATCH_YUCCA_FLOWER);
+				generation.addFeature(Decoration.VEGETAL_DECORATION, PATCH_ALOE_VERA);
+				generation.addFeature(Decoration.VEGETAL_DECORATION, PATCH_BARREL_CACTUS_DUNES);
 			} else {
-				generation.addFeature(Decoration.LOCAL_MODIFICATIONS, DUNE_ROCK_EXTRA.getHolder().get());
-				generation.addFeature(Decoration.VEGETAL_DECORATION, PATCH_MELON_DUNES.getHolder().get());
-				generation.addFeature(Decoration.VEGETAL_DECORATION, FLOWER_FLOURISHING_DUNES.getHolder().get());
-				generation.addFeature(Decoration.VEGETAL_DECORATION, PATCH_DUNE_GRASS.getHolder().get());
-				generation.addFeature(Decoration.VEGETAL_DECORATION, FLOURISHING_DUNES_YUCCA_TREES.getHolder().get());
-				generation.addFeature(Decoration.VEGETAL_DECORATION, TREES_FLOURISHING_DUNES.getHolder().get());
-				generation.addFeature(Decoration.VEGETAL_DECORATION, PATCH_YUCCA_FLOWER_EXTRA.getHolder().get());
-				generation.addFeature(Decoration.VEGETAL_DECORATION, PATCH_ALOE_VERA_EXTRA.getHolder().get());
-				generation.addFeature(Decoration.VEGETAL_DECORATION, PATCH_BARREL_CACTUS_FLOURISHING_DUNES.getHolder().get());
-				generation.addFeature(Decoration.VEGETAL_DECORATION, PATCH_AGAVE_LARGE.getHolder().get());
+				generation.addFeature(Decoration.LOCAL_MODIFICATIONS, DUNE_ROCK_EXTRA);
+				generation.addFeature(Decoration.VEGETAL_DECORATION, PATCH_MELON_DUNES);
+				generation.addFeature(Decoration.VEGETAL_DECORATION, FLOWER_FLOURISHING_DUNES);
+				generation.addFeature(Decoration.VEGETAL_DECORATION, PATCH_DUNE_GRASS);
+				generation.addFeature(Decoration.VEGETAL_DECORATION, FLOURISHING_DUNES_YUCCA_TREES);
+				generation.addFeature(Decoration.VEGETAL_DECORATION, TREES_FLOURISHING_DUNES);
+				generation.addFeature(Decoration.VEGETAL_DECORATION, PATCH_YUCCA_FLOWER_EXTRA);
+				generation.addFeature(Decoration.VEGETAL_DECORATION, PATCH_ALOE_VERA_EXTRA);
+				generation.addFeature(Decoration.VEGETAL_DECORATION, PATCH_BARREL_CACTUS_FLOURISHING_DUNES);
+				generation.addFeature(Decoration.VEGETAL_DECORATION, PATCH_AGAVE_LARGE);
 			}
 		} else {
 			if (!variant) {
-				generation.addFeature(Decoration.LOCAL_MODIFICATIONS, DUNE_ROCK_MANY.getHolder().get());
-				generation.addFeature(Decoration.VEGETAL_DECORATION, TREES_ROCKY_DUNES.getHolder().get());
-				generation.addFeature(Decoration.VEGETAL_DECORATION, PATCH_ALOE_VERA.getHolder().get());
+				generation.addFeature(Decoration.LOCAL_MODIFICATIONS, DUNE_ROCK_MANY);
+				generation.addFeature(Decoration.VEGETAL_DECORATION, TREES_ROCKY_DUNES);
+				generation.addFeature(Decoration.VEGETAL_DECORATION, PATCH_ALOE_VERA);
 			} else {
-				generation.addFeature(Decoration.LOCAL_MODIFICATIONS, DUNE_ROCK.getHolder().get());
-				generation.addFeature(Decoration.UNDERGROUND_DECORATION, FOSSIL_DUNES.getHolder().get());
-				generation.addFeature(Decoration.VEGETAL_DECORATION, TREES_PETRIFIED_DUNES.getHolder().get());
+				generation.addFeature(Decoration.LOCAL_MODIFICATIONS, DUNE_ROCK);
+				generation.addFeature(Decoration.UNDERGROUND_DECORATION, FOSSIL_DUNES);
+				generation.addFeature(Decoration.VEGETAL_DECORATION, TREES_PETRIFIED_DUNES);
 			}
-			generation.addFeature(Decoration.VEGETAL_DECORATION, PATCH_BARREL_CACTUS_ROCKY_DUNES.getHolder().get());
+			generation.addFeature(Decoration.VEGETAL_DECORATION, PATCH_BARREL_CACTUS_ROCKY_DUNES);
 		}
 	}
 
@@ -103,35 +103,35 @@ public class AtmosphericGeneration {
 		OverworldBiomes.globalOverworldGeneration(generation);
 		BiomeDefaultFeatures.addDefaultOres(generation);
 		BiomeDefaultFeatures.addDefaultSoftDisks(generation);
-		generation.addFeature(Decoration.VEGETAL_DECORATION, COARSE_DIRT.getHolder().get());
+		generation.addFeature(Decoration.VEGETAL_DECORATION, COARSE_DIRT);
 		generation.addFeature(Decoration.VEGETAL_DECORATION, VegetationPlacements.PATCH_DEAD_BUSH_BADLANDS);
 		BiomeDefaultFeatures.addSavannaExtraGrass(generation);
 		BiomeDefaultFeatures.addDefaultMushrooms(generation);
 		BiomeDefaultFeatures.addDefaultExtraVegetation(generation);
 
-		generation.addFeature(Decoration.VEGETAL_DECORATION, PATCH_CACTUS_SPINY_THICKET.getHolder().get());
-		generation.addFeature(Decoration.VEGETAL_DECORATION, PATCH_CACTUS_SPINIER_THICKET.getHolder().get());
-		generation.addFeature(Decoration.VEGETAL_DECORATION, TREES_SPINY_THICKET.getHolder().get());
-		generation.addFeature(Decoration.VEGETAL_DECORATION, TREES_FLOURISHING_DUNES.getHolder().get());
-		generation.addFeature(Decoration.VEGETAL_DECORATION, PATCH_BARREL_CACTUS_SPINY_THICKET.getHolder().get());
-		generation.addFeature(Decoration.VEGETAL_DECORATION, SINGLE_YUCCA_FLOWER.getHolder().get());
-		generation.addFeature(Decoration.VEGETAL_DECORATION, PATCH_AGAVE_LARGE.getHolder().get());
+		generation.addFeature(Decoration.VEGETAL_DECORATION, PATCH_CACTUS_SPINY_THICKET);
+		generation.addFeature(Decoration.VEGETAL_DECORATION, PATCH_CACTUS_SPINIER_THICKET);
+		generation.addFeature(Decoration.VEGETAL_DECORATION, TREES_SPINY_THICKET);
+		generation.addFeature(Decoration.VEGETAL_DECORATION, TREES_FLOURISHING_DUNES);
+		generation.addFeature(Decoration.VEGETAL_DECORATION, PATCH_BARREL_CACTUS_SPINY_THICKET);
+		generation.addFeature(Decoration.VEGETAL_DECORATION, SINGLE_YUCCA_FLOWER);
+		generation.addFeature(Decoration.VEGETAL_DECORATION, PATCH_AGAVE_LARGE);
 	}
 
 	public static void scrubland(BiomeGenerationSettings.Builder generation, boolean snowy) {
 		OverworldBiomes.globalOverworldGeneration(generation);
 		BiomeDefaultFeatures.addDefaultOres(generation);
 		BiomeDefaultFeatures.addDefaultSoftDisks(generation);
-		generation.addFeature(Decoration.VEGETAL_DECORATION, !snowy ? VegetationPlacements.PATCH_DEAD_BUSH_BADLANDS : PATCH_DEAD_BUSH_LAUREL_FOREST.getHolder().get());
+		generation.addFeature(Decoration.VEGETAL_DECORATION, !snowy ? VegetationPlacements.PATCH_DEAD_BUSH_BADLANDS : PATCH_DEAD_BUSH_LAUREL_FOREST);
 		BiomeDefaultFeatures.addDefaultMushrooms(generation);
 		BiomeDefaultFeatures.addDefaultExtraVegetation(generation);
 
-		generation.addFeature(Decoration.VEGETAL_DECORATION, !snowy ? PATCH_ARID_SPROUTS.getHolder().get() : PATCH_ARID_SPROUTS_RARE.getHolder().get());
-		generation.addFeature(Decoration.VEGETAL_DECORATION, DRAGON_ROOTS.getHolder().get());
-		generation.addFeature(Decoration.VEGETAL_DECORATION, TREES_SCRUBLAND.getHolder().get());
-		generation.addFeature(Decoration.VEGETAL_DECORATION, FLOWER_SCRUBLAND.getHolder().get());
-		generation.addFeature(Decoration.VEGETAL_DECORATION, PATCH_CACTUS_SCRUBLAND.getHolder().get());
-		generation.addFeature(Decoration.VEGETAL_DECORATION, PATCH_BARREL_CACTUS_SCRUBLAND.getHolder().get());
+		generation.addFeature(Decoration.VEGETAL_DECORATION, !snowy ? PATCH_ARID_SPROUTS : PATCH_ARID_SPROUTS_RARE);
+		generation.addFeature(Decoration.VEGETAL_DECORATION, DRAGON_ROOTS);
+		generation.addFeature(Decoration.VEGETAL_DECORATION, TREES_SCRUBLAND);
+		generation.addFeature(Decoration.VEGETAL_DECORATION, FLOWER_SCRUBLAND);
+		generation.addFeature(Decoration.VEGETAL_DECORATION, PATCH_CACTUS_SCRUBLAND);
+		generation.addFeature(Decoration.VEGETAL_DECORATION, PATCH_BARREL_CACTUS_SCRUBLAND);
 	}
 
 	public static void aspenParkland(BiomeGenerationSettings.Builder generation) {
@@ -143,12 +143,12 @@ public class AtmosphericGeneration {
 		BiomeDefaultFeatures.addDefaultMushrooms(generation);
 		BiomeDefaultFeatures.addDefaultExtraVegetation(generation);
 
-		generation.addFeature(Decoration.VEGETAL_DECORATION, CRUSTOSE.getHolder().get());
-		generation.addFeature(Decoration.VEGETAL_DECORATION, TREES_ASPEN_PARKLAND.getHolder().get());
-		generation.addFeature(Decoration.VEGETAL_DECORATION, FALLEN_CRUSTOSE_LOG.getHolder().get());
-		generation.addFeature(Decoration.VEGETAL_DECORATION, SINGLE_AGAVE.getHolder().get());
-		generation.addFeature(Decoration.VEGETAL_DECORATION, PATCH_AGAVE_LARGE.getHolder().get());
-		generation.addFeature(Decoration.VEGETAL_DECORATION, PATCH_GOLDEN_GROWTHS.getHolder().get());
+		generation.addFeature(Decoration.VEGETAL_DECORATION, CRUSTOSE);
+		generation.addFeature(Decoration.VEGETAL_DECORATION, TREES_ASPEN_PARKLAND);
+		generation.addFeature(Decoration.VEGETAL_DECORATION, FALLEN_CRUSTOSE_LOG);
+		generation.addFeature(Decoration.VEGETAL_DECORATION, SINGLE_AGAVE);
+		generation.addFeature(Decoration.VEGETAL_DECORATION, PATCH_AGAVE_LARGE);
+		generation.addFeature(Decoration.VEGETAL_DECORATION, PATCH_GOLDEN_GROWTHS);
 	}
 
 	public static void kousaJungle(BiomeGenerationSettings.Builder generation) {
@@ -160,27 +160,27 @@ public class AtmosphericGeneration {
 		BiomeDefaultFeatures.addTaigaGrass(generation);
 		BiomeDefaultFeatures.addDefaultExtraVegetation(generation);
 
-		generation.addFeature(Decoration.VEGETAL_DECORATION, PATCH_LARGE_FERN_KOUSA.getHolder().get());
-		generation.addFeature(Decoration.VEGETAL_DECORATION, CURRANT.getHolder().get());
-		generation.addFeature(Decoration.VEGETAL_DECORATION, SNOWY_BAMBOO.getHolder().get());
-		generation.addFeature(Decoration.VEGETAL_DECORATION, BIRCH_BUSH.getHolder().get());
-		generation.addFeature(Decoration.VEGETAL_DECORATION, TREES_KOUSA_JUNGLE.getHolder().get());
-		generation.addFeature(Decoration.VEGETAL_DECORATION, PASSION_VINES.getHolder().get());
+		generation.addFeature(Decoration.VEGETAL_DECORATION, PATCH_LARGE_FERN_KOUSA);
+		generation.addFeature(Decoration.VEGETAL_DECORATION, CURRANT);
+		generation.addFeature(Decoration.VEGETAL_DECORATION, SNOWY_BAMBOO);
+		generation.addFeature(Decoration.VEGETAL_DECORATION, BIRCH_BUSH);
+		generation.addFeature(Decoration.VEGETAL_DECORATION, TREES_KOUSA_JUNGLE);
+		generation.addFeature(Decoration.VEGETAL_DECORATION, PASSION_VINES);
 	}
 
 	public static void grimwoods(BiomeGenerationSettings.Builder generation) {
 		OverworldBiomes.globalOverworldGeneration(generation);
 		BiomeDefaultFeatures.addDefaultOres(generation);
 		BiomeDefaultFeatures.addDefaultSoftDisks(generation);
-		generation.addFeature(Decoration.VEGETAL_DECORATION, COARSE_DIRT.getHolder().get());
+		generation.addFeature(Decoration.VEGETAL_DECORATION, COARSE_DIRT);
 		generation.addFeature(Decoration.VEGETAL_DECORATION, VegetationPlacements.PATCH_DEAD_BUSH_BADLANDS);
 		BiomeDefaultFeatures.addSavannaExtraGrass(generation);
 		BiomeDefaultFeatures.addDefaultMushrooms(generation);
 		BiomeDefaultFeatures.addDefaultExtraVegetation(generation);
 
-		generation.addFeature(Decoration.VEGETAL_DECORATION, TREES_GRIMWOODS.getHolder().get());
-		generation.addFeature(Decoration.VEGETAL_DECORATION, OMINOUS_BLOCK.getHolder().get());
-		generation.addFeature(Decoration.VEGETAL_DECORATION, DEAD_CURRANT.getHolder().get());
+		generation.addFeature(Decoration.VEGETAL_DECORATION, TREES_GRIMWOODS);
+		generation.addFeature(Decoration.VEGETAL_DECORATION, OMINOUS_BLOCK);
+		generation.addFeature(Decoration.VEGETAL_DECORATION, DEAD_CURRANT);
 	}
 
 	public static void laurelForest(BiomeGenerationSettings.Builder generation) {
@@ -189,18 +189,18 @@ public class AtmosphericGeneration {
 		BiomeDefaultFeatures.addDefaultOres(generation);
 		BiomeDefaultFeatures.addDefaultSoftDisks(generation);
 		BiomeDefaultFeatures.addDefaultFlowers(generation);
-		generation.addFeature(Decoration.VEGETAL_DECORATION, COARSE_DIRT_LAUREL_FOREST.getHolder().get());
-		generation.addFeature(Decoration.VEGETAL_DECORATION, PATCH_DEAD_BUSH_LAUREL_FOREST.getHolder().get());
+		generation.addFeature(Decoration.VEGETAL_DECORATION, COARSE_DIRT_LAUREL_FOREST);
+		generation.addFeature(Decoration.VEGETAL_DECORATION, PATCH_DEAD_BUSH_LAUREL_FOREST);
 		BiomeDefaultFeatures.addForestGrass(generation);
 		BiomeDefaultFeatures.addDefaultMushrooms(generation);
 		BiomeDefaultFeatures.addDefaultExtraVegetation(generation);
 
-		generation.addFeature(Decoration.VEGETAL_DECORATION, TREES_LAUREL_FOREST_GIANT.getHolder().get());
-		generation.addFeature(Decoration.VEGETAL_DECORATION, TREES_LAUREL_FOREST_LARGE.getHolder().get());
-		generation.addFeature(Decoration.VEGETAL_DECORATION, TREES_LAUREL_FOREST.getHolder().get());
-		generation.addFeature(Decoration.VEGETAL_DECORATION, PATCH_AGAVE_LARGE.getHolder().get());
-		generation.addFeature(Decoration.VEGETAL_DECORATION, PATCH_LARGE_FERN_KOUSA.getHolder().get());
-		generation.addFeature(Decoration.VEGETAL_DECORATION, PATCH_GRASS_LAUREL_FOREST.getHolder().get());
+		generation.addFeature(Decoration.VEGETAL_DECORATION, TREES_LAUREL_FOREST_GIANT);
+		generation.addFeature(Decoration.VEGETAL_DECORATION, TREES_LAUREL_FOREST_LARGE);
+		generation.addFeature(Decoration.VEGETAL_DECORATION, TREES_LAUREL_FOREST);
+		generation.addFeature(Decoration.VEGETAL_DECORATION, PATCH_AGAVE_LARGE);
+		generation.addFeature(Decoration.VEGETAL_DECORATION, PATCH_LARGE_FERN_KOUSA);
+		generation.addFeature(Decoration.VEGETAL_DECORATION, PATCH_GRASS_LAUREL_FOREST);
 	}
 
 	public static void hotSprings(BiomeGenerationSettings.Builder generation) {
@@ -214,6 +214,6 @@ public class AtmosphericGeneration {
 		BiomeDefaultFeatures.addGiantTaigaVegetation(generation);
 		BiomeDefaultFeatures.addCommonBerryBushes(generation);
 		generation.addFeature(Decoration.VEGETAL_DECORATION, VegetationPlacements.TREES_OLD_GROWTH_SPRUCE_TAIGA);
-		generation.addFeature(Decoration.VEGETAL_DECORATION, HOT_SPRINGS_ROCK.getHolder().get());
+		generation.addFeature(Decoration.VEGETAL_DECORATION, HOT_SPRINGS_ROCK);
 	}
 }

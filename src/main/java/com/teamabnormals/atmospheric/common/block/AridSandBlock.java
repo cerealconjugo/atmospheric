@@ -10,6 +10,7 @@ import net.minecraft.tags.FluidTags;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.BonemealableBlock;
@@ -58,7 +59,7 @@ public class AridSandBlock extends FallingBlock implements BonemealableBlock {
 	}
 
 	@Override
-	public boolean isValidBonemealTarget(BlockGetter worldIn, BlockPos pos, BlockState state, boolean isClient) {
+	public boolean isValidBonemealTarget(LevelReader worldIn, BlockPos pos, BlockState state, boolean isClient) {
 		return worldIn.getBlockState(pos.above()).isAir();
 	}
 
@@ -88,7 +89,7 @@ public class AridSandBlock extends FallingBlock implements BonemealableBlock {
 				BlockState blockstate1;
 				if (rand.nextInt(8) == 0) {
 					Holder<Biome> biome = worldIn.getBiome(blockpos1);
-					if (biome.is(AtmosphericBiomes.FLOURISHING_DUNES.getKey()))
+					if (biome.is(AtmosphericBiomes.FLOURISHING_DUNES))
 						blockstate1 = AtmosphericBlocks.GILIA.get().defaultBlockState();
 					else {
 						blockstate1 = AtmosphericBlocks.YUCCA_FLOWER.get().defaultBlockState();

@@ -28,5 +28,6 @@
     "recipes": [
       "atmospheric:orange_pudding"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

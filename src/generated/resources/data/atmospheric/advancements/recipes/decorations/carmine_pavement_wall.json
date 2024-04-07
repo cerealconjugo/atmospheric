@@ -30,5 +30,6 @@
     "recipes": [
       "atmospheric:carmine_pavement_wall"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

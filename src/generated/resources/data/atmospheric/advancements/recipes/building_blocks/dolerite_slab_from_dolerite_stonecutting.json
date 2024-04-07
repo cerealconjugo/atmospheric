@@ -30,5 +30,6 @@
     "recipes": [
       "atmospheric:dolerite_slab_from_dolerite_stonecutting"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

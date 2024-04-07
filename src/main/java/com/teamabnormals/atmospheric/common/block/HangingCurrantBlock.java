@@ -7,6 +7,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.item.FallingBlockEntity;
@@ -85,7 +86,7 @@ public class HangingCurrantBlock extends BushBlock implements Fallable {
 	@Override
 	public void onBrokenAfterFall(Level level, BlockPos pos, FallingBlockEntity entity) {
 		BlockState state = level.getBlockState(pos);
-		if ((state.isAir() || state.getMaterial().isReplaceable()) && AtmosphericBlocks.CURRANT_SEEDLING.get().canSurvive(state, level, pos)) {
+		if ((state.isAir() || state.is(BlockTags.REPLACEABLE)) && AtmosphericBlocks.CURRANT_SEEDLING.get().canSurvive(state, level, pos)) {
 			level.setBlockAndUpdate(pos, AtmosphericBlocks.CURRANT_SEEDLING.get().defaultBlockState());
 		} else {
 			for (int i = 0; i < 2 + level.random.nextInt(3); i++) {

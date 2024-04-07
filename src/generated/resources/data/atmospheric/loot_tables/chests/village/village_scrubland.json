@@ -134,5 +134,6 @@
         "min": 3.0
       }
     }
-  ]
+  ],
+  "random_sequence": "atmospheric:chests/village/village_scrubland"
 }

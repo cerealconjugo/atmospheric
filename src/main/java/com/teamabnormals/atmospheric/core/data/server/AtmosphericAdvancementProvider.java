@@ -8,23 +8,28 @@ import com.teamabnormals.atmospheric.core.registry.AtmosphericItems;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.FrameType;
 import net.minecraft.advancements.critereon.*;
-import net.minecraft.data.DataGenerator;
-import net.minecraft.data.advancements.AdvancementProvider;
+import net.minecraft.core.HolderLookup.Provider;
+import net.minecraft.data.PackOutput;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.level.ItemLike;
 import net.minecraftforge.common.data.ExistingFileHelper;
+import net.minecraftforge.common.data.ForgeAdvancementProvider;
+import net.minecraftforge.common.data.ForgeAdvancementProvider.AdvancementGenerator;
 
+import java.util.List;
+import java.util.concurrent.CompletableFuture;
 import java.util.function.Consumer;
 
-public class AtmosphericAdvancementProvider extends AdvancementProvider {
+public class AtmosphericAdvancementProvider implements AdvancementGenerator {
 
-	public AtmosphericAdvancementProvider(DataGenerator generator, ExistingFileHelper existingFileHelper) {
-		super(generator, existingFileHelper);
+	public static ForgeAdvancementProvider create(PackOutput output, CompletableFuture<Provider> provider, ExistingFileHelper helper) {
+		return new ForgeAdvancementProvider(output, provider, helper, List.of(new AtmosphericAdvancementProvider()));
 	}
 
 	@Override
-	protected void registerAdvancements(Consumer<Advancement> consumer, ExistingFileHelper existingFileHelper) {
+	public void generate(Provider provider, Consumer<Advancement> consumer, ExistingFileHelper helper) {
 		Advancement dunesPricks = createAdvancement("dunes_pricks", "adventure", new ResourceLocation("adventure/root"), AtmosphericBlocks.YUCCA_FLOWER.get(), FrameType.TASK, true, true, false)
 				.addCriterion("yucca_flower", AtmosphericCriteriaTriggers.YUCCA_PRICK.createInstance())
 				.addCriterion("aloe_vera", AtmosphericCriteriaTriggers.ALOE_VERA_PRICK.createInstance())
@@ -35,10 +40,10 @@ public class AtmosphericAdvancementProvider extends AdvancementProvider {
 				.save(consumer, Atmospheric.MOD_ID + ":adventure/loot_arid_garden");
 
 		Advancement spitPassionFruit = createAdvancement("spit_passion_fruit", "husbandry", new ResourceLocation("husbandry/root"), AtmosphericItems.PASSION_FRUIT.get(), FrameType.TASK, true, true, false)
-				.addCriterion("spit_passion_fruit", PlayerHurtEntityTrigger.TriggerInstance.playerHurtEntity(DamagePredicate.Builder.damageInstance().type(DamageSourcePredicate.Builder.damageType().isProjectile(true).direct(EntityPredicate.Builder.entity().of(AtmosphericEntityTypes.PASSION_FRUIT_SEED.get())))))
+				.addCriterion("spit_passion_fruit", PlayerHurtEntityTrigger.TriggerInstance.playerHurtEntity(DamagePredicate.Builder.damageInstance().type(DamageSourcePredicate.Builder.damageType().tag(TagPredicate.is(DamageTypeTags.IS_PROJECTILE)).direct(EntityPredicate.Builder.entity().of(AtmosphericEntityTypes.PASSION_FRUIT_SEED.get())))))
 				.save(consumer, Atmospheric.MOD_ID + ":husbandry/spit_passion_fruit");
 		createAdvancement("kill_mob_with_passion_fruit", "husbandry", spitPassionFruit, AtmosphericItems.SHIMMERING_PASSION_FRUIT.get(), FrameType.TASK, true, true, false)
-				.addCriterion("kill_mob_with_passion_fruit", KilledTrigger.TriggerInstance.playerKilledEntity(EntityPredicate.ANY, DamageSourcePredicate.Builder.damageType().isProjectile(true).direct(EntityPredicate.Builder.entity().of(AtmosphericEntityTypes.PASSION_FRUIT_SEED.get()))))
+				.addCriterion("kill_mob_with_passion_fruit", KilledTrigger.TriggerInstance.playerKilledEntity(EntityPredicate.ANY, DamageSourcePredicate.Builder.damageType().tag(TagPredicate.is(DamageTypeTags.IS_PROJECTILE)).direct(EntityPredicate.Builder.entity().of(AtmosphericEntityTypes.PASSION_FRUIT_SEED.get()))))
 				.save(consumer, Atmospheric.MOD_ID + ":husbandry/kill_mob_with_passion_fruit");
 
 		Advancement findOrange = createAdvancement("find_orange", "husbandry", new ResourceLocation("husbandry/root"), AtmosphericItems.ORANGE.get(), FrameType.TASK, true, true, false)

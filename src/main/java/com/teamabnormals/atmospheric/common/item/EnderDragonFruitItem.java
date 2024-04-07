@@ -1,6 +1,5 @@
 package com.teamabnormals.atmospheric.common.item;
 
-import com.mojang.math.Vector3f;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.particles.DustParticleOptions;
 import net.minecraft.core.particles.ParticleOptions;
@@ -56,11 +55,11 @@ public class EnderDragonFruitItem extends Item {
 				vec31 = vec31.xRot(-entity.getXRot() * ((float) Math.PI / 180F));
 				vec31 = vec31.yRot(-entity.getYRot() * ((float) Math.PI / 180F));
 				vec31 = vec31.add(entity.getX(), entity.getEyeY(), entity.getZ());
-				ParticleOptions particleOptions = new DustParticleOptions(new Vector3f(Vec3.fromRGB24(14437887)), 1.0F);
-				if (entity.level instanceof ServerLevel serverLevel) {
+				ParticleOptions particleOptions = new DustParticleOptions(Vec3.fromRGB24(14437887).toVector3f(), 1.0F);
+				if (entity.level() instanceof ServerLevel serverLevel) {
 					serverLevel.sendParticles(particleOptions, vec31.x, vec31.y, vec31.z, 1, vec3.x, vec3.y + 0.05D, vec3.z, 0.0D);
 				} else {
-					entity.level.addParticle(particleOptions, vec31.x, vec31.y, vec31.z, vec3.x, vec3.y + 0.05D, vec3.z);
+					entity.level().addParticle(particleOptions, vec31.x, vec31.y, vec31.z, vec3.x, vec3.y + 0.05D, vec3.z);
 				}
 			}
 

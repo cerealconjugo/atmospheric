@@ -28,5 +28,6 @@
     "recipes": [
       "atmospheric:currant_muffin"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

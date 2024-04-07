@@ -14,13 +14,15 @@ import com.teamabnormals.atmospheric.core.Atmospheric;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Direction.Plane;
-import net.minecraft.core.Holder;
-import net.minecraft.core.Registry;
+import net.minecraft.core.HolderGetter;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.data.worldgen.BootstapContext;
 import net.minecraft.data.worldgen.ProcessorLists;
 import net.minecraft.data.worldgen.features.FeatureUtils;
 import net.minecraft.data.worldgen.placement.PlacementUtils;
 import net.minecraft.data.worldgen.placement.TreePlacements;
 import net.minecraft.data.worldgen.placement.VegetationPlacements;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.random.SimpleWeightedRandomList;
 import net.minecraft.util.valueproviders.BiasedToBottomInt;
@@ -50,13 +52,13 @@ import net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecoratorTy
 import net.minecraft.world.level.levelgen.feature.trunkplacers.StraightTrunkPlacer;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.TrunkPlacer;
 import net.minecraft.world.level.levelgen.placement.*;
+import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessorList;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
 import java.util.List;
-import java.util.function.Supplier;
 
 @EventBusSubscriber(modid = Atmospheric.MOD_ID, bus = EventBusSubscriber.Bus.MOD)
 public class AtmosphericFeatures {
@@ -236,338 +238,662 @@ public class AtmosphericFeatures {
 	}
 
 	public static final class AtmosphericConfiguredFeatures {
-		public static final DeferredRegister<ConfiguredFeature<?, ?>> CONFIGURED_FEATURES = DeferredRegister.create(Registry.CONFIGURED_FEATURE_REGISTRY, Atmospheric.MOD_ID);
+		public static final ResourceKey<ConfiguredFeature<?, ?>> ROSEWOOD = createKey("rosewood");
+		public static final ResourceKey<ConfiguredFeature<?, ?>> ROSEWOOD_BEES_0002 = createKey("rosewood_bees_0002");
+		public static final ResourceKey<ConfiguredFeature<?, ?>> ROSEWOOD_BEES_005 = createKey("rosewood_bees_005");
+
+		public static final ResourceKey<ConfiguredFeature<?, ?>> MORADO = createKey("morado");
+		public static final ResourceKey<ConfiguredFeature<?, ?>> MORADO_BEES_0002 = createKey("morado_bees_0002");
+		public static final ResourceKey<ConfiguredFeature<?, ?>> MORADO_BEES_005 = createKey("morado_bees_005");
+
+		public static final ResourceKey<ConfiguredFeature<?, ?>> YUCCA = createKey("yucca");
+		public static final ResourceKey<ConfiguredFeature<?, ?>> YUCCA_WITH_FLOWERS = createKey("yucca_with_flowers");
+		public static final ResourceKey<ConfiguredFeature<?, ?>> BABY_YUCCA = createKey("baby_yucca");
+		public static final ResourceKey<ConfiguredFeature<?, ?>> BABY_YUCCA_WITH_FLOWERS = createKey("baby_yucca_with_flowers");
+		public static final ResourceKey<ConfiguredFeature<?, ?>> YUCCA_BEES_005 = createKey("yucca_bees_005");
+		public static final ResourceKey<ConfiguredFeature<?, ?>> YUCCA_BEES_005_WITH_FLOWERS = createKey("yucca_bees_005_with_flowers");
+		public static final ResourceKey<ConfiguredFeature<?, ?>> PETRIFIED_YUCCA = createKey("petrified_yucca");
+		public static final ResourceKey<ConfiguredFeature<?, ?>> RED_PETRIFIED_YUCCA = createKey("red_petrified_yucca");
+
+		public static final ResourceKey<ConfiguredFeature<?, ?>> ASPEN = createKey("aspen");
+		public static final ResourceKey<ConfiguredFeature<?, ?>> ASPEN_BEES_0002 = createKey("aspen_bees_0002");
+		public static final ResourceKey<ConfiguredFeature<?, ?>> ASPEN_BEES_005 = createKey("aspen_bees_005");
+		public static final ResourceKey<ConfiguredFeature<?, ?>> ASPEN_WITH_VINES = createKey("aspen_with_vines");
+
+		public static final ResourceKey<ConfiguredFeature<?, ?>> GREEN_ASPEN = createKey("green_aspen");
+		public static final ResourceKey<ConfiguredFeature<?, ?>> GREEN_ASPEN_BEES_0002 = createKey("green_aspen_bees_0002");
+		public static final ResourceKey<ConfiguredFeature<?, ?>> GREEN_ASPEN_BEES_005 = createKey("green_aspen_bees_005");
+		public static final ResourceKey<ConfiguredFeature<?, ?>> GREEN_ASPEN_WITH_VINES = createKey("green_aspen_with_vines");
+
+		public static final ResourceKey<ConfiguredFeature<?, ?>> LAUREL = createKey("laurel");
+		public static final ResourceKey<ConfiguredFeature<?, ?>> LAUREL_ORANGES_0005 = createKey("laurel_oranges_0005");
+		public static final ResourceKey<ConfiguredFeature<?, ?>> LAUREL_ORANGES_08 = createKey("laurel_oranges_08");
+		public static final ResourceKey<ConfiguredFeature<?, ?>> LAUREL_WITH_VINES = createKey("laurel_with_vines");
+		public static final ResourceKey<ConfiguredFeature<?, ?>> LAUREL_BLOOD_ORANGES_08 = createKey("laurel_blood_oranges_08");
+		public static final ResourceKey<ConfiguredFeature<?, ?>> LARGE_LAUREL = createKey("large_laurel");
+		public static final ResourceKey<ConfiguredFeature<?, ?>> LARGE_LAUREL_ORANGES_0005 = createKey("large_laurel_oranges_0005");
+		public static final ResourceKey<ConfiguredFeature<?, ?>> LARGE_LAUREL_ORANGES_08 = createKey("large_laurel_oranges_08");
+		public static final ResourceKey<ConfiguredFeature<?, ?>> LARGE_LAUREL_WITH_VINES = createKey("large_laurel_with_vines");
+		public static final ResourceKey<ConfiguredFeature<?, ?>> LARGE_LAUREL_BLOOD_ORANGES_08 = createKey("large_laurel_blood_oranges_08");
+		public static final ResourceKey<ConfiguredFeature<?, ?>> GIANT_LAUREL = createKey("giant_laurel");
+		public static final ResourceKey<ConfiguredFeature<?, ?>> GIANT_LAUREL_ORANGES_0005 = createKey("giant_laurel_oranges_0005");
+		public static final ResourceKey<ConfiguredFeature<?, ?>> GIANT_LAUREL_ORANGES_08 = createKey("giant_laurel_oranges_08");
+		public static final ResourceKey<ConfiguredFeature<?, ?>> GIANT_LAUREL_WITH_VINES = createKey("giant_laurel_with_vines");
+		public static final ResourceKey<ConfiguredFeature<?, ?>> GIANT_LAUREL_BLOOD_ORANGES_08 = createKey("giant_laurel_blood_oranges_08");
+
+		public static final ResourceKey<ConfiguredFeature<?, ?>> DRY_LAUREL = createKey("dry_laurel");
+		public static final ResourceKey<ConfiguredFeature<?, ?>> DRY_LAUREL_ORANGES_0005 = createKey("dry_laurel_oranges_0005");
+		public static final ResourceKey<ConfiguredFeature<?, ?>> DRY_LAUREL_ORANGES_08 = createKey("dry_laurel_oranges_08");
+		public static final ResourceKey<ConfiguredFeature<?, ?>> DRY_LAUREL_WITH_VINES = createKey("dry_laurel_with_vines");
+		public static final ResourceKey<ConfiguredFeature<?, ?>> DRY_LAUREL_BLOOD_ORANGES_08 = createKey("dry_laurel_blood_oranges_08");
+		public static final ResourceKey<ConfiguredFeature<?, ?>> LARGE_DRY_LAUREL = createKey("large_dry_laurel");
+		public static final ResourceKey<ConfiguredFeature<?, ?>> LARGE_DRY_LAUREL_ORANGES_0005 = createKey("large_dry_laurel_oranges_0005");
+		public static final ResourceKey<ConfiguredFeature<?, ?>> LARGE_DRY_LAUREL_ORANGES_08 = createKey("large_dry_laurel_oranges_08");
+		public static final ResourceKey<ConfiguredFeature<?, ?>> LARGE_DRY_LAUREL_WITH_VINES = createKey("large_dry_laurel_with_vines");
+		public static final ResourceKey<ConfiguredFeature<?, ?>> LARGE_DRY_LAUREL_BLOOD_ORANGES_08 = createKey("large_dry_laurel_blood_oranges_08");
+		public static final ResourceKey<ConfiguredFeature<?, ?>> GIANT_DRY_LAUREL = createKey("giant_dry_laurel");
+		public static final ResourceKey<ConfiguredFeature<?, ?>> GIANT_DRY_LAUREL_ORANGES_0005 = createKey("giant_dry_laurel_oranges_0005");
+		public static final ResourceKey<ConfiguredFeature<?, ?>> GIANT_DRY_LAUREL_ORANGES_08 = createKey("giant_dry_laurel_oranges_08");
+		public static final ResourceKey<ConfiguredFeature<?, ?>> GIANT_DRY_LAUREL_WITH_VINES = createKey("giant_dry_laurel_with_vines");
+		public static final ResourceKey<ConfiguredFeature<?, ?>> GIANT_DRY_LAUREL_BLOOD_ORANGES_08 = createKey("giant_dry_laurel_blood_oranges_08");
+
+		public static final ResourceKey<ConfiguredFeature<?, ?>> KOUSA = createKey("kousa");
+		public static final ResourceKey<ConfiguredFeature<?, ?>> BABY_KOUSA = createKey("baby_kousa");
+		public static final ResourceKey<ConfiguredFeature<?, ?>> CURRANT = createKey("currant");
+		public static final ResourceKey<ConfiguredFeature<?, ?>> DEAD_CURRANT = createKey("dead_currant");
+
+		public static final ResourceKey<ConfiguredFeature<?, ?>> GRIMWOOD = createKey("grimwood");
+		public static final ResourceKey<ConfiguredFeature<?, ?>> DEAD_GRIMWOOD = createKey("dead_grimwood");
+
+		public static final ResourceKey<ConfiguredFeature<?, ?>> OAK_BUSH = createKey("oak_bush");
+		public static final ResourceKey<ConfiguredFeature<?, ?>> DARK_OAK_BUSH = createKey("dark_oak_bush");
+		public static final ResourceKey<ConfiguredFeature<?, ?>> MORADO_BUSH = createKey("morado_bush");
+		public static final ResourceKey<ConfiguredFeature<?, ?>> DRY_LAUREL_BUSH = createKey("dry_laurel_bush");
+
+		// Rainforest
+
+		public static final ResourceKey<ConfiguredFeature<?, ?>> TREES_RAINFOREST = createKey("trees_rainforest");
+		public static final ResourceKey<ConfiguredFeature<?, ?>> BUSHES_RAINFOREST = createKey("bushes_rainforest");
+
+		public static final ResourceKey<ConfiguredFeature<?, ?>> PODZOL = createKey("podzol");
+		public static final ResourceKey<ConfiguredFeature<?, ?>> PASSION_VINES = createKey("passion_vines");
+		public static final ResourceKey<ConfiguredFeature<?, ?>> PATCH_WATER_HYACINTH = createKey("patch_water_hyacinth");
+		public static final ResourceKey<ConfiguredFeature<?, ?>> PATCH_WATERLILY = createKey("patch_waterlily_rainforest");
+
+		public static final ResourceKey<ConfiguredFeature<?, ?>> WARM_MONKEY_BRUSH = createKey("warm_monkey_brush");
+		public static final ResourceKey<ConfiguredFeature<?, ?>> HOT_MONKEY_BRUSH = createKey("hot_monkey_brush");
+		public static final ResourceKey<ConfiguredFeature<?, ?>> SCALDING_MONKEY_BRUSH = createKey("scalding_monkey_brush");
+		public static final ResourceKey<ConfiguredFeature<?, ?>> MONKEY_BRUSH = createKey("monkey_brush");
+
+		public static final ResourceKey<ConfiguredFeature<?, ?>> OCEAN_FLOOR_RAISER = createKey("ocean_floor_raiser");
+
+		// Dunes
+
+		public static final ResourceKey<ConfiguredFeature<?, ?>> DUNE_ROCK = createKey("forest_rock");
+		public static final ResourceKey<ConfiguredFeature<?, ?>> SURFACE_FOSSIL = createKey("surface_fossil");
+		public static final ResourceKey<ConfiguredFeature<?, ?>> PATCH_BARREL_CACTUS = createKey("patch_barrel_cactus");
+		public static final ResourceKey<ConfiguredFeature<?, ?>> PATCH_DUNE_GRASS = createKey("patch_dune_grass");
+		public static final ResourceKey<ConfiguredFeature<?, ?>> PATCH_ARID_SPROUTS = createKey("patch_arid_sprouts");
+		public static final ResourceKey<ConfiguredFeature<?, ?>> FLOWER_FLOURISHING_DUNES = createKey("flower_flourishing_dunes");
+		public static final ResourceKey<ConfiguredFeature<?, ?>> PATCH_MELON_DUNES = createKey("patch_melon_dunes");
+
+		public static final ResourceKey<ConfiguredFeature<?, ?>> TREES_DUNES = createKey("trees_dunes");
+		public static final ResourceKey<ConfiguredFeature<?, ?>> TREES_PETRIFIED_DUNES = createKey("trees_petrified_dunes");
+		public static final ResourceKey<ConfiguredFeature<?, ?>> TREES_FLOURISHING_DUNES = createKey("trees_flourishing_dunes");
+
+		public static final ResourceKey<ConfiguredFeature<?, ?>> PATCH_YUCCA_FLOWER = createKey("patch_yucca_flower");
+
+		public static final ResourceKey<ConfiguredFeature<?, ?>> PATCH_SHORT_ALOE_VERA = createKey("patch_short_aloe_vera");
+		public static final ResourceKey<ConfiguredFeature<?, ?>> PATCH_TALL_ALOE_VERA = createKey("patch_tall_aloe_vera");
+		public static final ResourceKey<ConfiguredFeature<?, ?>> PATCH_ALOE_VERA = createKey("patch_aloe_vera");
+
+		// Aspen Parkland
+
+		public static final ResourceKey<ConfiguredFeature<?, ?>> CRUSTOSE = createKey("crustose");
+		public static final ResourceKey<ConfiguredFeature<?, ?>> FALLEN_CRUSTOSE_LOG = createKey("fallen_crustose_log");
+		public static final ResourceKey<ConfiguredFeature<?, ?>> TREES_ASPEN_PARKLAND = createKey("trees_aspen_parkland");
+		public static final ResourceKey<ConfiguredFeature<?, ?>> SINGLE_AGAVE = createKey("single_agave");
+		public static final ResourceKey<ConfiguredFeature<?, ?>> PATCH_AGAVE_LARGE = createKey("patch_agave_large");
+		public static final ResourceKey<ConfiguredFeature<?, ?>> PATCH_GOLDEN_GROWTHS = createKey("patch_golden_growths");
+
+		// Laurel Forest
+
+		public static final ResourceKey<ConfiguredFeature<?, ?>> TREES_LAUREL_FOREST = createKey("trees_laurel_forest");
+		public static final ResourceKey<ConfiguredFeature<?, ?>> TREES_LAUREL_FOREST_LARGE = createKey("trees_laurel_forest_large");
+		public static final ResourceKey<ConfiguredFeature<?, ?>> TREES_LAUREL_FOREST_GIANT = createKey("trees_laurel_forest_giant");
+		public static final ResourceKey<ConfiguredFeature<?, ?>> PATCH_GRASS_LAUREL_FOREST = createKey("patch_grass_laurel_forest");
+
+		// Kousa Jungle
+
+		public static final ResourceKey<ConfiguredFeature<?, ?>> SNOWY_BAMBOO = createKey("snowy_bamboo");
+		public static final ResourceKey<ConfiguredFeature<?, ?>> TREES_KOUSA_JUNGLE = createKey("trees_kousa_jungle");
+
+		// Grimwoods
+
+		public static final ResourceKey<ConfiguredFeature<?, ?>> TREES_GRIMWOODS = createKey("trees_grimwoods");
+		public static final ResourceKey<ConfiguredFeature<?, ?>> OMINOUS_BLOCK = createKey("ominous_block");
+
+		// Spiny Thicket
+
+		public static final ResourceKey<ConfiguredFeature<?, ?>> TREES_SPINY_THICKET = createKey("trees_spiny_thicket");
+		public static final ResourceKey<ConfiguredFeature<?, ?>> SINGLE_YUCCA_FLOWER = createKey("single_yucca_flower");
+
+		// Scrubland
+
+		public static final ResourceKey<ConfiguredFeature<?, ?>> TREES_SCRUBLAND = createKey("trees_scrubland");
+		public static final ResourceKey<ConfiguredFeature<?, ?>> FLOWER_SCRUBLAND = createKey("flower_scrubland");
+		public static final ResourceKey<ConfiguredFeature<?, ?>> DRAGON_ROOTS = createKey("dragon_roots");
+
+		// Hot Springs
+
+		public static final ResourceKey<ConfiguredFeature<?, ?>> HOT_SPRINGS_ROCK = createKey("hot_springs_rock");
+
+		// Generic
+
+		public static final ResourceKey<ConfiguredFeature<?, ?>> COARSE_DIRT = createKey("coarse_dirt");
+
+		public static final ResourceKey<ConfiguredFeature<?, ?>> BIRCH_BUSH = createKey("birch_bush");
+
+		public static final ResourceKey<ConfiguredFeature<?, ?>> PATCH_DEAD_BUSH = createKey("patch_dead_bush");
+		public static final ResourceKey<ConfiguredFeature<?, ?>> PATCH_LARGE_FERN = createKey("patch_large_fern");
+		public static final ResourceKey<ConfiguredFeature<?, ?>> PATCH_CACTUS = createKey("patch_cactus");
+		public static final ResourceKey<ConfiguredFeature<?, ?>> PATCH_CACTUS_TALL = createKey("patch_cactus_tall");
+		public static final ResourceKey<ConfiguredFeature<?, ?>> PATCH_CACTUS_VERY_TALL = createKey("patch_cactus_very_tall");
 
 		private static final List<ResourceLocation> FOSSIL_STRUCTURES = List.of(new ResourceLocation("fossil/spine_1"), new ResourceLocation("fossil/spine_2"), new ResourceLocation("fossil/spine_3"), new ResourceLocation("fossil/spine_4"), new ResourceLocation("fossil/skull_1"), new ResourceLocation("fossil/skull_2"), new ResourceLocation("fossil/skull_3"), new ResourceLocation("fossil/skull_4"));
 		private static final List<ResourceLocation> FOSSIL_COAL_STRUCTURES = List.of(new ResourceLocation("fossil/spine_1_coal"), new ResourceLocation("fossil/spine_2_coal"), new ResourceLocation("fossil/spine_3_coal"), new ResourceLocation("fossil/spine_4_coal"), new ResourceLocation("fossil/skull_1_coal"), new ResourceLocation("fossil/skull_2_coal"), new ResourceLocation("fossil/skull_3_coal"), new ResourceLocation("fossil/skull_4_coal"));
 
-		public static final RegistryObject<ConfiguredFeature<TreeConfiguration, ?>> ROSEWOOD = register("rosewood", () -> new ConfiguredFeature<>(AtmosphericFeatures.ROSEWOOD_TREE.get(), Configs.ROSEWOOD));
-		public static final RegistryObject<ConfiguredFeature<TreeConfiguration, ?>> ROSEWOOD_BEES_0002 = register("rosewood_bees_0002", () -> new ConfiguredFeature<>(AtmosphericFeatures.ROSEWOOD_TREE.get(), Configs.ROSEWOOD_BEES_0002));
-		public static final RegistryObject<ConfiguredFeature<TreeConfiguration, ?>> ROSEWOOD_BEES_005 = register("rosewood_bees_005", () -> new ConfiguredFeature<>(AtmosphericFeatures.ROSEWOOD_TREE.get(), Configs.ROSEWOOD_BEES_005));
+		public static void bootstrap(BootstapContext<ConfiguredFeature<?, ?>> context) {
+			HolderGetter<PlacedFeature> placedFeatures = context.lookup(Registries.PLACED_FEATURE);
+			HolderGetter<StructureProcessorList> processors = context.lookup(Registries.PROCESSOR_LIST);
 
-		public static final RegistryObject<ConfiguredFeature<TreeConfiguration, ?>> MORADO = register("morado", () -> new ConfiguredFeature<>(AtmosphericFeatures.ROSEWOOD_TREE.get(), Configs.MORADO));
-		public static final RegistryObject<ConfiguredFeature<TreeConfiguration, ?>> MORADO_BEES_0002 = register("morado_bees_0002", () -> new ConfiguredFeature<>(AtmosphericFeatures.ROSEWOOD_TREE.get(), Configs.MORADO_BEES_0002));
-		public static final RegistryObject<ConfiguredFeature<TreeConfiguration, ?>> MORADO_BEES_005 = register("morado_bees_005", () -> new ConfiguredFeature<>(AtmosphericFeatures.ROSEWOOD_TREE.get(), Configs.MORADO_BEES_005));
+			register(context, ROSEWOOD, AtmosphericFeatures.ROSEWOOD_TREE.get(), Configs.ROSEWOOD);
+			register(context, ROSEWOOD_BEES_0002, AtmosphericFeatures.ROSEWOOD_TREE.get(), Configs.ROSEWOOD_BEES_0002);
+			register(context, ROSEWOOD_BEES_005, AtmosphericFeatures.ROSEWOOD_TREE.get(), Configs.ROSEWOOD_BEES_005);
 
-		public static final RegistryObject<ConfiguredFeature<TreeConfiguration, ?>> YUCCA = register("yucca", () -> new ConfiguredFeature<>(AtmosphericFeatures.YUCCA_TREE.get(), Configs.YUCCA));
-		public static final RegistryObject<ConfiguredFeature<TreeConfiguration, ?>> YUCCA_WITH_FLOWERS = register("yucca_with_flowers", () -> new ConfiguredFeature<>(AtmosphericFeatures.YUCCA_TREE.get(), Configs.YUCCA_WITH_FLOWERS));
-		public static final RegistryObject<ConfiguredFeature<TreeConfiguration, ?>> BABY_YUCCA = register("baby_yucca", () -> new ConfiguredFeature<>(AtmosphericFeatures.BABY_YUCCA_TREE.get(), Configs.BABY_YUCCA));
-		public static final RegistryObject<ConfiguredFeature<TreeConfiguration, ?>> BABY_YUCCA_WITH_FLOWERS = register("baby_yucca_with_flowers", () -> new ConfiguredFeature<>(AtmosphericFeatures.BABY_YUCCA_TREE.get(), Configs.BABY_YUCCA_WITH_FLOWERS));
-		public static final RegistryObject<ConfiguredFeature<TreeConfiguration, ?>> YUCCA_BEES_005 = register("yucca_bees_005", () -> new ConfiguredFeature<>(AtmosphericFeatures.YUCCA_TREE.get(), Configs.YUCCA_BEES_005));
-		public static final RegistryObject<ConfiguredFeature<TreeConfiguration, ?>> YUCCA_BEES_005_WITH_FLOWERS = register("yucca_bees_005_with_flowers", () -> new ConfiguredFeature<>(AtmosphericFeatures.YUCCA_TREE.get(), Configs.YUCCA_BEES_005_WITH_FLOWERS));
-		public static final RegistryObject<ConfiguredFeature<TreeConfiguration, ?>> PETRIFIED_YUCCA = register("petrified_yucca", () -> new ConfiguredFeature<>(AtmosphericFeatures.YUCCA_TREE.get(), Configs.PETRIFIED_YUCCA));
-		public static final RegistryObject<ConfiguredFeature<TreeConfiguration, ?>> RED_PETRIFIED_YUCCA = register("red_petrified_yucca", () -> new ConfiguredFeature<>(AtmosphericFeatures.YUCCA_TREE.get(), Configs.RED_PETRIFIED_YUCCA));
+			register(context, MORADO, AtmosphericFeatures.ROSEWOOD_TREE.get(), Configs.MORADO);
+			register(context, MORADO_BEES_0002, AtmosphericFeatures.ROSEWOOD_TREE.get(), Configs.MORADO_BEES_0002);
+			register(context, MORADO_BEES_005, AtmosphericFeatures.ROSEWOOD_TREE.get(), Configs.MORADO_BEES_005);
 
-		public static final RegistryObject<ConfiguredFeature<TreeConfiguration, ?>> ASPEN = register("aspen", () -> new ConfiguredFeature<>(AtmosphericFeatures.ASPEN_TREE.get(), Configs.ASPEN));
-		public static final RegistryObject<ConfiguredFeature<TreeConfiguration, ?>> ASPEN_BEES_0002 = register("aspen_bees_0002", () -> new ConfiguredFeature<>(AtmosphericFeatures.ASPEN_TREE.get(), Configs.ASPEN_BEES_0002));
-		public static final RegistryObject<ConfiguredFeature<TreeConfiguration, ?>> ASPEN_BEES_005 = register("aspen_bees_005", () -> new ConfiguredFeature<>(AtmosphericFeatures.ASPEN_TREE.get(), Configs.ASPEN_BEES_005));
-		public static final RegistryObject<ConfiguredFeature<TreeConfiguration, ?>> ASPEN_WITH_VINES = register("aspen_with_vines", () -> new ConfiguredFeature<>(AtmosphericFeatures.ASPEN_TREE.get(), Configs.ASPEN_WITH_VINES));
+			register(context, YUCCA, AtmosphericFeatures.YUCCA_TREE.get(), Configs.YUCCA);
+			register(context, YUCCA_WITH_FLOWERS, AtmosphericFeatures.YUCCA_TREE.get(), Configs.YUCCA_WITH_FLOWERS);
+			register(context, BABY_YUCCA, AtmosphericFeatures.BABY_YUCCA_TREE.get(), Configs.BABY_YUCCA);
+			register(context, BABY_YUCCA_WITH_FLOWERS, AtmosphericFeatures.BABY_YUCCA_TREE.get(), Configs.BABY_YUCCA_WITH_FLOWERS);
+			register(context, YUCCA_BEES_005, AtmosphericFeatures.YUCCA_TREE.get(), Configs.YUCCA_BEES_005);
+			register(context, YUCCA_BEES_005_WITH_FLOWERS, AtmosphericFeatures.YUCCA_TREE.get(), Configs.YUCCA_BEES_005_WITH_FLOWERS);
+			register(context, PETRIFIED_YUCCA, AtmosphericFeatures.YUCCA_TREE.get(), Configs.PETRIFIED_YUCCA);
+			register(context, RED_PETRIFIED_YUCCA, AtmosphericFeatures.YUCCA_TREE.get(), Configs.RED_PETRIFIED_YUCCA);
 
-		public static final RegistryObject<ConfiguredFeature<TreeConfiguration, ?>> GREEN_ASPEN = register("green_aspen", () -> new ConfiguredFeature<>(AtmosphericFeatures.ASPEN_TREE.get(), Configs.GREEN_ASPEN));
-		public static final RegistryObject<ConfiguredFeature<TreeConfiguration, ?>> GREEN_ASPEN_BEES_0002 = register("green_aspen_bees_0002", () -> new ConfiguredFeature<>(AtmosphericFeatures.ASPEN_TREE.get(), Configs.GREEN_ASPEN_BEES_0002));
-		public static final RegistryObject<ConfiguredFeature<TreeConfiguration, ?>> GREEN_ASPEN_BEES_005 = register("green_aspen_bees_005", () -> new ConfiguredFeature<>(AtmosphericFeatures.ASPEN_TREE.get(), Configs.GREEN_ASPEN_BEES_005));
-		public static final RegistryObject<ConfiguredFeature<TreeConfiguration, ?>> GREEN_ASPEN_WITH_VINES = register("green_aspen_with_vines", () -> new ConfiguredFeature<>(AtmosphericFeatures.ASPEN_TREE.get(), Configs.GREEN_ASPEN_WITH_VINES));
+			register(context, ASPEN, AtmosphericFeatures.ASPEN_TREE.get(), Configs.ASPEN);
+			register(context, ASPEN_BEES_0002, AtmosphericFeatures.ASPEN_TREE.get(), Configs.ASPEN_BEES_0002);
+			register(context, ASPEN_BEES_005, AtmosphericFeatures.ASPEN_TREE.get(), Configs.ASPEN_BEES_005);
+			register(context, ASPEN_WITH_VINES, AtmosphericFeatures.ASPEN_TREE.get(), Configs.ASPEN_WITH_VINES);
 
-		public static final RegistryObject<ConfiguredFeature<TreeConfiguration, ?>> LAUREL = register("laurel", () -> new ConfiguredFeature<>(AtmosphericFeatures.LAUREL_TREE.get(), Configs.LAUREL));
-		public static final RegistryObject<ConfiguredFeature<TreeConfiguration, ?>> LAUREL_ORANGES_0005 = register("laurel_oranges_0005", () -> new ConfiguredFeature<>(AtmosphericFeatures.LAUREL_TREE.get(), Configs.LAUREL_ORANGES_0005));
-		public static final RegistryObject<ConfiguredFeature<TreeConfiguration, ?>> LAUREL_ORANGES_08 = register("laurel_oranges_08", () -> new ConfiguredFeature<>(AtmosphericFeatures.LAUREL_TREE.get(), Configs.LAUREL_ORANGES_08));
-		public static final RegistryObject<ConfiguredFeature<TreeConfiguration, ?>> LAUREL_WITH_VINES = register("laurel_with_vines", () -> new ConfiguredFeature<>(AtmosphericFeatures.LAUREL_TREE.get(), Configs.LAUREL_WITH_VINES));
-		public static final RegistryObject<ConfiguredFeature<TreeConfiguration, ?>> LAUREL_BLOOD_ORANGES_08 = register("laurel_blood_oranges_08", () -> new ConfiguredFeature<>(AtmosphericFeatures.LAUREL_TREE.get(), Configs.LAUREL_BLOOD_ORANGES_08));
-		public static final RegistryObject<ConfiguredFeature<TreeConfiguration, ?>> LARGE_LAUREL = register("large_laurel", () -> new ConfiguredFeature<>(AtmosphericFeatures.LARGE_LAUREL_TREE.get(), Configs.LAUREL));
-		public static final RegistryObject<ConfiguredFeature<TreeConfiguration, ?>> LARGE_LAUREL_ORANGES_0005 = register("large_laurel_oranges_0005", () -> new ConfiguredFeature<>(AtmosphericFeatures.LARGE_LAUREL_TREE.get(), Configs.LAUREL_ORANGES_0005));
-		public static final RegistryObject<ConfiguredFeature<TreeConfiguration, ?>> LARGE_LAUREL_ORANGES_08 = register("large_laurel_oranges_08", () -> new ConfiguredFeature<>(AtmosphericFeatures.LARGE_LAUREL_TREE.get(), Configs.LAUREL_ORANGES_08));
-		public static final RegistryObject<ConfiguredFeature<TreeConfiguration, ?>> LARGE_LAUREL_WITH_VINES = register("large_laurel_with_vines", () -> new ConfiguredFeature<>(AtmosphericFeatures.LARGE_LAUREL_TREE.get(), Configs.LAUREL_WITH_VINES));
-		public static final RegistryObject<ConfiguredFeature<TreeConfiguration, ?>> LARGE_LAUREL_BLOOD_ORANGES_08 = register("large_laurel_blood_oranges_08", () -> new ConfiguredFeature<>(AtmosphericFeatures.LARGE_LAUREL_TREE.get(), Configs.LAUREL_BLOOD_ORANGES_08));
-		public static final RegistryObject<ConfiguredFeature<TreeConfiguration, ?>> GIANT_LAUREL = register("giant_laurel", () -> new ConfiguredFeature<>(AtmosphericFeatures.GIANT_LAUREL_TREE.get(), Configs.LAUREL));
-		public static final RegistryObject<ConfiguredFeature<TreeConfiguration, ?>> GIANT_LAUREL_ORANGES_0005 = register("giant_laurel_oranges_0005", () -> new ConfiguredFeature<>(AtmosphericFeatures.GIANT_LAUREL_TREE.get(), Configs.LAUREL_ORANGES_0005));
-		public static final RegistryObject<ConfiguredFeature<TreeConfiguration, ?>> GIANT_LAUREL_ORANGES_08 = register("giant_laurel_oranges_08", () -> new ConfiguredFeature<>(AtmosphericFeatures.GIANT_LAUREL_TREE.get(), Configs.LAUREL_ORANGES_08));
-		public static final RegistryObject<ConfiguredFeature<TreeConfiguration, ?>> GIANT_LAUREL_WITH_VINES = register("giant_laurel_with_vines", () -> new ConfiguredFeature<>(AtmosphericFeatures.GIANT_LAUREL_TREE.get(), Configs.LAUREL_WITH_VINES));
-		public static final RegistryObject<ConfiguredFeature<TreeConfiguration, ?>> GIANT_LAUREL_BLOOD_ORANGES_08 = register("giant_laurel_blood_oranges_08", () -> new ConfiguredFeature<>(AtmosphericFeatures.GIANT_LAUREL_TREE.get(), Configs.LAUREL_BLOOD_ORANGES_08));
+			register(context, GREEN_ASPEN, AtmosphericFeatures.ASPEN_TREE.get(), Configs.GREEN_ASPEN);
+			register(context, GREEN_ASPEN_BEES_0002, AtmosphericFeatures.ASPEN_TREE.get(), Configs.GREEN_ASPEN_BEES_0002);
+			register(context, GREEN_ASPEN_BEES_005, AtmosphericFeatures.ASPEN_TREE.get(), Configs.GREEN_ASPEN_BEES_005);
+			register(context, GREEN_ASPEN_WITH_VINES, AtmosphericFeatures.ASPEN_TREE.get(), Configs.GREEN_ASPEN_WITH_VINES);
 
-		public static final RegistryObject<ConfiguredFeature<TreeConfiguration, ?>> DRY_LAUREL = register("dry_laurel", () -> new ConfiguredFeature<>(AtmosphericFeatures.LAUREL_TREE.get(), Configs.DRY_LAUREL));
-		public static final RegistryObject<ConfiguredFeature<TreeConfiguration, ?>> DRY_LAUREL_ORANGES_0005 = register("dry_laurel_oranges_0005", () -> new ConfiguredFeature<>(AtmosphericFeatures.LAUREL_TREE.get(), Configs.DRY_LAUREL_ORANGES_0005));
-		public static final RegistryObject<ConfiguredFeature<TreeConfiguration, ?>> DRY_LAUREL_ORANGES_08 = register("dry_laurel_oranges_08", () -> new ConfiguredFeature<>(AtmosphericFeatures.LAUREL_TREE.get(), Configs.DRY_LAUREL_ORANGES_08));
-		public static final RegistryObject<ConfiguredFeature<TreeConfiguration, ?>> DRY_LAUREL_WITH_VINES = register("dry_laurel_with_vines", () -> new ConfiguredFeature<>(AtmosphericFeatures.LAUREL_TREE.get(), Configs.DRY_LAUREL_WITH_VINES));
-		public static final RegistryObject<ConfiguredFeature<TreeConfiguration, ?>> DRY_LAUREL_BLOOD_ORANGES_08 = register("dry_laurel_blood_oranges_08", () -> new ConfiguredFeature<>(AtmosphericFeatures.LAUREL_TREE.get(), Configs.DRY_LAUREL_BLOOD_ORANGES_08));
-		public static final RegistryObject<ConfiguredFeature<TreeConfiguration, ?>> LARGE_DRY_LAUREL = register("large_dry_laurel", () -> new ConfiguredFeature<>(AtmosphericFeatures.LARGE_LAUREL_TREE.get(), Configs.DRY_LAUREL));
-		public static final RegistryObject<ConfiguredFeature<TreeConfiguration, ?>> LARGE_DRY_LAUREL_ORANGES_0005 = register("large_dry_laurel_oranges_0005", () -> new ConfiguredFeature<>(AtmosphericFeatures.LARGE_LAUREL_TREE.get(), Configs.DRY_LAUREL_ORANGES_0005));
-		public static final RegistryObject<ConfiguredFeature<TreeConfiguration, ?>> LARGE_DRY_LAUREL_ORANGES_08 = register("large_dry_laurel_oranges_08", () -> new ConfiguredFeature<>(AtmosphericFeatures.LARGE_LAUREL_TREE.get(), Configs.DRY_LAUREL_ORANGES_08));
-		public static final RegistryObject<ConfiguredFeature<TreeConfiguration, ?>> LARGE_DRY_LAUREL_WITH_VINES = register("large_dry_laurel_with_vines", () -> new ConfiguredFeature<>(AtmosphericFeatures.LARGE_LAUREL_TREE.get(), Configs.DRY_LAUREL_WITH_VINES));
-		public static final RegistryObject<ConfiguredFeature<TreeConfiguration, ?>> LARGE_DRY_LAUREL_BLOOD_ORANGES_08 = register("large_dry_laurel_blood_oranges_08", () -> new ConfiguredFeature<>(AtmosphericFeatures.LARGE_LAUREL_TREE.get(), Configs.DRY_LAUREL_BLOOD_ORANGES_08));
-		public static final RegistryObject<ConfiguredFeature<TreeConfiguration, ?>> GIANT_DRY_LAUREL = register("giant_dry_laurel", () -> new ConfiguredFeature<>(AtmosphericFeatures.GIANT_LAUREL_TREE.get(), Configs.DRY_LAUREL));
-		public static final RegistryObject<ConfiguredFeature<TreeConfiguration, ?>> GIANT_DRY_LAUREL_ORANGES_0005 = register("giant_dry_laurel_oranges_0005", () -> new ConfiguredFeature<>(AtmosphericFeatures.GIANT_LAUREL_TREE.get(), Configs.DRY_LAUREL_ORANGES_0005));
-		public static final RegistryObject<ConfiguredFeature<TreeConfiguration, ?>> GIANT_DRY_LAUREL_ORANGES_08 = register("giant_dry_laurel_oranges_08", () -> new ConfiguredFeature<>(AtmosphericFeatures.GIANT_LAUREL_TREE.get(), Configs.DRY_LAUREL_ORANGES_08));
-		public static final RegistryObject<ConfiguredFeature<TreeConfiguration, ?>> GIANT_DRY_LAUREL_WITH_VINES = register("giant_dry_laurel_with_vines", () -> new ConfiguredFeature<>(AtmosphericFeatures.GIANT_LAUREL_TREE.get(), Configs.DRY_LAUREL_WITH_VINES));
-		public static final RegistryObject<ConfiguredFeature<TreeConfiguration, ?>> GIANT_DRY_LAUREL_BLOOD_ORANGES_08 = register("giant_dry_laurel_blood_oranges_08", () -> new ConfiguredFeature<>(AtmosphericFeatures.GIANT_LAUREL_TREE.get(), Configs.DRY_LAUREL_BLOOD_ORANGES_08));
+			register(context, LAUREL, AtmosphericFeatures.LAUREL_TREE.get(), Configs.LAUREL);
+			register(context, LAUREL_ORANGES_0005, AtmosphericFeatures.LAUREL_TREE.get(), Configs.LAUREL_ORANGES_0005);
+			register(context, LAUREL_ORANGES_08, AtmosphericFeatures.LAUREL_TREE.get(), Configs.LAUREL_ORANGES_08);
+			register(context, LAUREL_WITH_VINES, AtmosphericFeatures.LAUREL_TREE.get(), Configs.LAUREL_WITH_VINES);
+			register(context, LAUREL_BLOOD_ORANGES_08, AtmosphericFeatures.LAUREL_TREE.get(), Configs.LAUREL_BLOOD_ORANGES_08);
+			register(context, LARGE_LAUREL, AtmosphericFeatures.LARGE_LAUREL_TREE.get(), Configs.LAUREL);
+			register(context, LARGE_LAUREL_ORANGES_0005, AtmosphericFeatures.LARGE_LAUREL_TREE.get(), Configs.LAUREL_ORANGES_0005);
+			register(context, LARGE_LAUREL_ORANGES_08, AtmosphericFeatures.LARGE_LAUREL_TREE.get(), Configs.LAUREL_ORANGES_08);
+			register(context, LARGE_LAUREL_WITH_VINES, AtmosphericFeatures.LARGE_LAUREL_TREE.get(), Configs.LAUREL_WITH_VINES);
+			register(context, LARGE_LAUREL_BLOOD_ORANGES_08, AtmosphericFeatures.LARGE_LAUREL_TREE.get(), Configs.LAUREL_BLOOD_ORANGES_08);
+			register(context, GIANT_LAUREL, AtmosphericFeatures.GIANT_LAUREL_TREE.get(), Configs.LAUREL);
+			register(context, GIANT_LAUREL_ORANGES_0005, AtmosphericFeatures.GIANT_LAUREL_TREE.get(), Configs.LAUREL_ORANGES_0005);
+			register(context, GIANT_LAUREL_ORANGES_08, AtmosphericFeatures.GIANT_LAUREL_TREE.get(), Configs.LAUREL_ORANGES_08);
+			register(context, GIANT_LAUREL_WITH_VINES, AtmosphericFeatures.GIANT_LAUREL_TREE.get(), Configs.LAUREL_WITH_VINES);
+			register(context, GIANT_LAUREL_BLOOD_ORANGES_08, AtmosphericFeatures.GIANT_LAUREL_TREE.get(), Configs.LAUREL_BLOOD_ORANGES_08);
 
-		public static final RegistryObject<ConfiguredFeature<TreeConfiguration, ?>> KOUSA = register("kousa", () -> new ConfiguredFeature<>(AtmosphericFeatures.KOUSA_TREE.get(), Configs.KOUSA));
-		public static final RegistryObject<ConfiguredFeature<TreeConfiguration, ?>> BABY_KOUSA = register("baby_kousa", () -> new ConfiguredFeature<>(AtmosphericFeatures.BABY_KOUSA_TREE.get(), Configs.BABY_KOUSA));
-		public static final RegistryObject<ConfiguredFeature<TreeConfiguration, ?>> CURRANT = register("currant", () -> new ConfiguredFeature<>(AtmosphericFeatures.CURRANT_TREE.get(), Configs.CURRANT));
-		public static final RegistryObject<ConfiguredFeature<TreeConfiguration, ?>> DEAD_CURRANT = register("dead_currant", () -> new ConfiguredFeature<>(AtmosphericFeatures.CURRANT_TREE.get(), Configs.DEAD_CURRANT));
+			register(context, DRY_LAUREL, AtmosphericFeatures.LAUREL_TREE.get(), Configs.DRY_LAUREL);
+			register(context, DRY_LAUREL_ORANGES_0005, AtmosphericFeatures.LAUREL_TREE.get(), Configs.DRY_LAUREL_ORANGES_0005);
+			register(context, DRY_LAUREL_ORANGES_08, AtmosphericFeatures.LAUREL_TREE.get(), Configs.DRY_LAUREL_ORANGES_08);
+			register(context, DRY_LAUREL_WITH_VINES, AtmosphericFeatures.LAUREL_TREE.get(), Configs.DRY_LAUREL_WITH_VINES);
+			register(context, DRY_LAUREL_BLOOD_ORANGES_08, AtmosphericFeatures.LAUREL_TREE.get(), Configs.DRY_LAUREL_BLOOD_ORANGES_08);
+			register(context, LARGE_DRY_LAUREL, AtmosphericFeatures.LARGE_LAUREL_TREE.get(), Configs.DRY_LAUREL);
+			register(context, LARGE_DRY_LAUREL_ORANGES_0005, AtmosphericFeatures.LARGE_LAUREL_TREE.get(), Configs.DRY_LAUREL_ORANGES_0005);
+			register(context, LARGE_DRY_LAUREL_ORANGES_08, AtmosphericFeatures.LARGE_LAUREL_TREE.get(), Configs.DRY_LAUREL_ORANGES_08);
+			register(context, LARGE_DRY_LAUREL_WITH_VINES, AtmosphericFeatures.LARGE_LAUREL_TREE.get(), Configs.DRY_LAUREL_WITH_VINES);
+			register(context, LARGE_DRY_LAUREL_BLOOD_ORANGES_08, AtmosphericFeatures.LARGE_LAUREL_TREE.get(), Configs.DRY_LAUREL_BLOOD_ORANGES_08);
+			register(context, GIANT_DRY_LAUREL, AtmosphericFeatures.GIANT_LAUREL_TREE.get(), Configs.DRY_LAUREL);
+			register(context, GIANT_DRY_LAUREL_ORANGES_0005, AtmosphericFeatures.GIANT_LAUREL_TREE.get(), Configs.DRY_LAUREL_ORANGES_0005);
+			register(context, GIANT_DRY_LAUREL_ORANGES_08, AtmosphericFeatures.GIANT_LAUREL_TREE.get(), Configs.DRY_LAUREL_ORANGES_08);
+			register(context, GIANT_DRY_LAUREL_WITH_VINES, AtmosphericFeatures.GIANT_LAUREL_TREE.get(), Configs.DRY_LAUREL_WITH_VINES);
+			register(context, GIANT_DRY_LAUREL_BLOOD_ORANGES_08, AtmosphericFeatures.GIANT_LAUREL_TREE.get(), Configs.DRY_LAUREL_BLOOD_ORANGES_08);
 
-		public static final RegistryObject<ConfiguredFeature<TreeConfiguration, ?>> GRIMWOOD = register("grimwood", () -> new ConfiguredFeature<>(AtmosphericFeatures.GRIMWOOD_TREE.get(), Configs.GRIMWOOD));
-		public static final RegistryObject<ConfiguredFeature<TreeConfiguration, ?>> DEAD_GRIMWOOD = register("dead_grimwood", () -> new ConfiguredFeature<>(AtmosphericFeatures.GRIMWOOD_TREE.get(), Configs.DEAD_GRIMWOOD));
+			register(context, KOUSA, AtmosphericFeatures.KOUSA_TREE.get(), Configs.KOUSA);
+			register(context, BABY_KOUSA, AtmosphericFeatures.BABY_KOUSA_TREE.get(), Configs.BABY_KOUSA);
+			register(context, CURRANT, AtmosphericFeatures.CURRANT_TREE.get(), Configs.CURRANT);
+			register(context, DEAD_CURRANT, AtmosphericFeatures.CURRANT_TREE.get(), Configs.DEAD_CURRANT);
 
-		public static final RegistryObject<ConfiguredFeature<TreeConfiguration, ?>> OAK_BUSH = register("oak_bush", () -> new ConfiguredFeature<>(Feature.TREE, (new TreeConfigurationBuilder(BlockStateProvider.simple(Blocks.OAK_LOG), new StraightTrunkPlacer(1, 0, 0), BlockStateProvider.simple(Blocks.OAK_LEAVES), new BushFoliagePlacer(ConstantInt.of(2), ConstantInt.of(1), 2), new TwoLayersFeatureSize(0, 0, 0))).build()));
-		public static final RegistryObject<ConfiguredFeature<TreeConfiguration, ?>> DARK_OAK_BUSH = register("dark_oak_bush", () -> new ConfiguredFeature<>(Feature.TREE, (new TreeConfigurationBuilder(BlockStateProvider.simple(Blocks.DARK_OAK_LOG), new StraightTrunkPlacer(1, 0, 0), BlockStateProvider.simple(Blocks.DARK_OAK_LEAVES), new BushFoliagePlacer(ConstantInt.of(2), ConstantInt.of(1), 2), new TwoLayersFeatureSize(0, 0, 0))).build()));
-		public static final RegistryObject<ConfiguredFeature<TreeConfiguration, ?>> MORADO_BUSH = register("morado_bush", () -> new ConfiguredFeature<>(Feature.TREE, (new TreeConfigurationBuilder(BlockStateProvider.simple(AtmosphericBlocks.MORADO_LOG.get()), new StraightTrunkPlacer(1, 0, 0), new WeightedStateProvider(SimpleWeightedRandomList.<BlockState>builder().add(AtmosphericBlocks.MORADO_LEAVES.get().defaultBlockState(), 2).add(AtmosphericBlocks.FLOWERING_MORADO_LEAVES.get().defaultBlockState(), 6).build()), new BushFoliagePlacer(ConstantInt.of(2), ConstantInt.of(1), 2), new TwoLayersFeatureSize(0, 0, 0))).build()));
-		public static final RegistryObject<ConfiguredFeature<TreeConfiguration, ?>> DRY_LAUREL_BUSH = register("dry_laurel_bush", () -> new ConfiguredFeature<>(AtmosphericFeatures.SMALL_BUSH.get(), Configs.DRY_LAUREL_BUSH));
+			register(context, GRIMWOOD, AtmosphericFeatures.GRIMWOOD_TREE.get(), Configs.GRIMWOOD);
+			register(context, DEAD_GRIMWOOD, AtmosphericFeatures.GRIMWOOD_TREE.get(), Configs.DEAD_GRIMWOOD);
 
-		// Rainforest
+			register(context, OAK_BUSH, Feature.TREE, (new TreeConfigurationBuilder(BlockStateProvider.simple(Blocks.OAK_LOG), new StraightTrunkPlacer(1, 0, 0), BlockStateProvider.simple(Blocks.OAK_LEAVES), new BushFoliagePlacer(ConstantInt.of(2), ConstantInt.of(1), 2), new TwoLayersFeatureSize(0, 0, 0))).build());
+			register(context, DARK_OAK_BUSH, Feature.TREE, (new TreeConfigurationBuilder(BlockStateProvider.simple(Blocks.DARK_OAK_LOG), new StraightTrunkPlacer(1, 0, 0), BlockStateProvider.simple(Blocks.DARK_OAK_LEAVES), new BushFoliagePlacer(ConstantInt.of(2), ConstantInt.of(1), 2), new TwoLayersFeatureSize(0, 0, 0))).build());
+			register(context, MORADO_BUSH, Feature.TREE, (new TreeConfigurationBuilder(BlockStateProvider.simple(AtmosphericBlocks.MORADO_LOG.get()), new StraightTrunkPlacer(1, 0, 0), new WeightedStateProvider(SimpleWeightedRandomList.<BlockState>builder().add(AtmosphericBlocks.MORADO_LEAVES.get().defaultBlockState(), 2).add(AtmosphericBlocks.FLOWERING_MORADO_LEAVES.get().defaultBlockState(), 6).build()), new BushFoliagePlacer(ConstantInt.of(2), ConstantInt.of(1), 2), new TwoLayersFeatureSize(0, 0, 0))).build());
+			register(context, DRY_LAUREL_BUSH, AtmosphericFeatures.SMALL_BUSH.get(), Configs.DRY_LAUREL_BUSH);
 
-		public static final RegistryObject<ConfiguredFeature<RandomFeatureConfiguration, ?>> TREES_RAINFOREST = register("trees_rainforest", () -> new ConfiguredFeature<>(Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(List.of(new WeightedPlacedFeature(AtmosphericPlacedFeatures.MORADO_BEES_0002.getHolder().get(), 0.025F)), AtmosphericPlacedFeatures.ROSEWOOD_BEES_0002.getHolder().get())));
-		public static final RegistryObject<ConfiguredFeature<RandomFeatureConfiguration, ?>> BUSHES_RAINFOREST = register("bushes_rainforest", () -> new ConfiguredFeature<>(Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(List.of(new WeightedPlacedFeature(TreePlacements.FANCY_OAK_CHECKED, 0.05F), new WeightedPlacedFeature(AtmosphericPlacedFeatures.MORADO_BUSH.getHolder().get(), 0.15F)), AtmosphericPlacedFeatures.OAK_BUSH.getHolder().get())));
+			// Rainforest
 
-		public static final RegistryObject<ConfiguredFeature<ProbabilityFeatureConfiguration, ?>> PODZOL = register("podzol", () -> new ConfiguredFeature<>(AtmosphericFeatures.PODZOL.get(), new ProbabilityFeatureConfiguration(0.2F)));
-		public static final RegistryObject<ConfiguredFeature<NoneFeatureConfiguration, ?>> PASSION_VINES = register("passion_vines", () -> new ConfiguredFeature<>(AtmosphericFeatures.PASSION_VINE.get(), NoneFeatureConfiguration.INSTANCE));
-		public static final RegistryObject<ConfiguredFeature<NoneFeatureConfiguration, ?>> PATCH_WATER_HYACINTH = register("patch_water_hyacinth", () -> new ConfiguredFeature<>(AtmosphericFeatures.WATER_HYACINTH_PATCH.get(), NoneFeatureConfiguration.INSTANCE));
-		public static final RegistryObject<ConfiguredFeature<RandomPatchConfiguration, ?>> PATCH_WATERLILY = register("patch_waterlily_rainforest", () -> new ConfiguredFeature<>(Feature.RANDOM_PATCH, new RandomPatchConfiguration(10, 7, 3, PlacementUtils.onlyWhenEmpty(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(Blocks.LILY_PAD))))));
+			register(context, TREES_RAINFOREST, Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(List.of(new WeightedPlacedFeature(placedFeatures.getOrThrow(AtmosphericPlacedFeatures.MORADO_BEES_0002), 0.025F)), placedFeatures.getOrThrow(AtmosphericPlacedFeatures.ROSEWOOD_BEES_0002)));
+			register(context, BUSHES_RAINFOREST, Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(List.of(new WeightedPlacedFeature(placedFeatures.getOrThrow(TreePlacements.FANCY_OAK_CHECKED), 0.05F), new WeightedPlacedFeature(placedFeatures.getOrThrow(AtmosphericPlacedFeatures.MORADO_BUSH), 0.15F)), placedFeatures.getOrThrow(AtmosphericPlacedFeatures.OAK_BUSH)));
 
-		public static final RegistryObject<ConfiguredFeature<NoneFeatureConfiguration, ?>> WARM_MONKEY_BRUSH = register("warm_monkey_brush", () -> new ConfiguredFeature<>(AtmosphericFeatures.WARM_MONKEY_BRUSH.get(), NoneFeatureConfiguration.INSTANCE));
-		public static final RegistryObject<ConfiguredFeature<NoneFeatureConfiguration, ?>> HOT_MONKEY_BRUSH = register("hot_monkey_brush", () -> new ConfiguredFeature<>(AtmosphericFeatures.HOT_MONKEY_BRUSH.get(), NoneFeatureConfiguration.INSTANCE));
-		public static final RegistryObject<ConfiguredFeature<NoneFeatureConfiguration, ?>> SCALDING_MONKEY_BRUSH = register("scalding_monkey_brush", () -> new ConfiguredFeature<>(AtmosphericFeatures.SCALDING_MONKEY_BRUSH.get(), NoneFeatureConfiguration.INSTANCE));
-		public static final RegistryObject<ConfiguredFeature<RandomFeatureConfiguration, ?>> MONKEY_BRUSH = register("monkey_brush", () -> new ConfiguredFeature<>(Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(List.of(new WeightedPlacedFeature(AtmosphericPlacedFeatures.SCALDING_MONKEY_BRUSH.getHolder().get(), 0.166666667F), new WeightedPlacedFeature(AtmosphericPlacedFeatures.HOT_MONKEY_BRUSH.getHolder().get(), 0.333333334F)), AtmosphericPlacedFeatures.WARM_MONKEY_BRUSH.getHolder().get())));
+			register(context, PODZOL, AtmosphericFeatures.PODZOL.get(), new ProbabilityFeatureConfiguration(0.2F));
+			register(context, PASSION_VINES, AtmosphericFeatures.PASSION_VINE.get(), NoneFeatureConfiguration.INSTANCE);
+			register(context, PATCH_WATER_HYACINTH, AtmosphericFeatures.WATER_HYACINTH_PATCH.get(), NoneFeatureConfiguration.INSTANCE);
+			register(context, PATCH_WATERLILY, Feature.RANDOM_PATCH, new RandomPatchConfiguration(10, 7, 3, PlacementUtils.onlyWhenEmpty(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(Blocks.LILY_PAD)))));
 
-		public static final RegistryObject<ConfiguredFeature<NoneFeatureConfiguration, ?>> OCEAN_FLOOR_RAISER = register("ocean_floor_raiser", () -> new ConfiguredFeature<>(AtmosphericFeatures.OCEAN_FLOOR_RAISER.get(), NoneFeatureConfiguration.INSTANCE));
+			register(context, WARM_MONKEY_BRUSH, AtmosphericFeatures.WARM_MONKEY_BRUSH.get(), NoneFeatureConfiguration.INSTANCE);
+			register(context, HOT_MONKEY_BRUSH, AtmosphericFeatures.HOT_MONKEY_BRUSH.get(), NoneFeatureConfiguration.INSTANCE);
+			register(context, SCALDING_MONKEY_BRUSH, AtmosphericFeatures.SCALDING_MONKEY_BRUSH.get(), NoneFeatureConfiguration.INSTANCE);
+			register(context, MONKEY_BRUSH, Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(List.of(new WeightedPlacedFeature(placedFeatures.getOrThrow(AtmosphericPlacedFeatures.SCALDING_MONKEY_BRUSH), 0.166666667F), new WeightedPlacedFeature(placedFeatures.getOrThrow(AtmosphericPlacedFeatures.HOT_MONKEY_BRUSH), 0.333333334F)), placedFeatures.getOrThrow(AtmosphericPlacedFeatures.WARM_MONKEY_BRUSH)));
 
-		// Dunes
+			register(context, OCEAN_FLOOR_RAISER, AtmosphericFeatures.OCEAN_FLOOR_RAISER.get(), NoneFeatureConfiguration.INSTANCE);
 
-		public static final RegistryObject<ConfiguredFeature<BlockStateConfiguration, ?>> DUNE_ROCK = register("forest_rock", () -> new ConfiguredFeature<>(AtmosphericFeatures.DUNE_ROCK.get(), new BlockStateConfiguration(AtmosphericBlocks.ARID_SANDSTONE.get().defaultBlockState())));
-		public static final RegistryObject<ConfiguredFeature<FossilFeatureConfiguration, ?>> SURFACE_FOSSIL = register("surface_fossil", () -> new ConfiguredFeature<>(AtmosphericFeatures.SURFACE_FOSSIL.get(), new FossilFeatureConfiguration(FOSSIL_STRUCTURES, FOSSIL_COAL_STRUCTURES, ProcessorLists.FOSSIL_ROT, ProcessorLists.FOSSIL_COAL, 4)));
-		public static final RegistryObject<ConfiguredFeature<RandomPatchConfiguration, ?>> PATCH_BARREL_CACTUS = register("patch_barrel_cactus", () -> new ConfiguredFeature<>(Feature.RANDOM_PATCH, FeatureUtils.simplePatchConfiguration(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(new RandomizedIntStateProvider(BlockStateProvider.simple(AtmosphericBlocks.BARREL_CACTUS.get()), BarrelCactusBlock.AGE, UniformInt.of(0, 3))), List.of(Blocks.SAND, Blocks.RED_SAND, AtmosphericBlocks.ARID_SAND.get(), AtmosphericBlocks.RED_ARID_SAND.get()))));
-		public static final RegistryObject<ConfiguredFeature<LargeDiskConfiguration, ?>> PATCH_DUNE_GRASS = register("patch_dune_grass", () -> new ConfiguredFeature<>(AtmosphericFeatures.COARSE_DIRT_PATCH.get(), new LargeDiskConfiguration(Blocks.COARSE_DIRT.defaultBlockState(), UniformInt.of(1, 7), 2, Lists.newArrayList(AtmosphericBlocks.RED_ARID_SAND.get().defaultBlockState(), AtmosphericBlocks.ARID_SAND.get().defaultBlockState()))));
-		public static final RegistryObject<ConfiguredFeature<RandomPatchConfiguration, ?>> PATCH_ARID_SPROUTS = register("patch_arid_sprouts", () -> new ConfiguredFeature<>(Feature.RANDOM_PATCH, FeatureUtils.simpleRandomPatchConfiguration(32, PlacementUtils.onlyWhenEmpty(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(AtmosphericBlocks.ARID_SPROUTS.get()))))));
-		public static final RegistryObject<ConfiguredFeature<RandomPatchConfiguration, ?>> FLOWER_FLOURISHING_DUNES = register("flower_flourishing_dunes", () -> new ConfiguredFeature<>(Feature.FLOWER, new RandomPatchConfiguration(64, 6, 2, PlacementUtils.onlyWhenEmpty(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(AtmosphericBlocks.GILIA.get()))))));
-		public static final RegistryObject<ConfiguredFeature<RandomPatchConfiguration, ?>> PATCH_MELON_DUNES = register("patch_melon_dunes", () -> new ConfiguredFeature<>(Feature.RANDOM_PATCH, new RandomPatchConfiguration(64, 7, 3, PlacementUtils.filtered(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(Blocks.MELON)), BlockPredicate.allOf(BlockPredicate.replaceable(), BlockPredicate.matchesBlocks(Direction.DOWN.getNormal(), List.of(AtmosphericBlocks.ARID_SAND.get(), AtmosphericBlocks.RED_ARID_SAND.get())))))));
+			// Dunes
 
-		public static final RegistryObject<ConfiguredFeature<RandomFeatureConfiguration, ?>> TREES_DUNES = register("trees_dunes", () -> new ConfiguredFeature<>(Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(List.of(new WeightedPlacedFeature(AtmosphericPlacedFeatures.YUCCA_WITH_FLOWERS.getHolder().get(), 0.25F)), AtmosphericPlacedFeatures.YUCCA.getHolder().get())));
-		public static final RegistryObject<ConfiguredFeature<RandomFeatureConfiguration, ?>> TREES_PETRIFIED_DUNES = register("trees_petrified_dunes", () -> new ConfiguredFeature<>(Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(List.of(new WeightedPlacedFeature(AtmosphericPlacedFeatures.RED_PETRIFIED_YUCCA.getHolder().get(), 0.25F)), AtmosphericPlacedFeatures.PETRIFIED_YUCCA.getHolder().get())));
-		public static final RegistryObject<ConfiguredFeature<RandomFeatureConfiguration, ?>> TREES_FLOURISHING_DUNES = register("trees_flourishing_dunes", () -> new ConfiguredFeature<>(Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(List.of(new WeightedPlacedFeature(AtmosphericPlacedFeatures.BABY_YUCCA_WITH_FLOWERS.getHolder().get(), 0.25F)), AtmosphericPlacedFeatures.BABY_YUCCA.getHolder().get())));
+			register(context, DUNE_ROCK, AtmosphericFeatures.DUNE_ROCK.get(), new BlockStateConfiguration(AtmosphericBlocks.ARID_SANDSTONE.get().defaultBlockState()));
+			register(context, SURFACE_FOSSIL, AtmosphericFeatures.SURFACE_FOSSIL.get(), new FossilFeatureConfiguration(FOSSIL_STRUCTURES, FOSSIL_COAL_STRUCTURES, processors.getOrThrow(ProcessorLists.FOSSIL_ROT), processors.getOrThrow(ProcessorLists.FOSSIL_COAL), 4));
+			register(context, PATCH_BARREL_CACTUS, Feature.RANDOM_PATCH, FeatureUtils.simplePatchConfiguration(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(new RandomizedIntStateProvider(BlockStateProvider.simple(AtmosphericBlocks.BARREL_CACTUS.get()), BarrelCactusBlock.AGE, UniformInt.of(0, 3))), List.of(Blocks.SAND, Blocks.RED_SAND, AtmosphericBlocks.ARID_SAND.get(), AtmosphericBlocks.RED_ARID_SAND.get())));
+			register(context, PATCH_DUNE_GRASS, AtmosphericFeatures.COARSE_DIRT_PATCH.get(), new LargeDiskConfiguration(Blocks.COARSE_DIRT.defaultBlockState(), UniformInt.of(1, 7), 2, Lists.newArrayList(AtmosphericBlocks.RED_ARID_SAND.get().defaultBlockState(), AtmosphericBlocks.ARID_SAND.get().defaultBlockState())));
+			register(context, PATCH_ARID_SPROUTS, Feature.RANDOM_PATCH, FeatureUtils.simpleRandomPatchConfiguration(32, PlacementUtils.onlyWhenEmpty(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(AtmosphericBlocks.ARID_SPROUTS.get())))));
+			register(context, FLOWER_FLOURISHING_DUNES, Feature.FLOWER, new RandomPatchConfiguration(64, 6, 2, PlacementUtils.onlyWhenEmpty(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(AtmosphericBlocks.GILIA.get())))));
+			register(context, PATCH_MELON_DUNES, Feature.RANDOM_PATCH, new RandomPatchConfiguration(64, 7, 3, PlacementUtils.filtered(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(Blocks.MELON)), BlockPredicate.allOf(BlockPredicate.replaceable(), BlockPredicate.matchesBlocks(Direction.DOWN.getNormal(), List.of(AtmosphericBlocks.ARID_SAND.get(), AtmosphericBlocks.RED_ARID_SAND.get()))))));
 
-		public static final RegistryObject<ConfiguredFeature<RandomPatchConfiguration, ?>> PATCH_YUCCA_FLOWER = register("patch_yucca_flower", () -> new ConfiguredFeature<>(Feature.RANDOM_PATCH, FeatureUtils.simplePatchConfiguration(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(new WeightedStateProvider(SimpleWeightedRandomList.<BlockState>builder().add(AtmosphericBlocks.YUCCA_FLOWER.get().defaultBlockState(), 1).add(AtmosphericBlocks.TALL_YUCCA_FLOWER.get().defaultBlockState(), 2).build())), List.of(AtmosphericBlocks.ARID_SAND.get(), AtmosphericBlocks.RED_ARID_SAND.get()))));
+			register(context, TREES_DUNES, Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(List.of(new WeightedPlacedFeature(placedFeatures.getOrThrow(AtmosphericPlacedFeatures.YUCCA_WITH_FLOWERS), 0.25F)), placedFeatures.getOrThrow(AtmosphericPlacedFeatures.YUCCA)));
+			register(context, TREES_PETRIFIED_DUNES, Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(List.of(new WeightedPlacedFeature(placedFeatures.getOrThrow(AtmosphericPlacedFeatures.RED_PETRIFIED_YUCCA), 0.25F)), placedFeatures.getOrThrow(AtmosphericPlacedFeatures.PETRIFIED_YUCCA)));
+			register(context, TREES_FLOURISHING_DUNES, Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(List.of(new WeightedPlacedFeature(placedFeatures.getOrThrow(AtmosphericPlacedFeatures.BABY_YUCCA_WITH_FLOWERS), 0.25F)), placedFeatures.getOrThrow(AtmosphericPlacedFeatures.BABY_YUCCA)));
 
-		public static final RegistryObject<ConfiguredFeature<RandomPatchConfiguration, ?>> PATCH_SHORT_ALOE_VERA = register("patch_short_aloe_vera", () -> new ConfiguredFeature<>(Feature.RANDOM_PATCH, FeatureUtils.simplePatchConfiguration(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(AtmosphericBlocks.ALOE_VERA.get().defaultBlockState().setValue(AloeVeraBlock.AGE, 5))), List.of(AtmosphericBlocks.RED_ARID_SAND.get()))));
-		public static final RegistryObject<ConfiguredFeature<RandomPatchConfiguration, ?>> PATCH_TALL_ALOE_VERA = register("patch_tall_aloe_vera", () -> new ConfiguredFeature<>(Feature.RANDOM_PATCH, FeatureUtils.simplePatchConfiguration(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(AtmosphericBlocks.TALL_ALOE_VERA.get().defaultBlockState().setValue(AloeVeraTallBlock.AGE, 8))), List.of(AtmosphericBlocks.ARID_SAND.get()))));
-		public static final RegistryObject<ConfiguredFeature<RandomFeatureConfiguration, ?>> PATCH_ALOE_VERA = register("patch_aloe_vera", () -> new ConfiguredFeature<>(Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(List.of(new WeightedPlacedFeature(AtmosphericPlacedFeatures.PATCH_TALL_ALOE_VERA.getHolder().get(), 0.5F)), AtmosphericPlacedFeatures.PATCH_SHORT_ALOE_VERA.getHolder().get())));
+			register(context, PATCH_YUCCA_FLOWER, Feature.RANDOM_PATCH, FeatureUtils.simplePatchConfiguration(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(new WeightedStateProvider(SimpleWeightedRandomList.<BlockState>builder().add(AtmosphericBlocks.YUCCA_FLOWER.get().defaultBlockState(), 1).add(AtmosphericBlocks.TALL_YUCCA_FLOWER.get().defaultBlockState(), 2).build())), List.of(AtmosphericBlocks.ARID_SAND.get(), AtmosphericBlocks.RED_ARID_SAND.get())));
 
-		// Aspen Parkland
+			register(context, PATCH_SHORT_ALOE_VERA, Feature.RANDOM_PATCH, FeatureUtils.simplePatchConfiguration(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(AtmosphericBlocks.ALOE_VERA.get().defaultBlockState().setValue(AloeVeraBlock.AGE, 5))), List.of(AtmosphericBlocks.RED_ARID_SAND.get())));
+			register(context, PATCH_TALL_ALOE_VERA, Feature.RANDOM_PATCH, FeatureUtils.simplePatchConfiguration(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(AtmosphericBlocks.TALL_ALOE_VERA.get().defaultBlockState().setValue(AloeVeraTallBlock.AGE, 8))), List.of(AtmosphericBlocks.ARID_SAND.get())));
+			register(context, PATCH_ALOE_VERA, Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(List.of(new WeightedPlacedFeature(placedFeatures.getOrThrow(AtmosphericPlacedFeatures.PATCH_TALL_ALOE_VERA), 0.5F)), placedFeatures.getOrThrow(AtmosphericPlacedFeatures.PATCH_SHORT_ALOE_VERA)));
 
-		public static final RegistryObject<ConfiguredFeature<ProbabilityFeatureConfiguration, ?>> CRUSTOSE = register("crustose", () -> new ConfiguredFeature<>(AtmosphericFeatures.CRUSTOSE.get(), new ProbabilityFeatureConfiguration(0.1F)));
-		public static final RegistryObject<ConfiguredFeature<SimpleBlockConfiguration, ?>> FALLEN_CRUSTOSE_LOG = register("fallen_crustose_log", () -> new ConfiguredFeature<>(AtmosphericFeatures.FALLEN_LOG.get(), new SimpleBlockConfiguration(BlockStateProvider.simple(AtmosphericBlocks.CRUSTOSE_LOG.get()))));
-		public static final RegistryObject<ConfiguredFeature<RandomFeatureConfiguration, ?>> TREES_ASPEN_PARKLAND = register("trees_aspen_parkland", () -> new ConfiguredFeature<>(Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(List.of(new WeightedPlacedFeature(AtmosphericPlacedFeatures.MORADO_BUSH.getHolder().get(), 0.1F), new WeightedPlacedFeature(AtmosphericPlacedFeatures.DRY_LAUREL.getHolder().get(), 0.05F), new WeightedPlacedFeature(AtmosphericPlacedFeatures.ASPEN_WITH_VINES.getHolder().get(), 0.075F), new WeightedPlacedFeature(AtmosphericPlacedFeatures.GREEN_ASPEN_WITH_VINES.getHolder().get(), 0.025F), new WeightedPlacedFeature(AtmosphericPlacedFeatures.GREEN_ASPEN_BEES_0002.getHolder().get(), 0.2F)), AtmosphericPlacedFeatures.ASPEN_BEES_0002.getHolder().get())));
-		public static final RegistryObject<ConfiguredFeature<SimpleBlockConfiguration, ?>> SINGLE_AGAVE = register("single_agave", () -> new ConfiguredFeature<>(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(AtmosphericBlocks.AGAVE.get()))));
-		public static final RegistryObject<ConfiguredFeature<RandomPatchConfiguration, ?>> PATCH_AGAVE_LARGE = register("patch_agave_large", () -> new ConfiguredFeature<>(Feature.RANDOM_PATCH, new RandomPatchConfiguration(512, 12, 5, PlacementUtils.onlyWhenEmpty(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(AtmosphericBlocks.AGAVE.get()))))));
-		public static final RegistryObject<ConfiguredFeature<RandomPatchConfiguration, ?>> PATCH_GOLDEN_GROWTHS = register("patch_golden_growths", () -> new ConfiguredFeature<>(Feature.RANDOM_PATCH, FeatureUtils.simpleRandomPatchConfiguration(32, PlacementUtils.onlyWhenEmpty(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(AtmosphericBlocks.GOLDEN_GROWTHS.get()))))));
+			// Aspen Parkland
 
-		// Laurel Forest
+			register(context, CRUSTOSE, AtmosphericFeatures.CRUSTOSE.get(), new ProbabilityFeatureConfiguration(0.1F));
+			register(context, FALLEN_CRUSTOSE_LOG, AtmosphericFeatures.FALLEN_LOG.get(), new SimpleBlockConfiguration(BlockStateProvider.simple(AtmosphericBlocks.CRUSTOSE_LOG.get())));
+			register(context, TREES_ASPEN_PARKLAND, Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(List.of(new WeightedPlacedFeature(placedFeatures.getOrThrow(AtmosphericPlacedFeatures.MORADO_BUSH), 0.1F), new WeightedPlacedFeature(placedFeatures.getOrThrow(AtmosphericPlacedFeatures.DRY_LAUREL), 0.05F), new WeightedPlacedFeature(placedFeatures.getOrThrow(AtmosphericPlacedFeatures.ASPEN_WITH_VINES), 0.075F), new WeightedPlacedFeature(placedFeatures.getOrThrow(AtmosphericPlacedFeatures.GREEN_ASPEN_WITH_VINES), 0.025F), new WeightedPlacedFeature(placedFeatures.getOrThrow(AtmosphericPlacedFeatures.GREEN_ASPEN_BEES_0002), 0.2F)), placedFeatures.getOrThrow(AtmosphericPlacedFeatures.ASPEN_BEES_0002)));
+			register(context, SINGLE_AGAVE, Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(AtmosphericBlocks.AGAVE.get())));
+			register(context, PATCH_AGAVE_LARGE, Feature.RANDOM_PATCH, new RandomPatchConfiguration(512, 12, 5, PlacementUtils.onlyWhenEmpty(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(AtmosphericBlocks.AGAVE.get())))));
+			register(context, PATCH_GOLDEN_GROWTHS, Feature.RANDOM_PATCH, FeatureUtils.simpleRandomPatchConfiguration(32, PlacementUtils.onlyWhenEmpty(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(AtmosphericBlocks.GOLDEN_GROWTHS.get())))));
 
-		public static final RegistryObject<ConfiguredFeature<RandomFeatureConfiguration, ?>> TREES_LAUREL_FOREST = register("trees_laurel_forest", () -> new ConfiguredFeature<>(Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(List.of(new WeightedPlacedFeature(AtmosphericPlacedFeatures.DRY_LAUREL_WITH_VINES.getHolder().get(), 0.05F), new WeightedPlacedFeature(AtmosphericPlacedFeatures.DRY_LAUREL.getHolder().get(), 0.05F), new WeightedPlacedFeature(AtmosphericPlacedFeatures.LAUREL_WITH_VINES.getHolder().get(), 0.45F)), AtmosphericPlacedFeatures.LAUREL.getHolder().get())));
-		public static final RegistryObject<ConfiguredFeature<RandomFeatureConfiguration, ?>> TREES_LAUREL_FOREST_LARGE = register("trees_laurel_forest_large", () -> new ConfiguredFeature<>(Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(List.of(new WeightedPlacedFeature(AtmosphericPlacedFeatures.LARGE_DRY_LAUREL_WITH_VINES.getHolder().get(), 0.05F), new WeightedPlacedFeature(AtmosphericPlacedFeatures.LARGE_DRY_LAUREL.getHolder().get(), 0.05F), new WeightedPlacedFeature(AtmosphericPlacedFeatures.LARGE_LAUREL_WITH_VINES.getHolder().get(), 0.45F)), AtmosphericPlacedFeatures.LARGE_LAUREL.getHolder().get())));
-		public static final RegistryObject<ConfiguredFeature<RandomFeatureConfiguration, ?>> TREES_LAUREL_FOREST_GIANT = register("trees_laurel_forest_giant", () -> new ConfiguredFeature<>(Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(List.of(new WeightedPlacedFeature(AtmosphericPlacedFeatures.GIANT_DRY_LAUREL_WITH_VINES.getHolder().get(), 0.05F), new WeightedPlacedFeature(AtmosphericPlacedFeatures.GIANT_DRY_LAUREL.getHolder().get(), 0.05F), new WeightedPlacedFeature(AtmosphericPlacedFeatures.GIANT_LAUREL_WITH_VINES.getHolder().get(), 0.45F)), AtmosphericPlacedFeatures.GIANT_LAUREL.getHolder().get())));
-		public static final RegistryObject<ConfiguredFeature<RandomPatchConfiguration, ?>> PATCH_GRASS_LAUREL_FOREST = register("patch_grass_laurel_forest", () -> new ConfiguredFeature<>(Feature.RANDOM_PATCH, grassPatch(new WeightedStateProvider(SimpleWeightedRandomList.<BlockState>builder().add(Blocks.GRASS.defaultBlockState(), 1).add(Blocks.FERN.defaultBlockState(), 6)), 32)));
+			// Laurel Forest
 
-		// Kousa Jungle
+			register(context, TREES_LAUREL_FOREST, Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(List.of(new WeightedPlacedFeature(placedFeatures.getOrThrow(AtmosphericPlacedFeatures.DRY_LAUREL_WITH_VINES), 0.05F), new WeightedPlacedFeature(placedFeatures.getOrThrow(AtmosphericPlacedFeatures.DRY_LAUREL), 0.05F), new WeightedPlacedFeature(placedFeatures.getOrThrow(AtmosphericPlacedFeatures.LAUREL_WITH_VINES), 0.45F)), placedFeatures.getOrThrow(AtmosphericPlacedFeatures.LAUREL)));
+			register(context, TREES_LAUREL_FOREST_LARGE, Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(List.of(new WeightedPlacedFeature(placedFeatures.getOrThrow(AtmosphericPlacedFeatures.LARGE_DRY_LAUREL_WITH_VINES), 0.05F), new WeightedPlacedFeature(placedFeatures.getOrThrow(AtmosphericPlacedFeatures.LARGE_DRY_LAUREL), 0.05F), new WeightedPlacedFeature(placedFeatures.getOrThrow(AtmosphericPlacedFeatures.LARGE_LAUREL_WITH_VINES), 0.45F)), placedFeatures.getOrThrow(AtmosphericPlacedFeatures.LARGE_LAUREL)));
+			register(context, TREES_LAUREL_FOREST_GIANT, Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(List.of(new WeightedPlacedFeature(placedFeatures.getOrThrow(AtmosphericPlacedFeatures.GIANT_DRY_LAUREL_WITH_VINES), 0.05F), new WeightedPlacedFeature(placedFeatures.getOrThrow(AtmosphericPlacedFeatures.GIANT_DRY_LAUREL), 0.05F), new WeightedPlacedFeature(placedFeatures.getOrThrow(AtmosphericPlacedFeatures.GIANT_LAUREL_WITH_VINES), 0.45F)), placedFeatures.getOrThrow(AtmosphericPlacedFeatures.GIANT_LAUREL)));
+			register(context, PATCH_GRASS_LAUREL_FOREST, Feature.RANDOM_PATCH, grassPatch(new WeightedStateProvider(SimpleWeightedRandomList.<BlockState>builder().add(Blocks.GRASS.defaultBlockState(), 1).add(Blocks.FERN.defaultBlockState(), 6)), 32));
 
-		public static final RegistryObject<ConfiguredFeature<ProbabilityFeatureConfiguration, ?>> SNOWY_BAMBOO = register("snowy_bamboo", () -> new ConfiguredFeature<>(AtmosphericFeatures.SNOWY_BAMBOO.get(), new ProbabilityFeatureConfiguration(1.0F)));
-		public static final RegistryObject<ConfiguredFeature<RandomFeatureConfiguration, ?>> TREES_KOUSA_JUNGLE = register("trees_kousa_jungle", () -> new ConfiguredFeature<>(Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(List.of(new WeightedPlacedFeature(TreePlacements.BIRCH_CHECKED, 0.3F)), AtmosphericPlacedFeatures.KOUSA.getHolder().get())));
+			// Kousa Jungle
 
-		// Grimwoods
+			register(context, SNOWY_BAMBOO, AtmosphericFeatures.SNOWY_BAMBOO.get(), new ProbabilityFeatureConfiguration(1.0F));
+			register(context, TREES_KOUSA_JUNGLE, Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(List.of(new WeightedPlacedFeature(placedFeatures.getOrThrow(TreePlacements.BIRCH_CHECKED), 0.3F)), placedFeatures.getOrThrow(AtmosphericPlacedFeatures.KOUSA)));
 
-		public static final RegistryObject<ConfiguredFeature<RandomFeatureConfiguration, ?>> TREES_GRIMWOODS = register("trees_grimwoods", () -> new ConfiguredFeature<>(Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(List.of(new WeightedPlacedFeature(AtmosphericPlacedFeatures.DARK_OAK_BUSH.getHolder().get(), 0.1F), new WeightedPlacedFeature(AtmosphericPlacedFeatures.GRIMWOOD.getHolder().get(), 0.0001F)), AtmosphericPlacedFeatures.DEAD_GRIMWOOD.getHolder().get())));
-		public static final RegistryObject<ConfiguredFeature<RandomPatchConfiguration, ?>> OMINOUS_BLOCK = register("ominous_block", () -> new ConfiguredFeature<>(Feature.RANDOM_PATCH, new RandomPatchConfiguration(1, 0, 0, PlacementUtils.filtered(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(Configs.ominousGrimwoodsBlocks()), BlockPredicate.allOf(BlockPredicate.replaceable(), BlockPredicate.matchesBlocks(Direction.DOWN.getNormal(), Blocks.GRASS_BLOCK, Blocks.COARSE_DIRT))))));
+			// Grimwoods
 
-		// Spiny Thicket
+			register(context, TREES_GRIMWOODS, Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(List.of(new WeightedPlacedFeature(placedFeatures.getOrThrow(AtmosphericPlacedFeatures.DARK_OAK_BUSH), 0.1F), new WeightedPlacedFeature(placedFeatures.getOrThrow(AtmosphericPlacedFeatures.GRIMWOOD), 0.0001F)), placedFeatures.getOrThrow(AtmosphericPlacedFeatures.DEAD_GRIMWOOD)));
+			register(context, OMINOUS_BLOCK, Feature.RANDOM_PATCH, new RandomPatchConfiguration(1, 0, 0, PlacementUtils.filtered(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(Configs.ominousGrimwoodsBlocks()), BlockPredicate.allOf(BlockPredicate.replaceable(), BlockPredicate.matchesBlocks(Direction.DOWN.getNormal(), Blocks.GRASS_BLOCK, Blocks.COARSE_DIRT)))));
 
-		public static final RegistryObject<ConfiguredFeature<RandomFeatureConfiguration, ?>> TREES_SPINY_THICKET = register("trees_spiny_thicket", () -> new ConfiguredFeature<>(Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(List.of(new WeightedPlacedFeature(TreePlacements.ACACIA_CHECKED, 0.25F)), AtmosphericPlacedFeatures.ROSEWOOD_BEES_0002.getHolder().get())));
-		public static final RegistryObject<ConfiguredFeature<SimpleBlockConfiguration, ?>> SINGLE_YUCCA_FLOWER = register("single_yucca_flower", () -> new ConfiguredFeature<>(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(AtmosphericBlocks.YUCCA_FLOWER.get()))));
+			// Spiny Thicket
 
-		// Scrubland
+			register(context, TREES_SPINY_THICKET, Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(List.of(new WeightedPlacedFeature(placedFeatures.getOrThrow(TreePlacements.ACACIA_CHECKED), 0.25F)), placedFeatures.getOrThrow(AtmosphericPlacedFeatures.ROSEWOOD_BEES_0002)));
+			register(context, SINGLE_YUCCA_FLOWER, Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(AtmosphericBlocks.YUCCA_FLOWER.get())));
 
-		public static final RegistryObject<ConfiguredFeature<RandomFeatureConfiguration, ?>> TREES_SCRUBLAND = register("trees_scrubland", () -> new ConfiguredFeature<>(Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(List.of(new WeightedPlacedFeature(AtmosphericPlacedFeatures.BABY_YUCCA_WITH_FLOWERS.getHolder().get(), 0.05F), new WeightedPlacedFeature(AtmosphericPlacedFeatures.MORADO_BUSH_SAND.getHolder().get(), 0.2F), new WeightedPlacedFeature(AtmosphericPlacedFeatures.DRY_LAUREL.getHolder().get(), 0.08F)), AtmosphericPlacedFeatures.DRY_LAUREL_BUSH.getHolder().get())));
-		public static final RegistryObject<ConfiguredFeature<RandomPatchConfiguration, ?>> FLOWER_SCRUBLAND = register("flower_scrubland", () -> new ConfiguredFeature<>(Feature.FLOWER, new RandomPatchConfiguration(64, 6, 2, PlacementUtils.onlyWhenEmpty(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(new WeightedStateProvider(SimpleWeightedRandomList.<BlockState>builder().add(AtmosphericBlocks.FIRETHORN.get().defaultBlockState(), 1).add(AtmosphericBlocks.FORSYTHIA.get().defaultBlockState(), 1).build()))))));
-		public static final RegistryObject<ConfiguredFeature<NoneFeatureConfiguration, ?>> DRAGON_ROOTS = register("dragon_roots", () -> new ConfiguredFeature<>(AtmosphericFeatures.DRAGON_ROOTS.get(), NoneFeatureConfiguration.INSTANCE));
+			// Scrubland
 
-		// Hot Springs
+			register(context, TREES_SCRUBLAND, Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(List.of(new WeightedPlacedFeature(placedFeatures.getOrThrow(AtmosphericPlacedFeatures.BABY_YUCCA_WITH_FLOWERS), 0.05F), new WeightedPlacedFeature(placedFeatures.getOrThrow(AtmosphericPlacedFeatures.MORADO_BUSH_SAND), 0.2F), new WeightedPlacedFeature(placedFeatures.getOrThrow(AtmosphericPlacedFeatures.DRY_LAUREL), 0.08F)), placedFeatures.getOrThrow(AtmosphericPlacedFeatures.DRY_LAUREL_BUSH)));
+			register(context, FLOWER_SCRUBLAND, Feature.FLOWER, new RandomPatchConfiguration(64, 6, 2, PlacementUtils.onlyWhenEmpty(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(new WeightedStateProvider(SimpleWeightedRandomList.<BlockState>builder().add(AtmosphericBlocks.FIRETHORN.get().defaultBlockState(), 1).add(AtmosphericBlocks.FORSYTHIA.get().defaultBlockState(), 1).build())))));
+			register(context, DRAGON_ROOTS, AtmosphericFeatures.DRAGON_ROOTS.get(), NoneFeatureConfiguration.INSTANCE);
 
-		public static final RegistryObject<ConfiguredFeature<BlockStateConfiguration, ?>> HOT_SPRINGS_ROCK = register("hot_springs_rock", () -> new ConfiguredFeature<>(Feature.FOREST_ROCK, new BlockStateConfiguration(Blocks.MOSSY_COBBLESTONE.defaultBlockState())));
+			// Hot Springs
 
-		// Generic
+			register(context, HOT_SPRINGS_ROCK, Feature.FOREST_ROCK, new BlockStateConfiguration(Blocks.MOSSY_COBBLESTONE.defaultBlockState()));
 
-		public static final RegistryObject<ConfiguredFeature<ProbabilityFeatureConfiguration, ?>> COARSE_DIRT = register("coarse_dirt", () -> new ConfiguredFeature<>(AtmosphericFeatures.COARSE_DIRT.get(), new ProbabilityFeatureConfiguration(0.1F)));
+			// Generic
 
-		public static final RegistryObject<ConfiguredFeature<TreeConfiguration, ?>> BIRCH_BUSH = register("birch_bush", () -> new ConfiguredFeature<>(Feature.TREE, (new TreeConfigurationBuilder(BlockStateProvider.simple(Blocks.BIRCH_LOG), new StraightTrunkPlacer(1, 0, 0), BlockStateProvider.simple(Blocks.BIRCH_LEAVES), new BushFoliagePlacer(ConstantInt.of(2), ConstantInt.of(1), 2), new TwoLayersFeatureSize(0, 0, 0))).build()));
+			register(context, COARSE_DIRT, AtmosphericFeatures.COARSE_DIRT.get(), new ProbabilityFeatureConfiguration(0.1F));
 
-		public static final RegistryObject<ConfiguredFeature<RandomPatchConfiguration, ?>> PATCH_DEAD_BUSH = register("patch_dead_bush", () -> new ConfiguredFeature<>(Feature.RANDOM_PATCH, grassPatch(BlockStateProvider.simple(Blocks.DEAD_BUSH), 4)));
-		public static final RegistryObject<ConfiguredFeature<RandomPatchConfiguration, ?>> PATCH_LARGE_FERN = register("patch_large_fern", () -> new ConfiguredFeature<>(Feature.RANDOM_PATCH, FeatureUtils.simplePatchConfiguration(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(Blocks.LARGE_FERN)))));
-		public static final RegistryObject<ConfiguredFeature<RandomPatchConfiguration, ?>> PATCH_CACTUS = register("patch_cactus", () -> new ConfiguredFeature<>(Feature.RANDOM_PATCH, FeatureUtils.simpleRandomPatchConfiguration(10, PlacementUtils.inlinePlaced(Feature.BLOCK_COLUMN, BlockColumnConfiguration.simple(BiasedToBottomInt.of(1, 3), BlockStateProvider.simple(Blocks.CACTUS)), BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.ONLY_IN_AIR_PREDICATE, BlockPredicate.wouldSurvive(Blocks.CACTUS.defaultBlockState(), BlockPos.ZERO)))))));
-		public static final RegistryObject<ConfiguredFeature<RandomPatchConfiguration, ?>> PATCH_CACTUS_TALL = register("patch_cactus_tall", () -> new ConfiguredFeature<>(Feature.RANDOM_PATCH, FeatureUtils.simpleRandomPatchConfiguration(10, PlacementUtils.inlinePlaced(Feature.BLOCK_COLUMN, BlockColumnConfiguration.simple(BiasedToBottomInt.of(3, 6), BlockStateProvider.simple(Blocks.CACTUS)), BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.ONLY_IN_AIR_PREDICATE, BlockPredicate.wouldSurvive(Blocks.CACTUS.defaultBlockState(), BlockPos.ZERO)))))));
-		public static final RegistryObject<ConfiguredFeature<RandomPatchConfiguration, ?>> PATCH_CACTUS_VERY_TALL = register("patch_cactus_very_tall", () -> new ConfiguredFeature<>(Feature.RANDOM_PATCH, new RandomPatchConfiguration(70, 12, 4, PlacementUtils.inlinePlaced(Feature.BLOCK_COLUMN, BlockColumnConfiguration.simple(BiasedToBottomInt.of(9, 12), BlockStateProvider.simple(Blocks.CACTUS)), BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.ONLY_IN_AIR_PREDICATE, BlockPredicate.wouldSurvive(Blocks.CACTUS.defaultBlockState(), BlockPos.ZERO)))))));
+			register(context, BIRCH_BUSH, Feature.TREE, (new TreeConfigurationBuilder(BlockStateProvider.simple(Blocks.BIRCH_LOG), new StraightTrunkPlacer(1, 0, 0), BlockStateProvider.simple(Blocks.BIRCH_LEAVES), new BushFoliagePlacer(ConstantInt.of(2), ConstantInt.of(1), 2), new TwoLayersFeatureSize(0, 0, 0))).build());
+
+			register(context, PATCH_DEAD_BUSH, Feature.RANDOM_PATCH, grassPatch(BlockStateProvider.simple(Blocks.DEAD_BUSH), 4));
+			register(context, PATCH_LARGE_FERN, Feature.RANDOM_PATCH, FeatureUtils.simplePatchConfiguration(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(Blocks.LARGE_FERN))));
+			register(context, PATCH_CACTUS, Feature.RANDOM_PATCH, FeatureUtils.simpleRandomPatchConfiguration(10, PlacementUtils.inlinePlaced(Feature.BLOCK_COLUMN, BlockColumnConfiguration.simple(BiasedToBottomInt.of(1, 3), BlockStateProvider.simple(Blocks.CACTUS)), BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.ONLY_IN_AIR_PREDICATE, BlockPredicate.wouldSurvive(Blocks.CACTUS.defaultBlockState(), BlockPos.ZERO))))));
+			register(context, PATCH_CACTUS_TALL, Feature.RANDOM_PATCH, FeatureUtils.simpleRandomPatchConfiguration(10, PlacementUtils.inlinePlaced(Feature.BLOCK_COLUMN, BlockColumnConfiguration.simple(BiasedToBottomInt.of(3, 6), BlockStateProvider.simple(Blocks.CACTUS)), BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.ONLY_IN_AIR_PREDICATE, BlockPredicate.wouldSurvive(Blocks.CACTUS.defaultBlockState(), BlockPos.ZERO))))));
+			register(context, PATCH_CACTUS_VERY_TALL, Feature.RANDOM_PATCH, new RandomPatchConfiguration(70, 12, 4, PlacementUtils.inlinePlaced(Feature.BLOCK_COLUMN, BlockColumnConfiguration.simple(BiasedToBottomInt.of(9, 12), BlockStateProvider.simple(Blocks.CACTUS)), BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.ONLY_IN_AIR_PREDICATE, BlockPredicate.wouldSurvive(Blocks.CACTUS.defaultBlockState(), BlockPos.ZERO))))));
+		}
 
 		private static RandomPatchConfiguration grassPatch(BlockStateProvider p_195203_, int p_195204_) {
 			return FeatureUtils.simpleRandomPatchConfiguration(p_195204_, PlacementUtils.onlyWhenEmpty(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(p_195203_)));
 		}
 
-		private static <FC extends FeatureConfiguration, F extends Feature<FC>> RegistryObject<ConfiguredFeature<FC, ?>> register(String name, Supplier<ConfiguredFeature<FC, F>> feature) {
-			return CONFIGURED_FEATURES.register(name, feature);
+		public static ResourceKey<ConfiguredFeature<?, ?>> createKey(String name) {
+			return ResourceKey.create(Registries.CONFIGURED_FEATURE, new ResourceLocation(Atmospheric.MOD_ID, name));
 		}
+
+		public static <FC extends FeatureConfiguration, F extends Feature<FC>> void register(BootstapContext<ConfiguredFeature<?, ?>> context, ResourceKey<ConfiguredFeature<?, ?>> key, F feature, FC config) {
+			context.register(key, new ConfiguredFeature<>(feature, config));
+		}
+
 	}
 
 	public static final class AtmosphericPlacedFeatures {
-		public static final DeferredRegister<PlacedFeature> PLACED_FEATURES = DeferredRegister.create(Registry.PLACED_FEATURE_REGISTRY, Atmospheric.MOD_ID);
+		public static final ResourceKey<PlacedFeature> ROSEWOOD_BEES_0002 = createKey("rosewood_bees_0002");
+		public static final ResourceKey<PlacedFeature> MORADO_BEES_0002 = createKey("morado_bees_0002");
+		public static final ResourceKey<PlacedFeature> YUCCA = createKey("yucca");
+		public static final ResourceKey<PlacedFeature> YUCCA_WITH_FLOWERS = createKey("yucca_with_flowers");
+		public static final ResourceKey<PlacedFeature> BABY_YUCCA = createKey("baby_yucca");
+		public static final ResourceKey<PlacedFeature> BABY_YUCCA_WITH_FLOWERS = createKey("baby_yucca_with_flowers");
+		public static final ResourceKey<PlacedFeature> PETRIFIED_YUCCA = createKey("petrified_yucca");
+		public static final ResourceKey<PlacedFeature> RED_PETRIFIED_YUCCA = createKey("red_petrified_yucca");
+		public static final ResourceKey<PlacedFeature> ASPEN_BEES_0002 = createKey("aspen_bees_0002");
+		public static final ResourceKey<PlacedFeature> ASPEN_WITH_VINES = createKey("aspen_with_vines");
+		public static final ResourceKey<PlacedFeature> GREEN_ASPEN_BEES_0002 = createKey("green_aspen_bees_0002");
+		public static final ResourceKey<PlacedFeature> GREEN_ASPEN_WITH_VINES = createKey("green_aspen_with_vines");
+		public static final ResourceKey<PlacedFeature> LAUREL = createKey("laurel");
+		public static final ResourceKey<PlacedFeature> LAUREL_WITH_VINES = createKey("laurel_with_vines");
+		public static final ResourceKey<PlacedFeature> LARGE_LAUREL = createKey("large_laurel");
+		public static final ResourceKey<PlacedFeature> LARGE_LAUREL_WITH_VINES = createKey("large_laurel_with_vines");
+		public static final ResourceKey<PlacedFeature> GIANT_LAUREL = createKey("giant_laurel");
+		public static final ResourceKey<PlacedFeature> GIANT_LAUREL_WITH_VINES = createKey("giant_laurel_with_vines");
+		public static final ResourceKey<PlacedFeature> DRY_LAUREL = createKey("dry_laurel");
+		public static final ResourceKey<PlacedFeature> DRY_LAUREL_WITH_VINES = createKey("dry_laurel_with_vines");
+		public static final ResourceKey<PlacedFeature> LARGE_DRY_LAUREL = createKey("large_dry_laurel");
+		public static final ResourceKey<PlacedFeature> LARGE_DRY_LAUREL_WITH_VINES = createKey("large_dry_laurel_with_vines");
+		public static final ResourceKey<PlacedFeature> GIANT_DRY_LAUREL = createKey("giant_dry_laurel");
+		public static final ResourceKey<PlacedFeature> GIANT_DRY_LAUREL_WITH_VINES = createKey("giant_dry_laurel_with_vines");
+		public static final ResourceKey<PlacedFeature> KOUSA = createKey("kousa");
+		public static final ResourceKey<PlacedFeature> GRIMWOOD = createKey("grimwood");
+		public static final ResourceKey<PlacedFeature> DEAD_GRIMWOOD = createKey("dead_grimwood");
+		public static final ResourceKey<PlacedFeature> DEAD_CURRANT = createKey("dead_currant");
 
-		public static final RegistryObject<PlacedFeature> ROSEWOOD_BEES_0002 = register("rosewood_bees_0002", AtmosphericConfiguredFeatures.ROSEWOOD_BEES_0002, List.of());
-		public static final RegistryObject<PlacedFeature> MORADO_BEES_0002 = register("morado_bees_0002", AtmosphericConfiguredFeatures.MORADO_BEES_0002, List.of());
-		public static final RegistryObject<PlacedFeature> YUCCA = register("yucca", AtmosphericConfiguredFeatures.YUCCA, List.of());
-		public static final RegistryObject<PlacedFeature> YUCCA_WITH_FLOWERS = register("yucca_with_flowers", AtmosphericConfiguredFeatures.YUCCA_WITH_FLOWERS, List.of());
-		public static final RegistryObject<PlacedFeature> BABY_YUCCA = register("baby_yucca", AtmosphericConfiguredFeatures.BABY_YUCCA, List.of());
-		public static final RegistryObject<PlacedFeature> BABY_YUCCA_WITH_FLOWERS = register("baby_yucca_with_flowers", AtmosphericConfiguredFeatures.BABY_YUCCA_WITH_FLOWERS, List.of());
-		public static final RegistryObject<PlacedFeature> PETRIFIED_YUCCA = register("petrified_yucca", AtmosphericConfiguredFeatures.PETRIFIED_YUCCA, List.of());
-		public static final RegistryObject<PlacedFeature> RED_PETRIFIED_YUCCA = register("red_petrified_yucca", AtmosphericConfiguredFeatures.RED_PETRIFIED_YUCCA, List.of());
-		public static final RegistryObject<PlacedFeature> ASPEN_BEES_0002 = register("aspen_bees_0002", AtmosphericConfiguredFeatures.ASPEN_BEES_0002, List.of());
-		public static final RegistryObject<PlacedFeature> ASPEN_WITH_VINES = register("aspen_with_vines", AtmosphericConfiguredFeatures.ASPEN_WITH_VINES, List.of());
-		public static final RegistryObject<PlacedFeature> GREEN_ASPEN_BEES_0002 = register("green_aspen_bees_0002", AtmosphericConfiguredFeatures.GREEN_ASPEN_BEES_0002, List.of());
-		public static final RegistryObject<PlacedFeature> GREEN_ASPEN_WITH_VINES = register("green_aspen_with_vines", AtmosphericConfiguredFeatures.GREEN_ASPEN_WITH_VINES, List.of());
-		public static final RegistryObject<PlacedFeature> LAUREL = register("laurel", AtmosphericConfiguredFeatures.LAUREL_ORANGES_0005, List.of());
-		public static final RegistryObject<PlacedFeature> LAUREL_WITH_VINES = register("laurel_with_vines", AtmosphericConfiguredFeatures.LAUREL_WITH_VINES, List.of());
-		public static final RegistryObject<PlacedFeature> LARGE_LAUREL = register("large_laurel", AtmosphericConfiguredFeatures.LARGE_LAUREL_ORANGES_0005, List.of());
-		public static final RegistryObject<PlacedFeature> LARGE_LAUREL_WITH_VINES = register("large_laurel_with_vines", AtmosphericConfiguredFeatures.LARGE_LAUREL_WITH_VINES, List.of());
-		public static final RegistryObject<PlacedFeature> GIANT_LAUREL = register("giant_laurel", AtmosphericConfiguredFeatures.GIANT_LAUREL_ORANGES_0005, List.of());
-		public static final RegistryObject<PlacedFeature> GIANT_LAUREL_WITH_VINES = register("giant_laurel_with_vines", AtmosphericConfiguredFeatures.GIANT_LAUREL_WITH_VINES, List.of());
-		public static final RegistryObject<PlacedFeature> DRY_LAUREL = register("dry_laurel", AtmosphericConfiguredFeatures.DRY_LAUREL_ORANGES_0005, List.of());
-		public static final RegistryObject<PlacedFeature> DRY_LAUREL_WITH_VINES = register("dry_laurel_with_vines", AtmosphericConfiguredFeatures.DRY_LAUREL_WITH_VINES, List.of());
-		public static final RegistryObject<PlacedFeature> LARGE_DRY_LAUREL = register("large_dry_laurel", AtmosphericConfiguredFeatures.LARGE_DRY_LAUREL_ORANGES_0005, List.of());
-		public static final RegistryObject<PlacedFeature> LARGE_DRY_LAUREL_WITH_VINES = register("large_dry_laurel_with_vines", AtmosphericConfiguredFeatures.LARGE_DRY_LAUREL_WITH_VINES, List.of());
-		public static final RegistryObject<PlacedFeature> GIANT_DRY_LAUREL = register("giant_dry_laurel", AtmosphericConfiguredFeatures.GIANT_DRY_LAUREL_ORANGES_0005, List.of());
-		public static final RegistryObject<PlacedFeature> GIANT_DRY_LAUREL_WITH_VINES = register("giant_dry_laurel_with_vines", AtmosphericConfiguredFeatures.GIANT_DRY_LAUREL_WITH_VINES, List.of());
-		public static final RegistryObject<PlacedFeature> KOUSA = register("kousa", AtmosphericConfiguredFeatures.KOUSA, List.of());
-		public static final RegistryObject<PlacedFeature> GRIMWOOD = register("grimwood", AtmosphericConfiguredFeatures.GRIMWOOD, List.of());
-		public static final RegistryObject<PlacedFeature> DEAD_GRIMWOOD = register("dead_grimwood", AtmosphericConfiguredFeatures.DEAD_GRIMWOOD, List.of());
-		public static final RegistryObject<PlacedFeature> DEAD_CURRANT = register("dead_currant", AtmosphericConfiguredFeatures.DEAD_CURRANT, VegetationPlacements.treePlacement(PlacementUtils.countExtra(10, 0.2F, 15)));
-
-		public static final RegistryObject<PlacedFeature> OAK_BUSH = register("oak_bush", AtmosphericConfiguredFeatures.OAK_BUSH, List.of(PlacementUtils.filteredByBlockSurvival(Blocks.OAK_SAPLING)));
-		public static final RegistryObject<PlacedFeature> DARK_OAK_BUSH = register("dark_oak_bush", AtmosphericConfiguredFeatures.DARK_OAK_BUSH, List.of(PlacementUtils.filteredByBlockSurvival(Blocks.DARK_OAK_SAPLING)));
-		public static final RegistryObject<PlacedFeature> MORADO_BUSH = register("morado_bush", AtmosphericConfiguredFeatures.MORADO_BUSH, List.of(PlacementUtils.filteredByBlockSurvival(Blocks.OAK_SAPLING)));
-		public static final RegistryObject<PlacedFeature> MORADO_BUSH_SAND = register("morado_bush_sand", AtmosphericConfiguredFeatures.MORADO_BUSH, List.of(PlacementUtils.filteredByBlockSurvival(Blocks.DEAD_BUSH)));
-		public static final RegistryObject<PlacedFeature> DRY_LAUREL_BUSH = register("dry_laurel_bush", AtmosphericConfiguredFeatures.DRY_LAUREL_BUSH, List.of());
+		public static final ResourceKey<PlacedFeature> OAK_BUSH = createKey("oak_bush");
+		public static final ResourceKey<PlacedFeature> DARK_OAK_BUSH = createKey("dark_oak_bush");
+		public static final ResourceKey<PlacedFeature> MORADO_BUSH = createKey("morado_bush");
+		public static final ResourceKey<PlacedFeature> MORADO_BUSH_SAND = createKey("morado_bush_sand");
+		public static final ResourceKey<PlacedFeature> DRY_LAUREL_BUSH = createKey("dry_laurel_bush");
 
 		// Rainforest
 
-		public static final RegistryObject<PlacedFeature> TREES_RAINFOREST = register("trees_rainforest", AtmosphericConfiguredFeatures.TREES_RAINFOREST, VegetationPlacements.treePlacement(PlacementUtils.countExtra(30, 0.1F, 1)));
-		public static final RegistryObject<PlacedFeature> TREES_SPARSE_RAINFOREST = register("trees_sparse_rainforest", AtmosphericConfiguredFeatures.TREES_RAINFOREST, VegetationPlacements.treePlacement(PlacementUtils.countExtra(0, 0.1F, 30)));
-		public static final RegistryObject<PlacedFeature> TREES_RAINFOREST_BASIN = register("trees_rainforest_basin", AtmosphericConfiguredFeatures.TREES_RAINFOREST, waterTreePlacement(PlacementUtils.countExtra(50, 0.1F, 1)));
-		public static final RegistryObject<PlacedFeature> TREES_SPARSE_RAINFOREST_BASIN = register("trees_sparse_rainforest_basin", AtmosphericConfiguredFeatures.TREES_RAINFOREST, waterTreePlacement(PlacementUtils.countExtra(3, 0.1F, 5)));
+		public static final ResourceKey<PlacedFeature> TREES_RAINFOREST = createKey("trees_rainforest");
+		public static final ResourceKey<PlacedFeature> TREES_SPARSE_RAINFOREST = createKey("trees_sparse_rainforest");
+		public static final ResourceKey<PlacedFeature> TREES_RAINFOREST_BASIN = createKey("trees_rainforest_basin");
+		public static final ResourceKey<PlacedFeature> TREES_SPARSE_RAINFOREST_BASIN = createKey("trees_sparse_rainforest_basin");
 
-		public static final RegistryObject<PlacedFeature> BUSHES_RAINFOREST = register("bushes_rainforest", AtmosphericConfiguredFeatures.BUSHES_RAINFOREST, VegetationPlacements.treePlacement(PlacementUtils.countExtra(12, 0.1F, 1)));
-		public static final RegistryObject<PlacedFeature> BUSHES_SPARSE_RAINFOREST = register("bushes_sparse_rainforest", AtmosphericConfiguredFeatures.BUSHES_RAINFOREST, VegetationPlacements.treePlacement(PlacementUtils.countExtra(2, 0.1F, 3)));
+		public static final ResourceKey<PlacedFeature> BUSHES_RAINFOREST = createKey("bushes_rainforest");
+		public static final ResourceKey<PlacedFeature> BUSHES_SPARSE_RAINFOREST = createKey("bushes_sparse_rainforest");
 
-		public static final RegistryObject<PlacedFeature> PODZOL = register("podzol", AtmosphericConfiguredFeatures.PODZOL, List.of(NoiseBasedCountPlacement.of(160, 80.0D, 0.3D), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome()));
-		public static final RegistryObject<PlacedFeature> PASSION_VINES = register("passion_vines", AtmosphericConfiguredFeatures.PASSION_VINES, List.of(CountPlacement.of(1), InSquarePlacement.spread(), HeightRangePlacement.uniform(VerticalAnchor.absolute(64), VerticalAnchor.absolute(192)), BiomeFilter.biome()));
-		public static final RegistryObject<PlacedFeature> PATCH_WATER_HYACINTH = register("patch_water_hyacinth", AtmosphericConfiguredFeatures.PATCH_WATER_HYACINTH, List.of(RarityFilter.onAverageOnceEvery(24), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome()));
-		public static final RegistryObject<PlacedFeature> PATCH_WATER_HYACINTH_SPARSE = register("patch_water_hyacinth_sparse", AtmosphericConfiguredFeatures.PATCH_WATER_HYACINTH, List.of(RarityFilter.onAverageOnceEvery(48), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome()));
-		public static final RegistryObject<PlacedFeature> PATCH_WATERLILY_RAINFOREST = register("patch_waterlily_rainforest", AtmosphericConfiguredFeatures.PATCH_WATERLILY, VegetationPlacements.worldSurfaceSquaredWithCount(1));
-		public static final RegistryObject<PlacedFeature> PATCH_WATERLILY_RAINFOREST_BASIN = register("patch_waterlily_rainforest_basin", AtmosphericConfiguredFeatures.PATCH_WATERLILY, VegetationPlacements.worldSurfaceSquaredWithCount(4));
+		public static final ResourceKey<PlacedFeature> PODZOL = createKey("podzol");
+		public static final ResourceKey<PlacedFeature> PASSION_VINES = createKey("passion_vines");
+		public static final ResourceKey<PlacedFeature> PATCH_WATER_HYACINTH = createKey("patch_water_hyacinth");
+		public static final ResourceKey<PlacedFeature> PATCH_WATER_HYACINTH_SPARSE = createKey("patch_water_hyacinth_sparse");
+		public static final ResourceKey<PlacedFeature> PATCH_WATERLILY_RAINFOREST = createKey("patch_waterlily_rainforest");
+		public static final ResourceKey<PlacedFeature> PATCH_WATERLILY_RAINFOREST_BASIN = createKey("patch_waterlily_rainforest_basin");
 
-		public static final RegistryObject<PlacedFeature> WARM_MONKEY_BRUSH = register("warm_monkey_brush", AtmosphericConfiguredFeatures.WARM_MONKEY_BRUSH, List.of());
-		public static final RegistryObject<PlacedFeature> HOT_MONKEY_BRUSH = register("hot_monkey_brush", AtmosphericConfiguredFeatures.HOT_MONKEY_BRUSH, List.of());
-		public static final RegistryObject<PlacedFeature> SCALDING_MONKEY_BRUSH = register("scalding_monkey_brush", AtmosphericConfiguredFeatures.SCALDING_MONKEY_BRUSH, List.of());
-		public static final RegistryObject<PlacedFeature> MONKEY_BRUSH = register("monkey_brush", AtmosphericConfiguredFeatures.MONKEY_BRUSH, List.of(RarityFilter.onAverageOnceEvery(12), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, BiomeFilter.biome()));
+		public static final ResourceKey<PlacedFeature> WARM_MONKEY_BRUSH = createKey("warm_monkey_brush");
+		public static final ResourceKey<PlacedFeature> HOT_MONKEY_BRUSH = createKey("hot_monkey_brush");
+		public static final ResourceKey<PlacedFeature> SCALDING_MONKEY_BRUSH = createKey("scalding_monkey_brush");
+		public static final ResourceKey<PlacedFeature> MONKEY_BRUSH = createKey("monkey_brush");
 
-		public static final RegistryObject<PlacedFeature> OCEAN_FLOOR_RAISER = register("ocean_floor_raiser", AtmosphericConfiguredFeatures.OCEAN_FLOOR_RAISER, List.of(InSquareCenterPlacement.INSTANCE, PlacementUtils.HEIGHTMAP_TOP_SOLID, BiomeFilter.biome()));
+		public static final ResourceKey<PlacedFeature> OCEAN_FLOOR_RAISER = createKey("ocean_floor_raiser");
 
 		// Dunes
 
-		public static final RegistryObject<PlacedFeature> TREES_DUNES = register("trees_dunes", AtmosphericConfiguredFeatures.TREES_DUNES, VegetationPlacements.treePlacement(PlacementUtils.countExtra(0, 0.25F, 1)));
-		public static final RegistryObject<PlacedFeature> TREES_FLOURISHING_DUNES = register("trees_flourishing_dunes", AtmosphericConfiguredFeatures.TREES_FLOURISHING_DUNES, VegetationPlacements.treePlacement(PlacementUtils.countExtra(2, 0.05F, 1)));
-		public static final RegistryObject<PlacedFeature> TREES_ROCKY_DUNES = register("trees_rocky_dunes", AtmosphericConfiguredFeatures.TREES_DUNES, VegetationPlacements.treePlacement(PlacementUtils.countExtra(0, 0.1F, 1)));
-		public static final RegistryObject<PlacedFeature> TREES_PETRIFIED_DUNES = register("trees_petrified_dunes", AtmosphericConfiguredFeatures.TREES_PETRIFIED_DUNES, VegetationPlacements.treePlacement(PlacementUtils.countExtra(0, 0.5F, 2)));
-		public static final RegistryObject<PlacedFeature> FLOURISHING_DUNES_YUCCA_TREES = register("flourishing_dunes_yucca_trees", AtmosphericConfiguredFeatures.YUCCA_BEES_005_WITH_FLOWERS, VegetationPlacements.treePlacement(PlacementUtils.countExtra(0, 0.25F, 1)));
+		public static final ResourceKey<PlacedFeature> TREES_DUNES = createKey("trees_dunes");
+		public static final ResourceKey<PlacedFeature> TREES_FLOURISHING_DUNES = createKey("trees_flourishing_dunes");
+		public static final ResourceKey<PlacedFeature> TREES_ROCKY_DUNES = createKey("trees_rocky_dunes");
+		public static final ResourceKey<PlacedFeature> TREES_PETRIFIED_DUNES = createKey("trees_petrified_dunes");
+		public static final ResourceKey<PlacedFeature> FLOURISHING_DUNES_YUCCA_TREES = createKey("flourishing_dunes_yucca_trees");
 
-		public static final RegistryObject<PlacedFeature> WOODED_BADLANDS_YUCCA_TREES = register("badlands_yucca_trees", AtmosphericConfiguredFeatures.TREES_DUNES, VegetationPlacements.treePlacement(PlacementUtils.countExtra(0, 0.25F, 1), Blocks.OAK_SAPLING));
-		public static final RegistryObject<PlacedFeature> DESERT_YUCCA_TREES = register("desert_yucca_trees", AtmosphericConfiguredFeatures.TREES_DUNES, VegetationPlacements.treePlacement(PlacementUtils.countExtra(0, 0.005F, 1)));
-		public static final RegistryObject<PlacedFeature> WINDSWEPT_SAVANNA_YUCCA_TREES = register("windswept_savanna_yucca_trees", AtmosphericConfiguredFeatures.TREES_DUNES, VegetationPlacements.treePlacement(PlacementUtils.countExtra(0, 0.125F, 1)));
+		public static final ResourceKey<PlacedFeature> WOODED_BADLANDS_YUCCA_TREES = createKey("badlands_yucca_trees");
+		public static final ResourceKey<PlacedFeature> DESERT_YUCCA_TREES = createKey("desert_yucca_trees");
+		public static final ResourceKey<PlacedFeature> WINDSWEPT_SAVANNA_YUCCA_TREES = createKey("windswept_savanna_yucca_trees");
 
-		public static final RegistryObject<PlacedFeature> DUNE_ROCK = register("dune_rock", AtmosphericConfiguredFeatures.DUNE_ROCK, List.of(CountPlacement.of(1), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome()));
-		public static final RegistryObject<PlacedFeature> DUNE_ROCK_EXTRA = register("dune_rock_extra", AtmosphericConfiguredFeatures.DUNE_ROCK, List.of(CountPlacement.of(2), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome()));
-		public static final RegistryObject<PlacedFeature> DUNE_ROCK_MANY = register("dune_rock_many", AtmosphericConfiguredFeatures.DUNE_ROCK, List.of(CountPlacement.of(3), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome()));
+		public static final ResourceKey<PlacedFeature> DUNE_ROCK = createKey("dune_rock");
+		public static final ResourceKey<PlacedFeature> DUNE_ROCK_EXTRA = createKey("dune_rock_extra");
+		public static final ResourceKey<PlacedFeature> DUNE_ROCK_MANY = createKey("dune_rock_many");
 
-		public static final RegistryObject<PlacedFeature> PATCH_BARREL_CACTUS_DUNES = register("patch_barrel_cactus_dunes", AtmosphericConfiguredFeatures.PATCH_BARREL_CACTUS, List.of(PlacementUtils.countExtra(0, 0.05F, 2), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, BiomeFilter.biome()));
-		public static final RegistryObject<PlacedFeature> PATCH_BARREL_CACTUS_ROCKY_DUNES = register("patch_barrel_cactus_rocky_dunes", AtmosphericConfiguredFeatures.PATCH_BARREL_CACTUS, List.of(PlacementUtils.countExtra(0, 0.025F, 1), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, BiomeFilter.biome()));
-		public static final RegistryObject<PlacedFeature> PATCH_BARREL_CACTUS_FLOURISHING_DUNES = register("patch_barrel_cactus_flourishing_dunes", AtmosphericConfiguredFeatures.PATCH_BARREL_CACTUS, List.of(PlacementUtils.countExtra(0, 0.5F, 3), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, BiomeFilter.biome()));
-		public static final RegistryObject<PlacedFeature> PATCH_BARREL_CACTUS_SPINY_THICKET = register("patch_barrel_cactus_spiny_thicket", AtmosphericConfiguredFeatures.PATCH_BARREL_CACTUS, List.of(PlacementUtils.countExtra(0, 0.5F, 4), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, BiomeFilter.biome()));
-		public static final RegistryObject<PlacedFeature> PATCH_BARREL_CACTUS_SCRUBLAND = register("patch_barrel_cactus_scrubland", AtmosphericConfiguredFeatures.PATCH_BARREL_CACTUS, List.of(PlacementUtils.countExtra(0, 0.1F, 2), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, BiomeFilter.biome()));
-		public static final RegistryObject<PlacedFeature> PATCH_MELON_DUNES = register("patch_melon_dunes", AtmosphericConfiguredFeatures.PATCH_MELON_DUNES, List.of(RarityFilter.onAverageOnceEvery(6), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, BiomeFilter.biome()));
+		public static final ResourceKey<PlacedFeature> PATCH_BARREL_CACTUS_DUNES = createKey("patch_barrel_cactus_dunes");
+		public static final ResourceKey<PlacedFeature> PATCH_BARREL_CACTUS_ROCKY_DUNES = createKey("patch_barrel_cactus_rocky_dunes");
+		public static final ResourceKey<PlacedFeature> PATCH_BARREL_CACTUS_FLOURISHING_DUNES = createKey("patch_barrel_cactus_flourishing_dunes");
+		public static final ResourceKey<PlacedFeature> PATCH_BARREL_CACTUS_SPINY_THICKET = createKey("patch_barrel_cactus_spiny_thicket");
+		public static final ResourceKey<PlacedFeature> PATCH_BARREL_CACTUS_SCRUBLAND = createKey("patch_barrel_cactus_scrubland");
+		public static final ResourceKey<PlacedFeature> PATCH_MELON_DUNES = createKey("patch_melon_dunes");
 
-		public static final RegistryObject<PlacedFeature> PATCH_DUNE_GRASS = register("patch_dune_grass", AtmosphericConfiguredFeatures.PATCH_DUNE_GRASS, List.of(PlacementUtils.countExtra(1, 0.05F, 1), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, BiomeFilter.biome()));
-		public static final RegistryObject<PlacedFeature> PATCH_ARID_SPROUTS = register("patch_arid_sprouts", AtmosphericConfiguredFeatures.PATCH_ARID_SPROUTS, VegetationPlacements.worldSurfaceSquaredWithCount(2));
-		public static final RegistryObject<PlacedFeature> FLOWER_FLOURISHING_DUNES = register("flower_flourishing_dunes", AtmosphericConfiguredFeatures.FLOWER_FLOURISHING_DUNES, List.of(RarityFilter.onAverageOnceEvery(12), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, BiomeFilter.biome()));
-		public static final RegistryObject<PlacedFeature> PATCH_YUCCA_FLOWER = register("patch_yucca_flower", AtmosphericConfiguredFeatures.PATCH_YUCCA_FLOWER, List.of(RarityFilter.onAverageOnceEvery(16), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, BiomeFilter.biome()));
-		public static final RegistryObject<PlacedFeature> PATCH_YUCCA_FLOWER_EXTRA = register("patch_yucca_flower_extra", AtmosphericConfiguredFeatures.PATCH_YUCCA_FLOWER, List.of(RarityFilter.onAverageOnceEvery(4), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, BiomeFilter.biome()));
-		public static final RegistryObject<PlacedFeature> PATCH_SHORT_ALOE_VERA = register("patch_short_aloe_vera", AtmosphericConfiguredFeatures.PATCH_SHORT_ALOE_VERA, List.of());
-		public static final RegistryObject<PlacedFeature> PATCH_TALL_ALOE_VERA = register("patch_tall_aloe_vera", AtmosphericConfiguredFeatures.PATCH_TALL_ALOE_VERA, List.of());
-		public static final RegistryObject<PlacedFeature> PATCH_ALOE_VERA = register("patch_aloe_vera", AtmosphericConfiguredFeatures.PATCH_ALOE_VERA, List.of(RarityFilter.onAverageOnceEvery(16), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, BiomeFilter.biome()));
-		public static final RegistryObject<PlacedFeature> PATCH_ALOE_VERA_EXTRA = register("patch_aloe_vera_extra", AtmosphericConfiguredFeatures.PATCH_ALOE_VERA, List.of(RarityFilter.onAverageOnceEvery(8), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, BiomeFilter.biome()));
+		public static final ResourceKey<PlacedFeature> PATCH_DUNE_GRASS = createKey("patch_dune_grass");
+		public static final ResourceKey<PlacedFeature> PATCH_ARID_SPROUTS = createKey("patch_arid_sprouts");
+		public static final ResourceKey<PlacedFeature> FLOWER_FLOURISHING_DUNES = createKey("flower_flourishing_dunes");
+		public static final ResourceKey<PlacedFeature> PATCH_YUCCA_FLOWER = createKey("patch_yucca_flower");
+		public static final ResourceKey<PlacedFeature> PATCH_YUCCA_FLOWER_EXTRA = createKey("patch_yucca_flower_extra");
+		public static final ResourceKey<PlacedFeature> PATCH_SHORT_ALOE_VERA = createKey("patch_short_aloe_vera");
+		public static final ResourceKey<PlacedFeature> PATCH_TALL_ALOE_VERA = createKey("patch_tall_aloe_vera");
+		public static final ResourceKey<PlacedFeature> PATCH_ALOE_VERA = createKey("patch_aloe_vera");
+		public static final ResourceKey<PlacedFeature> PATCH_ALOE_VERA_EXTRA = createKey("patch_aloe_vera_extra");
 
-		public static final RegistryObject<PlacedFeature> FOSSIL_DUNES = register("fossil_dunes", AtmosphericConfiguredFeatures.SURFACE_FOSSIL, List.of(RarityFilter.onAverageOnceEvery(24), InSquarePlacement.spread(), HeightRangePlacement.uniform(VerticalAnchor.absolute(64), VerticalAnchor.absolute(256)), BiomeFilter.biome()));
+		public static final ResourceKey<PlacedFeature> FOSSIL_DUNES = createKey("fossil_dunes");
 
 		// Aspen Parkland
 
-		public static final RegistryObject<PlacedFeature> CRUSTOSE = register("crustose", AtmosphericConfiguredFeatures.CRUSTOSE, List.of(CountPlacement.of(128), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome()));
-		public static final RegistryObject<PlacedFeature> FALLEN_CRUSTOSE_LOG = register("fallen_crustose_log", AtmosphericConfiguredFeatures.FALLEN_CRUSTOSE_LOG, List.of(CountPlacement.of(3), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, BiomeFilter.biome()));
-		public static final RegistryObject<PlacedFeature> SINGLE_AGAVE = register("single_agave", AtmosphericConfiguredFeatures.SINGLE_AGAVE, List.of(RarityFilter.onAverageOnceEvery(1), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, BiomeFilter.biome()));
-		public static final RegistryObject<PlacedFeature> PATCH_AGAVE_LARGE = register("patch_agave_large", AtmosphericConfiguredFeatures.PATCH_AGAVE_LARGE, List.of(RarityFilter.onAverageOnceEvery(64), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, BiomeFilter.biome()));
-		public static final RegistryObject<PlacedFeature> PATCH_AGAVE_WOODED_BADLANDS = register("patch_agave_wooded_badlands", AtmosphericConfiguredFeatures.PATCH_AGAVE_LARGE, List.of(RarityFilter.onAverageOnceEvery(64), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, BiomeFilter.biome()));
-		public static final RegistryObject<PlacedFeature> PATCH_GOLDEN_GROWTHS = register("patch_golden_growths", AtmosphericConfiguredFeatures.PATCH_GOLDEN_GROWTHS, VegetationPlacements.worldSurfaceSquaredWithCount(4));
-		public static final RegistryObject<PlacedFeature> TREES_ASPEN_PARKLAND = register("trees_aspen_parkland", AtmosphericConfiguredFeatures.TREES_ASPEN_PARKLAND, VegetationPlacements.treePlacement(PlacementUtils.countExtra(12, 0.1F, 1)));
+		public static final ResourceKey<PlacedFeature> CRUSTOSE = createKey("crustose");
+		public static final ResourceKey<PlacedFeature> FALLEN_CRUSTOSE_LOG = createKey("fallen_crustose_log");
+		public static final ResourceKey<PlacedFeature> SINGLE_AGAVE = createKey("single_agave");
+		public static final ResourceKey<PlacedFeature> PATCH_AGAVE_LARGE = createKey("patch_agave_large");
+		public static final ResourceKey<PlacedFeature> PATCH_AGAVE_WOODED_BADLANDS = createKey("patch_agave_wooded_badlands");
+		public static final ResourceKey<PlacedFeature> PATCH_GOLDEN_GROWTHS = createKey("patch_golden_growths");
+		public static final ResourceKey<PlacedFeature> TREES_ASPEN_PARKLAND = createKey("trees_aspen_parkland");
 
 		// Laurel Forest
 
-		public static final RegistryObject<PlacedFeature> TREES_LAUREL_FOREST = register("trees_laurel_forest", AtmosphericConfiguredFeatures.TREES_LAUREL_FOREST, VegetationPlacements.treePlacement(PlacementUtils.countExtra(10, 0.1F, 1)));
-		public static final RegistryObject<PlacedFeature> TREES_LAUREL_FOREST_LARGE = register("trees_laurel_forest_large", AtmosphericConfiguredFeatures.TREES_LAUREL_FOREST_LARGE, VegetationPlacements.treePlacement(PlacementUtils.countExtra(1, 0.1F, 1)));
-		public static final RegistryObject<PlacedFeature> TREES_LAUREL_FOREST_GIANT = register("trees_laurel_forest_giant", AtmosphericConfiguredFeatures.TREES_LAUREL_FOREST_GIANT, VegetationPlacements.treePlacement(PlacementUtils.countExtra(0, 0.5F, 1)));
-		public static final RegistryObject<PlacedFeature> COARSE_DIRT = register("coarse_dirt", AtmosphericConfiguredFeatures.COARSE_DIRT, List.of(CountPlacement.of(64), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome()));
-		public static final RegistryObject<PlacedFeature> COARSE_DIRT_LAUREL_FOREST = register("coarse_dirt_laurel_forest", AtmosphericConfiguredFeatures.COARSE_DIRT, List.of(CountPlacement.of(32), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome()));
-		public static final RegistryObject<PlacedFeature> PATCH_GRASS_LAUREL_FOREST = register("patch_grass_laurel_forest", AtmosphericConfiguredFeatures.PATCH_GRASS_LAUREL_FOREST, List.of(CountPlacement.of(20), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome()));
-		public static final RegistryObject<PlacedFeature> PATCH_DEAD_BUSH_LAUREL_FOREST = register("patch_dead_bush_laurel_forest", AtmosphericConfiguredFeatures.PATCH_DEAD_BUSH, VegetationPlacements.worldSurfaceSquaredWithCount(8));
+		public static final ResourceKey<PlacedFeature> TREES_LAUREL_FOREST = createKey("trees_laurel_forest");
+		public static final ResourceKey<PlacedFeature> TREES_LAUREL_FOREST_LARGE = createKey("trees_laurel_forest_large");
+		public static final ResourceKey<PlacedFeature> TREES_LAUREL_FOREST_GIANT = createKey("trees_laurel_forest_giant");
+		public static final ResourceKey<PlacedFeature> COARSE_DIRT = createKey("coarse_dirt");
+		public static final ResourceKey<PlacedFeature> COARSE_DIRT_LAUREL_FOREST = createKey("coarse_dirt_laurel_forest");
+		public static final ResourceKey<PlacedFeature> PATCH_GRASS_LAUREL_FOREST = createKey("patch_grass_laurel_forest");
+		public static final ResourceKey<PlacedFeature> PATCH_DEAD_BUSH_LAUREL_FOREST = createKey("patch_dead_bush_laurel_forest");
 
 		// Kousa Jungle
 
-		public static final RegistryObject<PlacedFeature> SNOWY_BAMBOO = register("snowy_bamboo", AtmosphericConfiguredFeatures.SNOWY_BAMBOO, List.of(NoiseBasedCountPlacement.of(120, 2.0D, 0.0D), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, BiomeFilter.biome()));
-		public static final RegistryObject<PlacedFeature> TREES_KOUSA_JUNGLE = register("trees_kousa_jungle", AtmosphericConfiguredFeatures.TREES_KOUSA_JUNGLE, VegetationPlacements.treePlacement(PlacementUtils.countExtra(20, 0.1F, 3)));
-		public static final RegistryObject<PlacedFeature> CURRANT = register("currant", AtmosphericConfiguredFeatures.CURRANT, VegetationPlacements.treePlacement(PlacementUtils.countExtra(0, 0.025F, 8)));
-		public static final RegistryObject<PlacedFeature> PATCH_LARGE_FERN_KOUSA = register("patch_large_fern_kousa", AtmosphericConfiguredFeatures.PATCH_LARGE_FERN, List.of(RarityFilter.onAverageOnceEvery(1), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, BiomeFilter.biome()));
-		public static final RegistryObject<PlacedFeature> BIRCH_BUSH = register("birch_bush", AtmosphericConfiguredFeatures.BIRCH_BUSH, VegetationPlacements.treePlacement(PlacementUtils.countExtra(5, 0.1F, 1), Blocks.BIRCH_SAPLING));
+		public static final ResourceKey<PlacedFeature> SNOWY_BAMBOO = createKey("snowy_bamboo");
+		public static final ResourceKey<PlacedFeature> TREES_KOUSA_JUNGLE = createKey("trees_kousa_jungle");
+		public static final ResourceKey<PlacedFeature> CURRANT = createKey("currant");
+		public static final ResourceKey<PlacedFeature> PATCH_LARGE_FERN_KOUSA = createKey("patch_large_fern_kousa");
+		public static final ResourceKey<PlacedFeature> BIRCH_BUSH = createKey("birch_bush");
 
 		// Spiny Thicket
 
-		public static final RegistryObject<PlacedFeature> TREES_SPINY_THICKET = register("trees_spiny_thicket", AtmosphericConfiguredFeatures.TREES_SPINY_THICKET, VegetationPlacements.treePlacement(PlacementUtils.countExtra(8, 0.1F, 5)));
-		public static final RegistryObject<PlacedFeature> SINGLE_YUCCA_FLOWER = register("single_yucca_flower", AtmosphericConfiguredFeatures.SINGLE_YUCCA_FLOWER, List.of(CountPlacement.of(4), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, BiomeFilter.biome()));
-		public static final RegistryObject<PlacedFeature> PATCH_CACTUS_SCRUBLAND = register("patch_cactus_scrubland", AtmosphericConfiguredFeatures.PATCH_CACTUS, List.of(RarityFilter.onAverageOnceEvery(1), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, BiomeFilter.biome()));
-		public static final RegistryObject<PlacedFeature> PATCH_CACTUS_SPINY_THICKET = register("patch_cactus_spiny_thicket", AtmosphericConfiguredFeatures.PATCH_CACTUS_TALL, List.of(CountPlacement.of(9), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, BiomeFilter.biome()));
-		public static final RegistryObject<PlacedFeature> PATCH_CACTUS_SPINIER_THICKET = register("patch_cactus_spinier_thicket", AtmosphericConfiguredFeatures.PATCH_CACTUS_VERY_TALL, List.of(RarityFilter.onAverageOnceEvery(16), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, BiomeFilter.biome()));
+		public static final ResourceKey<PlacedFeature> TREES_SPINY_THICKET = createKey("trees_spiny_thicket");
+		public static final ResourceKey<PlacedFeature> SINGLE_YUCCA_FLOWER = createKey("single_yucca_flower");
+		public static final ResourceKey<PlacedFeature> PATCH_CACTUS_SCRUBLAND = createKey("patch_cactus_scrubland");
+		public static final ResourceKey<PlacedFeature> PATCH_CACTUS_SPINY_THICKET = createKey("patch_cactus_spiny_thicket");
+		public static final ResourceKey<PlacedFeature> PATCH_CACTUS_SPINIER_THICKET = createKey("patch_cactus_spinier_thicket");
 
 		// Scrubland
 
-		public static final RegistryObject<PlacedFeature> TREES_SCRUBLAND = register("trees_scrubland", AtmosphericConfiguredFeatures.TREES_SCRUBLAND, VegetationPlacements.treePlacement(PlacementUtils.countExtra(3, 0.25F, 2)));
-		public static final RegistryObject<PlacedFeature> FLOWER_SCRUBLAND = register("flower_scrubland", AtmosphericConfiguredFeatures.FLOWER_SCRUBLAND, List.of(RarityFilter.onAverageOnceEvery(4), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, BiomeFilter.biome()));
-		public static final RegistryObject<PlacedFeature> PATCH_ARID_SPROUTS_RARE = register("patch_arid_sprouts_rare", AtmosphericConfiguredFeatures.PATCH_ARID_SPROUTS, List.of(RarityFilter.onAverageOnceEvery(6), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome()));
-		public static final RegistryObject<PlacedFeature> DRAGON_ROOTS = register("dragon_roots", AtmosphericConfiguredFeatures.DRAGON_ROOTS, List.of(RarityFilter.onAverageOnceEvery(8), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, BiomeFilter.biome()));
+		public static final ResourceKey<PlacedFeature> TREES_SCRUBLAND = createKey("trees_scrubland");
+		public static final ResourceKey<PlacedFeature> FLOWER_SCRUBLAND = createKey("flower_scrubland");
+		public static final ResourceKey<PlacedFeature> PATCH_ARID_SPROUTS_RARE = createKey("patch_arid_sprouts_rare");
+		public static final ResourceKey<PlacedFeature> DRAGON_ROOTS = createKey("dragon_roots");
 
 		// Grimwoods
 
-		public static final RegistryObject<PlacedFeature> TREES_GRIMWOODS = register("trees_grimwoods", AtmosphericConfiguredFeatures.TREES_GRIMWOODS, VegetationPlacements.treePlacement(PlacementUtils.countExtra(40, 0.1F, 3)));
-		public static final RegistryObject<PlacedFeature> OMINOUS_BLOCK = register("ominous_block", AtmosphericConfiguredFeatures.OMINOUS_BLOCK, List.of(RarityFilter.onAverageOnceEvery(64), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, BiomeFilter.biome()));
+		public static final ResourceKey<PlacedFeature> TREES_GRIMWOODS = createKey("trees_grimwoods");
+		public static final ResourceKey<PlacedFeature> OMINOUS_BLOCK = createKey("ominous_block");
 
 		// Hot Springs
 
-		public static final RegistryObject<PlacedFeature> HOT_SPRINGS_ROCK = register("hot_springs_rock", AtmosphericConfiguredFeatures.HOT_SPRINGS_ROCK, List.of(BlockPredicateFilter.forPredicate(BlockPredicate.matchesBlocks(Direction.DOWN.getNormal(), Blocks.GRASS_BLOCK)), CountPlacement.of(2), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, BiomeFilter.biome()));
+		public static final ResourceKey<PlacedFeature> HOT_SPRINGS_ROCK = createKey("hot_springs_rock");
+
+		public static void bootstrap(BootstapContext<PlacedFeature> context) {
+			register(context, ROSEWOOD_BEES_0002, AtmosphericConfiguredFeatures.ROSEWOOD_BEES_0002, List.of());
+			register(context, MORADO_BEES_0002, AtmosphericConfiguredFeatures.MORADO_BEES_0002, List.of());
+			register(context, YUCCA, AtmosphericConfiguredFeatures.YUCCA, List.of());
+			register(context, YUCCA_WITH_FLOWERS, AtmosphericConfiguredFeatures.YUCCA_WITH_FLOWERS, List.of());
+			register(context, BABY_YUCCA, AtmosphericConfiguredFeatures.BABY_YUCCA, List.of());
+			register(context, BABY_YUCCA_WITH_FLOWERS, AtmosphericConfiguredFeatures.BABY_YUCCA_WITH_FLOWERS, List.of());
+			register(context, PETRIFIED_YUCCA, AtmosphericConfiguredFeatures.PETRIFIED_YUCCA, List.of());
+			register(context, RED_PETRIFIED_YUCCA, AtmosphericConfiguredFeatures.RED_PETRIFIED_YUCCA, List.of());
+			register(context, ASPEN_BEES_0002, AtmosphericConfiguredFeatures.ASPEN_BEES_0002, List.of());
+			register(context, ASPEN_WITH_VINES, AtmosphericConfiguredFeatures.ASPEN_WITH_VINES, List.of());
+			register(context, GREEN_ASPEN_BEES_0002, AtmosphericConfiguredFeatures.GREEN_ASPEN_BEES_0002, List.of());
+			register(context, GREEN_ASPEN_WITH_VINES, AtmosphericConfiguredFeatures.GREEN_ASPEN_WITH_VINES, List.of());
+			register(context, LAUREL, AtmosphericConfiguredFeatures.LAUREL_ORANGES_0005, List.of());
+			register(context, LAUREL_WITH_VINES, AtmosphericConfiguredFeatures.LAUREL_WITH_VINES, List.of());
+			register(context, LARGE_LAUREL, AtmosphericConfiguredFeatures.LARGE_LAUREL_ORANGES_0005, List.of());
+			register(context, LARGE_LAUREL_WITH_VINES, AtmosphericConfiguredFeatures.LARGE_LAUREL_WITH_VINES, List.of());
+			register(context, GIANT_LAUREL, AtmosphericConfiguredFeatures.GIANT_LAUREL_ORANGES_0005, List.of());
+			register(context, GIANT_LAUREL_WITH_VINES, AtmosphericConfiguredFeatures.GIANT_LAUREL_WITH_VINES, List.of());
+			register(context, DRY_LAUREL, AtmosphericConfiguredFeatures.DRY_LAUREL_ORANGES_0005, List.of());
+			register(context, DRY_LAUREL_WITH_VINES, AtmosphericConfiguredFeatures.DRY_LAUREL_WITH_VINES, List.of());
+			register(context, LARGE_DRY_LAUREL, AtmosphericConfiguredFeatures.LARGE_DRY_LAUREL_ORANGES_0005, List.of());
+			register(context, LARGE_DRY_LAUREL_WITH_VINES, AtmosphericConfiguredFeatures.LARGE_DRY_LAUREL_WITH_VINES, List.of());
+			register(context, GIANT_DRY_LAUREL, AtmosphericConfiguredFeatures.GIANT_DRY_LAUREL_ORANGES_0005, List.of());
+			register(context, GIANT_DRY_LAUREL_WITH_VINES, AtmosphericConfiguredFeatures.GIANT_DRY_LAUREL_WITH_VINES, List.of());
+			register(context, KOUSA, AtmosphericConfiguredFeatures.KOUSA, List.of());
+			register(context, GRIMWOOD, AtmosphericConfiguredFeatures.GRIMWOOD, List.of());
+			register(context, DEAD_GRIMWOOD, AtmosphericConfiguredFeatures.DEAD_GRIMWOOD, List.of());
+			register(context, DEAD_CURRANT, AtmosphericConfiguredFeatures.DEAD_CURRANT, VegetationPlacements.treePlacement(PlacementUtils.countExtra(10, 0.2F, 15)));
+
+			register(context, OAK_BUSH, AtmosphericConfiguredFeatures.OAK_BUSH, List.of(PlacementUtils.filteredByBlockSurvival(Blocks.OAK_SAPLING)));
+			register(context, DARK_OAK_BUSH, AtmosphericConfiguredFeatures.DARK_OAK_BUSH, List.of(PlacementUtils.filteredByBlockSurvival(Blocks.DARK_OAK_SAPLING)));
+			register(context, MORADO_BUSH, AtmosphericConfiguredFeatures.MORADO_BUSH, List.of(PlacementUtils.filteredByBlockSurvival(Blocks.OAK_SAPLING)));
+			register(context, MORADO_BUSH_SAND, AtmosphericConfiguredFeatures.MORADO_BUSH, List.of(PlacementUtils.filteredByBlockSurvival(Blocks.DEAD_BUSH)));
+			register(context, DRY_LAUREL_BUSH, AtmosphericConfiguredFeatures.DRY_LAUREL_BUSH, List.of());
+
+			// Rainforest
+
+			register(context, TREES_RAINFOREST, AtmosphericConfiguredFeatures.TREES_RAINFOREST, VegetationPlacements.treePlacement(PlacementUtils.countExtra(30, 0.1F, 1)));
+			register(context, TREES_SPARSE_RAINFOREST, AtmosphericConfiguredFeatures.TREES_RAINFOREST, VegetationPlacements.treePlacement(PlacementUtils.countExtra(0, 0.1F, 30)));
+			register(context, TREES_RAINFOREST_BASIN, AtmosphericConfiguredFeatures.TREES_RAINFOREST, waterTreePlacement(PlacementUtils.countExtra(50, 0.1F, 1)));
+			register(context, TREES_SPARSE_RAINFOREST_BASIN, AtmosphericConfiguredFeatures.TREES_RAINFOREST, waterTreePlacement(PlacementUtils.countExtra(3, 0.1F, 5)));
+
+			register(context, BUSHES_RAINFOREST, AtmosphericConfiguredFeatures.BUSHES_RAINFOREST, VegetationPlacements.treePlacement(PlacementUtils.countExtra(12, 0.1F, 1)));
+			register(context, BUSHES_SPARSE_RAINFOREST, AtmosphericConfiguredFeatures.BUSHES_RAINFOREST, VegetationPlacements.treePlacement(PlacementUtils.countExtra(2, 0.1F, 3)));
+
+			register(context, PODZOL, AtmosphericConfiguredFeatures.PODZOL, List.of(NoiseBasedCountPlacement.of(160, 80.0D, 0.3D), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome()));
+			register(context, PASSION_VINES, AtmosphericConfiguredFeatures.PASSION_VINES, List.of(CountPlacement.of(1), InSquarePlacement.spread(), HeightRangePlacement.uniform(VerticalAnchor.absolute(64), VerticalAnchor.absolute(192)), BiomeFilter.biome()));
+			register(context, PATCH_WATER_HYACINTH, AtmosphericConfiguredFeatures.PATCH_WATER_HYACINTH, List.of(RarityFilter.onAverageOnceEvery(24), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome()));
+			register(context, PATCH_WATER_HYACINTH_SPARSE, AtmosphericConfiguredFeatures.PATCH_WATER_HYACINTH, List.of(RarityFilter.onAverageOnceEvery(48), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome()));
+			register(context, PATCH_WATERLILY_RAINFOREST, AtmosphericConfiguredFeatures.PATCH_WATERLILY, VegetationPlacements.worldSurfaceSquaredWithCount(1));
+			register(context, PATCH_WATERLILY_RAINFOREST_BASIN, AtmosphericConfiguredFeatures.PATCH_WATERLILY, VegetationPlacements.worldSurfaceSquaredWithCount(4));
+
+			register(context, WARM_MONKEY_BRUSH, AtmosphericConfiguredFeatures.WARM_MONKEY_BRUSH, List.of());
+			register(context, HOT_MONKEY_BRUSH, AtmosphericConfiguredFeatures.HOT_MONKEY_BRUSH, List.of());
+			register(context, SCALDING_MONKEY_BRUSH, AtmosphericConfiguredFeatures.SCALDING_MONKEY_BRUSH, List.of());
+			register(context, MONKEY_BRUSH, AtmosphericConfiguredFeatures.MONKEY_BRUSH, List.of(RarityFilter.onAverageOnceEvery(12), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, BiomeFilter.biome()));
+
+			register(context, OCEAN_FLOOR_RAISER, AtmosphericConfiguredFeatures.OCEAN_FLOOR_RAISER, List.of(InSquareCenterPlacement.INSTANCE, PlacementUtils.HEIGHTMAP_TOP_SOLID, BiomeFilter.biome()));
+
+			// Dunes
+
+			register(context, TREES_DUNES, AtmosphericConfiguredFeatures.TREES_DUNES, VegetationPlacements.treePlacement(PlacementUtils.countExtra(0, 0.25F, 1)));
+			register(context, TREES_FLOURISHING_DUNES, AtmosphericConfiguredFeatures.TREES_FLOURISHING_DUNES, VegetationPlacements.treePlacement(PlacementUtils.countExtra(2, 0.05F, 1)));
+			register(context, TREES_ROCKY_DUNES, AtmosphericConfiguredFeatures.TREES_DUNES, VegetationPlacements.treePlacement(PlacementUtils.countExtra(0, 0.1F, 1)));
+			register(context, TREES_PETRIFIED_DUNES, AtmosphericConfiguredFeatures.TREES_PETRIFIED_DUNES, VegetationPlacements.treePlacement(PlacementUtils.countExtra(0, 0.5F, 2)));
+			register(context, FLOURISHING_DUNES_YUCCA_TREES, AtmosphericConfiguredFeatures.YUCCA_BEES_005_WITH_FLOWERS, VegetationPlacements.treePlacement(PlacementUtils.countExtra(0, 0.25F, 1)));
+
+			register(context, WOODED_BADLANDS_YUCCA_TREES, AtmosphericConfiguredFeatures.TREES_DUNES, VegetationPlacements.treePlacement(PlacementUtils.countExtra(0, 0.25F, 1), Blocks.OAK_SAPLING));
+			register(context, DESERT_YUCCA_TREES, AtmosphericConfiguredFeatures.TREES_DUNES, VegetationPlacements.treePlacement(PlacementUtils.countExtra(0, 0.005F, 1)));
+			register(context, WINDSWEPT_SAVANNA_YUCCA_TREES, AtmosphericConfiguredFeatures.TREES_DUNES, VegetationPlacements.treePlacement(PlacementUtils.countExtra(0, 0.125F, 1)));
+
+			register(context, DUNE_ROCK, AtmosphericConfiguredFeatures.DUNE_ROCK, List.of(CountPlacement.of(1), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome()));
+			register(context, DUNE_ROCK_EXTRA, AtmosphericConfiguredFeatures.DUNE_ROCK, List.of(CountPlacement.of(2), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome()));
+			register(context, DUNE_ROCK_MANY, AtmosphericConfiguredFeatures.DUNE_ROCK, List.of(CountPlacement.of(3), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome()));
+
+			register(context, PATCH_BARREL_CACTUS_DUNES, AtmosphericConfiguredFeatures.PATCH_BARREL_CACTUS, List.of(PlacementUtils.countExtra(0, 0.05F, 2), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, BiomeFilter.biome()));
+			register(context, PATCH_BARREL_CACTUS_ROCKY_DUNES, AtmosphericConfiguredFeatures.PATCH_BARREL_CACTUS, List.of(PlacementUtils.countExtra(0, 0.025F, 1), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, BiomeFilter.biome()));
+			register(context, PATCH_BARREL_CACTUS_FLOURISHING_DUNES, AtmosphericConfiguredFeatures.PATCH_BARREL_CACTUS, List.of(PlacementUtils.countExtra(0, 0.5F, 3), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, BiomeFilter.biome()));
+			register(context, PATCH_BARREL_CACTUS_SPINY_THICKET, AtmosphericConfiguredFeatures.PATCH_BARREL_CACTUS, List.of(PlacementUtils.countExtra(0, 0.5F, 4), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, BiomeFilter.biome()));
+			register(context, PATCH_BARREL_CACTUS_SCRUBLAND, AtmosphericConfiguredFeatures.PATCH_BARREL_CACTUS, List.of(PlacementUtils.countExtra(0, 0.1F, 2), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, BiomeFilter.biome()));
+			register(context, PATCH_MELON_DUNES, AtmosphericConfiguredFeatures.PATCH_MELON_DUNES, List.of(RarityFilter.onAverageOnceEvery(6), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, BiomeFilter.biome()));
+
+			register(context, PATCH_DUNE_GRASS, AtmosphericConfiguredFeatures.PATCH_DUNE_GRASS, List.of(PlacementUtils.countExtra(1, 0.05F, 1), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, BiomeFilter.biome()));
+			register(context, PATCH_ARID_SPROUTS, AtmosphericConfiguredFeatures.PATCH_ARID_SPROUTS, VegetationPlacements.worldSurfaceSquaredWithCount(2));
+			register(context, FLOWER_FLOURISHING_DUNES, AtmosphericConfiguredFeatures.FLOWER_FLOURISHING_DUNES, List.of(RarityFilter.onAverageOnceEvery(12), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, BiomeFilter.biome()));
+			register(context, PATCH_YUCCA_FLOWER, AtmosphericConfiguredFeatures.PATCH_YUCCA_FLOWER, List.of(RarityFilter.onAverageOnceEvery(16), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, BiomeFilter.biome()));
+			register(context, PATCH_YUCCA_FLOWER_EXTRA, AtmosphericConfiguredFeatures.PATCH_YUCCA_FLOWER, List.of(RarityFilter.onAverageOnceEvery(4), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, BiomeFilter.biome()));
+			register(context, PATCH_SHORT_ALOE_VERA, AtmosphericConfiguredFeatures.PATCH_SHORT_ALOE_VERA, List.of());
+			register(context, PATCH_TALL_ALOE_VERA, AtmosphericConfiguredFeatures.PATCH_TALL_ALOE_VERA, List.of());
+			register(context, PATCH_ALOE_VERA, AtmosphericConfiguredFeatures.PATCH_ALOE_VERA, List.of(RarityFilter.onAverageOnceEvery(16), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, BiomeFilter.biome()));
+			register(context, PATCH_ALOE_VERA_EXTRA, AtmosphericConfiguredFeatures.PATCH_ALOE_VERA, List.of(RarityFilter.onAverageOnceEvery(8), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, BiomeFilter.biome()));
+
+			register(context, FOSSIL_DUNES, AtmosphericConfiguredFeatures.SURFACE_FOSSIL, List.of(RarityFilter.onAverageOnceEvery(24), InSquarePlacement.spread(), HeightRangePlacement.uniform(VerticalAnchor.absolute(64), VerticalAnchor.absolute(256)), BiomeFilter.biome()));
+
+			// Aspen Parkland
+
+			register(context, CRUSTOSE, AtmosphericConfiguredFeatures.CRUSTOSE, List.of(CountPlacement.of(128), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome()));
+			register(context, FALLEN_CRUSTOSE_LOG, AtmosphericConfiguredFeatures.FALLEN_CRUSTOSE_LOG, List.of(CountPlacement.of(3), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, BiomeFilter.biome()));
+			register(context, SINGLE_AGAVE, AtmosphericConfiguredFeatures.SINGLE_AGAVE, List.of(RarityFilter.onAverageOnceEvery(1), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, BiomeFilter.biome()));
+			register(context, PATCH_AGAVE_LARGE, AtmosphericConfiguredFeatures.PATCH_AGAVE_LARGE, List.of(RarityFilter.onAverageOnceEvery(64), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, BiomeFilter.biome()));
+			register(context, PATCH_AGAVE_WOODED_BADLANDS, AtmosphericConfiguredFeatures.PATCH_AGAVE_LARGE, List.of(RarityFilter.onAverageOnceEvery(64), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, BiomeFilter.biome()));
+			register(context, PATCH_GOLDEN_GROWTHS, AtmosphericConfiguredFeatures.PATCH_GOLDEN_GROWTHS, VegetationPlacements.worldSurfaceSquaredWithCount(4));
+			register(context, TREES_ASPEN_PARKLAND, AtmosphericConfiguredFeatures.TREES_ASPEN_PARKLAND, VegetationPlacements.treePlacement(PlacementUtils.countExtra(12, 0.1F, 1)));
+
+			// Laurel Forest
+
+			register(context, TREES_LAUREL_FOREST, AtmosphericConfiguredFeatures.TREES_LAUREL_FOREST, VegetationPlacements.treePlacement(PlacementUtils.countExtra(10, 0.1F, 1)));
+			register(context, TREES_LAUREL_FOREST_LARGE, AtmosphericConfiguredFeatures.TREES_LAUREL_FOREST_LARGE, VegetationPlacements.treePlacement(PlacementUtils.countExtra(1, 0.1F, 1)));
+			register(context, TREES_LAUREL_FOREST_GIANT, AtmosphericConfiguredFeatures.TREES_LAUREL_FOREST_GIANT, VegetationPlacements.treePlacement(PlacementUtils.countExtra(0, 0.5F, 1)));
+			register(context, COARSE_DIRT, AtmosphericConfiguredFeatures.COARSE_DIRT, List.of(CountPlacement.of(64), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome()));
+			register(context, COARSE_DIRT_LAUREL_FOREST, AtmosphericConfiguredFeatures.COARSE_DIRT, List.of(CountPlacement.of(32), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome()));
+			register(context, PATCH_GRASS_LAUREL_FOREST, AtmosphericConfiguredFeatures.PATCH_GRASS_LAUREL_FOREST, List.of(CountPlacement.of(20), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome()));
+			register(context, PATCH_DEAD_BUSH_LAUREL_FOREST, AtmosphericConfiguredFeatures.PATCH_DEAD_BUSH, VegetationPlacements.worldSurfaceSquaredWithCount(8));
+
+			// Kousa Jungle
+
+			register(context, SNOWY_BAMBOO, AtmosphericConfiguredFeatures.SNOWY_BAMBOO, List.of(NoiseBasedCountPlacement.of(120, 2.0D, 0.0D), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, BiomeFilter.biome()));
+			register(context, TREES_KOUSA_JUNGLE, AtmosphericConfiguredFeatures.TREES_KOUSA_JUNGLE, VegetationPlacements.treePlacement(PlacementUtils.countExtra(20, 0.1F, 3)));
+			register(context, CURRANT, AtmosphericConfiguredFeatures.CURRANT, VegetationPlacements.treePlacement(PlacementUtils.countExtra(0, 0.025F, 8)));
+			register(context, PATCH_LARGE_FERN_KOUSA, AtmosphericConfiguredFeatures.PATCH_LARGE_FERN, List.of(RarityFilter.onAverageOnceEvery(1), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, BiomeFilter.biome()));
+			register(context, BIRCH_BUSH, AtmosphericConfiguredFeatures.BIRCH_BUSH, VegetationPlacements.treePlacement(PlacementUtils.countExtra(5, 0.1F, 1), Blocks.BIRCH_SAPLING));
+
+			// Spiny Thicket
+
+			register(context, TREES_SPINY_THICKET, AtmosphericConfiguredFeatures.TREES_SPINY_THICKET, VegetationPlacements.treePlacement(PlacementUtils.countExtra(8, 0.1F, 5)));
+			register(context, SINGLE_YUCCA_FLOWER, AtmosphericConfiguredFeatures.SINGLE_YUCCA_FLOWER, List.of(CountPlacement.of(4), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, BiomeFilter.biome()));
+			register(context, PATCH_CACTUS_SCRUBLAND, AtmosphericConfiguredFeatures.PATCH_CACTUS, List.of(RarityFilter.onAverageOnceEvery(1), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, BiomeFilter.biome()));
+			register(context, PATCH_CACTUS_SPINY_THICKET, AtmosphericConfiguredFeatures.PATCH_CACTUS_TALL, List.of(CountPlacement.of(9), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, BiomeFilter.biome()));
+			register(context, PATCH_CACTUS_SPINIER_THICKET, AtmosphericConfiguredFeatures.PATCH_CACTUS_VERY_TALL, List.of(RarityFilter.onAverageOnceEvery(16), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, BiomeFilter.biome()));
+
+			// Scrubland
+
+			register(context, TREES_SCRUBLAND, AtmosphericConfiguredFeatures.TREES_SCRUBLAND, VegetationPlacements.treePlacement(PlacementUtils.countExtra(3, 0.25F, 2)));
+			register(context, FLOWER_SCRUBLAND, AtmosphericConfiguredFeatures.FLOWER_SCRUBLAND, List.of(RarityFilter.onAverageOnceEvery(4), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, BiomeFilter.biome()));
+			register(context, PATCH_ARID_SPROUTS_RARE, AtmosphericConfiguredFeatures.PATCH_ARID_SPROUTS, List.of(RarityFilter.onAverageOnceEvery(6), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome()));
+			register(context, DRAGON_ROOTS, AtmosphericConfiguredFeatures.DRAGON_ROOTS, List.of(RarityFilter.onAverageOnceEvery(8), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, BiomeFilter.biome()));
+
+			// Grimwoods
+
+			register(context, TREES_GRIMWOODS, AtmosphericConfiguredFeatures.TREES_GRIMWOODS, VegetationPlacements.treePlacement(PlacementUtils.countExtra(40, 0.1F, 3)));
+			register(context, OMINOUS_BLOCK, AtmosphericConfiguredFeatures.OMINOUS_BLOCK, List.of(RarityFilter.onAverageOnceEvery(64), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, BiomeFilter.biome()));
+
+			// Hot Springs
+
+			register(context, HOT_SPRINGS_ROCK, AtmosphericConfiguredFeatures.HOT_SPRINGS_ROCK, List.of(BlockPredicateFilter.forPredicate(BlockPredicate.matchesBlocks(Direction.DOWN.getNormal(), Blocks.GRASS_BLOCK)), CountPlacement.of(2), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, BiomeFilter.biome()));
+		}
 
 		private static ImmutableList<PlacementModifier> waterTreePlacement(PlacementModifier modifier) {
 			return ImmutableList.<PlacementModifier>builder().add(modifier).add(InSquarePlacement.spread()).add(SurfaceWaterDepthFilter.forMaxDepth(10)).add(PlacementUtils.HEIGHTMAP_OCEAN_FLOOR).add(BiomeFilter.biome()).build();
 		}
 
-		@SuppressWarnings("unchecked")
-		private static RegistryObject<PlacedFeature> register(String name, RegistryObject<? extends ConfiguredFeature<?, ?>> feature, List<PlacementModifier> placementModifiers) {
-			return PLACED_FEATURES.register(name, () -> new PlacedFeature((Holder<ConfiguredFeature<?, ?>>) feature.getHolder().get(), ImmutableList.copyOf(placementModifiers)));
+		public static ResourceKey<PlacedFeature> createKey(String name) {
+			return ResourceKey.create(Registries.PLACED_FEATURE, new ResourceLocation(Atmospheric.MOD_ID, name));
 		}
+
+		public static void register(BootstapContext<PlacedFeature> context, ResourceKey<PlacedFeature> key, ResourceKey<ConfiguredFeature<?, ?>> feature, List<PlacementModifier> modifiers) {
+			context.register(key, new PlacedFeature(context.lookup(Registries.CONFIGURED_FEATURE).getOrThrow(feature), modifiers));
+		}
+
+		public static void register(BootstapContext<PlacedFeature> context, ResourceKey<PlacedFeature> key, ResourceKey<ConfiguredFeature<?, ?>> feature, PlacementModifier... modifiers) {
+			register(context, key, feature, List.of(modifiers));
+		}
+
 	}
 }

@@ -266,7 +266,7 @@ public class Cochineal extends Animal implements Saddleable {
 	}
 
 	private Vec3 getCactusAttachPoint(BlockPos cactusPos, Direction cactusSide) {
-		VoxelShape shape = this.level.getBlockState(cactusPos).getCollisionShape(this.level, cactusPos);
+		VoxelShape shape = this.level().getBlockState(cactusPos).getCollisionShape(this.level(), cactusPos);
 		double x = cactusPos.getX();
 		double z = cactusPos.getZ();
 		if (cactusSide.getAxis() == Axis.X) {
@@ -282,7 +282,7 @@ public class Cochineal extends Animal implements Saddleable {
 	}
 
 	public boolean isSuckleable(BlockPos pos) {
-		return this.level.getBlockState(pos).is(AtmosphericBlockTags.COCHINEALS_CAN_FEED_ON);
+		return this.level().getBlockState(pos).is(AtmosphericBlockTags.COCHINEALS_CAN_FEED_ON);
 	}
 
 	public Direction getClosestVisibleCactusFace(BlockPos cactusPos) {
@@ -293,7 +293,7 @@ public class Cochineal extends Animal implements Saddleable {
 			BlockPos sidepos = cactusPos.relative(direction);
 			Vec3 vec3 = new Vec3(this.getX(), this.getEyeY(), this.getZ());
 			Vec3 vec31 = new Vec3(sidepos.getX() + 0.5D, sidepos.getY() + 0.5D, sidepos.getZ() + 0.5D);
-			if (this.hasSpaceOnCactusSide(cactusPos, direction) && this.level.clip(new ClipContext(vec3, vec31, ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, this)).getType() == HitResult.Type.MISS) {
+			if (this.hasSpaceOnCactusSide(cactusPos, direction) && this.level().clip(new ClipContext(vec3, vec31, ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, this)).getType() == HitResult.Type.MISS) {
 				double distance = this.distanceToSqr(sidepos.getX(), sidepos.getY(), sidepos.getZ());
 				if (distance < closestdist) {
 					closestdir = direction;
@@ -307,17 +307,17 @@ public class Cochineal extends Animal implements Saddleable {
 
 	public boolean hasSpaceOnCactusSide(BlockPos cactusPos, Direction cactusSide) {
 		AABB aabb = new AABB(0.0D, 0.5D - this.getBbHeight() * 0.5D, 0.0D, 1.0D, 0.5D + this.getBbHeight() * 0.5D, 1.0D).deflate(1.0E-6D);
-		VoxelShape shape = this.level.getBlockState(cactusPos).getCollisionShape(this.level, cactusPos);
+		VoxelShape shape = this.level().getBlockState(cactusPos).getCollisionShape(this.level(), cactusPos);
 
 		double x = cactusSide == Direction.WEST ? shape.min(Axis.X) - 1.0D : cactusSide == Direction.EAST ? shape.max(Axis.X) : 0.0D;
 		double z = cactusSide == Direction.NORTH ? shape.min(Axis.Z) - 1.0D : cactusSide == Direction.SOUTH ? shape.max(Axis.Z) : 0.0D;
 		aabb = aabb.move(cactusPos.getX() + x, cactusPos.getY(), cactusPos.getZ() + z);
 
-		for (VoxelShape voxelshape : this.level.getBlockCollisions(this, aabb))
+		for (VoxelShape voxelshape : this.level().getBlockCollisions(this, aabb))
 			if (!voxelshape.isEmpty())
 				return false;
 
-		for (Cochineal cochineal : this.level.getEntitiesOfClass(Cochineal.class, aabb))
+		for (Cochineal cochineal : this.level().getEntitiesOfClass(Cochineal.class, aabb))
 			if (cochineal != this && cochineal.isAttachedToCactus())
 				return false;
 
@@ -329,7 +329,7 @@ public class Cochineal extends Animal implements Saddleable {
 		ItemStack stack = player.getItemInHand(hand);
 		if (this.isFood(stack)) {
 			int i = this.getAge();
-			if (!this.level.isClientSide && i == 0 && this.canFallInLove()) {
+			if (!this.level().isClientSide && i == 0 && this.canFallInLove()) {
 				this.usePlayerItem(player, hand, stack);
 				this.setInLove(player);
 				if (stack.is(AtmosphericItemTags.COCHINEAL_SUPER_LOVE_FOOD))
@@ -340,18 +340,18 @@ public class Cochineal extends Animal implements Saddleable {
 			if (this.isBaby()) {
 				this.usePlayerItem(player, hand, stack);
 				this.ageUp(getSpeedUpSecondsWhenFeeding(-i), true);
-				return InteractionResult.sidedSuccess(this.level.isClientSide);
+				return InteractionResult.sidedSuccess(this.level().isClientSide);
 			}
 
-			if (this.level.isClientSide) {
+			if (this.level().isClientSide) {
 				return InteractionResult.CONSUME;
 			}
 		} else if (this.isSaddled() && !this.isVehicle() && !player.isSecondaryUseActive() && !this.isAttachedToCactus()) {
-			if (!this.level.isClientSide) {
+			if (!this.level().isClientSide) {
 				player.startRiding(this);
 			}
 
-			return InteractionResult.sidedSuccess(this.level.isClientSide);
+			return InteractionResult.sidedSuccess(this.level().isClientSide);
 		} else if (stack.is(Items.SADDLE)) {
 			return stack.interactLivingEntity(player, this, hand);
 		}
@@ -363,7 +363,7 @@ public class Cochineal extends Animal implements Saddleable {
 	public void equipSaddle(@Nullable SoundSource source) {
 		this.entityData.set(IS_SADDLED, true);
 		if (source != null) {
-			this.level.playSound(null, this, SoundEvents.PIG_SADDLE, source, 0.5F, 1.0F);
+			this.level().playSound(null, this, SoundEvents.PIG_SADDLE, source, 0.5F, 1.0F);
 		}
 	}
 
@@ -385,13 +385,13 @@ public class Cochineal extends Animal implements Saddleable {
 			--this.jumpDelayTicks;
 		}
 
-		if ((this.onGround || this.isInFluidType()) && !this.wasOnGroundOrFluid) {
+		if ((this.onGround() || this.isInFluidType()) && !this.wasOnGroundOrFluid) {
 			this.setDiscardFriction(false);
 			this.setLeaping(false);
 			this.jumpDelayTicks = this.jumpingQuickly ? 2 : 10;
 		}
 
-		this.wasOnGroundOrFluid = this.onGround || this.isInFluidType();
+		this.wasOnGroundOrFluid = this.onGround() || this.isInFluidType();
 
 		if (this.isAttachedToCactus()) {
 			if (this.isSuckleable(this.getCactusPos()) && this.distanceToSqr(this.getCactusAttachPoint(this.getCactusPos(), this.getCactusSide())) < 0.2D) {
@@ -399,7 +399,7 @@ public class Cochineal extends Animal implements Saddleable {
 				this.setYRot(this.getCactusSide().getOpposite().toYRot());
 				this.yHeadRot = this.getYRot();
 				this.yBodyRot = this.getYRot();
-			} else if (!this.level.isClientSide) {
+			} else if (!this.level().isClientSide) {
 				this.detachFromCactus();
 			}
 		}
@@ -407,7 +407,7 @@ public class Cochineal extends Animal implements Saddleable {
 
 	@Override
 	public void aiStep() {
-		if (!this.level.isClientSide && this.isAlive() && this.getAge() < 0 && !this.isAttachedToCactus())
+		if (!this.level().isClientSide && this.isAlive() && this.getAge() < 0 && !this.isAttachedToCactus())
 			this.setAge(this.age - 1);
 
 		super.aiStep();
@@ -426,7 +426,7 @@ public class Cochineal extends Animal implements Saddleable {
 		}
 
 		if (this.isAlive()) {
-			if (!this.level.isClientSide) {
+			if (!this.level().isClientSide) {
 				if (this.suckleCooldown > 0)
 					this.suckleCooldown--;
 
@@ -440,7 +440,7 @@ public class Cochineal extends Animal implements Saddleable {
 				}
 			} else {
 				if (this.isLeaping() || this.hurtTime > 0) {
-					boolean cold = this.level.getBiome(this.blockPosition()).get().coldEnoughToSnow(this.blockPosition());
+					boolean cold = this.level().getBiome(this.blockPosition()).get().coldEnoughToSnow(this.blockPosition());
 					for (int i = 0; i < 3; i++) {
 						double x = -this.getLookAngle().x * 0.7D + (this.random.nextDouble() - 0.5D) * 0.6D;
 						double y = 0.6D + (this.random.nextDouble() - 0.5D) * 0.6D;
@@ -450,12 +450,12 @@ public class Cochineal extends Animal implements Saddleable {
 							y *= 0.4D;
 							z *= 0.4D;
 						}
-						this.level.addParticle(cold ? AtmosphericParticleTypes.COLD_COCHINEAL_TRAIL.get() : AtmosphericParticleTypes.COCHINEAL_TRAIL.get(), this.getX() + x, this.getY() + y, this.getZ() + z, 0.0D, 0.0D, 0.0D);
+						this.level().addParticle(cold ? AtmosphericParticleTypes.COLD_COCHINEAL_TRAIL.get() : AtmosphericParticleTypes.COCHINEAL_TRAIL.get(), this.getX() + x, this.getY() + y, this.getZ() + z, 0.0D, 0.0D, 0.0D);
 					}
 				}
 
 				if (this.isAttachedToCactus() && this.isBaby() && this.random.nextInt(160) == 0) {
-					this.level.addParticle(ParticleTypes.HAPPY_VILLAGER, this.getRandomX(1.0D), this.getRandomY(), this.getRandomZ(1.0D), 0.0D, 0.0D, 0.0D);
+					this.level().addParticle(ParticleTypes.HAPPY_VILLAGER, this.getRandomX(1.0D), this.getRandomY(), this.getRandomZ(1.0D), 0.0D, 0.0D, 0.0D);
 				}
 			}
 
@@ -465,7 +465,7 @@ public class Cochineal extends Animal implements Saddleable {
 
 			if (!this.getEatingStack().isEmpty() && this.tickCount % 12 == 0) {
 				this.playSound(AtmosphericSoundEvents.COCHINEAL_SUCKLE.get(), 1.4F, 0.4F / (this.getRandom().nextFloat() * 0.4F + 0.8F));
-				if (this.level.isClientSide) {
+				if (this.level().isClientSide) {
 					for (int i = 0; i < 6; ++i) {
 						Vec3 vec3 = new Vec3((this.random.nextFloat() - 0.5D) * 0.1D, Math.random() * 0.1D + 0.1D, (this.random.nextFloat() - 0.5D) * 0.1D);
 						vec3 = vec3.xRot(-this.getXRot() * Mth.DEG_TO_RAD);
@@ -474,7 +474,7 @@ public class Cochineal extends Animal implements Saddleable {
 						Vec3 vec31 = new Vec3((this.random.nextFloat() - 0.5D) * 0.8D, d0, 0.8D + (this.random.nextFloat() - 0.5D) * 0.4D);
 						vec31 = vec31.yRot(-this.yBodyRot * Mth.DEG_TO_RAD);
 						vec31 = vec31.add(this.getX(), this.getY() + 1.0F, this.getZ());
-						this.level.addParticle(new ItemParticleOption(ParticleTypes.ITEM, this.getEatingStack()), vec31.x, vec31.y, vec31.z, vec3.x, vec3.y + 0.05D, vec3.z);
+						this.level().addParticle(new ItemParticleOption(ParticleTypes.ITEM, this.getEatingStack()), vec31.x, vec31.y, vec31.z, vec3.x, vec3.y + 0.05D, vec3.z);
 					}
 				}
 			}
@@ -494,9 +494,9 @@ public class Cochineal extends Animal implements Saddleable {
 		this.moveRelative((float) speed, new Vec3(0.0D, 0.0D, 1.0D));
 
 		this.setLeaping(true);
-		this.level.broadcastEntityEvent(this, (byte) 1);
+		this.level().broadcastEntityEvent(this, (byte) 1);
 
-		if (this.level.getBiome(this.blockPosition()).is(AtmosphericBiomeTags.IS_COCHINEAL_HABITAT)) {
+		if (this.level().getBiome(this.blockPosition()).is(AtmosphericBiomeTags.IS_COCHINEAL_HABITAT)) {
 			this.lastHabitatBiomePos = this.blockPosition();
 			this.forgetHabitatBiomePosCounter = 100;
 		} else if (this.lastHabitatBiomePos != null && this.forgetHabitatBiomePosCounter-- <= 0) {
@@ -508,7 +508,7 @@ public class Cochineal extends Animal implements Saddleable {
 	}
 
 	public boolean canLeap() {
-		return this.onGround && !this.isLeaping() && !((CochinealMoveControl) this.moveControl).wantsToLeap && this.jumpDelayTicks == 0;
+		return this.onGround() && !this.isLeaping() && !((CochinealMoveControl) this.moveControl).wantsToLeap && this.jumpDelayTicks == 0;
 	}
 
 	public float getJumpAmount(float partialTick) {
@@ -596,7 +596,7 @@ public class Cochineal extends Animal implements Saddleable {
 	@Override
 	public SpawnGroupData finalizeSpawn(ServerLevelAccessor level, DifficultyInstance difficulty, MobSpawnType spawnType, @Nullable SpawnGroupData groupData, @Nullable CompoundTag tag) {
 		BlockPos blockpos = this.blockPosition();
-		if (this.level.getBiome(blockpos).is(AtmosphericBiomeTags.IS_COCHINEAL_HABITAT)) {
+		if (this.level().getBiome(blockpos).is(AtmosphericBiomeTags.IS_COCHINEAL_HABITAT)) {
 			this.lastHabitatBiomePos = blockpos;
 			this.forgetHabitatBiomePosCounter = 100;
 		}
@@ -623,7 +623,7 @@ public class Cochineal extends Animal implements Saddleable {
 
 		@Override
 		public boolean isStableDestination(BlockPos pos) {
-			return !this.cochineal.isInFluidType() ? this.level.getBlockState(pos.below()).entityCanStandOn(this.level, pos.below(), this.mob) : super.isStableDestination(pos);
+			return !this.cochineal.isInFluidType() ? level.getBlockState(pos.below()).entityCanStandOn(level, pos.below(), this.mob) : super.isStableDestination(pos);
 		}
 	}
 
@@ -666,7 +666,7 @@ public class Cochineal extends Animal implements Saddleable {
 
 				this.cochineal.setDiscardFriction(true);
 				this.stopSwimmingNaviation();
-			} else if (this.cochineal.onGround) {
+			} else if (this.cochineal.onGround()) {
 				if (this.wantsToLeap && this.cochineal.jumpDelayTicks == 0) {
 					if (this.canReach(this.jumpX, this.jumpY, this.jumpZ)) {
 						double dx = this.jumpX - this.mob.getX();

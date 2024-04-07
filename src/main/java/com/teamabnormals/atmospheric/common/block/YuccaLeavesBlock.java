@@ -1,13 +1,14 @@
 package com.teamabnormals.atmospheric.common.block;
 
-import com.teamabnormals.atmospheric.core.other.AtmosphericDamageSources;
-import com.teamabnormals.blueprint.common.block.wood.BlueprintLeavesBlock;
+import com.teamabnormals.atmospheric.core.other.AtmosphericDamageTypes;
 import net.minecraft.core.BlockPos;
-import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.damagesource.DamageType;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.LeavesBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.pathfinder.BlockPathTypes;
 import net.minecraft.world.phys.shapes.CollisionContext;
@@ -17,7 +18,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 import javax.annotation.Nullable;
 
-public class YuccaLeavesBlock extends BlueprintLeavesBlock implements YuccaPlant {
+public class YuccaLeavesBlock extends LeavesBlock implements YuccaPlant {
 	private static final VoxelShape HITBOX = box(1.0F, 1.0F, 1.0F, 15.0F, 15.0F, 15.0F);
 
 	public YuccaLeavesBlock(Properties properties) {
@@ -44,7 +45,7 @@ public class YuccaLeavesBlock extends BlueprintLeavesBlock implements YuccaPlant
 	@Nullable
 	@Override
 	public BlockPathTypes getBlockPathType(BlockState state, BlockGetter world, BlockPos pos, @Nullable Mob entity) {
-		return BlockPathTypes.DAMAGE_CACTUS;
+		return BlockPathTypes.DANGER_OTHER;
 	}
 
 	@Override
@@ -53,8 +54,8 @@ public class YuccaLeavesBlock extends BlueprintLeavesBlock implements YuccaPlant
 	}
 
 	@Override
-	public DamageSource getDamageSource() {
-		return AtmosphericDamageSources.YUCCA_LEAVES;
+	public ResourceKey<DamageType> getDamageTypeKey() {
+		return AtmosphericDamageTypes.YUCCA_LEAVES;
 	}
 
 	@Override

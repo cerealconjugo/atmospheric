@@ -165,5 +165,6 @@
         "min": 0.0
       }
     }
-  ]
+  ],
+  "random_sequence": "atmospheric:chests/kousa_sanctum"
 }

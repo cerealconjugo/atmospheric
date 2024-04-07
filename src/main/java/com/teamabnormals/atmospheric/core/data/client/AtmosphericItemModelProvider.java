@@ -2,7 +2,7 @@ package com.teamabnormals.atmospheric.core.data.client;
 
 import com.teamabnormals.atmospheric.core.Atmospheric;
 import com.teamabnormals.atmospheric.core.registry.AtmosphericBlocks;
-import net.minecraft.data.DataGenerator;
+import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
@@ -17,8 +17,8 @@ import static com.teamabnormals.atmospheric.core.registry.AtmosphericItems.*;
 
 public class AtmosphericItemModelProvider extends ItemModelProvider {
 
-	public AtmosphericItemModelProvider(DataGenerator generator, ExistingFileHelper existingFileHelper) {
-		super(generator, Atmospheric.MOD_ID, existingFileHelper);
+	public AtmosphericItemModelProvider(PackOutput output, ExistingFileHelper helper) {
+		super(output, Atmospheric.MOD_ID, helper);
 	}
 
 	@Override

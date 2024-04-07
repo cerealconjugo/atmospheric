@@ -4,7 +4,6 @@ import com.teamabnormals.atmospheric.core.registry.AtmosphericBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -28,7 +27,7 @@ public class PassionVineBundleBlock extends Block {
 
 	@Override
 	public void fallOn(Level worldIn, BlockState state, BlockPos pos, Entity entityIn, float fallDistance) {
-		entityIn.causeFallDamage(fallDistance, rand.nextFloat(), DamageSource.FALL);
+		entityIn.causeFallDamage(fallDistance, rand.nextFloat(), worldIn.damageSources().fall());
 	}
 
 	@Override

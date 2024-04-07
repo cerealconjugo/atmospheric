@@ -1,6 +1,6 @@
 package com.teamabnormals.atmospheric.common.entity.projectile;
 
-import com.teamabnormals.atmospheric.core.other.AtmosphericDamageSources;
+import com.teamabnormals.atmospheric.core.other.AtmosphericDamageTypes;
 import com.teamabnormals.atmospheric.core.registry.AtmosphericEntityTypes;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
@@ -33,8 +33,8 @@ public class PassionFruitSeed extends ThrowableProjectile {
 		super.onHitEntity(result);
 		Entity entity = this.getOwner();
 		if (entity instanceof LivingEntity living) {
-			result.getEntity().hurt(AtmosphericDamageSources.passionFruitSeedAttack(this, living).setProjectile(), 0.5F + amplifier);
-			if (!level.isClientSide()) {
+			result.getEntity().hurt(AtmosphericDamageTypes.passionFruitSeed(this.level(), this, living), 0.5F + amplifier);
+			if (!this.level().isClientSide()) {
 				this.discard();
 			}
 		}
@@ -43,7 +43,7 @@ public class PassionFruitSeed extends ThrowableProjectile {
 	@Override
 	protected void onHitBlock(BlockHitResult result) {
 		super.onHitBlock(result);
-		if (!this.level.isClientSide) {
+		if (!this.level().isClientSide) {
 			this.discard();
 		}
 	}

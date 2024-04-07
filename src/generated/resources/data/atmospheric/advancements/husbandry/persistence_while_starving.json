@@ -24,5 +24,6 @@
     [
       "persistence_while_starving"
     ]
-  ]
+  ],
+  "sends_telemetry_event": true
 }

@@ -35,15 +35,12 @@ public class AtmosphericCompat {
 	public static void registerCompostables() {
 		DataUtil.registerCompostable(AtmosphericBlocks.ROSEWOOD_LEAVES.get(), 0.3F);
 		DataUtil.registerCompostable(AtmosphericBlocks.ROSEWOOD_SAPLING.get(), 0.3F);
-		DataUtil.registerCompostable(AtmosphericBlocks.ROSEWOOD_LEAF_CARPET.get(), 0.3F);
 
 		DataUtil.registerCompostable(AtmosphericBlocks.MORADO_LEAVES.get(), 0.3F);
 		DataUtil.registerCompostable(AtmosphericBlocks.MORADO_SAPLING.get(), 0.3F);
-		DataUtil.registerCompostable(AtmosphericBlocks.MORADO_LEAF_CARPET.get(), 0.3F);
 
 		DataUtil.registerCompostable(AtmosphericBlocks.FLOWERING_MORADO_LEAVES.get(), 0.3F);
 		DataUtil.registerCompostable(AtmosphericItems.YELLOW_BLOSSOMS.get(), 0.3F);
-		DataUtil.registerCompostable(AtmosphericBlocks.FLOWERING_MORADO_LEAF_CARPET.get(), 0.3F);
 
 		DataUtil.registerCompostable(AtmosphericBlocks.WARM_MONKEY_BRUSH.get(), 0.65F);
 		DataUtil.registerCompostable(AtmosphericBlocks.HOT_MONKEY_BRUSH.get(), 0.65F);
@@ -62,7 +59,6 @@ public class AtmosphericCompat {
 
 		DataUtil.registerCompostable(AtmosphericBlocks.YUCCA_LEAVES.get(), 0.3F);
 		DataUtil.registerCompostable(AtmosphericBlocks.YUCCA_SAPLING.get(), 0.3F);
-		DataUtil.registerCompostable(AtmosphericBlocks.YUCCA_LEAF_CARPET.get(), 0.3F);
 
 		DataUtil.registerCompostable(AtmosphericBlocks.YUCCA_FLOWER.get(), 0.65F);
 		DataUtil.registerCompostable(AtmosphericBlocks.TALL_YUCCA_FLOWER.get(), 0.65F);
@@ -79,27 +75,21 @@ public class AtmosphericCompat {
 
 		DataUtil.registerCompostable(AtmosphericBlocks.KOUSA_LEAVES.get(), 0.3F);
 		DataUtil.registerCompostable(AtmosphericBlocks.KOUSA_SAPLING.get(), 0.3F);
-		DataUtil.registerCompostable(AtmosphericBlocks.KOUSA_LEAF_CARPET.get(), 0.3F);
 
 		DataUtil.registerCompostable(AtmosphericBlocks.ASPEN_LEAVES.get(), 0.3F);
 		DataUtil.registerCompostable(AtmosphericBlocks.ASPEN_SAPLING.get(), 0.3F);
-		DataUtil.registerCompostable(AtmosphericBlocks.ASPEN_LEAF_CARPET.get(), 0.3F);
 
 		DataUtil.registerCompostable(AtmosphericBlocks.GREEN_ASPEN_LEAVES.get(), 0.3F);
 		DataUtil.registerCompostable(AtmosphericBlocks.GREEN_ASPEN_SAPLING.get(), 0.3F);
-		DataUtil.registerCompostable(AtmosphericBlocks.GREEN_ASPEN_LEAF_CARPET.get(), 0.3F);
 
 		DataUtil.registerCompostable(AtmosphericBlocks.GRIMWOOD_LEAVES.get(), 0.3F);
 		DataUtil.registerCompostable(AtmosphericBlocks.GRIMWOOD_SAPLING.get(), 0.3F);
-		DataUtil.registerCompostable(AtmosphericBlocks.GRIMWOOD_LEAF_CARPET.get(), 0.3F);
 
 		DataUtil.registerCompostable(AtmosphericBlocks.LAUREL_LEAVES.get(), 0.3F);
 		DataUtil.registerCompostable(AtmosphericBlocks.LAUREL_SAPLING.get(), 0.3F);
-		DataUtil.registerCompostable(AtmosphericBlocks.LAUREL_LEAF_CARPET.get(), 0.3F);
 
 		DataUtil.registerCompostable(AtmosphericBlocks.DRY_LAUREL_LEAVES.get(), 0.3F);
 		DataUtil.registerCompostable(AtmosphericBlocks.DRY_LAUREL_SAPLING.get(), 0.3F);
-		DataUtil.registerCompostable(AtmosphericBlocks.DRY_LAUREL_LEAF_CARPET.get(), 0.3F);
 
 		DataUtil.registerCompostable(AtmosphericBlocks.AGAVE.get(), 0.65F);
 		DataUtil.registerCompostable(AtmosphericBlocks.GOLDEN_GROWTHS.get(), 0.3F);
@@ -108,7 +98,6 @@ public class AtmosphericCompat {
 		DataUtil.registerCompostable(AtmosphericBlocks.HANGING_CURRANT.get(), 0.3F);
 		DataUtil.registerCompostable(AtmosphericBlocks.CURRANT_LEAVES.get(), 0.3F);
 		DataUtil.registerCompostable(AtmosphericBlocks.CURRANT_SEEDLING.get(), 0.3F);
-		DataUtil.registerCompostable(AtmosphericBlocks.CURRANT_LEAF_CARPET.get(), 0.3F);
 		DataUtil.registerCompostable(AtmosphericBlocks.CURRANT_CRATE.get(), 1.0F);
 		DataUtil.registerCompostable(AtmosphericBlocks.CURRANT_STALK.get(), 0.65F);
 		DataUtil.registerCompostable(AtmosphericBlocks.CURRANT_STALK_BUNDLE.get(), 1.0F);
@@ -176,14 +165,8 @@ public class AtmosphericCompat {
 		DataUtil.registerFlammable(AtmosphericBlocks.ROSEWOOD_STAIRS.get(), 5, 20);
 		DataUtil.registerFlammable(AtmosphericBlocks.ROSEWOOD_FENCE.get(), 5, 20);
 		DataUtil.registerFlammable(AtmosphericBlocks.ROSEWOOD_FENCE_GATE.get(), 5, 20);
-		DataUtil.registerFlammable(AtmosphericBlocks.VERTICAL_ROSEWOOD_PLANKS.get(), 5, 20);
-		DataUtil.registerFlammable(AtmosphericBlocks.ROSEWOOD_LEAF_CARPET.get(), 30, 60);
-		DataUtil.registerFlammable(AtmosphericBlocks.ROSEWOOD_VERTICAL_SLAB.get(), 5, 20);
 		DataUtil.registerFlammable(AtmosphericBlocks.ROSEWOOD_BOOKSHELF.get(), 30, 20);
 		DataUtil.registerFlammable(AtmosphericBlocks.ROSEWOOD_BEEHIVE.get(), 5, 20);
-		DataUtil.registerFlammable(AtmosphericBlocks.ROSEWOOD_POST.get(), 5, 20);
-		DataUtil.registerFlammable(AtmosphericBlocks.STRIPPED_ROSEWOOD_POST.get(), 5, 20);
-		DataUtil.registerFlammable(AtmosphericBlocks.ROSEWOOD_HEDGE.get(), 5, 20);
 		DataUtil.registerFlammable(AtmosphericBlocks.ROSEWOOD_LEAF_PILE.get(), 30, 60);
 		DataUtil.registerFlammable(AtmosphericBlocks.ROSEWOOD_BOARDS.get(), 5, 20);
 
@@ -198,16 +181,8 @@ public class AtmosphericCompat {
 		DataUtil.registerFlammable(AtmosphericBlocks.MORADO_STAIRS.get(), 5, 20);
 		DataUtil.registerFlammable(AtmosphericBlocks.MORADO_FENCE.get(), 5, 20);
 		DataUtil.registerFlammable(AtmosphericBlocks.MORADO_FENCE_GATE.get(), 5, 20);
-		DataUtil.registerFlammable(AtmosphericBlocks.VERTICAL_MORADO_PLANKS.get(), 5, 20);
-		DataUtil.registerFlammable(AtmosphericBlocks.MORADO_LEAF_CARPET.get(), 30, 60);
-		DataUtil.registerFlammable(AtmosphericBlocks.FLOWERING_MORADO_LEAF_CARPET.get(), 30, 60);
-		DataUtil.registerFlammable(AtmosphericBlocks.MORADO_VERTICAL_SLAB.get(), 5, 20);
 		DataUtil.registerFlammable(AtmosphericBlocks.MORADO_BOOKSHELF.get(), 30, 20);
 		DataUtil.registerFlammable(AtmosphericBlocks.MORADO_BEEHIVE.get(), 5, 20);
-		DataUtil.registerFlammable(AtmosphericBlocks.MORADO_POST.get(), 5, 20);
-		DataUtil.registerFlammable(AtmosphericBlocks.STRIPPED_MORADO_POST.get(), 5, 20);
-		DataUtil.registerFlammable(AtmosphericBlocks.MORADO_HEDGE.get(), 5, 20);
-		DataUtil.registerFlammable(AtmosphericBlocks.FLOWERING_MORADO_HEDGE.get(), 5, 20);
 		DataUtil.registerFlammable(AtmosphericBlocks.MORADO_LEAF_PILE.get(), 30, 60);
 		DataUtil.registerFlammable(AtmosphericBlocks.FLOWERING_MORADO_LEAF_PILE.get(), 30, 60);
 		DataUtil.registerFlammable(AtmosphericBlocks.MORADO_BOARDS.get(), 5, 20);
@@ -222,14 +197,8 @@ public class AtmosphericCompat {
 		DataUtil.registerFlammable(AtmosphericBlocks.YUCCA_STAIRS.get(), 5, 20);
 		DataUtil.registerFlammable(AtmosphericBlocks.YUCCA_FENCE.get(), 5, 20);
 		DataUtil.registerFlammable(AtmosphericBlocks.YUCCA_FENCE_GATE.get(), 5, 20);
-		DataUtil.registerFlammable(AtmosphericBlocks.VERTICAL_YUCCA_PLANKS.get(), 5, 20);
-		DataUtil.registerFlammable(AtmosphericBlocks.YUCCA_LEAF_CARPET.get(), 30, 60);
-		DataUtil.registerFlammable(AtmosphericBlocks.YUCCA_VERTICAL_SLAB.get(), 5, 20);
 		DataUtil.registerFlammable(AtmosphericBlocks.YUCCA_BOOKSHELF.get(), 30, 20);
 		DataUtil.registerFlammable(AtmosphericBlocks.YUCCA_BEEHIVE.get(), 5, 20);
-		DataUtil.registerFlammable(AtmosphericBlocks.YUCCA_POST.get(), 5, 20);
-		DataUtil.registerFlammable(AtmosphericBlocks.STRIPPED_YUCCA_POST.get(), 5, 20);
-		DataUtil.registerFlammable(AtmosphericBlocks.YUCCA_HEDGE.get(), 5, 20);
 		DataUtil.registerFlammable(AtmosphericBlocks.YUCCA_LEAF_PILE.get(), 30, 60);
 		DataUtil.registerFlammable(AtmosphericBlocks.YUCCA_BOARDS.get(), 5, 20);
 
@@ -243,14 +212,8 @@ public class AtmosphericCompat {
 		DataUtil.registerFlammable(AtmosphericBlocks.KOUSA_STAIRS.get(), 5, 20);
 		DataUtil.registerFlammable(AtmosphericBlocks.KOUSA_FENCE.get(), 5, 20);
 		DataUtil.registerFlammable(AtmosphericBlocks.KOUSA_FENCE_GATE.get(), 5, 20);
-		DataUtil.registerFlammable(AtmosphericBlocks.VERTICAL_KOUSA_PLANKS.get(), 5, 20);
-		DataUtil.registerFlammable(AtmosphericBlocks.KOUSA_LEAF_CARPET.get(), 30, 60);
-		DataUtil.registerFlammable(AtmosphericBlocks.KOUSA_VERTICAL_SLAB.get(), 5, 20);
 		DataUtil.registerFlammable(AtmosphericBlocks.KOUSA_BOOKSHELF.get(), 30, 20);
 		DataUtil.registerFlammable(AtmosphericBlocks.KOUSA_BEEHIVE.get(), 5, 20);
-		DataUtil.registerFlammable(AtmosphericBlocks.KOUSA_POST.get(), 5, 20);
-		DataUtil.registerFlammable(AtmosphericBlocks.STRIPPED_KOUSA_POST.get(), 5, 20);
-		DataUtil.registerFlammable(AtmosphericBlocks.KOUSA_HEDGE.get(), 5, 20);
 		DataUtil.registerFlammable(AtmosphericBlocks.KOUSA_LEAF_PILE.get(), 30, 60);
 		DataUtil.registerFlammable(AtmosphericBlocks.KOUSA_BOARDS.get(), 5, 20);
 
@@ -266,19 +229,11 @@ public class AtmosphericCompat {
 		DataUtil.registerFlammable(AtmosphericBlocks.ASPEN_STAIRS.get(), 5, 20);
 		DataUtil.registerFlammable(AtmosphericBlocks.ASPEN_FENCE.get(), 5, 20);
 		DataUtil.registerFlammable(AtmosphericBlocks.ASPEN_FENCE_GATE.get(), 5, 20);
-		DataUtil.registerFlammable(AtmosphericBlocks.VERTICAL_ASPEN_PLANKS.get(), 5, 20);
-		DataUtil.registerFlammable(AtmosphericBlocks.ASPEN_LEAF_CARPET.get(), 30, 60);
-		DataUtil.registerFlammable(AtmosphericBlocks.ASPEN_VERTICAL_SLAB.get(), 5, 20);
 		DataUtil.registerFlammable(AtmosphericBlocks.ASPEN_BOOKSHELF.get(), 30, 20);
 		DataUtil.registerFlammable(AtmosphericBlocks.ASPEN_BEEHIVE.get(), 5, 20);
-		DataUtil.registerFlammable(AtmosphericBlocks.ASPEN_POST.get(), 5, 20);
-		DataUtil.registerFlammable(AtmosphericBlocks.STRIPPED_ASPEN_POST.get(), 5, 20);
-		DataUtil.registerFlammable(AtmosphericBlocks.ASPEN_HEDGE.get(), 5, 20);
 		DataUtil.registerFlammable(AtmosphericBlocks.ASPEN_LEAF_PILE.get(), 30, 60);
 		DataUtil.registerFlammable(AtmosphericBlocks.ASPEN_BOARDS.get(), 5, 20);
 		DataUtil.registerFlammable(AtmosphericBlocks.GREEN_ASPEN_LEAVES.get(), 30, 60);
-		DataUtil.registerFlammable(AtmosphericBlocks.GREEN_ASPEN_LEAF_CARPET.get(), 30, 60);
-		DataUtil.registerFlammable(AtmosphericBlocks.GREEN_ASPEN_HEDGE.get(), 5, 20);
 		DataUtil.registerFlammable(AtmosphericBlocks.GREEN_ASPEN_LEAF_PILE.get(), 30, 60);
 
 		DataUtil.registerFlammable(AtmosphericBlocks.LAUREL_LEAVES.get(), 30, 60);
@@ -292,16 +247,8 @@ public class AtmosphericCompat {
 		DataUtil.registerFlammable(AtmosphericBlocks.LAUREL_STAIRS.get(), 5, 20);
 		DataUtil.registerFlammable(AtmosphericBlocks.LAUREL_FENCE.get(), 5, 20);
 		DataUtil.registerFlammable(AtmosphericBlocks.LAUREL_FENCE_GATE.get(), 5, 20);
-		DataUtil.registerFlammable(AtmosphericBlocks.VERTICAL_LAUREL_PLANKS.get(), 5, 20);
-		DataUtil.registerFlammable(AtmosphericBlocks.LAUREL_LEAF_CARPET.get(), 30, 60);
-		DataUtil.registerFlammable(AtmosphericBlocks.DRY_LAUREL_LEAF_CARPET.get(), 30, 60);
-		DataUtil.registerFlammable(AtmosphericBlocks.LAUREL_VERTICAL_SLAB.get(), 5, 20);
 		DataUtil.registerFlammable(AtmosphericBlocks.LAUREL_BOOKSHELF.get(), 30, 20);
 		DataUtil.registerFlammable(AtmosphericBlocks.LAUREL_BEEHIVE.get(), 5, 20);
-		DataUtil.registerFlammable(AtmosphericBlocks.LAUREL_POST.get(), 5, 20);
-		DataUtil.registerFlammable(AtmosphericBlocks.STRIPPED_LAUREL_POST.get(), 5, 20);
-		DataUtil.registerFlammable(AtmosphericBlocks.LAUREL_HEDGE.get(), 5, 20);
-		DataUtil.registerFlammable(AtmosphericBlocks.DRY_LAUREL_HEDGE.get(), 5, 20);
 		DataUtil.registerFlammable(AtmosphericBlocks.LAUREL_LEAF_PILE.get(), 30, 60);
 		DataUtil.registerFlammable(AtmosphericBlocks.DRY_LAUREL_LEAF_PILE.get(), 30, 60);
 		DataUtil.registerFlammable(AtmosphericBlocks.LAUREL_BOARDS.get(), 5, 20);
@@ -316,14 +263,8 @@ public class AtmosphericCompat {
 		DataUtil.registerFlammable(AtmosphericBlocks.GRIMWOOD_STAIRS.get(), 5, 20);
 		DataUtil.registerFlammable(AtmosphericBlocks.GRIMWOOD_FENCE.get(), 5, 20);
 		DataUtil.registerFlammable(AtmosphericBlocks.GRIMWOOD_FENCE_GATE.get(), 5, 20);
-		DataUtil.registerFlammable(AtmosphericBlocks.VERTICAL_GRIMWOOD_PLANKS.get(), 5, 20);
-		DataUtil.registerFlammable(AtmosphericBlocks.GRIMWOOD_LEAF_CARPET.get(), 30, 60);
-		DataUtil.registerFlammable(AtmosphericBlocks.GRIMWOOD_VERTICAL_SLAB.get(), 5, 20);
 		DataUtil.registerFlammable(AtmosphericBlocks.GRIMWOOD_BOOKSHELF.get(), 30, 20);
 		DataUtil.registerFlammable(AtmosphericBlocks.GRIMWOOD_BEEHIVE.get(), 5, 20);
-		DataUtil.registerFlammable(AtmosphericBlocks.GRIMWOOD_POST.get(), 5, 20);
-		DataUtil.registerFlammable(AtmosphericBlocks.STRIPPED_GRIMWOOD_POST.get(), 5, 20);
-		DataUtil.registerFlammable(AtmosphericBlocks.GRIMWOOD_HEDGE.get(), 5, 20);
 		DataUtil.registerFlammable(AtmosphericBlocks.GRIMWOOD_LEAF_PILE.get(), 30, 60);
 		DataUtil.registerFlammable(AtmosphericBlocks.GRIMWOOD_BOARDS.get(), 5, 20);
 	}

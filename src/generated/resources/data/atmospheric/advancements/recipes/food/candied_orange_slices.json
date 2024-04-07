@@ -28,5 +28,6 @@
     "recipes": [
       "atmospheric:candied_orange_slices"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

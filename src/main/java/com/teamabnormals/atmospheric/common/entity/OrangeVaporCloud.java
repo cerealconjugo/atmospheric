@@ -4,6 +4,7 @@ import com.teamabnormals.atmospheric.core.registry.AtmosphericEntityTypes;
 import com.teamabnormals.atmospheric.core.registry.AtmosphericParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.Packet;
+import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
@@ -39,7 +40,7 @@ public class OrangeVaporCloud extends Entity {
 	}
 
 	public void setRadius(float radius) {
-		if (!this.level.isClientSide) {
+		if (!this.level().isClientSide) {
 			this.getEntityData().set(DATA_RADIUS, Mth.clamp(radius, 0.0F, 32.0F));
 		}
 	}
@@ -75,7 +76,7 @@ public class OrangeVaporCloud extends Entity {
 	public void tick() {
 		super.tick();
 		float f = this.getRadius();
-		if (this.level.isClientSide) {
+		if (this.level().isClientSide) {
 			int i = Mth.ceil((float) Math.PI * f * f * 0.05F);
 
 			boolean fresh = this.tickCount < 4;
@@ -95,7 +96,7 @@ public class OrangeVaporCloud extends Entity {
 					double d6 = 0.15;
 					double d7 = (0.5D - this.random.nextDouble()) * 0.15D;
 
-					this.level.addAlwaysVisibleParticle(this.isBloodOrange() ? AtmosphericParticleTypes.BLOOD_ORANGE_VAPOR.get() : AtmosphericParticleTypes.ORANGE_VAPOR.get(), d0, d2, d4, d5, d6, d7);
+					this.level().addAlwaysVisibleParticle(this.isBloodOrange() ? AtmosphericParticleTypes.BLOOD_ORANGE_VAPOR.get() : AtmosphericParticleTypes.ORANGE_VAPOR.get(), d0, d2, d4, d5, d6, d7);
 				}
 			}
 		} else {
@@ -107,7 +108,7 @@ public class OrangeVaporCloud extends Entity {
 			if (this.radiusPerTick != 0.0F) {
 				f += this.radiusPerTick;
 
-				if (this.level.dimensionType().ultraWarm() && !this.isBloodOrange()) {
+				if (this.level().dimensionType().ultraWarm() && !this.isBloodOrange()) {
 					f += this.radiusPerTick * 4.0F;
 				}
 
@@ -120,7 +121,7 @@ public class OrangeVaporCloud extends Entity {
 			}
 
 			if (this.tickCount % 5 == 0) {
-				List<LivingEntity> list1 = this.level.getEntitiesOfClass(LivingEntity.class, this.getBoundingBox());
+				List<LivingEntity> list1 = this.level().getEntitiesOfClass(LivingEntity.class, this.getBoundingBox());
 				if (!list1.isEmpty()) {
 					for (LivingEntity livingentity : list1) {
 						if (livingentity instanceof Wolf wolf) {
@@ -163,7 +164,7 @@ public class OrangeVaporCloud extends Entity {
 		return PushReaction.IGNORE;
 	}
 
-	public Packet<?> getAddEntityPacket() {
+	public Packet<ClientGamePacketListener> getAddEntityPacket() {
 		return NetworkHooks.getEntitySpawningPacket(this);
 	}
 

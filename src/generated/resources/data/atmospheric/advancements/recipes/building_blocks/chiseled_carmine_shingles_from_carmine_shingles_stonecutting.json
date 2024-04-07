@@ -30,5 +30,6 @@
     "recipes": [
       "atmospheric:chiseled_carmine_shingles_from_carmine_shingles_stonecutting"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

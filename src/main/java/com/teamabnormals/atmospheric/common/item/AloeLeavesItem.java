@@ -1,7 +1,7 @@
 package com.teamabnormals.atmospheric.common.item;
 
 import com.teamabnormals.atmospheric.core.other.AtmosphericCriteriaTriggers;
-import com.teamabnormals.atmospheric.core.other.AtmosphericDamageSources;
+import com.teamabnormals.atmospheric.core.other.AtmosphericDamageTypes;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.LivingEntity;
@@ -20,7 +20,7 @@ public class AloeLeavesItem extends Item {
 		ItemStack returnStack = super.finishUsingItem(stack, level, entity);
 		RandomSource random = level.getRandom();
 		if (random.nextInt(5) == 0) {
-			entity.hurt(AtmosphericDamageSources.ALOE_LEAVES, 3.0F);
+			entity.hurt(AtmosphericDamageTypes.aloeLeaves(level), 3.0F);
 		}
 
 		if (entity.getRemainingFireTicks() > 0 && entity instanceof ServerPlayer serverPlayer) {

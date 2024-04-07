@@ -7,7 +7,12 @@
           "direct_entity": {
             "type": "atmospheric:passion_fruit_seed"
           },
-          "is_projectile": true
+          "tags": [
+            {
+              "expected": true,
+              "id": "minecraft:is_projectile"
+            }
+          ]
         }
       },
       "trigger": "minecraft:player_killed_entity"
@@ -32,5 +37,6 @@
     [
       "kill_mob_with_passion_fruit"
     ]
-  ]
+  ],
+  "sends_telemetry_event": true
 }

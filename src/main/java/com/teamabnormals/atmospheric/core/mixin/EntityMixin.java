@@ -16,7 +16,7 @@ import java.util.List;
 public abstract class EntityMixin {
 
 	@Shadow
-	public Level level;
+	private Level level;
 
 	@Shadow
 	public abstract AABB getBoundingBox();

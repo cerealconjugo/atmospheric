@@ -24,5 +24,6 @@
     [
       "loot_arid_garden"
     ]
-  ]
+  ],
+  "sends_telemetry_event": true
 }

@@ -5,25 +5,29 @@ import com.teamabnormals.atmospheric.core.registry.AtmosphericBiomes;
 import com.teamabnormals.atmospheric.core.registry.AtmosphericBlocks;
 import com.teamabnormals.blueprint.common.world.modification.chunk.ChunkGeneratorModifierProvider;
 import com.teamabnormals.blueprint.common.world.modification.chunk.modifiers.SurfaceRuleModifier;
+import net.minecraft.core.HolderLookup.Provider;
 import net.minecraft.data.DataGenerator;
+import net.minecraft.data.PackOutput;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.Noises;
 import net.minecraft.world.level.levelgen.VerticalAnchor;
+
+import java.util.concurrent.CompletableFuture;
 
 import static net.minecraft.world.level.levelgen.SurfaceRules.*;
 
 public final class AtmosphericChunkGeneratorModifierProvider extends ChunkGeneratorModifierProvider {
 
-	public AtmosphericChunkGeneratorModifierProvider(DataGenerator dataGenerator) {
-		super(dataGenerator, Atmospheric.MOD_ID);
+	public AtmosphericChunkGeneratorModifierProvider(PackOutput output, CompletableFuture<Provider> provider) {
+		super(Atmospheric.MOD_ID, output, provider);
 	}
 
 	@Override
-	protected void registerEntries() {
-		ConditionSource isDunes = isBiome(AtmosphericBiomes.DUNES.getKey(), AtmosphericBiomes.FLOURISHING_DUNES.getKey(), AtmosphericBiomes.ROCKY_DUNES.getKey(), AtmosphericBiomes.PETRIFIED_DUNES.getKey());
-		ConditionSource isSpinyThicket = isBiome(AtmosphericBiomes.SPINY_THICKET.getKey());
-		ConditionSource isScrubland = isBiome(AtmosphericBiomes.SCRUBLAND.getKey(), AtmosphericBiomes.SNOWY_SCRUBLAND.getKey());
-		ConditionSource isHotSprings = isBiome(AtmosphericBiomes.HOT_SPRINGS.getKey());
+	protected void registerEntries(Provider provider) {
+		ConditionSource isDunes = isBiome(AtmosphericBiomes.DUNES, AtmosphericBiomes.FLOURISHING_DUNES, AtmosphericBiomes.ROCKY_DUNES, AtmosphericBiomes.PETRIFIED_DUNES);
+		ConditionSource isSpinyThicket = isBiome(AtmosphericBiomes.SPINY_THICKET);
+		ConditionSource isScrubland = isBiome(AtmosphericBiomes.SCRUBLAND, AtmosphericBiomes.SNOWY_SCRUBLAND);
+		ConditionSource isHotSprings = isBiome(AtmosphericBiomes.HOT_SPRINGS);
 
 		RuleSource coarseDirt = state(Blocks.COARSE_DIRT.defaultBlockState());
 		RuleSource dirt = state(Blocks.DIRT.defaultBlockState());
@@ -54,7 +58,7 @@ public final class AtmosphericChunkGeneratorModifierProvider extends ChunkGenera
 				.addModifier(new SurfaceRuleModifier(ifTrue(abovePreliminarySurface(), ifTrue(isDunes, sequence(ifTrue(noiseRange(0.3F, 2.5F), redAridSandRuleSource), aridSandRuleSource))), false))
 				.addModifier(new SurfaceRuleModifier(ifTrue(abovePreliminarySurface(), ifTrue(isSpinyThicket, sequence(ifTrue(noiseRange(0.1F, 2.5F), redAridSandRuleSource), redSandRuleSource))), false))
 				.addModifier(new SurfaceRuleModifier(ifTrue(abovePreliminarySurface(), ifTrue(isScrubland, sequence(ifTrue(noiseRange(-2.0F, -0.5F), aridSandRuleSource), ifTrue(noiseRange(1.0F, 2.5F), aridSandRuleSource), sandRuleSource))), false))
-				.addModifier(new SurfaceRuleModifier(ifTrue(abovePreliminarySurface(), ifTrue(isBiome(AtmosphericBiomes.ASPEN_PARKLAND.getKey()), ifTrue(ON_FLOOR, ifTrue(waterBlockCheck(-1, 0), sequence(ifTrue(waterBlockCheck(0, 0), coarseDirt), dirt))))), false))
+				.addModifier(new SurfaceRuleModifier(ifTrue(abovePreliminarySurface(), ifTrue(isBiome(AtmosphericBiomes.ASPEN_PARKLAND), ifTrue(ON_FLOOR, ifTrue(waterBlockCheck(-1, 0), sequence(ifTrue(waterBlockCheck(0, 0), coarseDirt), dirt))))), false))
 				.addModifier(new SurfaceRuleModifier(ifTrue(abovePreliminarySurface(), ifTrue(isHotSprings, ifTrue(not(yBlockCheck(VerticalAnchor.absolute(93), 0)), sequence(hotSpringsRuleSource, hotSpringsRuleSource2)))), false));
 	}
 

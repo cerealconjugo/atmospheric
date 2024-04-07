@@ -1,17 +1,18 @@
 package com.teamabnormals.atmospheric.common.block;
 
-import com.teamabnormals.atmospheric.core.other.AtmosphericDamageSources;
+import com.teamabnormals.atmospheric.core.other.AtmosphericDamageTypes;
 import com.teamabnormals.atmospheric.core.other.tags.AtmosphericBlockTags;
 import com.teamabnormals.atmospheric.core.registry.AtmosphericBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.damagesource.DamageType;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.animal.Bee;
@@ -71,7 +72,7 @@ public class YuccaBranchBlock extends BushBlock implements BonemealableBlock, Yu
 	}
 
 	@Override
-	public boolean isValidBonemealTarget(BlockGetter worldIn, BlockPos pos, BlockState state, boolean isClient) {
+	public boolean isValidBonemealTarget(LevelReader worldIn, BlockPos pos, BlockState state, boolean isClient) {
 		return state.getValue(SNAPPED) && worldIn.getBlockState(pos.below()).isAir();
 	}
 
@@ -132,7 +133,7 @@ public class YuccaBranchBlock extends BushBlock implements BonemealableBlock, Yu
 	}
 
 	@Override
-	public DamageSource getDamageSource() {
-		return AtmosphericDamageSources.YUCCA_BRANCH;
+	public ResourceKey<DamageType> getDamageTypeKey() {
+		return AtmosphericDamageTypes.YUCCA_BRANCH;
 	}
 }

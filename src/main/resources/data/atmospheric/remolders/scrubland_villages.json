@@ -1,0 +1,12 @@
+{
+  "molding": "json",
+  "remolder": {
+    "type": "add",
+    "target": "structures[]",
+    "value": {
+      "structure": "atmospheric:village_scrubland",
+      "weight": 1
+    }
+  },
+  "selector": "minecraft:worldgen/structure_set/villages"
+}

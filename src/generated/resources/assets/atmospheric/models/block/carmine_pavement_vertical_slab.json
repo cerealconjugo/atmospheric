@@ -1,8 +1,0 @@
-{
-  "parent": "blueprint:block/vertical_slab",
-  "textures": {
-    "bottom": "atmospheric:block/carmine_pavement",
-    "side": "atmospheric:block/carmine_pavement",
-    "top": "atmospheric:block/carmine_pavement"
-  }
-}

@@ -1,7 +1,7 @@
 package com.teamabnormals.atmospheric.common.block;
 
 import com.teamabnormals.atmospheric.core.other.AtmosphericCriteriaTriggers;
-import com.teamabnormals.atmospheric.core.other.AtmosphericDamageSources;
+import com.teamabnormals.atmospheric.core.other.AtmosphericDamageTypes;
 import com.teamabnormals.atmospheric.core.other.tags.AtmosphericBlockTags;
 import com.teamabnormals.atmospheric.core.other.tags.AtmosphericEntityTypeTags;
 import com.teamabnormals.atmospheric.core.registry.AtmosphericItems;
@@ -126,7 +126,7 @@ public class BarrelCactusBlock extends Block implements IPlantable, Bonemealable
 			}
 		}
 
-		return downState.is(AtmosphericBlockTags.BARREL_CACTUS_PLACEABLE) && !worldIn.getBlockState(pos.above()).getMaterial().isLiquid();
+		return downState.is(AtmosphericBlockTags.BARREL_CACTUS_PLACEABLE) && !worldIn.getBlockState(pos.above()).liquid();
 	}
 
 	@Override
@@ -142,7 +142,7 @@ public class BarrelCactusBlock extends Block implements IPlantable, Bonemealable
 					damage /= 2.0F;
 				}
 
-				entity.hurt(AtmosphericDamageSources.BARREL_CACTUS, damage);
+				entity.hurt(AtmosphericDamageTypes.barrelCactus(level), damage);
 				if (entity instanceof ServerPlayer serverPlayer) {
 					if (!entity.getCommandSenderWorld().isClientSide() && !serverPlayer.isCreative()) {
 						AtmosphericCriteriaTriggers.BARREL_CACTUS_PRICK.trigger(serverPlayer);
@@ -175,11 +175,11 @@ public class BarrelCactusBlock extends Block implements IPlantable, Bonemealable
 	@Nullable
 	@Override
 	public BlockPathTypes getBlockPathType(BlockState state, BlockGetter world, BlockPos pos, @Nullable Mob entity) {
-		return BlockPathTypes.DAMAGE_CACTUS;
+		return BlockPathTypes.DANGER_OTHER;
 	}
 
 	@Override
-	public boolean isValidBonemealTarget(BlockGetter world, BlockPos pos, BlockState state, boolean isClient) {
+	public boolean isValidBonemealTarget(LevelReader world, BlockPos pos, BlockState state, boolean isClient) {
 		return state.getValue(AGE) < 3;
 	}
 

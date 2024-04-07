@@ -33,5 +33,6 @@
     [
       "obtain_blood_orange"
     ]
-  ]
+  ],
+  "sends_telemetry_event": true
 }

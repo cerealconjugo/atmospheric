@@ -1,11 +1,11 @@
 package com.teamabnormals.atmospheric.common.block;
 
-import com.teamabnormals.atmospheric.core.other.AtmosphericDamageSources;
+import com.teamabnormals.atmospheric.core.other.AtmosphericDamageTypes;
 import com.teamabnormals.atmospheric.core.other.tags.AtmosphericBlockTags;
 import com.teamabnormals.atmospheric.core.registry.AtmosphericBlocks;
-import com.teamabnormals.blueprint.common.block.BlueprintTallFlowerBlock;
 import net.minecraft.core.BlockPos;
-import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.damagesource.DamageType;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.level.BlockGetter;
@@ -13,6 +13,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.DoublePlantBlock;
+import net.minecraft.world.level.block.TallFlowerBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import net.minecraft.world.level.pathfinder.BlockPathTypes;
@@ -22,7 +23,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 
 import javax.annotation.Nullable;
 
-public class YuccaFlowerDoubleBlock extends BlueprintTallFlowerBlock implements YuccaPlant {
+public class YuccaFlowerDoubleBlock extends TallFlowerBlock implements YuccaPlant {
 	public static final VoxelShape SHAPE = Block.box(2.0D, 0.0D, 2.0D, 14.0D, 16.0D, 14.0D);
 
 	public YuccaFlowerDoubleBlock(Properties properties) {
@@ -41,7 +42,7 @@ public class YuccaFlowerDoubleBlock extends BlueprintTallFlowerBlock implements 
 	@Nullable
 	@Override
 	public BlockPathTypes getBlockPathType(BlockState state, BlockGetter world, BlockPos pos, @Nullable Mob entity) {
-		return BlockPathTypes.DAMAGE_CACTUS;
+		return BlockPathTypes.DANGER_OTHER;
 	}
 
 	@Override
@@ -56,8 +57,8 @@ public class YuccaFlowerDoubleBlock extends BlueprintTallFlowerBlock implements 
 	}
 
 	@Override
-	public DamageSource getDamageSource() {
-		return AtmosphericDamageSources.YUCCA_FLOWER;
+	public ResourceKey<DamageType> getDamageTypeKey() {
+		return AtmosphericDamageTypes.YUCCA_FLOWER;
 	}
 
 	@Override

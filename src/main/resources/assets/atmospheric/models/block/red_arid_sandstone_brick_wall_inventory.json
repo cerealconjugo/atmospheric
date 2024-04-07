@@ -1,6 +1,0 @@
-{
-    "parent": "block/wall_inventory",
-    "textures": {
-        "wall": "atmospheric:block/red_arid_sandstone_bricks"
-    }
-}

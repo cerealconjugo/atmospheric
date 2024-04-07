@@ -36,5 +36,6 @@
     [
       "barrel_cactus"
     ]
-  ]
+  ],
+  "sends_telemetry_event": true
 }

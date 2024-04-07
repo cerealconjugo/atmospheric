@@ -1,5 +1,6 @@
 {
   "type": "minecraft:crafting_shaped",
+  "category": "building",
   "key": {
     "#": {
       "item": "atmospheric:carmine_husk"
@@ -12,5 +13,6 @@
   ],
   "result": {
     "item": "atmospheric:carmine_block"
-  }
+  },
+  "show_notification": true
 }

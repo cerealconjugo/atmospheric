@@ -1,14 +1,14 @@
 package com.teamabnormals.atmospheric.common.block;
 
 import com.google.common.base.Supplier;
-import com.teamabnormals.atmospheric.core.other.AtmosphericDamageSources;
+import com.teamabnormals.atmospheric.core.other.AtmosphericDamageTypes;
 import com.teamabnormals.atmospheric.core.other.tags.AtmosphericBlockTags;
 import com.teamabnormals.atmospheric.core.registry.AtmosphericBlocks;
-import com.teamabnormals.blueprint.common.block.BlueprintFlowerBlock;
 import net.minecraft.core.BlockPos;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.damagesource.DamageType;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.Mob;
@@ -17,13 +17,14 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.BonemealableBlock;
+import net.minecraft.world.level.block.FlowerBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import net.minecraft.world.level.pathfinder.BlockPathTypes;
 
 import javax.annotation.Nullable;
 
-public class YuccaFlowerBlock extends BlueprintFlowerBlock implements BonemealableBlock, YuccaPlant {
+public class YuccaFlowerBlock extends FlowerBlock implements BonemealableBlock, YuccaPlant {
 
 	public YuccaFlowerBlock(Supplier<MobEffect> effect, int effectDuration, Properties properties) {
 		super(effect, effectDuration, properties);
@@ -43,7 +44,7 @@ public class YuccaFlowerBlock extends BlueprintFlowerBlock implements Bonemealab
 	}
 
 	@Override
-	public boolean isValidBonemealTarget(BlockGetter world, BlockPos pos, BlockState state, boolean isClient) {
+	public boolean isValidBonemealTarget(LevelReader world, BlockPos pos, BlockState state, boolean isClient) {
 		return true;
 	}
 
@@ -60,7 +61,7 @@ public class YuccaFlowerBlock extends BlueprintFlowerBlock implements Bonemealab
 	@Nullable
 	@Override
 	public BlockPathTypes getBlockPathType(BlockState state, BlockGetter world, BlockPos pos, @Nullable Mob entity) {
-		return BlockPathTypes.DAMAGE_CACTUS;
+		return BlockPathTypes.DANGER_OTHER;
 	}
 
 	@Override
@@ -69,8 +70,8 @@ public class YuccaFlowerBlock extends BlueprintFlowerBlock implements Bonemealab
 	}
 
 	@Override
-	public DamageSource getDamageSource() {
-		return AtmosphericDamageSources.YUCCA_FLOWER;
+	public ResourceKey<DamageType> getDamageTypeKey() {
+		return AtmosphericDamageTypes.YUCCA_FLOWER;
 	}
 
 	@Override

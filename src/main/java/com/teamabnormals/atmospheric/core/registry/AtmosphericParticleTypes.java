@@ -32,11 +32,11 @@ public class AtmosphericParticleTypes {
 
 	@SubscribeEvent
 	public static void registerParticleTypes(RegisterParticleProvidersEvent event) {
-		event.register(ALOE_BLOSSOM.get(), AloeBlossomParticle.Factory::new);
-		event.register(MORADO_BLOSSOM.get(), MoradoBlossomParticle.Factory::new);
-		event.register(ORANGE_VAPOR.get(), OrangeVaporParticle.Provider::new);
-		event.register(BLOOD_ORANGE_VAPOR.get(), OrangeVaporParticle.Provider::new);
-		event.register(COCHINEAL_TRAIL.get(), CochinealTrailParticle.Provider::new);
-		event.register(COLD_COCHINEAL_TRAIL.get(), CochinealTrailParticle.Provider::new);
+		event.registerSpriteSet(ALOE_BLOSSOM.get(), AloeBlossomParticle.Factory::new);
+		event.registerSpriteSet(MORADO_BLOSSOM.get(), MoradoBlossomParticle.Factory::new);
+		event.registerSpriteSet(ORANGE_VAPOR.get(), OrangeVaporParticle.Provider::new);
+		event.registerSpriteSet(BLOOD_ORANGE_VAPOR.get(), OrangeVaporParticle.Provider::new);
+		event.registerSpriteSet(COCHINEAL_TRAIL.get(), CochinealTrailParticle.Provider::new);
+		event.registerSpriteSet(COLD_COCHINEAL_TRAIL.get(), CochinealTrailParticle.Provider::new);
 	}
 }

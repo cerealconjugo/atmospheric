@@ -12,12 +12,15 @@ import net.minecraft.core.particles.ItemParticleOption;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.Packet;
+import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MoverType;
@@ -95,15 +98,15 @@ public class DragonFruit extends Entity {
 			this.setDeltaMovement(this.getDeltaMovement().add(0.0D, -0.04D, 0.0D));
 		}
 
-		if (!this.onGround || this.getDeltaMovement().horizontalDistanceSqr() > (double) 1.0E-5F || (this.tickCount + this.getId()) % 4 == 0) {
+		if (!this.onGround() || this.getDeltaMovement().horizontalDistanceSqr() > (double) 1.0E-5F || (this.tickCount + this.getId()) % 4 == 0) {
 			this.move(MoverType.SELF, this.getDeltaMovement());
 			float f1 = 0.98F;
-			if (this.onGround) {
-				f1 = this.level.getBlockState(new BlockPos(this.getX(), this.getY() - 1.0D, this.getZ())).getFriction(level, new BlockPos(this.getX(), this.getY() - 1.0D, this.getZ()), this) * 0.98F;
+			if (this.onGround()) {
+				f1 = this.level().getBlockState(BlockPos.containing(this.getX(), this.getY() - 1.0D, this.getZ())).getFriction(this.level(), BlockPos.containing(this.getX(), this.getY() - 1.0D, this.getZ()), this) * 0.98F;
 			}
 
 			this.setDeltaMovement(this.getDeltaMovement().multiply(f1, 0.98D, f1));
-			if (this.onGround) {
+			if (this.onGround()) {
 				Vec3 vec31 = this.getDeltaMovement();
 				if (vec31.y < 0.0D) {
 					this.setDeltaMovement(vec31.multiply(1.0D, -0.5D, 1.0D));
@@ -129,7 +132,7 @@ public class DragonFruit extends Entity {
 			Vec3i direction = this.getRollingDirection().getNormal();
 			double speed = this.rollingTicks / 1000.0D;
 			speed = Math.max(speed, 0.1D);
-			if (!this.isOnGround()) {
+			if (!this.onGround()) {
 				speed *= 0.1D;
 			}
 
@@ -147,21 +150,21 @@ public class DragonFruit extends Entity {
 	}
 
 	public boolean attemptPlaceRoots() {
-		if (this.isFlowering() && !this.getLevel().isClientSide()) {
+		if (this.isFlowering() && !this.level().isClientSide()) {
 			BlockState rootsState = AtmosphericBlocks.DRAGON_ROOTS.get().defaultBlockState()
 					.setValue(DragonRootsBlock.TOP_STAGE, DragonRootsStage.ROOTS)
 					.setValue(DragonRootsBlock.BOTTOM_STAGE, DragonRootsStage.NONE)
 					.setValue(DragonRootsBlock.FACING, this.getRollingDirection().getOpposite());
 			BlockPos pos = this.blockPosition();
-			BlockState state = this.getLevel().getBlockState(pos);
+			BlockState state = this.level().getBlockState(pos);
 
 			for (int i = 0; i < 4; i++) {
 				if (i > 0) {
 					rootsState = rootsState.cycle(DragonRootsBlock.FACING);
 				}
 
-				if (this.getLevel().isEmptyBlock(pos) && rootsState.canSurvive(this.getLevel(), pos)) {
-					this.level.setBlockAndUpdate(pos, rootsState);
+				if (this.level().isEmptyBlock(pos) && rootsState.canSurvive(this.level(), pos)) {
+					this.level().setBlockAndUpdate(pos, rootsState);
 					return true;
 				} else if (state.is(AtmosphericBlocks.DRAGON_ROOTS.get()) && !DragonRootsBlock.isDouble(state)) {
 					if (state.getValue(DragonRootsBlock.TOP_STAGE) == DragonRootsStage.NONE) {
@@ -172,12 +175,12 @@ public class DragonFruit extends Entity {
 						state = state.setValue(DragonRootsBlock.BOTTOM_STAGE, DragonRootsStage.ROOTS);
 					}
 
-					this.level.setBlockAndUpdate(pos, state);
+					this.level().setBlockAndUpdate(pos, state);
 					return true;
 				}
 			}
 
-			Block.popResource(this.level, this.blockPosition(), new ItemStack(AtmosphericBlocks.DRAGON_ROOTS.get()));
+			Block.popResource(this.level(), this.blockPosition(), new ItemStack(AtmosphericBlocks.DRAGON_ROOTS.get()));
 		}
 		return false;
 	}
@@ -204,12 +207,12 @@ public class DragonFruit extends Entity {
 
 	@Override
 	public boolean hurt(DamageSource source, float damage) {
-		if (!this.level.isClientSide && !this.isRemoved()) {
-			if (DamageSource.OUT_OF_WORLD.equals(source)) {
+		if (!this.level().isClientSide && !this.isRemoved()) {
+			if (source.is(DamageTypes.FELL_OUT_OF_WORLD)) {
 				this.kill();
 				return false;
 			} else if (!this.isInvulnerableTo(source)) {
-				if (source.isExplosion()) {
+				if (source.is(DamageTypeTags.IS_EXPLOSION)) {
 					this.brokenByPlayer();
 					this.kill();
 					return false;
@@ -243,25 +246,25 @@ public class DragonFruit extends Entity {
 	}
 
 	private void brokenByPlayer() {
-		Block.popResource(this.level, this.blockPosition(), this.getItem());
+		Block.popResource(this.level(), this.blockPosition(), this.getItem());
 		if (!this.attemptPlaceRoots()) {
 			this.playBrokenSound();
 		}
 	}
 
 	private void showBreakingParticles() {
-		if (this.level instanceof ServerLevel serverLevel) {
+		if (this.level() instanceof ServerLevel serverLevel) {
 			serverLevel.sendParticles(new ItemParticleOption(ParticleTypes.ITEM, this.getItem()), this.getX(), this.getY(0.6666666666666666D), this.getZ(), 10, this.getBbWidth() / 4.0F, (double) (this.getBbHeight() / 4.0F), (double) (this.getBbWidth() / 4.0F), 0.05D);
 		}
 	}
 
 
 	private void playBrokenSound() {
-		this.level.playSound(null, this.getX(), this.getY(), this.getZ(), SoundEvents.SWEET_BERRY_BUSH_BREAK, this.getSoundSource(), 1.0F, 1.0F);
+		this.level().playSound(null, this.getX(), this.getY(), this.getZ(), SoundEvents.SWEET_BERRY_BUSH_BREAK, this.getSoundSource(), 1.0F, 1.0F);
 	}
 
 	@Override
-	public Packet<?> getAddEntityPacket() {
+	public Packet<ClientGamePacketListener> getAddEntityPacket() {
 		return NetworkHooks.getEntitySpawningPacket(this);
 	}
 }

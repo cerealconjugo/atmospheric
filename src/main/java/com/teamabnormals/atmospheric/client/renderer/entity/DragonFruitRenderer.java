@@ -2,7 +2,7 @@ package com.teamabnormals.atmospheric.client.renderer.entity;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import com.mojang.math.Vector3f;
+import com.mojang.math.Axis;
 import com.teamabnormals.atmospheric.client.model.DragonFruitModel;
 import com.teamabnormals.atmospheric.client.renderer.entity.layers.FloweringDragonFruitLayer;
 import com.teamabnormals.atmospheric.common.entity.projectile.DragonFruit;
@@ -36,7 +36,7 @@ public class DragonFruitRenderer<T extends DragonFruit> extends EntityRenderer<T
 	@Override
 	public void render(T entity, float entityYaw, float partialTicks, PoseStack poseStack, MultiBufferSource buffer, int packedLight) {
 		poseStack.pushPose();
-		poseStack.mulPose(Vector3f.YP.rotationDegrees(180.0F - entity.getYRot()));
+		poseStack.mulPose(Axis.YP.rotationDegrees(180.0F - entity.getYRot()));
 		this.getModel().setupAnim(entity, partialTicks, 0.0F, entity.tickCount + partialTicks, 0.0F, 0.0F);
 		poseStack.popPose();
 

@@ -30,5 +30,6 @@
     "recipes": [
       "atmospheric:carmine_pavement_slab_from_carmine_pavement_stonecutting"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

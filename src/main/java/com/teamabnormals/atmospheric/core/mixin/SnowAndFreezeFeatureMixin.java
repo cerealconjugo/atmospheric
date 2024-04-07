@@ -24,7 +24,8 @@ public abstract class SnowAndFreezeFeatureMixin {
 		if (!biome.warmEnoughToRain(pos)) {
 			if (pos.getY() >= level.getMinBuildHeight() && pos.getY() < level.getMaxBuildHeight() && level.getBrightness(LightLayer.BLOCK, pos) < 10) {
 				BlockState state = level.getBlockState(pos);
-				if (state.isAir() || state.is(BlockTags.REPLACEABLE_PLANTS)) {
+				//TODO: Maybe ported wrong
+				if (state.isAir() || state.is(BlockTags.REPLACEABLE)) {
 					BlockState belowState = level.getBlockState(pos.below());
 					Block newBlock = belowState.is(Blocks.CACTUS) ? AtmosphericBlocks.SNOWY_CACTUS.get() : belowState.is(AtmosphericBlocks.BARREL_CACTUS.get()) ? AtmosphericBlocks.SNOWY_BARREL_CACTUS.get() : null;
 

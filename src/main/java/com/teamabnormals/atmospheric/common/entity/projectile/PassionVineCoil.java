@@ -44,7 +44,7 @@ public class PassionVineCoil extends ThrowableItemProjectile {
 		if (id == 3) {
 			ParticleOptions iparticledata = this.makeParticle();
 			for (int i = 0; i < 8; ++i) {
-				this.level.addParticle(iparticledata, this.getX(), this.getY(), this.getZ(), 0.0D, 0.0D, 0.0D);
+				this.level().addParticle(iparticledata, this.getX(), this.getY(), this.getZ(), 0.0D, 0.0D, 0.0D);
 			}
 		}
 
@@ -66,8 +66,8 @@ public class PassionVineCoil extends ThrowableItemProjectile {
 		BlockState nextBlock = worldIn.getBlockState(nextPos);
 
 		int counter;
-		if (!level.getBlockState(pos).isAir()) {
-			if (level.getBlockState(pos).is(AtmosphericBlocks.PASSION_VINE.get())) {
+		if (!this.level().getBlockState(pos).isAir()) {
+			if (this.level().getBlockState(pos).is(AtmosphericBlocks.PASSION_VINE.get())) {
 				while (true) {
 					if (nextBlock.is(AtmosphericBlocks.PASSION_VINE.get())) {
 						nextPos = nextPos.below();
@@ -145,11 +145,11 @@ public class PassionVineCoil extends ThrowableItemProjectile {
 	}
 
 	private void removeVine(BlockPos nextPos, boolean doDrops) {
-		if (!this.level.isClientSide) {
-			this.level.broadcastEntityEvent(this, (byte) 3);
+		if (!this.level().isClientSide) {
+			this.level().broadcastEntityEvent(this, (byte) 3);
 			this.discard();
 		}
 		if (doDrops)
-			PassionVineBundleBlock.popResource(this.level, nextPos.relative(Direction.UP), new ItemStack(AtmosphericBlocks.PASSION_VINE.get(), 8));
+			PassionVineBundleBlock.popResource(this.level(), nextPos.relative(Direction.UP), new ItemStack(AtmosphericBlocks.PASSION_VINE.get(), 8));
 	}
 }

@@ -1,8 +1,0 @@
-{
-    "parent": "block/slab",
-    "textures": {
-        "bottom": "atmospheric:block/arid_sandstone_bricks",
-        "top": "atmospheric:block/arid_sandstone_bricks",
-        "side": "atmospheric:block/arid_sandstone_bricks"
-    }
-}

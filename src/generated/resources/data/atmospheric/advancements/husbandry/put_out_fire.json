@@ -24,5 +24,6 @@
     [
       "put_out_fire"
     ]
-  ]
+  ],
+  "sends_telemetry_event": true
 }

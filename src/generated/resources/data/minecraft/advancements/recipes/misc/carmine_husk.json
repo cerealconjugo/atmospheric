@@ -30,5 +30,6 @@
     "recipes": [
       "minecraft:carmine_husk"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

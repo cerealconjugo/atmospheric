@@ -8,7 +8,12 @@
             "direct_entity": {
               "type": "atmospheric:passion_fruit_seed"
             },
-            "is_projectile": true
+            "tags": [
+              {
+                "expected": true,
+                "id": "minecraft:is_projectile"
+              }
+            ]
           }
         }
       },
@@ -34,5 +39,6 @@
     [
       "spit_passion_fruit"
     ]
-  ]
+  ],
+  "sends_telemetry_event": true
 }

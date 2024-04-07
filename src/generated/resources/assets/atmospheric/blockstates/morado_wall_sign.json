@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "atmospheric:block/morado_wall_sign"
+      "model": "atmospheric:block/morado_sign"
     }
   }
 }
