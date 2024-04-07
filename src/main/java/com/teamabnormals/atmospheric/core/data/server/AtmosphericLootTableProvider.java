@@ -158,6 +158,7 @@ public class AtmosphericLootTableProvider extends LootTableProvider {
 			this.add(DRAGON_ROOTS.get(), this::createDragonRootsDrops);
 
 			this.dropSelf(ARID_SAND.get());
+			this.add(SUSPICIOUS_ARID_SAND.get(), noDrop());
 			this.dropSelf(ARID_SANDSTONE.get());
 			this.dropSelf(ARID_SANDSTONE_STAIRS.get());
 			this.add(ARID_SANDSTONE_SLAB.get(), this::createSlabItemTable);
@@ -170,6 +171,7 @@ public class AtmosphericLootTableProvider extends LootTableProvider {
 			this.dropSelf(CHISELED_ARID_SANDSTONE.get());
 
 			this.dropSelf(RED_ARID_SAND.get());
+			this.add(SUSPICIOUS_RED_ARID_SAND.get(), noDrop());
 			this.dropSelf(RED_ARID_SANDSTONE.get());
 			this.dropSelf(RED_ARID_SANDSTONE_STAIRS.get());
 			this.add(RED_ARID_SANDSTONE_SLAB.get(), this::createSlabItemTable);

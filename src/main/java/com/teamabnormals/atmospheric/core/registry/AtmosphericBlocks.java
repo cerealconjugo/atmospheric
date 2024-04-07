@@ -16,6 +16,7 @@ import com.teamabnormals.blueprint.core.util.PropertyUtil;
 import com.teamabnormals.blueprint.core.util.item.CreativeModeTabContentsPopulator;
 import com.teamabnormals.blueprint.core.util.registry.BlockSubRegistryHelper;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.ItemLike;
@@ -23,7 +24,9 @@ import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockBehaviour.OffsetType;
 import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
+import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 import net.minecraft.world.level.material.MapColor;
+import net.minecraft.world.level.material.PushReaction;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
@@ -187,6 +190,9 @@ public class AtmosphericBlocks {
 	public static final RegistryObject<Block> CUT_RED_ARID_SANDSTONE_SLAB = HELPER.createBlock("cut_red_arid_sandstone_slab", () -> new SlabBlock(Block.Properties.copy(Blocks.CUT_SANDSTONE_SLAB)));
 
 	public static final RegistryObject<Block> CHISELED_RED_ARID_SANDSTONE = HELPER.createBlock("chiseled_red_arid_sandstone", () -> new Block(Block.Properties.copy(Blocks.CHISELED_SANDSTONE)));
+
+	public static final RegistryObject<Block> SUSPICIOUS_ARID_SAND = HELPER.createBlock("suspicious_arid_sand", () -> new BrushableBlock(ARID_SAND.get(), BlockBehaviour.Properties.of().mapColor(MapColor.SAND).instrument(NoteBlockInstrument.SNARE).strength(0.25F).sound(SoundType.SUSPICIOUS_SAND).pushReaction(PushReaction.DESTROY), SoundEvents.BRUSH_SAND, SoundEvents.BRUSH_SAND_COMPLETED));
+	public static final RegistryObject<Block> SUSPICIOUS_RED_ARID_SAND = HELPER.createBlock("suspicious_red_arid_sand", () -> new BrushableBlock(RED_ARID_SAND.get(), BlockBehaviour.Properties.of().mapColor(MapColor.TERRACOTTA_ORANGE).instrument(NoteBlockInstrument.SNARE).strength(0.25F).sound(SoundType.SUSPICIOUS_SAND).pushReaction(PushReaction.DESTROY), SoundEvents.BRUSH_SAND, SoundEvents.BRUSH_SAND_COMPLETED));
 
 	public static final RegistryObject<Block> STRIPPED_YUCCA_LOG = HELPER.createBlock("stripped_yucca_log", () -> new RotatedPillarBlock(AtmosphericProperties.YUCCA.log()));
 	public static final RegistryObject<Block> STRIPPED_YUCCA_WOOD = HELPER.createBlock("stripped_yucca_wood", () -> new RotatedPillarBlock(AtmosphericProperties.YUCCA.log()));
@@ -471,6 +477,7 @@ public class AtmosphericBlocks {
 				)
 				.tab(FUNCTIONAL_BLOCKS)
 				.addItemsBefore(of(Blocks.BAMBOO_SIGN), ROSEWOOD_SIGNS.getFirst(), MORADO_SIGNS.getFirst(), YUCCA_SIGNS.getFirst(), LAUREL_SIGNS.getFirst(), ASPEN_SIGNS.getFirst(), KOUSA_SIGNS.getFirst(), GRIMWOOD_SIGNS.getFirst())
+				.addItemsAfter(of(Blocks.SUSPICIOUS_SAND), SUSPICIOUS_ARID_SAND, SUSPICIOUS_RED_ARID_SAND)
 				.tab(NATURAL_BLOCKS)
 				.addItemsBefore(of(Blocks.DIRT_PATH), CRUSTOSE)
 				.addItemsBefore(of(Blocks.DIRT), CRUSTOSE_PATH)

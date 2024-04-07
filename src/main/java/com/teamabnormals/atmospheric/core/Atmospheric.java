@@ -1,5 +1,7 @@
 package com.teamabnormals.atmospheric.core;
 
+import com.google.common.collect.ImmutableSet;
+import com.google.common.collect.Sets;
 import com.teamabnormals.atmospheric.client.model.CochinealModel;
 import com.teamabnormals.atmospheric.client.model.DragonFruitModel;
 import com.teamabnormals.atmospheric.client.model.PassionFruitSeedModel;
@@ -16,6 +18,8 @@ import com.teamabnormals.atmospheric.core.registry.*;
 import com.teamabnormals.atmospheric.core.registry.AtmosphericFeatures.AtmosphericConfiguredFeatures;
 import com.teamabnormals.atmospheric.core.registry.AtmosphericFeatures.AtmosphericPlacedFeatures;
 import com.teamabnormals.atmospheric.core.registry.helper.AtmosphericBlockSubRegistryHelper;
+import com.teamabnormals.blueprint.common.block.BlueprintChiseledBookShelfBlock;
+import com.teamabnormals.blueprint.core.util.registry.BlockEntitySubRegistryHelper;
 import com.teamabnormals.blueprint.core.util.registry.RegistryHelper;
 import net.minecraft.client.model.geom.builders.CubeDeformation;
 import net.minecraft.client.renderer.entity.NoopRenderer;
@@ -23,6 +27,8 @@ import net.minecraft.core.HolderLookup.Provider;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.EntityRenderersEvent;
@@ -40,6 +46,7 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.ForgeRegistries;
 
+import java.util.Set;
 import java.util.concurrent.CompletableFuture;
 
 @Mod(Atmospheric.MOD_ID)
@@ -80,6 +87,10 @@ public class Atmospheric {
 	}
 
 	private void commonSetup(FMLCommonSetupEvent event) {
+		Set<Block> validBlocks = Sets.newHashSet(BlockEntityType.BRUSHABLE_BLOCK.validBlocks);
+		validBlocks.addAll(Sets.newHashSet(AtmosphericBlocks.SUSPICIOUS_ARID_SAND.get(), AtmosphericBlocks.SUSPICIOUS_RED_ARID_SAND.get()));
+		BlockEntityType.BRUSHABLE_BLOCK.validBlocks = ImmutableSet.copyOf(validBlocks);
+
 		event.enqueueWork(() -> {
 			AtmosphericVillagers.registerVillagerTypes();
 			AtmosphericCompat.registerCompat();
@@ -101,7 +112,6 @@ public class Atmospheric {
 		ExistingFileHelper helper = event.getExistingFileHelper();
 
 		boolean includeServer = event.includeServer();
-
 
 		AtmosphericDatapackBuiltinEntriesProvider datapackEntries = new AtmosphericDatapackBuiltinEntriesProvider(output, provider);
 		generator.addProvider(includeServer, datapackEntries);

@@ -1,15 +1,10 @@
 package com.teamabnormals.atmospheric.core.data.client;
 
-import com.mojang.datafixers.util.Pair;
 import com.teamabnormals.atmospheric.common.block.DragonRootsBlock;
 import com.teamabnormals.atmospheric.common.block.OrangeBlock;
 import com.teamabnormals.atmospheric.common.block.state.properties.DragonRootsStage;
 import com.teamabnormals.atmospheric.core.Atmospheric;
 import com.teamabnormals.atmospheric.core.other.AtmosphericBlockFamilies;
-import com.teamabnormals.blueprint.common.block.chest.BlueprintChestBlock;
-import com.teamabnormals.blueprint.common.block.chest.BlueprintTrappedChestBlock;
-import com.teamabnormals.blueprint.common.block.sign.BlueprintStandingSignBlock;
-import com.teamabnormals.blueprint.common.block.sign.BlueprintWallSignBlock;
 import com.teamabnormals.blueprint.core.Blueprint;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Direction.Axis;
@@ -23,13 +18,11 @@ import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.AttachFace;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraftforge.client.model.generators.*;
 import net.minecraftforge.client.model.generators.ModelFile.ExistingModelFile;
 import net.minecraftforge.client.model.generators.ModelFile.UncheckedModelFile;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.RegistryObject;
 
 import java.util.function.Function;
 
@@ -75,6 +68,9 @@ public class AtmosphericBlockStateProvider extends BlockStateProvider {
 
 		this.directionalBlock(YUCCA_CASK.get());
 		this.directionalBlockSharedSide(ROASTED_YUCCA_CASK.get(), YUCCA_CASK.get());
+
+		this.brushableBlock(SUSPICIOUS_ARID_SAND.get());
+		this.brushableBlock(SUSPICIOUS_RED_ARID_SAND.get());
 
 //		this.blockFamily(AtmosphericBlockFamilies.ARID_SANDSTONE_FAMILY, ARID_SANDSTONE_VERTICAL_SLAB.get());
 //		this.blockFamily(AtmosphericBlockFamilies.CUT_ARID_SANDSTONE_FAMILY, CUT_ARID_SANDSTONE_VERTICAL_SLAB.get());
@@ -428,6 +424,15 @@ public class AtmosphericBlockStateProvider extends BlockStateProvider {
 	public void logBlock(Block block) {
 		this.axisBlock((RotatedPillarBlock) block, blockTexture(block), suffix(remove(blockTexture(block), "watchful_"), "_top"));
 		this.blockItem(block);
+	}
+
+	public void brushableBlock(Block block) {
+		ModelFile[] models = new ModelFile[4];
+		for (int i = 0; i < 4; i++) {
+			models[i] = this.models().cubeAll(name(block) + "_" + i, suffix(blockTexture(block), "_" + i));
+		}
+		this.getVariantBuilder(block).forAllStates(state -> ConfiguredModel.builder().modelFile(models[state.getValue(BlockStateProperties.DUSTED)]).build());
+		this.simpleBlockItem(block, models[0]);
 	}
 
 	private String name(Block block) {
