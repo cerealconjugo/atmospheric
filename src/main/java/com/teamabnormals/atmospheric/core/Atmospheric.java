@@ -71,6 +71,7 @@ public class Atmospheric {
 
 		DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> {
 			AtmosphericItems.setupTabEditors();
+			AtmosphericBlocks.setupTabEditors();
 			bus.addListener(this::registerLayerDefinitions);
 			bus.addListener(this::registerRenderers);
 		});

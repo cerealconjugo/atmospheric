@@ -119,8 +119,7 @@ public class AtmosphericItems {
 				.addItemsAfter(of(Items.BEETROOT_SEEDS), ALOE_KERNELS)
 				.tab(INGREDIENTS)
 				.addItemsAfter(of(Items.HONEYCOMB), CARMINE_HUSK, YELLOW_BLOSSOMS)
-				.addItemsAfter(of(Items.WILD_ARMOR_TRIM_SMITHING_TEMPLATE), APOSTLE_ARMOR_TRIM_SMITHING_TEMPLATE)
-				.addItemsAfter(of(Items.DUNE_ARMOR_TRIM_SMITHING_TEMPLATE), PETRIFIED_ARMOR_TRIM_SMITHING_TEMPLATE, DRUID_ARMOR_TRIM_SMITHING_TEMPLATE)
+				.addItemsAfter(of(Items.DUNE_ARMOR_TRIM_SMITHING_TEMPLATE), PETRIFIED_ARMOR_TRIM_SMITHING_TEMPLATE, DRUID_ARMOR_TRIM_SMITHING_TEMPLATE, APOSTLE_ARMOR_TRIM_SMITHING_TEMPLATE)
 				.addItemsAlphabetically(stack -> stack.is(ItemTags.DECORATED_POT_SHERDS), SCYTHE_POTTERY_SHERD, SUCCULENT_POTTERY_SHERD, SUN_POTTERY_SHERD)
 				.addItemsAfter(of(Items.GLOBE_BANNER_PATTERN), COCHINEAL_BANNER_PATTERN)
 				.tab(TOOLS_AND_UTILITIES)
@@ -131,12 +130,12 @@ public class AtmosphericItems {
 				.addItemsBefore(modLoaded(Items.BAMBOO_RAFT, "boatload"), MORADO_FURNACE_BOAT, LARGE_MORADO_BOAT)
 				.addItemsBefore(of(Items.BAMBOO_RAFT), YUCCA_BOAT.getFirst(), YUCCA_BOAT.getSecond())
 				.addItemsBefore(modLoaded(Items.BAMBOO_RAFT, "boatload"), YUCCA_FURNACE_BOAT, LARGE_YUCCA_BOAT)
-				.addItemsBefore(of(Items.BAMBOO_RAFT), KOUSA_BOAT.getFirst(), KOUSA_BOAT.getSecond())
-				.addItemsBefore(modLoaded(Items.BAMBOO_RAFT, "boatload"), KOUSA_FURNACE_BOAT, LARGE_KOUSA_BOAT)
-				.addItemsBefore(of(Items.BAMBOO_RAFT), ASPEN_BOAT.getFirst(), ASPEN_BOAT.getSecond())
-				.addItemsBefore(modLoaded(Items.BAMBOO_RAFT, "boatload"), ASPEN_FURNACE_BOAT, LARGE_ASPEN_BOAT)
 				.addItemsBefore(of(Items.BAMBOO_RAFT), LAUREL_BOAT.getFirst(), LAUREL_BOAT.getSecond())
 				.addItemsBefore(modLoaded(Items.BAMBOO_RAFT, "boatload"), LAUREL_FURNACE_BOAT, LARGE_LAUREL_BOAT)
+				.addItemsBefore(of(Items.BAMBOO_RAFT), ASPEN_BOAT.getFirst(), ASPEN_BOAT.getSecond())
+				.addItemsBefore(modLoaded(Items.BAMBOO_RAFT, "boatload"), ASPEN_FURNACE_BOAT, LARGE_ASPEN_BOAT)
+				.addItemsBefore(of(Items.BAMBOO_RAFT), KOUSA_BOAT.getFirst(), KOUSA_BOAT.getSecond())
+				.addItemsBefore(modLoaded(Items.BAMBOO_RAFT, "boatload"), KOUSA_FURNACE_BOAT, LARGE_KOUSA_BOAT)
 				.addItemsBefore(of(Items.BAMBOO_RAFT), GRIMWOOD_BOAT.getFirst(), GRIMWOOD_BOAT.getSecond())
 				.addItemsBefore(modLoaded(Items.BAMBOO_RAFT, "boatload"), GRIMWOOD_FURNACE_BOAT, LARGE_GRIMWOOD_BOAT)
 				.tab(SPAWN_EGGS)
@@ -146,15 +145,6 @@ public class AtmosphericItems {
 	public static Predicate<ItemStack> modLoaded(ItemLike item, String... modids) {
 		return stack -> of(item).test(stack) && BlockSubRegistryHelper.areModsLoaded(modids);
 	}
-
-	public static Predicate<ItemStack> ofID(ResourceLocation location, ItemLike fallback, String... modids) {
-		return stack -> (BlockSubRegistryHelper.areModsLoaded(modids) ? of(ForgeRegistries.ITEMS.getValue(location)) : of(fallback)).test(stack);
-	}
-
-	public static Predicate<ItemStack> ofID(ResourceLocation location, String... modids) {
-		return stack -> (BlockSubRegistryHelper.areModsLoaded(modids) && of(ForgeRegistries.ITEMS.getValue(location)).test(stack));
-	}
-
 
 	public static final class AtmosphericFoods {
 		public static final FoodProperties PASSION_FRUIT = new FoodProperties.Builder().nutrition(1).saturationMod(0.1F).fast().alwaysEat().effect(() -> new MobEffectInstance(AtmosphericMobEffects.SPITTING.get(), 140, 0, false, false, false), 1.0F).build();

@@ -5,6 +5,7 @@ import com.teamabnormals.atmospheric.common.block.*;
 import com.teamabnormals.atmospheric.common.block.grower.*;
 import com.teamabnormals.atmospheric.core.Atmospheric;
 import com.teamabnormals.atmospheric.core.other.AtmosphericProperties;
+import com.teamabnormals.atmospheric.core.other.AtmosphericConstants;
 import com.teamabnormals.atmospheric.core.registry.helper.AtmosphericBlockSubRegistryHelper;
 import com.teamabnormals.blueprint.common.block.*;
 import com.teamabnormals.blueprint.common.block.chest.BlueprintChestBlock;
@@ -12,15 +13,25 @@ import com.teamabnormals.blueprint.common.block.chest.BlueprintTrappedChestBlock
 import com.teamabnormals.blueprint.common.block.sign.BlueprintStandingSignBlock;
 import com.teamabnormals.blueprint.common.block.sign.BlueprintWallSignBlock;
 import com.teamabnormals.blueprint.core.util.PropertyUtil;
+import com.teamabnormals.blueprint.core.util.item.CreativeModeTabContentsPopulator;
+import com.teamabnormals.blueprint.core.util.registry.BlockSubRegistryHelper;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockBehaviour.OffsetType;
 import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
+import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
-import org.spongepowered.asm.mixin.injection.At;
+
+import java.util.function.Predicate;
+
+import static net.minecraft.world.item.CreativeModeTabs.*;
+import static net.minecraft.world.item.crafting.Ingredient.of;
 
 @EventBusSubscriber(modid = Atmospheric.MOD_ID, bus = EventBusSubscriber.Bus.MOD)
 public class AtmosphericBlocks {
@@ -409,4 +420,119 @@ public class AtmosphericBlocks {
 
 	public static final RegistryObject<Block> DRAGON_FRUIT_CRATE = HELPER.createBlock("dragon_fruit_crate", () -> new BlueprintDirectionalBlock(Block.Properties.of().mapColor(MapColor.TERRACOTTA_MAGENTA).strength(1.5F).sound(SoundType.WOOD)));
 	public static final RegistryObject<Block> GOLDEN_DRAGON_FRUIT_CRATE = HELPER.createBlock("golden_dragon_fruit_crate", () -> new BlueprintDirectionalBlock(Block.Properties.of().mapColor(MapColor.GOLD).strength(1.5F).sound(SoundType.WOOD)));
+
+	public static void setupTabEditors() {
+		CreativeModeTabContentsPopulator.mod(Atmospheric.MOD_ID)
+				.tab(BUILDING_BLOCKS)
+				.addItemsBefore(of(Blocks.BAMBOO_BLOCK), ROSEWOOD_LOG, ROSEWOOD, STRIPPED_ROSEWOOD_LOG, STRIPPED_ROSEWOOD, ROSEWOOD_PLANKS)
+				.addItemsBefore(modLoaded(Blocks.BAMBOO_BLOCK, "woodworks"), ROSEWOOD_BOARDS)
+				.addItemsBefore(of(Blocks.BAMBOO_BLOCK),
+						ROSEWOOD_STAIRS, ROSEWOOD_SLAB, ROSEWOOD_FENCE, ROSEWOOD_FENCE_GATE, ROSEWOOD_DOOR, ROSEWOOD_TRAPDOOR, ROSEWOOD_PRESSURE_PLATE, ROSEWOOD_BUTTON,
+						MORADO_LOG, MORADO_WOOD, STRIPPED_MORADO_LOG, STRIPPED_MORADO_WOOD, MORADO_PLANKS)
+				.addItemsBefore(modLoaded(Blocks.BAMBOO_BLOCK, "woodworks"), MORADO_BOARDS)
+				.addItemsBefore(of(Blocks.BAMBOO_BLOCK),
+						MORADO_STAIRS, MORADO_SLAB, MORADO_FENCE, MORADO_FENCE_GATE, MORADO_DOOR, MORADO_TRAPDOOR, MORADO_PRESSURE_PLATE, MORADO_BUTTON,
+						YUCCA_LOG, YUCCA_WOOD, STRIPPED_YUCCA_LOG, STRIPPED_YUCCA_WOOD, YUCCA_PLANKS)
+				.addItemsBefore(modLoaded(Blocks.BAMBOO_BLOCK, "woodworks"), YUCCA_BOARDS)
+				.addItemsBefore(of(Blocks.BAMBOO_BLOCK),
+						YUCCA_STAIRS, YUCCA_SLAB, YUCCA_FENCE, YUCCA_FENCE_GATE, YUCCA_DOOR, YUCCA_TRAPDOOR, YUCCA_PRESSURE_PLATE, YUCCA_BUTTON,
+						LAUREL_LOG, LAUREL_WOOD, STRIPPED_LAUREL_LOG, STRIPPED_LAUREL_WOOD, LAUREL_PLANKS)
+				.addItemsBefore(modLoaded(Blocks.BAMBOO_BLOCK, "woodworks"), LAUREL_BOARDS)
+				.addItemsBefore(of(Blocks.BAMBOO_BLOCK),
+						LAUREL_STAIRS, LAUREL_SLAB, LAUREL_FENCE, LAUREL_FENCE_GATE, LAUREL_DOOR, LAUREL_TRAPDOOR, LAUREL_PRESSURE_PLATE, LAUREL_BUTTON,
+						ASPEN_LOG, ASPEN_WOOD, WATCHFUL_ASPEN_LOG, WATCHFUL_ASPEN_WOOD, CRUSTOSE_LOG, CRUSTOSE_WOOD, STRIPPED_ASPEN_LOG, STRIPPED_ASPEN_WOOD, ASPEN_PLANKS)
+				.addItemsBefore(modLoaded(Blocks.BAMBOO_BLOCK, "woodworks"), ASPEN_BOARDS)
+				.addItemsBefore(of(Blocks.BAMBOO_BLOCK),
+						ASPEN_STAIRS, ASPEN_SLAB, ASPEN_FENCE, ASPEN_FENCE_GATE, ASPEN_DOOR, ASPEN_TRAPDOOR, ASPEN_PRESSURE_PLATE, ASPEN_BUTTON,
+						KOUSA_LOG, KOUSA_WOOD, STRIPPED_KOUSA_LOG, STRIPPED_KOUSA_WOOD, KOUSA_PLANKS)
+				.addItemsBefore(modLoaded(Blocks.BAMBOO_BLOCK, "woodworks"), KOUSA_BOARDS)
+				.addItemsBefore(of(Blocks.BAMBOO_BLOCK),
+						KOUSA_STAIRS, KOUSA_SLAB, KOUSA_FENCE, KOUSA_FENCE_GATE, KOUSA_DOOR, KOUSA_TRAPDOOR, KOUSA_PRESSURE_PLATE, KOUSA_BUTTON,
+						GRIMWOOD_LOG, GRIMWOOD, STRIPPED_GRIMWOOD_LOG, STRIPPED_GRIMWOOD, GRIMWOOD_PLANKS)
+				.addItemsBefore(modLoaded(Blocks.BAMBOO_BLOCK, "woodworks"), GRIMWOOD_BOARDS)
+				.addItemsBefore(of(Blocks.BAMBOO_BLOCK),
+						GRIMWOOD_STAIRS, GRIMWOOD_SLAB, GRIMWOOD_FENCE, GRIMWOOD_FENCE_GATE, GRIMWOOD_DOOR, GRIMWOOD_TRAPDOOR, GRIMWOOD_PRESSURE_PLATE, GRIMWOOD_BUTTON)
+				.addItemsAfter(of(Blocks.CUT_RED_SANDSTONE_SLAB),
+						ARID_SANDSTONE, ARID_SANDSTONE_STAIRS, ARID_SANDSTONE_SLAB, ARID_SANDSTONE_WALL,
+						CHISELED_ARID_SANDSTONE, SMOOTH_ARID_SANDSTONE, SMOOTH_ARID_SANDSTONE_STAIRS, SMOOTH_ARID_SANDSTONE_SLAB,
+						CUT_ARID_SANDSTONE, CUT_ARID_SANDSTONE_SLAB,
+						RED_ARID_SANDSTONE, RED_ARID_SANDSTONE_STAIRS, RED_ARID_SANDSTONE_SLAB, RED_ARID_SANDSTONE_WALL,
+						CHISELED_RED_ARID_SANDSTONE, SMOOTH_RED_ARID_SANDSTONE, SMOOTH_RED_ARID_SANDSTONE_STAIRS, SMOOTH_RED_ARID_SANDSTONE_SLAB,
+						CUT_RED_ARID_SANDSTONE, CUT_RED_ARID_SANDSTONE_SLAB,
+						CARMINE_BLOCK, CARMINE_SHINGLES, CARMINE_SHINGLE_STAIRS, CARMINE_SHINGLE_SLAB, CARMINE_SHINGLE_WALL, CHISELED_CARMINE_SHINGLES,
+						CARMINE_PAVEMENT, CARMINE_PAVEMENT_STAIRS, CARMINE_PAVEMENT_SLAB, CARMINE_PAVEMENT_WALL
+				)
+				.addItemsBefore(of(Blocks.BRICKS),
+						IVORY_TRAVERTINE, CHISELED_IVORY_TRAVERTINE, CUT_IVORY_TRAVERTINE, IVORY_TRAVERTINE_STAIRS, IVORY_TRAVERTINE_SLAB, IVORY_TRAVERTINE_WALL,
+						PEACH_TRAVERTINE, CHISELED_PEACH_TRAVERTINE, CUT_PEACH_TRAVERTINE, PEACH_TRAVERTINE_STAIRS, PEACH_TRAVERTINE_SLAB, PEACH_TRAVERTINE_WALL,
+						PERSIMMON_TRAVERTINE, CHISELED_PERSIMMON_TRAVERTINE, CUT_PERSIMMON_TRAVERTINE, PERSIMMON_TRAVERTINE_STAIRS, PERSIMMON_TRAVERTINE_SLAB, PERSIMMON_TRAVERTINE_WALL,
+						SAFFRON_TRAVERTINE, CHISELED_SAFFRON_TRAVERTINE, CUT_SAFFRON_TRAVERTINE, SAFFRON_TRAVERTINE_STAIRS, SAFFRON_TRAVERTINE_SLAB, SAFFRON_TRAVERTINE_WALL,
+						DOLERITE, DOLERITE_STAIRS, DOLERITE_SLAB, DOLERITE_WALL, POLISHED_DOLERITE, POLISHED_DOLERITE_STAIRS, POLISHED_DOLERITE_SLAB
+				)
+				.tab(FUNCTIONAL_BLOCKS)
+				.addItemsBefore(of(Blocks.BAMBOO_SIGN), ROSEWOOD_SIGNS.getFirst(), MORADO_SIGNS.getFirst(), YUCCA_SIGNS.getFirst(), LAUREL_SIGNS.getFirst(), ASPEN_SIGNS.getFirst(), KOUSA_SIGNS.getFirst(), GRIMWOOD_SIGNS.getFirst())
+				.tab(NATURAL_BLOCKS)
+				.addItemsBefore(of(Blocks.DIRT_PATH), CRUSTOSE)
+				.addItemsBefore(of(Blocks.DIRT), CRUSTOSE_PATH)
+				.addItemsBefore(of(Blocks.ICE), ARID_SAND, ARID_SANDSTONE, RED_ARID_SAND, RED_ARID_SANDSTONE)
+				.addItemsBefore(of(Blocks.MUSHROOM_STEM), ROSEWOOD_LOG, MORADO_LOG, YUCCA_LOG, LAUREL_LOG, ASPEN_LOG, WATCHFUL_ASPEN_LOG, CRUSTOSE_LOG, KOUSA_LOG, GRIMWOOD_LOG)
+				.addItemsBefore(of(Blocks.TORCHFLOWER), WARM_MONKEY_BRUSH, HOT_MONKEY_BRUSH, SCALDING_MONKEY_BRUSH, YUCCA_FLOWER, GILIA, FIRETHORN, FORSYTHIA)
+				.addItemsBefore(of(Blocks.PITCHER_PLANT), TALL_YUCCA_FLOWER)
+				.addItemsBefore(of(Blocks.LILY_PAD), YUCCA_BRANCH, DRAGON_ROOTS, HANGING_CURRANT)
+				.addItemsAfter(of(Blocks.LILY_PAD), WATER_HYACINTH)
+				.addItemsAfter(of(Blocks.VINE), PASSION_VINE)
+				.addItemsAfter(of(Blocks.FERN), AGAVE, GOLDEN_GROWTHS, ARID_SPROUTS)
+				.addItemsAfter(of(Blocks.CACTUS), BARREL_CACTUS)
+				.addItemsAfter(modLoaded(Blocks.HAY_BLOCK, "quark"), BARREL_CACTUS_BATCH, PASSION_FRUIT_CRATE, SHIMMERING_PASSION_FRUIT_CRATE, ORANGE_CRATE, BLOOD_ORANGE_CRATE, DRAGON_FRUIT_CRATE, GOLDEN_DRAGON_FRUIT_CRATE, YUCCA_CASK, ROASTED_YUCCA_CASK, CURRANT_CRATE)
+				.addItemsAfter(of(Blocks.HAY_BLOCK), PASSION_VINE_BUNDLE, YUCCA_BUNDLE, ROASTED_YUCCA_BUNDLE, ALOE_BUNDLE)
+				.addItemsBefore(of(Blocks.OAK_LEAVES), CURRANT_STALK, CURRANT_STALK_BUNDLE)
+				.addItemsBefore(of(Blocks.AZALEA_LEAVES), ROSEWOOD_LEAVES)
+				.addItemsBefore(modLoaded(Blocks.AZALEA_LEAVES, "woodworks"), ROSEWOOD_LEAF_PILE)
+				.addItemsBefore(of(Blocks.AZALEA_LEAVES), MORADO_LEAVES)
+				.addItemsBefore(modLoaded(Blocks.AZALEA_LEAVES, "woodworks"), MORADO_LEAF_PILE)
+				.addItemsBefore(of(Blocks.AZALEA_LEAVES), FLOWERING_MORADO_LEAVES)
+				.addItemsBefore(modLoaded(Blocks.AZALEA_LEAVES, "woodworks"), FLOWERING_MORADO_LEAF_PILE)
+				.addItemsBefore(of(Blocks.AZALEA_LEAVES), YUCCA_LEAVES)
+				.addItemsBefore(modLoaded(Blocks.AZALEA_LEAVES, "woodworks"), YUCCA_LEAF_PILE)
+				.addItemsBefore(of(Blocks.AZALEA_LEAVES), LAUREL_LEAVES)
+				.addItemsBefore(modLoaded(Blocks.AZALEA_LEAVES, "woodworks"), LAUREL_LEAF_PILE)
+				.addItemsBefore(of(Blocks.AZALEA_LEAVES), DRY_LAUREL_LEAVES)
+				.addItemsBefore(modLoaded(Blocks.AZALEA_LEAVES, "woodworks"), DRY_LAUREL_LEAF_PILE)
+				.addItemsBefore(of(Blocks.AZALEA_LEAVES), ASPEN_LEAVES)
+				.addItemsBefore(modLoaded(Blocks.AZALEA_LEAVES, "woodworks"), ASPEN_LEAF_PILE)
+				.addItemsBefore(of(Blocks.AZALEA_LEAVES), GREEN_ASPEN_LEAVES)
+				.addItemsBefore(modLoaded(Blocks.AZALEA_LEAVES, "woodworks"), GREEN_ASPEN_LEAF_PILE)
+				.addItemsBefore(of(Blocks.AZALEA_LEAVES), KOUSA_LEAVES)
+				.addItemsBefore(modLoaded(Blocks.AZALEA_LEAVES, "woodworks"), KOUSA_LEAF_PILE)
+				.addItemsBefore(of(Blocks.AZALEA_LEAVES), CURRANT_LEAVES)
+				.addItemsBefore(modLoaded(Blocks.AZALEA_LEAVES, "woodworks"), CURRANT_LEAF_PILE)
+				.addItemsBefore(of(Blocks.AZALEA_LEAVES), GRIMWOOD_LEAVES)
+				.addItemsBefore(modLoaded(Blocks.AZALEA_LEAVES, "woodworks"), GRIMWOOD_LEAF_PILE)
+				.addItemsBefore(of(Blocks.AZALEA), ROSEWOOD_SAPLING, MORADO_SAPLING, YUCCA_SAPLING, LAUREL_SAPLING, DRY_LAUREL_SAPLING, ASPEN_SAPLING, GREEN_ASPEN_SAPLING, KOUSA_SAPLING, CURRANT_SEEDLING, GRIMWOOD_SAPLING)
+				.addItemsAfter(of(Blocks.HONEY_BLOCK), ALOE_GEL_BLOCK)
+				.tab(REDSTONE_BLOCKS)
+				.addItemsAfter(of(Blocks.HONEY_BLOCK), ALOE_GEL_BLOCK);
+
+		CreativeModeTabContentsPopulator.mod("woodworks_1")
+				.tab(FUNCTIONAL_BLOCKS)
+				.addItemsBefore(ofID(AtmosphericConstants.BAMBOO_LADDER), ROSEWOOD_LADDER, MORADO_LADDER, YUCCA_LADDER, LAUREL_LADDER, ASPEN_LADDER, KOUSA_LADDER, GRIMWOOD_LADDER)
+				.addItemsBefore(ofID(AtmosphericConstants.BAMBOO_BEEHIVE), ROSEWOOD_BEEHIVE, MORADO_BEEHIVE, YUCCA_BEEHIVE, LAUREL_BEEHIVE, ASPEN_BEEHIVE, KOUSA_BEEHIVE, GRIMWOOD_BEEHIVE)
+				.addItemsBefore(ofID(AtmosphericConstants.BAMBOO_BOOKSHELF), ROSEWOOD_BOOKSHELF, MORADO_BOOKSHELF, YUCCA_BOOKSHELF, LAUREL_BOOKSHELF, ASPEN_BOOKSHELF, KOUSA_BOOKSHELF, GRIMWOOD_BOOKSHELF)
+				.addItemsBefore(ofID(AtmosphericConstants.BAMBOO_CLOSET), ROSEWOOD_CHEST, MORADO_CHEST, YUCCA_CHEST, LAUREL_CHEST, ASPEN_CHEST, KOUSA_CHEST, GRIMWOOD_CHEST)
+				.tab(REDSTONE_BLOCKS)
+				.addItemsBefore(ofID(AtmosphericConstants.TRAPPED_BAMBOO_CLOSET), TRAPPED_ROSEWOOD_CHEST, TRAPPED_MORADO_CHEST, TRAPPED_YUCCA_CHEST, TRAPPED_LAUREL_CHEST, TRAPPED_ASPEN_CHEST, TRAPPED_KOUSA_CHEST, TRAPPED_GRIMWOOD_CHEST);
+	}
+
+	public static Predicate<ItemStack> modLoaded(ItemLike item, String... modids) {
+		return stack -> of(item).test(stack) && BlockSubRegistryHelper.areModsLoaded(modids);
+	}
+
+	public static Predicate<ItemStack> ofID(ResourceLocation location, ItemLike fallback, String... modids) {
+		return stack -> (BlockSubRegistryHelper.areModsLoaded(modids) ? of(ForgeRegistries.ITEMS.getValue(location)) : of(fallback)).test(stack);
+	}
+
+	public static Predicate<ItemStack> ofID(ResourceLocation location, String... modids) {
+		return stack -> (BlockSubRegistryHelper.areModsLoaded(modids) && of(ForgeRegistries.ITEMS.getValue(location)).test(stack));
+	}
+
 }
