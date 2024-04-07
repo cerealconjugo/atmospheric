@@ -19,7 +19,7 @@
           },
           {
             "type": "woodworks:config",
-            "value": "wooden_ladders_in_structures"
+            "value": "wooden_ladders_in_villages"
           }
         ]
       }

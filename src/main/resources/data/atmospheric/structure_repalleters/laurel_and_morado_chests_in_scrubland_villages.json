@@ -28,7 +28,7 @@
           },
           {
             "type": "woodworks:config",
-            "value": "wooden_chests_in_structures"
+            "value": "wooden_chests_in_villages"
           }
         ]
       }
