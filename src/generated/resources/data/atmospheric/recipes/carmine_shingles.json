@@ -3,19 +3,15 @@
   "category": "building",
   "key": {
     "#": {
-      "item": "minecraft:stone_bricks"
-    },
-    "S": {
       "item": "atmospheric:carmine_husk"
     }
   },
   "pattern": [
-    "###",
-    "#S#",
-    "###"
+    "##",
+    "##"
   ],
   "result": {
-    "count": 8,
+    "count": 4,
     "item": "atmospheric:carmine_shingles"
   },
   "show_notification": true
