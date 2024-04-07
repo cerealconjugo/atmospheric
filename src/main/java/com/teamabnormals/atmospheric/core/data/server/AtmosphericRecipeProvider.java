@@ -9,6 +9,9 @@ import com.teamabnormals.blueprint.core.other.tags.BlueprintItemTags;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.ItemTags;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
@@ -39,6 +42,10 @@ public class AtmosphericRecipeProvider extends RecipeProvider {
 		oneToOneConversionRecipe(consumer, Items.RED_DYE, AtmosphericBlocks.FIRETHORN.get(), "red_dye");
 		oneToOneConversionRecipe(consumer, Items.YELLOW_DYE, AtmosphericBlocks.FORSYTHIA.get(), "yellow_dye");
 		oneToOneConversionRecipe(consumer, Items.PINK_DYE, AtmosphericItems.DRAGON_FRUIT.get(), "pink_dye");
+
+		trimRecipes(consumer, AtmosphericItems.APOSTLE_ARMOR_TRIM_SMITHING_TEMPLATE.get(), AtmosphericBlocks.STRIPPED_KOUSA_LOG.get());
+		trimRecipes(consumer, AtmosphericItems.DRUID_ARMOR_TRIM_SMITHING_TEMPLATE.get(), AtmosphericBlocks.RED_ARID_SANDSTONE.get());
+		trimRecipes(consumer, AtmosphericItems.PETRIFIED_ARMOR_TRIM_SMITHING_TEMPLATE.get(), AtmosphericBlocks.ARID_SANDSTONE.get());
 
 		ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, AtmosphericItems.CURRANT_MUFFIN.get()).requires(AtmosphericItemTags.FRUITS_CURRANT).requires(AtmosphericItemTags.FRUITS_CURRANT).requires(AtmosphericItemTags.FRUITS_CURRANT).requires(Items.SUGAR).requires(Tags.Items.EGGS).unlockedBy("has_currant", has(AtmosphericItemTags.FRUITS_CURRANT)).save(consumer);
 		conditionalNineBlockStorageRecipes(consumer, APPLE_CRATE, RecipeCategory.FOOD, AtmosphericItems.CURRANT.get(), RecipeCategory.BUILDING_BLOCKS, AtmosphericBlocks.CURRANT_CRATE.get());
@@ -129,5 +136,23 @@ public class AtmosphericRecipeProvider extends RecipeProvider {
 
 	public static void stonecutterResultFromBase(Consumer<FinishedRecipe> p_176547_, RecipeCategory category, ItemLike p_176548_, ItemLike p_176549_, int p_176550_) {
 		SingleItemRecipeBuilder.stonecutting(Ingredient.of(p_176549_), category, p_176548_, p_176550_).unlockedBy(getHasName(p_176549_), has(p_176549_)).save(p_176547_, getModConversionRecipeName(p_176548_, p_176549_) + "_stonecutting");
+	}
+
+	private static ResourceLocation suffix(ResourceLocation rl, String suffix) {
+		return new ResourceLocation(rl.getNamespace(), rl.getPath() + suffix);
+	}
+
+	public static void trimSmithing(Consumer<FinishedRecipe> consumer, ItemLike item) {
+		SmithingTrimRecipeBuilder.smithingTrim(Ingredient.of(item), Ingredient.of(ItemTags.TRIMMABLE_ARMOR), Ingredient.of(ItemTags.TRIM_MATERIALS), RecipeCategory.MISC).unlocks("has_smithing_trim_template", has(item)).save(consumer, suffix(RecipeBuilder.getDefaultRecipeId(item), "_smithing_trim"));
+	}
+
+	public static void trimRecipes(Consumer<FinishedRecipe> consumer, ItemLike item, TagKey<Item> copyItem) {
+		trimSmithing(consumer, item);
+		copySmithingTemplate(consumer, item, copyItem);
+	}
+
+	public static void trimRecipes(Consumer<FinishedRecipe> consumer, ItemLike item, ItemLike copyItem) {
+		trimSmithing(consumer, item);
+		copySmithingTemplate(consumer, item, copyItem);
 	}
 }

@@ -2,13 +2,12 @@ package com.teamabnormals.atmospheric.core.data.server;
 
 import com.teamabnormals.atmospheric.core.Atmospheric;
 import com.teamabnormals.atmospheric.core.other.AtmosphericDamageTypes;
+import com.teamabnormals.atmospheric.core.registry.AtmosphericNoiseParameters;
+import com.teamabnormals.atmospheric.core.registry.builtin.*;
 import com.teamabnormals.atmospheric.core.other.AtmosphericBiomeSlices;
 import com.teamabnormals.atmospheric.core.registry.AtmosphericFeatures.AtmosphericConfiguredFeatures;
 import com.teamabnormals.atmospheric.core.registry.AtmosphericFeatures.AtmosphericPlacedFeatures;
-import com.teamabnormals.atmospheric.core.registry.builtin.AtmosphericBiomeModifiers;
 import com.teamabnormals.atmospheric.core.registry.AtmosphericBiomes;
-import com.teamabnormals.atmospheric.core.registry.AtmosphericNoiseParameters;
-import com.teamabnormals.atmospheric.core.registry.builtin.AtmosphericStructureRepaletters;
 import com.teamabnormals.blueprint.core.registry.BlueprintDataPackRegistries;
 import net.minecraft.core.HolderLookup.Provider;
 import net.minecraft.core.RegistrySetBuilder;
@@ -27,8 +26,9 @@ public class AtmosphericDatapackBuiltinEntriesProvider extends DatapackBuiltinEn
 			.add(Registries.PLACED_FEATURE, AtmosphericPlacedFeatures::bootstrap)
 			.add(Registries.NOISE, AtmosphericNoiseParameters::bootstrap)
 			.add(Registries.BIOME, AtmosphericBiomes::bootstrap)
-			.add(BlueprintDataPackRegistries.STRUCTURE_REPALETTERS, AtmosphericStructureRepaletters::bootstrap)
 			.add(Registries.DAMAGE_TYPE, AtmosphericDamageTypes::bootstrap)
+			.add(Registries.TRIM_PATTERN, AtmosphericTrimPatterns::bootstrap)
+			.add(BlueprintDataPackRegistries.STRUCTURE_REPALETTERS, AtmosphericStructureRepaletters::bootstrap)
 			.add(BlueprintDataPackRegistries.MODDED_BIOME_SLICES, AtmosphericBiomeSlices::bootstrap)
 			.add(ForgeRegistries.Keys.BIOME_MODIFIERS, AtmosphericBiomeModifiers::bootstrap);
 

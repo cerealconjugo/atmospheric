@@ -5,6 +5,7 @@ import com.teamabnormals.atmospheric.common.item.*;
 import com.teamabnormals.atmospheric.core.Atmospheric;
 import com.teamabnormals.atmospheric.core.other.AtmosphericEvents;
 import com.teamabnormals.atmospheric.core.other.tags.AtmosphericBannerPatternTags;
+import com.teamabnormals.atmospheric.core.registry.builtin.AtmosphericTrimPatterns;
 import com.teamabnormals.atmospheric.integration.boatload.AtmosphericBoatTypes;
 import com.teamabnormals.blueprint.core.util.registry.ItemSubRegistryHelper;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -56,6 +57,10 @@ public class AtmosphericItems {
 	public static final RegistryObject<Item> SCYTHE_POTTERY_SHERD = HELPER.createItem("scythe_pottery_sherd", () -> new Item(new Item.Properties()));
 	public static final RegistryObject<Item> SUCCULENT_POTTERY_SHERD = HELPER.createItem("succulent_pottery_sherd", () -> new Item(new Item.Properties()));
 	public static final RegistryObject<Item> SUN_POTTERY_SHERD = HELPER.createItem("sun_pottery_sherd", () -> new Item(new Item.Properties()));
+
+	public static final RegistryObject<Item> APOSTLE_ARMOR_TRIM_SMITHING_TEMPLATE = HELPER.createItem("apostle_armor_trim_smithing_template", () -> SmithingTemplateItem.createArmorTrimTemplate(AtmosphericTrimPatterns.APOSTLE));
+	public static final RegistryObject<Item> DRUID_ARMOR_TRIM_SMITHING_TEMPLATE = HELPER.createItem("druid_armor_trim_smithing_template", () -> SmithingTemplateItem.createArmorTrimTemplate(AtmosphericTrimPatterns.DRUID));
+	public static final RegistryObject<Item> PETRIFIED_ARMOR_TRIM_SMITHING_TEMPLATE = HELPER.createItem("petrified_armor_trim_smithing_template", () -> SmithingTemplateItem.createArmorTrimTemplate(AtmosphericTrimPatterns.PETRIFIED));
 
 	public static final Pair<RegistryObject<Item>, RegistryObject<Item>> ROSEWOOD_BOAT = HELPER.createBoatAndChestBoatItem("rosewood", AtmosphericBlocks.ROSEWOOD_PLANKS);
 	public static final RegistryObject<Item> ROSEWOOD_FURNACE_BOAT = HELPER.createItem("rosewood_furnace_boat", ModList.get().isLoaded("boatload") ? AtmosphericBoatTypes.ROSEWOOD_FURNACE_BOAT : () -> new Item(new Item.Properties()));
