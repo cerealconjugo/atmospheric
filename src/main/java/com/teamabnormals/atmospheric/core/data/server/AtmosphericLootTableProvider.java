@@ -29,6 +29,7 @@ import net.minecraft.world.level.block.DoublePlantBlock;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import net.minecraft.world.level.storage.loot.*;
 import net.minecraft.world.level.storage.loot.LootTable.Builder;
+import net.minecraft.world.level.storage.loot.entries.EmptyLootItem;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.entries.LootPoolEntryContainer;
 import net.minecraft.world.level.storage.loot.functions.*;
@@ -537,6 +538,9 @@ public class AtmosphericLootTableProvider extends LootTableProvider {
 					.withPool(LootPool.lootPool().setRolls(UniformGenerator.between(0.0F, 1.0F))
 							.add(LootItem.lootTableItem(Items.SHEARS))
 					)
+					.withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F))
+							.add(EmptyLootItem.emptyItem().setWeight(2))
+							.add(LootItem.lootTableItem(AtmosphericItems.APOSTLE_ARMOR_TRIM_SMITHING_TEMPLATE.get()).setWeight(1).apply(SetItemCountFunction.setCount(ConstantValue.exactly(2.0F)))))
 			);
 
 			consumer.accept(Atmospheric.location("chests/village/village_scrubland"), LootTable.lootTable()
