@@ -51,15 +51,15 @@ public class AtmosphericRecipeProvider extends RecipeProvider {
 		conditionalNineBlockStorageRecipes(consumer, APPLE_CRATE, RecipeCategory.FOOD, AtmosphericItems.CURRANT.get(), RecipeCategory.BUILDING_BLOCKS, AtmosphericBlocks.CURRANT_CRATE.get());
 
 		nineBlockStorageRecipes(consumer, RecipeCategory.MISC, AtmosphericItems.CARMINE_HUSK.get(), RecipeCategory.BUILDING_BLOCKS, AtmosphericBlocks.CARMINE_BLOCK.get());
-		ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, AtmosphericBlocks.CARMINE_SHINGLES.get(), 4).define('#', AtmosphericItems.CARMINE_HUSK.get()).pattern("##").pattern("##").unlockedBy("has_carmine_husk", has(AtmosphericItems.CARMINE_HUSK.get())).save(consumer);
-		ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, AtmosphericBlocks.CARMINE_PAVEMENT.get(), 4).define('#', AtmosphericBlocks.CARMINE_SHINGLES.get()).pattern("##").pattern("##").unlockedBy("has_carmine_shingles", has(AtmosphericBlocks.CARMINE_SHINGLES.get())).save(consumer);
 
+		ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, AtmosphericBlocks.CARMINE_SHINGLES.get(), 8).define('#', Blocks.STONE_BRICKS).define('S', AtmosphericItems.CARMINE_HUSK.get()).pattern("###").pattern("#S#").pattern("###").unlockedBy("has_carmine_husk", has(AtmosphericItems.CARMINE_HUSK.get())).save(consumer);
 		generateRecipes(consumer, AtmosphericBlockFamilies.CARMINE_SHINGLES_FAMILY);
 		stonecutterResultFromBase(consumer, RecipeCategory.BUILDING_BLOCKS, AtmosphericBlocks.CARMINE_SHINGLE_SLAB.get(), AtmosphericBlocks.CARMINE_SHINGLES.get(), 2);
 		stonecutterResultFromBase(consumer, RecipeCategory.BUILDING_BLOCKS, AtmosphericBlocks.CARMINE_SHINGLE_STAIRS.get(), AtmosphericBlocks.CARMINE_SHINGLES.get());
 		stonecutterResultFromBase(consumer, RecipeCategory.DECORATIONS, AtmosphericBlocks.CARMINE_SHINGLE_WALL.get(), AtmosphericBlocks.CARMINE_SHINGLES.get());
 		stonecutterResultFromBase(consumer, RecipeCategory.BUILDING_BLOCKS, AtmosphericBlocks.CHISELED_CARMINE_SHINGLES.get(), AtmosphericBlocks.CARMINE_SHINGLES.get());
 
+		ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, AtmosphericBlocks.CARMINE_PAVEMENT.get(), 4).define('#', AtmosphericBlocks.CARMINE_SHINGLES.get()).pattern("##").pattern("##").unlockedBy("has_carmine_shingles", has(AtmosphericBlocks.CARMINE_SHINGLES.get())).save(consumer);
 		generateRecipes(consumer, AtmosphericBlockFamilies.CARMINE_PAVEMENT_FAMILY);
 		stonecutterResultFromBase(consumer, RecipeCategory.BUILDING_BLOCKS, AtmosphericBlocks.CARMINE_PAVEMENT_SLAB.get(), AtmosphericBlocks.CARMINE_PAVEMENT.get(), 2);
 		stonecutterResultFromBase(consumer, RecipeCategory.BUILDING_BLOCKS, AtmosphericBlocks.CARMINE_PAVEMENT_STAIRS.get(), AtmosphericBlocks.CARMINE_PAVEMENT.get());
