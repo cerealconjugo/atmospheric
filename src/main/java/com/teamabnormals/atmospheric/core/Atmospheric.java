@@ -70,6 +70,7 @@ public class Atmospheric {
 		bus.addListener(this::dataSetup);
 
 		DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> {
+			AtmosphericItems.setupTabEditors();
 			bus.addListener(this::registerLayerDefinitions);
 			bus.addListener(this::registerRenderers);
 		});

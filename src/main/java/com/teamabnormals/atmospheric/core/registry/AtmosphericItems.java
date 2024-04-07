@@ -7,15 +7,28 @@ import com.teamabnormals.atmospheric.core.other.AtmosphericEvents;
 import com.teamabnormals.atmospheric.core.other.tags.AtmosphericBannerPatternTags;
 import com.teamabnormals.atmospheric.core.registry.builtin.AtmosphericTrimPatterns;
 import com.teamabnormals.atmospheric.integration.boatload.AtmosphericBoatTypes;
+import com.teamabnormals.blueprint.core.util.item.CreativeModeTabContentsPopulator;
+import com.teamabnormals.blueprint.core.util.registry.BlockSubRegistryHelper;
 import com.teamabnormals.blueprint.core.util.registry.ItemSubRegistryHelper;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.*;
+import net.minecraft.world.level.ItemLike;
 import net.minecraftforge.common.ForgeSpawnEggItem;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
+import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
+
+import java.util.function.Predicate;
+
+import static com.teamabnormals.blueprint.core.util.item.ItemStackUtil.is;
+import static net.minecraft.world.item.CreativeModeTabs.*;
+import static net.minecraft.world.item.CreativeModeTabs.SPAWN_EGGS;
+import static net.minecraft.world.item.crafting.Ingredient.of;
 
 @EventBusSubscriber(modid = Atmospheric.MOD_ID, bus = EventBusSubscriber.Bus.MOD)
 public class AtmosphericItems {
@@ -91,6 +104,57 @@ public class AtmosphericItems {
 	public static final RegistryObject<Item> LARGE_GRIMWOOD_BOAT = HELPER.createItem("large_grimwood_boat", ModList.get().isLoaded("boatload") ? AtmosphericBoatTypes.LARGE_GRIMWOOD_BOAT : () -> new Item(new Item.Properties()));
 
 	public static final RegistryObject<ForgeSpawnEggItem> COCHINEAL_SPAWN_EGG = HELPER.createSpawnEggItem("cochineal", AtmosphericEntityTypes.COCHINEAL::get, 0xEF5B58, 0xAA3D3A);
+
+	public static void setupTabEditors() {
+		CreativeModeTabContentsPopulator.mod(Atmospheric.MOD_ID)
+				.tab(FOOD_AND_DRINKS)
+				.addItemsAfter(of(Items.MELON_SLICE), PASSION_FRUIT, SHIMMERING_PASSION_FRUIT, ORANGE, BLOOD_ORANGE, DRAGON_FRUIT, GOLDEN_DRAGON_FRUIT, YUCCA_FRUIT, ROASTED_YUCCA_FRUIT)
+				.addItemsBefore(of(Items.CHORUS_FRUIT), CURRANT)
+				.addItemsBefore(of(Items.PUMPKIN_PIE), YUCCA_GATEAU)
+				.addItemsAfter(of(Items.PUMPKIN_PIE), PASSION_FRUIT_TART, CANDIED_ORANGE_SLICES, ORANGE_PUDDING, CURRANT_MUFFIN)
+				.addItemsBefore(of(Items.MILK_BUCKET), PASSION_FRUIT_SORBET, ORANGE_SORBET)
+				.addItemsAfter(of(Items.DRIED_KELP), ALOE_LEAVES)
+				.addItemsAfter(of(Items.HONEY_BOTTLE), ALOE_GEL_BOTTLE)
+				.tab(NATURAL_BLOCKS)
+				.addItemsAfter(of(Items.BEETROOT_SEEDS), ALOE_KERNELS)
+				.tab(INGREDIENTS)
+				.addItemsAfter(of(Items.HONEYCOMB), CARMINE_HUSK, YELLOW_BLOSSOMS)
+				.addItemsAfter(of(Items.WILD_ARMOR_TRIM_SMITHING_TEMPLATE), APOSTLE_ARMOR_TRIM_SMITHING_TEMPLATE)
+				.addItemsAfter(of(Items.DUNE_ARMOR_TRIM_SMITHING_TEMPLATE), PETRIFIED_ARMOR_TRIM_SMITHING_TEMPLATE, DRUID_ARMOR_TRIM_SMITHING_TEMPLATE)
+				.addItemsAlphabetically(stack -> stack.is(ItemTags.DECORATED_POT_SHERDS), SCYTHE_POTTERY_SHERD, SUCCULENT_POTTERY_SHERD, SUN_POTTERY_SHERD)
+				.addItemsAfter(of(Items.GLOBE_BANNER_PATTERN), COCHINEAL_BANNER_PATTERN)
+				.tab(TOOLS_AND_UTILITIES)
+				.addItemsBefore(of(Items.ENDER_PEARL), PASSION_VINE_COIL)
+				.addItemsBefore(of(Items.BAMBOO_RAFT), ROSEWOOD_BOAT.getFirst(), ROSEWOOD_BOAT.getSecond())
+				.addItemsBefore(modLoaded(Items.BAMBOO_RAFT, "boatload"), ROSEWOOD_FURNACE_BOAT, LARGE_ROSEWOOD_BOAT)
+				.addItemsBefore(of(Items.BAMBOO_RAFT), MORADO_BOAT.getFirst(), MORADO_BOAT.getSecond())
+				.addItemsBefore(modLoaded(Items.BAMBOO_RAFT, "boatload"), MORADO_FURNACE_BOAT, LARGE_MORADO_BOAT)
+				.addItemsBefore(of(Items.BAMBOO_RAFT), YUCCA_BOAT.getFirst(), YUCCA_BOAT.getSecond())
+				.addItemsBefore(modLoaded(Items.BAMBOO_RAFT, "boatload"), YUCCA_FURNACE_BOAT, LARGE_YUCCA_BOAT)
+				.addItemsBefore(of(Items.BAMBOO_RAFT), KOUSA_BOAT.getFirst(), KOUSA_BOAT.getSecond())
+				.addItemsBefore(modLoaded(Items.BAMBOO_RAFT, "boatload"), KOUSA_FURNACE_BOAT, LARGE_KOUSA_BOAT)
+				.addItemsBefore(of(Items.BAMBOO_RAFT), ASPEN_BOAT.getFirst(), ASPEN_BOAT.getSecond())
+				.addItemsBefore(modLoaded(Items.BAMBOO_RAFT, "boatload"), ASPEN_FURNACE_BOAT, LARGE_ASPEN_BOAT)
+				.addItemsBefore(of(Items.BAMBOO_RAFT), LAUREL_BOAT.getFirst(), LAUREL_BOAT.getSecond())
+				.addItemsBefore(modLoaded(Items.BAMBOO_RAFT, "boatload"), LAUREL_FURNACE_BOAT, LARGE_LAUREL_BOAT)
+				.addItemsBefore(of(Items.BAMBOO_RAFT), GRIMWOOD_BOAT.getFirst(), GRIMWOOD_BOAT.getSecond())
+				.addItemsBefore(modLoaded(Items.BAMBOO_RAFT, "boatload"), GRIMWOOD_FURNACE_BOAT, LARGE_GRIMWOOD_BOAT)
+				.tab(SPAWN_EGGS)
+				.addItemsAlphabetically(is(SpawnEggItem.class),COCHINEAL_SPAWN_EGG);
+	}
+
+	public static Predicate<ItemStack> modLoaded(ItemLike item, String... modids) {
+		return stack -> of(item).test(stack) && BlockSubRegistryHelper.areModsLoaded(modids);
+	}
+
+	public static Predicate<ItemStack> ofID(ResourceLocation location, ItemLike fallback, String... modids) {
+		return stack -> (BlockSubRegistryHelper.areModsLoaded(modids) ? of(ForgeRegistries.ITEMS.getValue(location)) : of(fallback)).test(stack);
+	}
+
+	public static Predicate<ItemStack> ofID(ResourceLocation location, String... modids) {
+		return stack -> (BlockSubRegistryHelper.areModsLoaded(modids) && of(ForgeRegistries.ITEMS.getValue(location)).test(stack));
+	}
+
 
 	public static final class AtmosphericFoods {
 		public static final FoodProperties PASSION_FRUIT = new FoodProperties.Builder().nutrition(1).saturationMod(0.1F).fast().alwaysEat().effect(() -> new MobEffectInstance(AtmosphericMobEffects.SPITTING.get(), 140, 0, false, false, false), 1.0F).build();
