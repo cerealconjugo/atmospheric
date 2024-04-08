@@ -55,7 +55,8 @@ public class AtmosphericLootTableProvider extends LootTableProvider {
 		super(output, BuiltInLootTables.all(), ImmutableList.of(
 				new LootTableProvider.SubProviderEntry(AtmosphericBlockLoot::new, LootContextParamSets.BLOCK),
 				new LootTableProvider.SubProviderEntry(AtmosphericEntityLoot::new, LootContextParamSets.ENTITY),
-				new LootTableProvider.SubProviderEntry(AtmosphericChestLoot::new, LootContextParamSets.CHEST)
+				new LootTableProvider.SubProviderEntry(AtmosphericChestLoot::new, LootContextParamSets.CHEST),
+				new LootTableProvider.SubProviderEntry(AtmosphericArchaeologyLoot::new, LootContextParamSets.ARCHAEOLOGY)
 		));
 	}
 
@@ -561,6 +562,36 @@ public class AtmosphericLootTableProvider extends LootTableProvider {
 			consumer.accept(Atmospheric.location("chests/cochineal_farm_dropper"), LootTable.lootTable()
 					.withPool(LootPool.lootPool().setRolls(UniformGenerator.between(3.0F, 4.0F))
 							.add(LootItem.lootTableItem(AtmosphericItems.DRAGON_FRUIT.get()).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 3.0F))))));
+		}
+	}
+
+
+	public static class AtmosphericArchaeologyLoot implements LootTableSubProvider {
+		public static final ResourceLocation ARID_GARDEN_COMMON = Atmospheric.location("archaeology/arid_garden_common");
+		public static final ResourceLocation ARID_GARDEN_RARE = Atmospheric.location("archaeology/arid_garden_rare");
+
+		@Override
+		public void generate(BiConsumer<ResourceLocation, Builder> consumer) {
+			consumer.accept(ARID_GARDEN_COMMON, LootTable.lootTable()
+					.withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F))
+							.add(LootItem.lootTableItem(AtmosphericItems.CARMINE_HUSK.get()))
+							.add(LootItem.lootTableItem(AtmosphericItems.ROASTED_YUCCA_FRUIT.get()))
+							.add(LootItem.lootTableItem(AtmosphericItems.ALOE_KERNELS.get()))
+							.add(LootItem.lootTableItem(AtmosphericItems.ALOE_GEL_BOTTLE.get()))
+							.add(LootItem.lootTableItem(Items.FLOWER_POT))
+							.add(LootItem.lootTableItem(Items.BRICK))
+							.add(LootItem.lootTableItem(Items.DEAD_BUSH))
+							.add(LootItem.lootTableItem(Items.BONE_MEAL))
+							.add(LootItem.lootTableItem(Items.COMPOSTER))
+					));
+
+			consumer.accept(ARID_GARDEN_RARE, LootTable.lootTable()
+					.withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F))
+							.add(LootItem.lootTableItem(AtmosphericItems.SCYTHE_POTTERY_SHERD.get()))
+							.add(LootItem.lootTableItem(AtmosphericItems.SUCCULENT_POTTERY_SHERD.get()))
+							.add(LootItem.lootTableItem(AtmosphericItems.SUN_POTTERY_SHERD.get()))
+							.add(LootItem.lootTableItem(AtmosphericItems.PETRIFIED_ARMOR_TRIM_SMITHING_TEMPLATE.get()))
+					));
 		}
 	}
 }

@@ -1,0 +1,48 @@
+{
+  "type": "minecraft:archaeology",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "atmospheric:carmine_husk"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "atmospheric:roasted_yucca_fruit"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "atmospheric:aloe_kernels"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "atmospheric:aloe_gel_bottle"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:flower_pot"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:brick"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:dead_bush"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:bone_meal"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:composter"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "atmospheric:archaeology/arid_garden_common"
+}
