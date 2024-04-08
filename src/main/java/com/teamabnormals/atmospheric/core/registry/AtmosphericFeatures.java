@@ -77,6 +77,7 @@ public class AtmosphericFeatures {
 	public static final RegistryObject<Feature<NoneFeatureConfiguration>> PASSION_VINE = FEATURES.register("passion_vine", () -> new PassionVineFeature(NoneFeatureConfiguration.CODEC));
 
 	public static final RegistryObject<Feature<NoneFeatureConfiguration>> DRAGON_ROOTS = FEATURES.register("dragon_roots", () -> new DragonRootsFeature(NoneFeatureConfiguration.CODEC));
+	public static final RegistryObject<Feature<NoneFeatureConfiguration>> SUSPICIOUS_ARID_SAND = FEATURES.register("suspicious_arid_sand", () -> new SuspiciousAridSandFeature(NoneFeatureConfiguration.CODEC));
 
 	public static final RegistryObject<Feature<TreeConfiguration>> ROSEWOOD_TREE = FEATURES.register("rosewood_tree", () -> new RainforestTreeFeature(TreeConfiguration.CODEC));
 	public static final RegistryObject<Feature<TreeConfiguration>> YUCCA_TREE = FEATURES.register("yucca_tree", () -> new YuccaTreeFeature(TreeConfiguration.CODEC));
@@ -347,6 +348,8 @@ public class AtmosphericFeatures {
 		public static final ResourceKey<ConfiguredFeature<?, ?>> PATCH_TALL_ALOE_VERA = createKey("patch_tall_aloe_vera");
 		public static final ResourceKey<ConfiguredFeature<?, ?>> PATCH_ALOE_VERA = createKey("patch_aloe_vera");
 
+		public static final ResourceKey<ConfiguredFeature<?, ?>> SUSPICIOUS_ARID_SAND = createKey("suspicious_arid_sand");
+
 		// Aspen Parkland
 
 		public static final ResourceKey<ConfiguredFeature<?, ?>> CRUSTOSE = createKey("crustose");
@@ -515,6 +518,8 @@ public class AtmosphericFeatures {
 			register(context, PATCH_SHORT_ALOE_VERA, Feature.RANDOM_PATCH, FeatureUtils.simplePatchConfiguration(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(AtmosphericBlocks.ALOE_VERA.get().defaultBlockState().setValue(AloeVeraBlock.AGE, 5))), List.of(AtmosphericBlocks.RED_ARID_SAND.get())));
 			register(context, PATCH_TALL_ALOE_VERA, Feature.RANDOM_PATCH, FeatureUtils.simplePatchConfiguration(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(AtmosphericBlocks.TALL_ALOE_VERA.get().defaultBlockState().setValue(AloeVeraTallBlock.AGE, 8))), List.of(AtmosphericBlocks.ARID_SAND.get())));
 			register(context, PATCH_ALOE_VERA, Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(List.of(new WeightedPlacedFeature(placedFeatures.getOrThrow(AtmosphericPlacedFeatures.PATCH_TALL_ALOE_VERA), 0.5F)), placedFeatures.getOrThrow(AtmosphericPlacedFeatures.PATCH_SHORT_ALOE_VERA)));
+
+			register(context, SUSPICIOUS_ARID_SAND, AtmosphericFeatures.SUSPICIOUS_ARID_SAND.get(), NoneFeatureConfiguration.INSTANCE);
 
 			// Aspen Parkland
 
