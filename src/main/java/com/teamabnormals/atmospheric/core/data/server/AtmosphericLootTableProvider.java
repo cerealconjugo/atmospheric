@@ -511,6 +511,9 @@ public class AtmosphericLootTableProvider extends LootTableProvider {
 									.withEffect(MobEffects.SATURATION, UniformGenerator.between(7.0F, 10.0F))
 									.withEffect(MobEffects.WEAKNESS, UniformGenerator.between(6.0F, 8.0F))))
 					)
+					.withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F))
+							.add(EmptyLootItem.emptyItem().setWeight(2))
+							.add(LootItem.lootTableItem(AtmosphericItems.DRUID_ARMOR_TRIM_SMITHING_TEMPLATE.get()).setWeight(1).apply(SetItemCountFunction.setCount(ConstantValue.exactly(2.0F)))))
 			);
 
 			consumer.accept(Atmospheric.location("chests/kousa_sanctum_fire"), LootTable.lootTable()
