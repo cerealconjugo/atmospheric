@@ -1,0 +1,6 @@
+{
+  "parent": "atmospheric:block/chiseled_kousa_bookshelf_slot_bottom_mid",
+  "textures": {
+    "texture": "atmospheric:block/chiseled_kousa_bookshelf_empty"
+  }
+}

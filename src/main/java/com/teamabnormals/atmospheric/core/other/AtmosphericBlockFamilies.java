@@ -25,5 +25,4 @@ public class AtmosphericBlockFamilies {
 
 	public static final BlockFamily CARMINE_SHINGLES_FAMILY = new BlockFamily.Builder(CARMINE_SHINGLES.get()).slab(CARMINE_SHINGLE_SLAB.get()).stairs(CARMINE_SHINGLE_STAIRS.get()).wall(CARMINE_SHINGLE_WALL.get()).chiseled(CHISELED_CARMINE_SHINGLES.get()).getFamily();
 	public static final BlockFamily CARMINE_PAVEMENT_FAMILY = new BlockFamily.Builder(CARMINE_PAVEMENT.get()).slab(CARMINE_PAVEMENT_SLAB.get()).stairs(CARMINE_PAVEMENT_STAIRS.get()).wall(CARMINE_PAVEMENT_WALL.get()).getFamily();
-
 }

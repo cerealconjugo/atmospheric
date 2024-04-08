@@ -1,0 +1,6 @@
+{
+  "parent": "atmospheric:block/chiseled_grimwood_bookshelf_slot_bottom_right",
+  "textures": {
+    "texture": "atmospheric:block/chiseled_grimwood_bookshelf_empty"
+  }
+}

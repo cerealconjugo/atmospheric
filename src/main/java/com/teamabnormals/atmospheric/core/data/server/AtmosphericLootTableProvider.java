@@ -224,6 +224,7 @@ public class AtmosphericLootTableProvider extends LootTableProvider {
 			this.dropSelf(STRIPPED_ROSEWOOD_LOG.get());
 			this.dropSelf(STRIPPED_ROSEWOOD.get());
 			this.dropSelf(ROSEWOOD_SIGNS.getFirst().get());
+			this.dropSelf(ROSEWOOD_HANGING_SIGNS.getFirst().get());
 			this.dropSelf(ROSEWOOD_PRESSURE_PLATE.get());
 			this.dropSelf(ROSEWOOD_TRAPDOOR.get());
 			this.dropSelf(ROSEWOOD_BUTTON.get());
@@ -241,6 +242,7 @@ public class AtmosphericLootTableProvider extends LootTableProvider {
 			this.add(ROSEWOOD_CHEST.get(), this::createNameableBlockEntityTable);
 			this.add(TRAPPED_ROSEWOOD_CHEST.get(), this::createNameableBlockEntityTable);
 			this.add(ROSEWOOD_BOOKSHELF.get(), (block) -> createSingleItemTableWithSilkTouch(block, Items.BOOK, ConstantValue.exactly(3.0F)));
+			this.dropWhenSilkTouch(CHISELED_ROSEWOOD_BOOKSHELF.get());
 			this.add(ROSEWOOD_LEAVES.get(), (block) -> createLeavesDrops(block, ROSEWOOD_SAPLING.get(), NORMAL_LEAVES_SAPLING_CHANCES));
 
 			this.dropSelf(MORADO_PLANKS.get());
@@ -249,6 +251,7 @@ public class AtmosphericLootTableProvider extends LootTableProvider {
 			this.dropSelf(STRIPPED_MORADO_LOG.get());
 			this.dropSelf(STRIPPED_MORADO_WOOD.get());
 			this.dropSelf(MORADO_SIGNS.getFirst().get());
+			this.dropSelf(MORADO_HANGING_SIGNS.getFirst().get());
 			this.dropSelf(MORADO_PRESSURE_PLATE.get());
 			this.dropSelf(MORADO_TRAPDOOR.get());
 			this.dropSelf(MORADO_BUTTON.get());
@@ -266,6 +269,7 @@ public class AtmosphericLootTableProvider extends LootTableProvider {
 			this.add(MORADO_CHEST.get(), this::createNameableBlockEntityTable);
 			this.add(TRAPPED_MORADO_CHEST.get(), this::createNameableBlockEntityTable);
 			this.add(MORADO_BOOKSHELF.get(), (block) -> createSingleItemTableWithSilkTouch(block, Items.BOOK, ConstantValue.exactly(3.0F)));
+			this.dropWhenSilkTouch(CHISELED_MORADO_BOOKSHELF.get());
 			this.add(MORADO_LEAVES.get(), (block) -> createLeavesDrops(block, MORADO_SAPLING.get(), NORMAL_LEAVES_SAPLING_CHANCES));
 
 			this.add(FLOWERING_MORADO_LEAF_PILE.get(), this::createLeafPileDrops);
@@ -277,6 +281,7 @@ public class AtmosphericLootTableProvider extends LootTableProvider {
 			this.dropSelf(STRIPPED_YUCCA_LOG.get());
 			this.dropSelf(STRIPPED_YUCCA_WOOD.get());
 			this.dropSelf(YUCCA_SIGNS.getFirst().get());
+			this.dropSelf(YUCCA_HANGING_SIGNS.getFirst().get());
 			this.dropSelf(YUCCA_PRESSURE_PLATE.get());
 			this.dropSelf(YUCCA_TRAPDOOR.get());
 			this.dropSelf(YUCCA_BUTTON.get());
@@ -294,6 +299,7 @@ public class AtmosphericLootTableProvider extends LootTableProvider {
 			this.add(YUCCA_CHEST.get(), this::createNameableBlockEntityTable);
 			this.add(TRAPPED_YUCCA_CHEST.get(), this::createNameableBlockEntityTable);
 			this.add(YUCCA_BOOKSHELF.get(), (block) -> createSingleItemTableWithSilkTouch(block, Items.BOOK, ConstantValue.exactly(3.0F)));
+			this.dropWhenSilkTouch(CHISELED_YUCCA_BOOKSHELF.get());
 			this.add(YUCCA_LEAVES.get(), (block) -> createLeavesDrops(block, YUCCA_SAPLING.get(), NORMAL_LEAVES_SAPLING_CHANCES));
 
 			this.dropSelf(LAUREL_PLANKS.get());
@@ -302,6 +308,7 @@ public class AtmosphericLootTableProvider extends LootTableProvider {
 			this.dropSelf(STRIPPED_LAUREL_LOG.get());
 			this.dropSelf(STRIPPED_LAUREL_WOOD.get());
 			this.dropSelf(LAUREL_SIGNS.getFirst().get());
+			this.dropSelf(LAUREL_HANGING_SIGNS.getFirst().get());
 			this.dropSelf(LAUREL_PRESSURE_PLATE.get());
 			this.dropSelf(LAUREL_TRAPDOOR.get());
 			this.dropSelf(LAUREL_BUTTON.get());
@@ -319,6 +326,7 @@ public class AtmosphericLootTableProvider extends LootTableProvider {
 			this.add(LAUREL_CHEST.get(), this::createNameableBlockEntityTable);
 			this.add(TRAPPED_LAUREL_CHEST.get(), this::createNameableBlockEntityTable);
 			this.add(LAUREL_BOOKSHELF.get(), (block) -> createSingleItemTableWithSilkTouch(block, Items.BOOK, ConstantValue.exactly(3.0F)));
+			this.dropWhenSilkTouch(CHISELED_LAUREL_BOOKSHELF.get());
 			this.add(LAUREL_LEAVES.get(), (block) -> createLeavesDrops(block, LAUREL_SAPLING.get(), NORMAL_LEAVES_SAPLING_CHANCES));
 
 			this.add(DRY_LAUREL_LEAF_PILE.get(), this::createLeafPileDrops);
@@ -339,6 +347,7 @@ public class AtmosphericLootTableProvider extends LootTableProvider {
 			this.add(WATCHFUL_ASPEN_LOG.get(), (block) -> createSingleItemTableWithSilkTouch(block, ASPEN_LOG.get()));
 			this.add(WATCHFUL_ASPEN_WOOD.get(), (block) -> createSingleItemTableWithSilkTouch(block, ASPEN_WOOD.get()));
 			this.dropSelf(ASPEN_SIGNS.getFirst().get());
+			this.dropSelf(ASPEN_HANGING_SIGNS.getFirst().get());
 			this.dropSelf(ASPEN_PRESSURE_PLATE.get());
 			this.dropSelf(ASPEN_TRAPDOOR.get());
 			this.dropSelf(ASPEN_BUTTON.get());
@@ -356,6 +365,7 @@ public class AtmosphericLootTableProvider extends LootTableProvider {
 			this.add(ASPEN_CHEST.get(), this::createNameableBlockEntityTable);
 			this.add(TRAPPED_ASPEN_CHEST.get(), this::createNameableBlockEntityTable);
 			this.add(ASPEN_BOOKSHELF.get(), (block) -> createSingleItemTableWithSilkTouch(block, Items.BOOK, ConstantValue.exactly(3.0F)));
+			this.dropWhenSilkTouch(CHISELED_ASPEN_BOOKSHELF.get());
 			this.add(ASPEN_LEAVES.get(), (block) -> createLeavesDrops(block, ASPEN_SAPLING.get(), NORMAL_LEAVES_SAPLING_CHANCES));
 			this.add(GREEN_ASPEN_LEAVES.get(), (block) -> createLeavesDrops(block, GREEN_ASPEN_SAPLING.get(), NORMAL_LEAVES_SAPLING_CHANCES));
 			this.add(GREEN_ASPEN_LEAF_PILE.get(), this::createLeafPileDrops);
@@ -368,6 +378,7 @@ public class AtmosphericLootTableProvider extends LootTableProvider {
 			this.dropSelf(STRIPPED_KOUSA_LOG.get());
 			this.dropSelf(STRIPPED_KOUSA_WOOD.get());
 			this.dropSelf(KOUSA_SIGNS.getFirst().get());
+			this.dropSelf(KOUSA_HANGING_SIGNS.getFirst().get());
 			this.dropSelf(KOUSA_PRESSURE_PLATE.get());
 			this.dropSelf(KOUSA_TRAPDOOR.get());
 			this.dropSelf(KOUSA_BUTTON.get());
@@ -385,6 +396,7 @@ public class AtmosphericLootTableProvider extends LootTableProvider {
 			this.add(KOUSA_CHEST.get(), this::createNameableBlockEntityTable);
 			this.add(TRAPPED_KOUSA_CHEST.get(), this::createNameableBlockEntityTable);
 			this.add(KOUSA_BOOKSHELF.get(), (block) -> createSingleItemTableWithSilkTouch(block, Items.BOOK, ConstantValue.exactly(3.0F)));
+			this.dropWhenSilkTouch(CHISELED_KOUSA_BOOKSHELF.get());
 			this.add(KOUSA_LEAVES.get(), (block) -> createLeavesDrops(block, KOUSA_SAPLING.get(), NORMAL_LEAVES_SAPLING_CHANCES));
 
 			this.dropSelf(GRIMWOOD_PLANKS.get());
@@ -393,6 +405,7 @@ public class AtmosphericLootTableProvider extends LootTableProvider {
 			this.dropSelf(STRIPPED_GRIMWOOD_LOG.get());
 			this.dropSelf(STRIPPED_GRIMWOOD.get());
 			this.dropSelf(GRIMWOOD_SIGNS.getFirst().get());
+			this.dropSelf(GRIMWOOD_HANGING_SIGNS.getFirst().get());
 			this.dropSelf(GRIMWOOD_PRESSURE_PLATE.get());
 			this.dropSelf(GRIMWOOD_TRAPDOOR.get());
 			this.dropSelf(GRIMWOOD_BUTTON.get());
@@ -410,6 +423,7 @@ public class AtmosphericLootTableProvider extends LootTableProvider {
 			this.add(GRIMWOOD_CHEST.get(), this::createNameableBlockEntityTable);
 			this.add(TRAPPED_GRIMWOOD_CHEST.get(), this::createNameableBlockEntityTable);
 			this.add(GRIMWOOD_BOOKSHELF.get(), (block) -> createSingleItemTableWithSilkTouch(block, Items.BOOK, ConstantValue.exactly(3.0F)));
+			this.dropWhenSilkTouch(CHISELED_GRIMWOOD_BOOKSHELF.get());
 			this.add(GRIMWOOD_LEAVES.get(), (block) -> createLeavesDrops(block, GRIMWOOD_SAPLING.get(), NORMAL_LEAVES_SAPLING_CHANCES));
 		}
 

@@ -84,8 +84,10 @@ public class AtmosphericBlockTagsProvider extends BlockTagsProvider {
 		this.tag(MONKEY_BRUSH).add(WARM_MONKEY_BRUSH.get(), HOT_MONKEY_BRUSH.get(), SCALDING_MONKEY_BRUSH.get(), WARM_WALL_MONKEY_BRUSH.get(), HOT_WALL_MONKEY_BRUSH.get(), SCALDING_WALL_MONKEY_BRUSH.get());
 		this.tag(BlockTags.SMALL_FLOWERS).addTag(MONKEY_BRUSH).add(YUCCA_FLOWER.get(), GILIA.get(), WATER_HYACINTH.get(), FIRETHORN.get(), FORSYTHIA.get());
 		this.tag(BlockTags.STANDING_SIGNS).add(ROSEWOOD_SIGNS.getFirst().get(), MORADO_SIGNS.getFirst().get(), YUCCA_SIGNS.getFirst().get(), KOUSA_SIGNS.getFirst().get(), ASPEN_SIGNS.getFirst().get(), GRIMWOOD_SIGNS.getFirst().get(), LAUREL_SIGNS.getFirst().get());
-		this.tag(BlockTags.TALL_FLOWERS).add(TALL_YUCCA_FLOWER.get());
 		this.tag(BlockTags.WALL_SIGNS).add(ROSEWOOD_SIGNS.getSecond().get(), MORADO_SIGNS.getSecond().get(), YUCCA_SIGNS.getSecond().get(), KOUSA_SIGNS.getSecond().get(), ASPEN_SIGNS.getSecond().get(), GRIMWOOD_SIGNS.getSecond().get(), LAUREL_SIGNS.getSecond().get());
+		this.tag(BlockTags.CEILING_HANGING_SIGNS).add(ROSEWOOD_HANGING_SIGNS.getFirst().get(), MORADO_HANGING_SIGNS.getFirst().get(), YUCCA_HANGING_SIGNS.getFirst().get(), KOUSA_HANGING_SIGNS.getFirst().get(), ASPEN_HANGING_SIGNS.getFirst().get(), GRIMWOOD_HANGING_SIGNS.getFirst().get(), LAUREL_HANGING_SIGNS.getFirst().get());
+		this.tag(BlockTags.WALL_HANGING_SIGNS).add(ROSEWOOD_HANGING_SIGNS.getSecond().get(), MORADO_HANGING_SIGNS.getSecond().get(), YUCCA_HANGING_SIGNS.getSecond().get(), KOUSA_HANGING_SIGNS.getSecond().get(), ASPEN_HANGING_SIGNS.getSecond().get(), GRIMWOOD_HANGING_SIGNS.getSecond().get(), LAUREL_HANGING_SIGNS.getSecond().get());
+		this.tag(BlockTags.TALL_FLOWERS).add(TALL_YUCCA_FLOWER.get());
 		this.tag(BlockTags.WOODEN_BUTTONS).add(ROSEWOOD_BUTTON.get(), MORADO_BUTTON.get(), YUCCA_BUTTON.get(), KOUSA_BUTTON.get(), ASPEN_BUTTON.get(), GRIMWOOD_BUTTON.get(), LAUREL_BUTTON.get());
 		this.tag(BlockTags.WOODEN_DOORS).add(ROSEWOOD_DOOR.get(), MORADO_DOOR.get(), YUCCA_DOOR.get(), KOUSA_DOOR.get(), ASPEN_DOOR.get(), GRIMWOOD_DOOR.get(), LAUREL_DOOR.get());
 		this.tag(BlockTags.WOODEN_FENCES).add(ROSEWOOD_FENCE.get(), MORADO_FENCE.get(), YUCCA_FENCE.get(), KOUSA_FENCE.get(), ASPEN_FENCE.get(), GRIMWOOD_FENCE.get(), LAUREL_FENCE.get());

@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/chiseled_bookshelf",
+  "textures": {
+    "side": "atmospheric:block/chiseled_morado_bookshelf_side",
+    "top": "atmospheric:block/chiseled_morado_bookshelf_top"
+  }
+}

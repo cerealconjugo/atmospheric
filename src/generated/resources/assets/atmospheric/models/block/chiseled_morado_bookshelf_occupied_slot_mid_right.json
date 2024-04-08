@@ -1,0 +1,6 @@
+{
+  "parent": "atmospheric:block/chiseled_morado_bookshelf_slot_mid_right",
+  "textures": {
+    "texture": "atmospheric:block/chiseled_morado_bookshelf_occupied"
+  }
+}

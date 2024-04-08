@@ -10,7 +10,9 @@ import com.teamabnormals.atmospheric.core.registry.helper.AtmosphericBlockSubReg
 import com.teamabnormals.blueprint.common.block.*;
 import com.teamabnormals.blueprint.common.block.chest.BlueprintChestBlock;
 import com.teamabnormals.blueprint.common.block.chest.BlueprintTrappedChestBlock;
+import com.teamabnormals.blueprint.common.block.sign.BlueprintCeilingHangingSignBlock;
 import com.teamabnormals.blueprint.common.block.sign.BlueprintStandingSignBlock;
+import com.teamabnormals.blueprint.common.block.sign.BlueprintWallHangingSignBlock;
 import com.teamabnormals.blueprint.common.block.sign.BlueprintWallSignBlock;
 import com.teamabnormals.blueprint.core.util.PropertyUtil;
 import com.teamabnormals.blueprint.core.util.item.CreativeModeTabContentsPopulator;
@@ -46,7 +48,7 @@ public class AtmosphericBlocks {
 	public static final RegistryObject<Block> STRIPPED_ROSEWOOD_LOG = HELPER.createBlock("stripped_rosewood_log", () -> new RotatedPillarBlock(AtmosphericProperties.ROSEWOOD.log()));
 	public static final RegistryObject<Block> STRIPPED_ROSEWOOD = HELPER.createBlock("stripped_rosewood", () -> new RotatedPillarBlock(AtmosphericProperties.ROSEWOOD.log()));
 	public static final RegistryObject<Block> ROSEWOOD_LOG = HELPER.createBlock("rosewood_log", () -> new LogBlock(STRIPPED_ROSEWOOD_LOG, AtmosphericProperties.ROSEWOOD.log()));
-	public static final RegistryObject<Block> ROSEWOOD = HELPER.createBlock("rosewood", () -> new WoodBlock(STRIPPED_ROSEWOOD, AtmosphericProperties.ROSEWOOD.log()));
+	public static final RegistryObject<Block> ROSEWOOD = HELPER.createBlock("rosewood", () -> new LogBlock(STRIPPED_ROSEWOOD, AtmosphericProperties.ROSEWOOD.log()));
 	public static final RegistryObject<Block> ROSEWOOD_LEAVES = HELPER.createBlock("rosewood_leaves", () -> new LeavesBlock(AtmosphericProperties.ROSEWOOD.leaves()));
 	public static final RegistryObject<Block> ROSEWOOD_SAPLING = HELPER.createBlock("rosewood_sapling", () -> new SaplingBlock(new RosewoodTreeGrower(), AtmosphericProperties.ROSEWOOD.sapling()));
 	public static final RegistryObject<Block> POTTED_ROSEWOOD_SAPLING = HELPER.createBlockNoItem("potted_rosewood_sapling", () -> new FlowerPotBlock(ROSEWOOD_SAPLING.get(), PropertyUtil.flowerPot()));
@@ -60,9 +62,11 @@ public class AtmosphericBlocks {
 	public static final RegistryObject<Block> ROSEWOOD_DOOR = HELPER.createBlock("rosewood_door", () -> new DoorBlock(AtmosphericProperties.ROSEWOOD.door(), AtmosphericProperties.ROSEWOOD_BLOCK_SET));
 	public static final RegistryObject<Block> ROSEWOOD_TRAPDOOR = HELPER.createBlock("rosewood_trapdoor", () -> new TrapDoorBlock(AtmosphericProperties.ROSEWOOD.trapdoor(), AtmosphericProperties.ROSEWOOD_BLOCK_SET));
 	public static final Pair<RegistryObject<BlueprintStandingSignBlock>, RegistryObject<BlueprintWallSignBlock>> ROSEWOOD_SIGNS = HELPER.createSignBlock("rosewood", AtmosphericProperties.ROSEWOOD_WOOD_TYPE, AtmosphericProperties.ROSEWOOD.sign());
+	public static final Pair<RegistryObject<BlueprintCeilingHangingSignBlock>, RegistryObject<BlueprintWallHangingSignBlock>> ROSEWOOD_HANGING_SIGNS = HELPER.createHangingSignBlock("rosewood", AtmosphericProperties.ROSEWOOD_WOOD_TYPE, AtmosphericProperties.ROSEWOOD.hangingSign());
 
 	public static final RegistryObject<Block> ROSEWOOD_BOARDS = HELPER.createFuelBlock("rosewood_boards", () -> new RotatedPillarBlock(AtmosphericProperties.ROSEWOOD.planks()), 300);
 	public static final RegistryObject<Block> ROSEWOOD_BOOKSHELF = HELPER.createFuelBlock("rosewood_bookshelf", () -> new Block(AtmosphericProperties.ROSEWOOD.bookshelf()), 300);
+	public static final RegistryObject<Block> CHISELED_ROSEWOOD_BOOKSHELF = HELPER.createFuelBlock("chiseled_rosewood_bookshelf", () -> new ChiseledRosewoodBookShelfBlock(AtmosphericProperties.ROSEWOOD.chiseledBookshelf()), 300);
 	public static final RegistryObject<Block> ROSEWOOD_LADDER = HELPER.createFuelBlock("rosewood_ladder", () -> new LadderBlock(AtmosphericProperties.ROSEWOOD.ladder()), 300);
 	public static final RegistryObject<Block> ROSEWOOD_BEEHIVE = HELPER.createBlock("rosewood_beehive", () -> new BlueprintBeehiveBlock(AtmosphericProperties.ROSEWOOD.beehive()));
 	public static final RegistryObject<Block> ROSEWOOD_LEAF_PILE = HELPER.createBlock("rosewood_leaf_pile", () -> new LeafPileBlock(AtmosphericProperties.ROSEWOOD.leafPile()));
@@ -72,7 +76,7 @@ public class AtmosphericBlocks {
 	public static final RegistryObject<Block> STRIPPED_MORADO_LOG = HELPER.createBlock("stripped_morado_log", () -> new RotatedPillarBlock(AtmosphericProperties.MORADO.log()));
 	public static final RegistryObject<Block> STRIPPED_MORADO_WOOD = HELPER.createBlock("stripped_morado_wood", () -> new RotatedPillarBlock(AtmosphericProperties.MORADO.log()));
 	public static final RegistryObject<Block> MORADO_LOG = HELPER.createBlock("morado_log", () -> new LogBlock(STRIPPED_MORADO_LOG, AtmosphericProperties.MORADO.log()));
-	public static final RegistryObject<Block> MORADO_WOOD = HELPER.createBlock("morado_wood", () -> new WoodBlock(STRIPPED_MORADO_WOOD, AtmosphericProperties.MORADO.log()));
+	public static final RegistryObject<Block> MORADO_WOOD = HELPER.createBlock("morado_wood", () -> new LogBlock(STRIPPED_MORADO_WOOD, AtmosphericProperties.MORADO.log()));
 	public static final RegistryObject<Block> MORADO_LEAVES = HELPER.createBlock("morado_leaves", () -> new LeavesBlock(AtmosphericProperties.MORADO.leaves()));
 	public static final RegistryObject<Block> MORADO_SAPLING = HELPER.createBlock("morado_sapling", () -> new SaplingBlock(new MoradoTreeGrower(), AtmosphericProperties.MORADO.sapling()));
 	public static final RegistryObject<Block> POTTED_MORADO_SAPLING = HELPER.createBlockNoItem("potted_morado_sapling", () -> new FlowerPotBlock(MORADO_SAPLING.get(), PropertyUtil.flowerPot()));
@@ -86,9 +90,11 @@ public class AtmosphericBlocks {
 	public static final RegistryObject<Block> MORADO_DOOR = HELPER.createBlock("morado_door", () -> new DoorBlock(AtmosphericProperties.MORADO.door(), AtmosphericProperties.MORADO_BLOCK_SET));
 	public static final RegistryObject<Block> MORADO_TRAPDOOR = HELPER.createBlock("morado_trapdoor", () -> new TrapDoorBlock(AtmosphericProperties.MORADO.trapdoor(), AtmosphericProperties.MORADO_BLOCK_SET));
 	public static final Pair<RegistryObject<BlueprintStandingSignBlock>, RegistryObject<BlueprintWallSignBlock>> MORADO_SIGNS = HELPER.createSignBlock("morado", AtmosphericProperties.MORADO_WOOD_TYPE, AtmosphericProperties.MORADO.sign());
+	public static final Pair<RegistryObject<BlueprintCeilingHangingSignBlock>, RegistryObject<BlueprintWallHangingSignBlock>> MORADO_HANGING_SIGNS = HELPER.createHangingSignBlock("morado", AtmosphericProperties.MORADO_WOOD_TYPE, AtmosphericProperties.MORADO.hangingSign());
 
 	public static final RegistryObject<Block> MORADO_BOARDS = HELPER.createFuelBlock("morado_boards", () -> new RotatedPillarBlock(AtmosphericProperties.MORADO.planks()), 300);
 	public static final RegistryObject<Block> MORADO_BOOKSHELF = HELPER.createFuelBlock("morado_bookshelf", () -> new Block(AtmosphericProperties.MORADO.bookshelf()), 300);
+	public static final RegistryObject<Block> CHISELED_MORADO_BOOKSHELF = HELPER.createFuelBlock("chiseled_morado_bookshelf", () -> new ChiseledMoradoBookShelfBlock(AtmosphericProperties.MORADO.chiseledBookshelf()), 300);
 	public static final RegistryObject<Block> MORADO_LADDER = HELPER.createFuelBlock("morado_ladder", () -> new LadderBlock(AtmosphericProperties.MORADO.ladder()), 300);
 	public static final RegistryObject<Block> MORADO_BEEHIVE = HELPER.createBlock("morado_beehive", () -> new BlueprintBeehiveBlock(AtmosphericProperties.MORADO.beehive()));
 	public static final RegistryObject<Block> MORADO_LEAF_PILE = HELPER.createBlock("morado_leaf_pile", () -> new LeafPileBlock(AtmosphericProperties.MORADO.leafPile()));
@@ -197,7 +203,7 @@ public class AtmosphericBlocks {
 	public static final RegistryObject<Block> STRIPPED_YUCCA_LOG = HELPER.createBlock("stripped_yucca_log", () -> new RotatedPillarBlock(AtmosphericProperties.YUCCA.log()));
 	public static final RegistryObject<Block> STRIPPED_YUCCA_WOOD = HELPER.createBlock("stripped_yucca_wood", () -> new RotatedPillarBlock(AtmosphericProperties.YUCCA.log()));
 	public static final RegistryObject<Block> YUCCA_LOG = HELPER.createBlock("yucca_log", () -> new LogBlock(STRIPPED_YUCCA_LOG, AtmosphericProperties.YUCCA.log()));
-	public static final RegistryObject<Block> YUCCA_WOOD = HELPER.createBlock("yucca_wood", () -> new WoodBlock(STRIPPED_YUCCA_WOOD, AtmosphericProperties.YUCCA.log()));
+	public static final RegistryObject<Block> YUCCA_WOOD = HELPER.createBlock("yucca_wood", () -> new LogBlock(STRIPPED_YUCCA_WOOD, AtmosphericProperties.YUCCA.log()));
 	public static final RegistryObject<Block> YUCCA_LEAVES = HELPER.createBlock("yucca_leaves", () -> new YuccaLeavesBlock(AtmosphericProperties.YUCCA.leaves()));
 	public static final RegistryObject<Block> YUCCA_SAPLING = HELPER.createBlock("yucca_sapling", () -> new YuccaSaplingBlock(new YuccaTreeGrower(), AtmosphericProperties.YUCCA.sapling()));
 	public static final RegistryObject<Block> POTTED_YUCCA_SAPLING = HELPER.createBlockNoItem("potted_yucca_sapling", () -> new FlowerPotBlock(YUCCA_SAPLING.get(), PropertyUtil.flowerPot()));
@@ -211,9 +217,11 @@ public class AtmosphericBlocks {
 	public static final RegistryObject<Block> YUCCA_DOOR = HELPER.createBlock("yucca_door", () -> new DoorBlock(AtmosphericProperties.YUCCA.door(), AtmosphericProperties.YUCCA_BLOCK_SET));
 	public static final RegistryObject<Block> YUCCA_TRAPDOOR = HELPER.createBlock("yucca_trapdoor", () -> new TrapDoorBlock(AtmosphericProperties.YUCCA.trapdoor(), AtmosphericProperties.YUCCA_BLOCK_SET));
 	public static final Pair<RegistryObject<BlueprintStandingSignBlock>, RegistryObject<BlueprintWallSignBlock>> YUCCA_SIGNS = HELPER.createSignBlock("yucca", AtmosphericProperties.YUCCA_WOOD_TYPE, AtmosphericProperties.YUCCA.sign());
+	public static final Pair<RegistryObject<BlueprintCeilingHangingSignBlock>, RegistryObject<BlueprintWallHangingSignBlock>> YUCCA_HANGING_SIGNS = HELPER.createHangingSignBlock("yucca", AtmosphericProperties.YUCCA_WOOD_TYPE, AtmosphericProperties.YUCCA.hangingSign());
 
 	public static final RegistryObject<Block> YUCCA_BOARDS = HELPER.createFuelBlock("yucca_boards", () -> new RotatedPillarBlock(AtmosphericProperties.YUCCA.planks()), 300);
 	public static final RegistryObject<Block> YUCCA_BOOKSHELF = HELPER.createFuelBlock("yucca_bookshelf", () -> new Block(AtmosphericProperties.YUCCA.bookshelf()), 300);
+	public static final RegistryObject<Block> CHISELED_YUCCA_BOOKSHELF = HELPER.createFuelBlock("chiseled_yucca_bookshelf", () -> new ChiseledYuccaBookShelfBlock(AtmosphericProperties.YUCCA.chiseledBookshelf()), 300);
 	public static final RegistryObject<Block> YUCCA_LADDER = HELPER.createFuelBlock("yucca_ladder", () -> new LadderBlock(AtmosphericProperties.YUCCA.ladder()), 300);
 	public static final RegistryObject<Block> YUCCA_BEEHIVE = HELPER.createBlock("yucca_beehive", () -> new BlueprintBeehiveBlock(AtmosphericProperties.YUCCA.beehive()));
 	public static final RegistryObject<Block> YUCCA_LEAF_PILE = HELPER.createBlock("yucca_leaf_pile", () -> new LeafPileBlock(AtmosphericProperties.YUCCA.leafPile()));
@@ -253,9 +261,9 @@ public class AtmosphericBlocks {
 	public static final RegistryObject<Block> STRIPPED_ASPEN_LOG = HELPER.createBlock("stripped_aspen_log", () -> new RotatedPillarBlock(AtmosphericProperties.ASPEN.log()));
 	public static final RegistryObject<Block> STRIPPED_ASPEN_WOOD = HELPER.createBlock("stripped_aspen_wood", () -> new RotatedPillarBlock(AtmosphericProperties.ASPEN.log()));
 	public static final RegistryObject<Block> ASPEN_LOG = HELPER.createBlock("aspen_log", () -> new LogBlock(STRIPPED_ASPEN_LOG, AtmosphericProperties.ASPEN.log()));
-	public static final RegistryObject<Block> ASPEN_WOOD = HELPER.createBlock("aspen_wood", () -> new WoodBlock(STRIPPED_ASPEN_WOOD, AtmosphericProperties.ASPEN.log()));
+	public static final RegistryObject<Block> ASPEN_WOOD = HELPER.createBlock("aspen_wood", () -> new LogBlock(STRIPPED_ASPEN_WOOD, AtmosphericProperties.ASPEN.log()));
 	public static final RegistryObject<Block> WATCHFUL_ASPEN_LOG = HELPER.createBlock("watchful_aspen_log", () -> new LogBlock(ASPEN_LOG, AtmosphericProperties.ASPEN.log()));
-	public static final RegistryObject<Block> WATCHFUL_ASPEN_WOOD = HELPER.createBlock("watchful_aspen_wood", () -> new WoodBlock(ASPEN_WOOD, AtmosphericProperties.ASPEN.log()));
+	public static final RegistryObject<Block> WATCHFUL_ASPEN_WOOD = HELPER.createBlock("watchful_aspen_wood", () -> new LogBlock(ASPEN_WOOD, AtmosphericProperties.ASPEN.log()));
 	public static final RegistryObject<Block> ASPEN_LEAVES = HELPER.createBlock("aspen_leaves", () -> new LeavesBlock(AtmosphericProperties.ASPEN.leaves()));
 	public static final RegistryObject<Block> ASPEN_SAPLING = HELPER.createBlock("aspen_sapling", () -> new SaplingBlock(new AspenTreeGrower(), AtmosphericProperties.ASPEN.sapling()));
 	public static final RegistryObject<Block> POTTED_ASPEN_SAPLING = HELPER.createBlockNoItem("potted_aspen_sapling", () -> new FlowerPotBlock(ASPEN_SAPLING.get(), PropertyUtil.flowerPot()));
@@ -269,9 +277,11 @@ public class AtmosphericBlocks {
 	public static final RegistryObject<Block> ASPEN_DOOR = HELPER.createBlock("aspen_door", () -> new DoorBlock(AtmosphericProperties.ASPEN.door(), AtmosphericProperties.ASPEN_BLOCK_SET));
 	public static final RegistryObject<Block> ASPEN_TRAPDOOR = HELPER.createBlock("aspen_trapdoor", () -> new TrapDoorBlock(AtmosphericProperties.ASPEN.trapdoor(), AtmosphericProperties.ASPEN_BLOCK_SET));
 	public static final Pair<RegistryObject<BlueprintStandingSignBlock>, RegistryObject<BlueprintWallSignBlock>> ASPEN_SIGNS = HELPER.createSignBlock("aspen", AtmosphericProperties.ASPEN_WOOD_TYPE, AtmosphericProperties.ASPEN.sign());
+	public static final Pair<RegistryObject<BlueprintCeilingHangingSignBlock>, RegistryObject<BlueprintWallHangingSignBlock>> ASPEN_HANGING_SIGNS = HELPER.createHangingSignBlock("aspen", AtmosphericProperties.ASPEN_WOOD_TYPE, AtmosphericProperties.ASPEN.hangingSign());
 
 	public static final RegistryObject<Block> ASPEN_BOARDS = HELPER.createFuelBlock("aspen_boards", () -> new RotatedPillarBlock(AtmosphericProperties.ASPEN.planks()), 300);
 	public static final RegistryObject<Block> ASPEN_BOOKSHELF = HELPER.createFuelBlock("aspen_bookshelf", () -> new Block(AtmosphericProperties.ASPEN.bookshelf()), 300);
+	public static final RegistryObject<Block> CHISELED_ASPEN_BOOKSHELF = HELPER.createFuelBlock("chiseled_aspen_bookshelf", () -> new ChiseledAspenBookShelfBlock(AtmosphericProperties.ASPEN.chiseledBookshelf()), 300);
 	public static final RegistryObject<Block> ASPEN_LADDER = HELPER.createFuelBlock("aspen_ladder", () -> new LadderBlock(AtmosphericProperties.ASPEN.ladder()), 300);
 	public static final RegistryObject<Block> ASPEN_BEEHIVE = HELPER.createBlock("aspen_beehive", () -> new BlueprintBeehiveBlock(AtmosphericProperties.ASPEN.beehive()));
 	public static final RegistryObject<Block> ASPEN_LEAF_PILE = HELPER.createBlock("aspen_leaf_pile", () -> new LeafPileBlock(AtmosphericProperties.ASPEN.leafPile()));
@@ -298,7 +308,7 @@ public class AtmosphericBlocks {
 	public static final RegistryObject<Block> STRIPPED_LAUREL_LOG = HELPER.createBlock("stripped_laurel_log", () -> new RotatedPillarBlock(AtmosphericProperties.LAUREL.log()));
 	public static final RegistryObject<Block> STRIPPED_LAUREL_WOOD = HELPER.createBlock("stripped_laurel_wood", () -> new RotatedPillarBlock(AtmosphericProperties.LAUREL.log()));
 	public static final RegistryObject<Block> LAUREL_LOG = HELPER.createBlock("laurel_log", () -> new LogBlock(STRIPPED_LAUREL_LOG, AtmosphericProperties.LAUREL.log()));
-	public static final RegistryObject<Block> LAUREL_WOOD = HELPER.createBlock("laurel_wood", () -> new WoodBlock(STRIPPED_LAUREL_WOOD, AtmosphericProperties.LAUREL.log()));
+	public static final RegistryObject<Block> LAUREL_WOOD = HELPER.createBlock("laurel_wood", () -> new LogBlock(STRIPPED_LAUREL_WOOD, AtmosphericProperties.LAUREL.log()));
 	public static final RegistryObject<Block> LAUREL_LEAVES = HELPER.createBlock("laurel_leaves", () -> new LeavesBlock(AtmosphericProperties.LAUREL.leaves()));
 	public static final RegistryObject<Block> LAUREL_SAPLING = HELPER.createBlock("laurel_sapling", () -> new LaurelSaplingBlock(new LaurelTreeGrower(), AtmosphericProperties.LAUREL.sapling()));
 	public static final RegistryObject<Block> POTTED_LAUREL_SAPLING = HELPER.createBlockNoItem("potted_laurel_sapling", () -> new FlowerPotBlock(LAUREL_SAPLING.get(), PropertyUtil.flowerPot()));
@@ -312,9 +322,11 @@ public class AtmosphericBlocks {
 	public static final RegistryObject<Block> LAUREL_DOOR = HELPER.createBlock("laurel_door", () -> new DoorBlock(AtmosphericProperties.LAUREL.door(), AtmosphericProperties.LAUREL_BLOCK_SET));
 	public static final RegistryObject<Block> LAUREL_TRAPDOOR = HELPER.createBlock("laurel_trapdoor", () -> new TrapDoorBlock(AtmosphericProperties.LAUREL.trapdoor(), AtmosphericProperties.LAUREL_BLOCK_SET));
 	public static final Pair<RegistryObject<BlueprintStandingSignBlock>, RegistryObject<BlueprintWallSignBlock>> LAUREL_SIGNS = HELPER.createSignBlock("laurel", AtmosphericProperties.LAUREL_WOOD_TYPE, AtmosphericProperties.LAUREL.sign());
+	public static final Pair<RegistryObject<BlueprintCeilingHangingSignBlock>, RegistryObject<BlueprintWallHangingSignBlock>> LAUREL_HANGING_SIGNS = HELPER.createHangingSignBlock("laurel", AtmosphericProperties.LAUREL_WOOD_TYPE, AtmosphericProperties.LAUREL.hangingSign());
 
 	public static final RegistryObject<Block> LAUREL_BOARDS = HELPER.createFuelBlock("laurel_boards", () -> new RotatedPillarBlock(AtmosphericProperties.LAUREL.planks()), 300);
 	public static final RegistryObject<Block> LAUREL_BOOKSHELF = HELPER.createFuelBlock("laurel_bookshelf", () -> new Block(AtmosphericProperties.LAUREL.bookshelf()), 300);
+	public static final RegistryObject<Block> CHISELED_LAUREL_BOOKSHELF = HELPER.createFuelBlock("chiseled_laurel_bookshelf", () -> new BlueprintChiseledBookShelfBlock(AtmosphericProperties.LAUREL.chiseledBookshelf()), 300);
 	public static final RegistryObject<Block> LAUREL_LADDER = HELPER.createFuelBlock("laurel_ladder", () -> new LadderBlock(AtmosphericProperties.LAUREL.ladder()), 300);
 	public static final RegistryObject<Block> LAUREL_BEEHIVE = HELPER.createBlock("laurel_beehive", () -> new BlueprintBeehiveBlock(AtmosphericProperties.LAUREL.beehive()));
 	public static final RegistryObject<Block> LAUREL_LEAF_PILE = HELPER.createBlock("laurel_leaf_pile", () -> new LeafPileBlock(AtmosphericProperties.LAUREL.leafPile()));
@@ -337,7 +349,7 @@ public class AtmosphericBlocks {
 	public static final RegistryObject<Block> STRIPPED_KOUSA_LOG = HELPER.createBlock("stripped_kousa_log", () -> new RotatedPillarBlock(AtmosphericProperties.KOUSA.log()));
 	public static final RegistryObject<Block> STRIPPED_KOUSA_WOOD = HELPER.createBlock("stripped_kousa_wood", () -> new RotatedPillarBlock(AtmosphericProperties.KOUSA.log()));
 	public static final RegistryObject<Block> KOUSA_LOG = HELPER.createBlock("kousa_log", () -> new LogBlock(STRIPPED_KOUSA_LOG, AtmosphericProperties.KOUSA.log()));
-	public static final RegistryObject<Block> KOUSA_WOOD = HELPER.createBlock("kousa_wood", () -> new WoodBlock(STRIPPED_KOUSA_WOOD, AtmosphericProperties.KOUSA.log()));
+	public static final RegistryObject<Block> KOUSA_WOOD = HELPER.createBlock("kousa_wood", () -> new LogBlock(STRIPPED_KOUSA_WOOD, AtmosphericProperties.KOUSA.log()));
 	public static final RegistryObject<Block> KOUSA_LEAVES = HELPER.createBlock("kousa_leaves", () -> new LeavesBlock(AtmosphericProperties.KOUSA.leaves()));
 	public static final RegistryObject<Block> KOUSA_SAPLING = HELPER.createBlock("kousa_sapling", () -> new SaplingBlock(new KousaTreeGrower(), AtmosphericProperties.KOUSA.sapling()));
 	public static final RegistryObject<Block> POTTED_KOUSA_SAPLING = HELPER.createBlockNoItem("potted_kousa_sapling", () -> new FlowerPotBlock(KOUSA_SAPLING.get(), PropertyUtil.flowerPot()));
@@ -351,9 +363,11 @@ public class AtmosphericBlocks {
 	public static final RegistryObject<Block> KOUSA_DOOR = HELPER.createBlock("kousa_door", () -> new DoorBlock(AtmosphericProperties.KOUSA.door(), AtmosphericProperties.KOUSA_BLOCK_SET));
 	public static final RegistryObject<Block> KOUSA_TRAPDOOR = HELPER.createBlock("kousa_trapdoor", () -> new TrapDoorBlock(AtmosphericProperties.KOUSA.trapdoor(), AtmosphericProperties.KOUSA_BLOCK_SET));
 	public static final Pair<RegistryObject<BlueprintStandingSignBlock>, RegistryObject<BlueprintWallSignBlock>> KOUSA_SIGNS = HELPER.createSignBlock("kousa", AtmosphericProperties.KOUSA_WOOD_TYPE, AtmosphericProperties.KOUSA.sign());
+	public static final Pair<RegistryObject<BlueprintCeilingHangingSignBlock>, RegistryObject<BlueprintWallHangingSignBlock>> KOUSA_HANGING_SIGNS = HELPER.createHangingSignBlock("kousa", AtmosphericProperties.KOUSA_WOOD_TYPE, AtmosphericProperties.KOUSA.hangingSign());
 
 	public static final RegistryObject<Block> KOUSA_BOARDS = HELPER.createFuelBlock("kousa_boards", () -> new RotatedPillarBlock(AtmosphericProperties.KOUSA.planks()), 300);
 	public static final RegistryObject<Block> KOUSA_BOOKSHELF = HELPER.createFuelBlock("kousa_bookshelf", () -> new Block(AtmosphericProperties.KOUSA.bookshelf()), 300);
+	public static final RegistryObject<Block> CHISELED_KOUSA_BOOKSHELF = HELPER.createFuelBlock("chiseled_kousa_bookshelf", () -> new ChiseledKousaBookShelfBlock(AtmosphericProperties.KOUSA.chiseledBookshelf()), 300);
 	public static final RegistryObject<Block> KOUSA_LADDER = HELPER.createFuelBlock("kousa_ladder", () -> new LadderBlock(AtmosphericProperties.KOUSA.ladder()), 300);
 	public static final RegistryObject<Block> KOUSA_BEEHIVE = HELPER.createBlock("kousa_beehive", () -> new BlueprintBeehiveBlock(AtmosphericProperties.KOUSA.beehive()));
 	public static final RegistryObject<Block> KOUSA_LEAF_PILE = HELPER.createBlock("kousa_leaf_pile", () -> new LeafPileBlock(AtmosphericProperties.KOUSA.leafPile()));
@@ -380,7 +394,7 @@ public class AtmosphericBlocks {
 	public static final RegistryObject<Block> STRIPPED_GRIMWOOD_LOG = HELPER.createBlock("stripped_grimwood_log", () -> new RotatedPillarBlock(AtmosphericProperties.GRIMWOOD.log()));
 	public static final RegistryObject<Block> STRIPPED_GRIMWOOD = HELPER.createBlock("stripped_grimwood", () -> new RotatedPillarBlock(AtmosphericProperties.GRIMWOOD.log()));
 	public static final RegistryObject<Block> GRIMWOOD_LOG = HELPER.createBlock("grimwood_log", () -> new LogBlock(STRIPPED_GRIMWOOD_LOG, AtmosphericProperties.GRIMWOOD.log()));
-	public static final RegistryObject<Block> GRIMWOOD = HELPER.createBlock("grimwood", () -> new WoodBlock(STRIPPED_GRIMWOOD, AtmosphericProperties.GRIMWOOD.log()));
+	public static final RegistryObject<Block> GRIMWOOD = HELPER.createBlock("grimwood", () -> new LogBlock(STRIPPED_GRIMWOOD, AtmosphericProperties.GRIMWOOD.log()));
 	public static final RegistryObject<Block> GRIMWOOD_LEAVES = HELPER.createBlock("grimwood_leaves", () -> new LeavesBlock(AtmosphericProperties.GRIMWOOD.leaves()));
 	public static final RegistryObject<Block> GRIMWOOD_SAPLING = HELPER.createBlock("grimwood_sapling", () -> new SaplingBlock(new GrimwoodTreeGrower(), AtmosphericProperties.GRIMWOOD.sapling()));
 	public static final RegistryObject<Block> POTTED_GRIMWOOD_SAPLING = HELPER.createBlockNoItem("potted_grimwood_sapling", () -> new FlowerPotBlock(GRIMWOOD_SAPLING.get(), PropertyUtil.flowerPot()));
@@ -394,9 +408,11 @@ public class AtmosphericBlocks {
 	public static final RegistryObject<Block> GRIMWOOD_DOOR = HELPER.createBlock("grimwood_door", () -> new DoorBlock(AtmosphericProperties.GRIMWOOD.door(), AtmosphericProperties.GRIMWOOD_BLOCK_SET));
 	public static final RegistryObject<Block> GRIMWOOD_TRAPDOOR = HELPER.createBlock("grimwood_trapdoor", () -> new TrapDoorBlock(AtmosphericProperties.GRIMWOOD.trapdoor(), AtmosphericProperties.GRIMWOOD_BLOCK_SET));
 	public static final Pair<RegistryObject<BlueprintStandingSignBlock>, RegistryObject<BlueprintWallSignBlock>> GRIMWOOD_SIGNS = HELPER.createSignBlock("grimwood", AtmosphericProperties.GRIMWOOD_WOOD_TYPE, AtmosphericProperties.GRIMWOOD.sign());
+	public static final Pair<RegistryObject<BlueprintCeilingHangingSignBlock>, RegistryObject<BlueprintWallHangingSignBlock>> GRIMWOOD_HANGING_SIGNS = HELPER.createHangingSignBlock("grimwood", AtmosphericProperties.GRIMWOOD_WOOD_TYPE, AtmosphericProperties.GRIMWOOD.hangingSign());
 
 	public static final RegistryObject<Block> GRIMWOOD_BOARDS = HELPER.createFuelBlock("grimwood_boards", () -> new RotatedPillarBlock(AtmosphericProperties.GRIMWOOD.planks()), 300);
 	public static final RegistryObject<Block> GRIMWOOD_BOOKSHELF = HELPER.createFuelBlock("grimwood_bookshelf", () -> new Block(AtmosphericProperties.GRIMWOOD.bookshelf()), 300);
+	public static final RegistryObject<Block> CHISELED_GRIMWOOD_BOOKSHELF = HELPER.createFuelBlock("chiseled_grimwood_bookshelf", () -> new ChiseledGrimwoodBookShelfBlock(AtmosphericProperties.GRIMWOOD.chiseledBookshelf()), 300);
 	public static final RegistryObject<Block> GRIMWOOD_LADDER = HELPER.createFuelBlock("grimwood_ladder", () -> new LadderBlock(AtmosphericProperties.GRIMWOOD.ladder()), 300);
 	public static final RegistryObject<Block> GRIMWOOD_BEEHIVE = HELPER.createBlock("grimwood_beehive", () -> new BlueprintBeehiveBlock(AtmosphericProperties.GRIMWOOD.beehive()));
 	public static final RegistryObject<Block> GRIMWOOD_LEAF_PILE = HELPER.createBlock("grimwood_leaf_pile", () -> new LeafPileBlock(AtmosphericProperties.GRIMWOOD.leafPile()));
@@ -476,7 +492,15 @@ public class AtmosphericBlocks {
 						DOLERITE, DOLERITE_STAIRS, DOLERITE_SLAB, DOLERITE_WALL, POLISHED_DOLERITE, POLISHED_DOLERITE_STAIRS, POLISHED_DOLERITE_SLAB
 				)
 				.tab(FUNCTIONAL_BLOCKS)
-				.addItemsBefore(of(Blocks.BAMBOO_SIGN), ROSEWOOD_SIGNS.getFirst(), MORADO_SIGNS.getFirst(), YUCCA_SIGNS.getFirst(), LAUREL_SIGNS.getFirst(), ASPEN_SIGNS.getFirst(), KOUSA_SIGNS.getFirst(), GRIMWOOD_SIGNS.getFirst())
+				.addItemsBefore(of(Blocks.BAMBOO_SIGN),
+						ROSEWOOD_SIGNS.getFirst(), ROSEWOOD_HANGING_SIGNS.getFirst(),
+						MORADO_SIGNS.getFirst(), MORADO_HANGING_SIGNS.getFirst(),
+						YUCCA_SIGNS.getFirst(), YUCCA_HANGING_SIGNS.getFirst(),
+						LAUREL_SIGNS.getFirst(), LAUREL_HANGING_SIGNS.getFirst(),
+						ASPEN_SIGNS.getFirst(), ASPEN_HANGING_SIGNS.getFirst(),
+						KOUSA_SIGNS.getFirst(), KOUSA_HANGING_SIGNS.getFirst(),
+						GRIMWOOD_SIGNS.getFirst(), GRIMWOOD_HANGING_SIGNS.getFirst()
+				)
 				.addItemsAfter(of(Blocks.SUSPICIOUS_SAND), SUSPICIOUS_ARID_SAND, SUSPICIOUS_RED_ARID_SAND)
 				.tab(NATURAL_BLOCKS)
 				.addItemsBefore(of(Blocks.DIRT_PATH), CRUSTOSE)
@@ -524,7 +548,7 @@ public class AtmosphericBlocks {
 				.tab(FUNCTIONAL_BLOCKS)
 				.addItemsBefore(ofID(AtmosphericConstants.BAMBOO_LADDER), ROSEWOOD_LADDER, MORADO_LADDER, YUCCA_LADDER, LAUREL_LADDER, ASPEN_LADDER, KOUSA_LADDER, GRIMWOOD_LADDER)
 				.addItemsBefore(ofID(AtmosphericConstants.BAMBOO_BEEHIVE), ROSEWOOD_BEEHIVE, MORADO_BEEHIVE, YUCCA_BEEHIVE, LAUREL_BEEHIVE, ASPEN_BEEHIVE, KOUSA_BEEHIVE, GRIMWOOD_BEEHIVE)
-				.addItemsBefore(ofID(AtmosphericConstants.BAMBOO_BOOKSHELF), ROSEWOOD_BOOKSHELF, MORADO_BOOKSHELF, YUCCA_BOOKSHELF, LAUREL_BOOKSHELF, ASPEN_BOOKSHELF, KOUSA_BOOKSHELF, GRIMWOOD_BOOKSHELF)
+				.addItemsBefore(ofID(AtmosphericConstants.BAMBOO_BOOKSHELF), ROSEWOOD_BOOKSHELF, CHISELED_ROSEWOOD_BOOKSHELF, MORADO_BOOKSHELF, CHISELED_MORADO_BOOKSHELF, YUCCA_BOOKSHELF, CHISELED_YUCCA_BOOKSHELF, LAUREL_BOOKSHELF, CHISELED_LAUREL_BOOKSHELF, ASPEN_BOOKSHELF, CHISELED_ASPEN_BOOKSHELF, KOUSA_BOOKSHELF, CHISELED_KOUSA_BOOKSHELF, GRIMWOOD_BOOKSHELF, CHISELED_GRIMWOOD_BOOKSHELF)
 				.addItemsBefore(ofID(AtmosphericConstants.BAMBOO_CLOSET), ROSEWOOD_CHEST, MORADO_CHEST, YUCCA_CHEST, LAUREL_CHEST, ASPEN_CHEST, KOUSA_CHEST, GRIMWOOD_CHEST)
 				.tab(REDSTONE_BLOCKS)
 				.addItemsBefore(ofID(AtmosphericConstants.TRAPPED_BAMBOO_CLOSET), TRAPPED_ROSEWOOD_CHEST, TRAPPED_MORADO_CHEST, TRAPPED_YUCCA_CHEST, TRAPPED_LAUREL_CHEST, TRAPPED_ASPEN_CHEST, TRAPPED_KOUSA_CHEST, TRAPPED_GRIMWOOD_CHEST);

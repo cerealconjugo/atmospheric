@@ -10,7 +10,6 @@
     "EntityMixin",
     "PistonBaseBlockMixin",
     "RabbitMixin",
-    "RabbitVariantMixin",
     "ServerLevelMixin",
     "ShearsItemMixin",
     "SnowAndFreezeFeatureMixin",
@@ -20,8 +19,5 @@
   ],
   "injectors": {
     "defaultRequire": 1
-  },
-  "client": [
-    "client.RabbitRendererMixin"
-  ]
+  }
 }

@@ -28,7 +28,7 @@ public abstract class RabbitMixin extends Animal {
 	private static void getRandomRabbitVariant(LevelAccessor level, BlockPos pos, CallbackInfoReturnable<Variant> cir) {
 		Holder<Biome> biome = level.getBiome(pos);
 		if (biome.is(AtmosphericBiomeTags.SPAWNS_YELLOW_RABBITS)) {
-			cir.setReturnValue(AtmosphericRabbitVariants.YELLOW);
+			cir.setReturnValue(AtmosphericRabbitVariants.YELLOW.variant());
 		}
 
 		if (cir.getReturnValue() == Rabbit.Variant.WHITE_SPLOTCHED && biome.is(AtmosphericBiomes.SNOWY_SCRUBLAND)) {

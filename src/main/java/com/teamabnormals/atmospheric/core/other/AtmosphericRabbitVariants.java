@@ -1,11 +1,13 @@
 package com.teamabnormals.atmospheric.core.other;
 
-import net.minecraft.world.entity.animal.Rabbit;
+import com.teamabnormals.atmospheric.core.Atmospheric;
+import com.teamabnormals.blueprint.core.api.BlueprintRabbitVariants;
+import com.teamabnormals.blueprint.core.api.BlueprintRabbitVariants.BlueprintRabbitVariant;
+import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 
+@EventBusSubscriber(modid = Atmospheric.MOD_ID)
 public class AtmosphericRabbitVariants {
-	public static Rabbit.Variant YELLOW;
+	private static final int UNIQUE_OFFSET = 1337;
 
-	static {
-		Rabbit.Variant.values();
-	}
+	public static final BlueprintRabbitVariant YELLOW = BlueprintRabbitVariants.register(UNIQUE_OFFSET, Atmospheric.location("yellow"));
 }
