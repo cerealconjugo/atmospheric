@@ -3,6 +3,7 @@ package com.teamabnormals.atmospheric.core.other;
 import com.teamabnormals.atmospheric.core.Atmospheric;
 import com.teamabnormals.blueprint.core.api.BlueprintRabbitTypes;
 import com.teamabnormals.blueprint.core.api.BlueprintRabbitTypes.BlueprintRabbitType;
+import net.minecraft.world.entity.animal.Rabbit;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 
 @EventBusSubscriber(modid = Atmospheric.MOD_ID)
