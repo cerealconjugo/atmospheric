@@ -34,7 +34,7 @@ public class SuspiciousAridSandFeature extends Feature<NoneFeatureConfiguration>
 	public boolean place(FeaturePlaceContext<NoneFeatureConfiguration> context) {
 		WorldGenLevel level = context.level();
 		RandomSource rand = context.random();
-		BlockPos pos = context.origin().below().offset(rand.nextInt(3) - 2, 0, rand.nextInt(3) - 1);
+		BlockPos pos = context.origin().below();
 
 		int i = placeSandLayer(level, pos, rand, 1, 0, 0, UniformInt.of(1, 2), ConstantInt.ZERO)
 				+ placeSandLayer(level, pos, rand, 2, -2, -1, UniformInt.of(2, 3), UniformInt.of(0, 1))
