@@ -20,6 +20,7 @@ import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConf
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -33,10 +34,11 @@ public class SuspiciousAridSandFeature extends Feature<NoneFeatureConfiguration>
 	public boolean place(FeaturePlaceContext<NoneFeatureConfiguration> context) {
 		WorldGenLevel level = context.level();
 		RandomSource rand = context.random();
-		BlockPos pos = context.origin().below();
+		BlockPos pos = context.origin().below().offset(rand.nextInt(3) - 2, 0, rand.nextInt(3) - 1);
+
 		int i = placeSandLayer(level, pos, rand, 1, 0, 0, UniformInt.of(1, 2), ConstantInt.ZERO)
 				+ placeSandLayer(level, pos, rand, 2, -2, -1, UniformInt.of(2, 3), UniformInt.of(0, 1))
-				+ placeSandLayer(level, pos, rand, 1, -2, -1, UniformInt.of(3, 4), UniformInt.of(1, 3));
+				+ placeSandLayer(level, pos, rand, 2, -3, -2, UniformInt.of(3, 4), UniformInt.of(1, 3));
 		if (i > 0) {
 			for (BlockPos newPos : BlockPos.betweenClosedStream(pos.offset(-2, -4, -2), pos.offset(2, -1, 2)).map(BlockPos::immutable).toList()) {
 				Optional<Block> block = convertToSandstone(level.getBlockState(newPos));

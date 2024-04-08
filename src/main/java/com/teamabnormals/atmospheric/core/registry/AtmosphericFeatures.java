@@ -684,6 +684,8 @@ public class AtmosphericFeatures {
 
 		public static final ResourceKey<PlacedFeature> FOSSIL_DUNES = createKey("fossil_dunes");
 
+		public static final ResourceKey<PlacedFeature> SUSPICIOUS_ARID_SAND = createKey("suspicious_arid_sand");
+
 		// Aspen Parkland
 
 		public static final ResourceKey<PlacedFeature> CRUSTOSE = createKey("crustose");
@@ -830,6 +832,8 @@ public class AtmosphericFeatures {
 			register(context, PATCH_ALOE_VERA_EXTRA, AtmosphericConfiguredFeatures.PATCH_ALOE_VERA, List.of(RarityFilter.onAverageOnceEvery(8), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, BiomeFilter.biome()));
 
 			register(context, FOSSIL_DUNES, AtmosphericConfiguredFeatures.SURFACE_FOSSIL, List.of(RarityFilter.onAverageOnceEvery(24), InSquarePlacement.spread(), HeightRangePlacement.uniform(VerticalAnchor.absolute(64), VerticalAnchor.absolute(256)), BiomeFilter.biome()));
+
+			register(context, SUSPICIOUS_ARID_SAND, AtmosphericConfiguredFeatures.SUSPICIOUS_ARID_SAND, List.of(PlacementUtils.HEIGHTMAP));
 
 			// Aspen Parkland
 
