@@ -10,6 +10,7 @@ import com.teamabnormals.atmospheric.client.renderer.entity.DragonFruitRenderer;
 import com.teamabnormals.atmospheric.client.renderer.entity.PassionFruitSeedRenderer;
 import com.teamabnormals.atmospheric.core.data.client.AtmosphericBlockStateProvider;
 import com.teamabnormals.atmospheric.core.data.client.AtmosphericItemModelProvider;
+import com.teamabnormals.atmospheric.core.data.client.AtmosphericSpriteSourceProvider;
 import com.teamabnormals.atmospheric.core.data.server.AtmosphericAdvancementProvider;
 import com.teamabnormals.atmospheric.core.data.server.AtmosphericDatapackBuiltinEntriesProvider;
 import com.teamabnormals.atmospheric.core.data.server.AtmosphericLootTableProvider;
@@ -138,7 +139,8 @@ public class Atmospheric {
 
 		boolean includeClient = event.includeClient();
 		generator.addProvider(includeClient, new AtmosphericBlockStateProvider(output, helper));
-		generator.addProvider(includeServer, new AtmosphericItemModelProvider(output, helper));
+		generator.addProvider(includeClient, new AtmosphericItemModelProvider(output, helper));
+		generator.addProvider(includeClient, new AtmosphericSpriteSourceProvider(output, helper));
 	}
 
 	@OnlyIn(Dist.CLIENT)
