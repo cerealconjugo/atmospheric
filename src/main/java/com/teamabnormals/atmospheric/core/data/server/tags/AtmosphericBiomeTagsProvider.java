@@ -47,6 +47,7 @@ public class AtmosphericBiomeTagsProvider extends BiomeTagsProvider {
 		this.tag(AtmosphericBiomeTags.HAS_VILLAGE_SCRUBLAND).add(SCRUBLAND);
 		this.tag(AtmosphericBiomeTags.HAS_KOUSA_SANCTUM).add(KOUSA_JUNGLE);
 		this.tag(AtmosphericBiomeTags.SPAWNS_YELLOW_RABBITS).add(ASPEN_PARKLAND);
+		this.tag(AtmosphericBiomeTags.SPAWNS_ARID_CAMELS).addTag(AtmosphericBiomeTags.IS_DUNES).addTag(AtmosphericBiomeTags.IS_SCRUBLAND).add(SPINY_THICKET);
 	}
 
 	@SafeVarargs

@@ -13,7 +13,8 @@ public class AtmosphericBiomeTags {
 	public static final TagKey<Biome> HAS_ARID_GARDEN = biomeTag("has_structure/arid_garden");
 	public static final TagKey<Biome> HAS_KOUSA_SANCTUM = biomeTag("has_structure/kousa_sanctum");
 	public static final TagKey<Biome> HAS_VILLAGE_SCRUBLAND = biomeTag("has_structure/village_scrubland");
-	public static final TagKey<Biome> SPAWNS_YELLOW_RABBITS = biomeTag("only_allows_yellow_rabbits");
+	public static final TagKey<Biome> SPAWNS_YELLOW_RABBITS = biomeTag("spawns_yellow_rabbits");
+	public static final TagKey<Biome> SPAWNS_ARID_CAMELS = biomeTag("spawns_arid_camels");
 
 	private static TagKey<Biome> biomeTag(String name) {
 		return TagUtil.biomeTag(Atmospheric.MOD_ID, name);
