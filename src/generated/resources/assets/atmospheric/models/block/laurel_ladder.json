@@ -1,5 +1,6 @@
 {
   "parent": "minecraft:block/ladder",
+  "render_type": "minecraft:cutout",
   "textures": {
     "particle": "atmospheric:block/laurel_ladder",
     "texture": "atmospheric:block/laurel_ladder"
