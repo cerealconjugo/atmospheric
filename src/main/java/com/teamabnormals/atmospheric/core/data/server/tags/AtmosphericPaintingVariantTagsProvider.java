@@ -20,7 +20,9 @@ public class AtmosphericPaintingVariantTagsProvider extends PaintingVariantTagsP
 	public void addTags(Provider provider) {
 		this.tag(PaintingVariantTags.PLACEABLE).add(
 				AtmosphericPaintingVariants.FATEFUL_OUTING.getKey(),
-				AtmosphericPaintingVariants.JUNGLES_END.getKey()
+				AtmosphericPaintingVariants.JUNGLES_END.getKey(),
+				AtmosphericPaintingVariants.MONSOON.getKey(),
+				AtmosphericPaintingVariants.NOT_SO_STILL_LIFE.getKey()
 		);
 	}
 }
