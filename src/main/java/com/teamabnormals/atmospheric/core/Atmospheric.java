@@ -76,6 +76,7 @@ public class Atmospheric {
 		AtmosphericBannerPatterns.BANNER_PATTERNS.register(bus);
 		AtmosphericStructureProcessors.STRUCTURE_PROCESSORS.register(bus);
 		AtmosphericDecoratedPotPatterns.DECORATED_POT_PATTERNS.register(bus);
+		AtmosphericPaintingVariants.PAINTING_VARIANTS.register(bus);
 
 		bus.addListener(this::commonSetup);
 		bus.addListener(this::clientSetup);
@@ -130,6 +131,7 @@ public class Atmospheric {
 		generator.addProvider(includeServer, new AtmosphericBannerPatternTagsProvider(output, provider, helper));
 		generator.addProvider(includeServer, new AtmosphericStructureTagsProvider(output, provider, helper));
 		generator.addProvider(includeServer, new AtmosphericDamageTypeTagsProvider(output, provider, helper));
+		generator.addProvider(includeServer, new AtmosphericPaintingVariantTagsProvider(output, provider, helper));
 		generator.addProvider(includeServer, new AtmosphericLootTableProvider(output));
 		generator.addProvider(includeServer, new AtmosphericRecipeProvider(output));
 		generator.addProvider(includeServer, AtmosphericAdvancementProvider.create(output, provider, helper));
