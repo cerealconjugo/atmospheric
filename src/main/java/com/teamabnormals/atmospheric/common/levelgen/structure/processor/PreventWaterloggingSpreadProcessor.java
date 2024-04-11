@@ -16,7 +16,7 @@ import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemp
 public class PreventWaterloggingSpreadProcessor extends StructureProcessor {
 	public static final Codec<PreventWaterloggingSpreadProcessor> CODEC = Codec.unit(PreventWaterloggingSpreadProcessor::new);
 
-	private PreventWaterloggingSpreadProcessor() {
+	public PreventWaterloggingSpreadProcessor() {
 	}
 
 	@Override
