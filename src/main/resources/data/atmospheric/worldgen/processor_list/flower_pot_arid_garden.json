@@ -82,6 +82,34 @@
           }
         }
       ]
+    },
+    {
+      "delegate": {
+        "processor_type": "minecraft:rule",
+        "rules": [
+          {
+            "block_entity_modifier": {
+              "type": "minecraft:append_loot",
+              "loot_table": "atmospheric:archaeology/arid_garden_common"
+            },
+            "input_predicate": {
+              "predicate_type": "minecraft:block_match",
+              "block": "atmospheric:arid_sand"
+            },
+            "location_predicate": {
+              "predicate_type": "minecraft:always_true"
+            },
+            "output_state": {
+              "Name": "atmospheric:suspicious_arid_sand",
+              "Properties": {
+                "dusted": "0"
+              }
+            }
+          }
+        ]
+      },
+      "limit": 2,
+      "processor_type": "minecraft:capped"
     }
   ]
 }

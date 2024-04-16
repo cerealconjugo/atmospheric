@@ -1,4 +1,4 @@
-package com.teamabnormals.atmospheric.core.mixin;
+package com.teamabnormals.atmospheric.core.mixin.client;
 
 import com.teamabnormals.atmospheric.common.entity.CamelVariant;
 import net.minecraft.client.renderer.entity.CamelRenderer;

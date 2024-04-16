@@ -28,6 +28,8 @@ public class AtmosphericDatapackBuiltinEntriesProvider extends DatapackBuiltinEn
 			.add(Registries.BIOME, AtmosphericBiomes::bootstrap)
 			.add(Registries.DAMAGE_TYPE, AtmosphericDamageTypes::bootstrap)
 			.add(Registries.TRIM_PATTERN, AtmosphericTrimPatterns::bootstrap)
+			.add(Registries.PROCESSOR_LIST, AtmosphericProcessorLists::bootstrap)
+			.add(Registries.TEMPLATE_POOL, AtmosphericTemplatePools::bootstrap)
 			.add(BlueprintDataPackRegistries.STRUCTURE_REPALETTERS, AtmosphericStructureRepaletters::bootstrap)
 			.add(BlueprintDataPackRegistries.MODDED_BIOME_SLICES, AtmosphericBiomeSlices::bootstrap)
 			.add(ForgeRegistries.Keys.BIOME_MODIFIERS, AtmosphericBiomeModifiers::bootstrap);

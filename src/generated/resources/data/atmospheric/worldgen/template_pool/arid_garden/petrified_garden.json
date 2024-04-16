@@ -1,0 +1,50 @@
+{
+  "elements": [
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "atmospheric:arid_garden/petrified_garden/petrified_garden_1",
+        "processors": "atmospheric:petrified_arid_garden",
+        "projection": "rigid"
+      },
+      "weight": 1
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "atmospheric:arid_garden/petrified_garden/petrified_garden_2",
+        "processors": "atmospheric:petrified_arid_garden",
+        "projection": "rigid"
+      },
+      "weight": 1
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "atmospheric:arid_garden/petrified_garden/petrified_garden_3",
+        "processors": "atmospheric:petrified_arid_garden",
+        "projection": "rigid"
+      },
+      "weight": 1
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "atmospheric:arid_garden/petrified_garden/petrified_garden_4",
+        "processors": "atmospheric:petrified_arid_garden",
+        "projection": "rigid"
+      },
+      "weight": 1
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "atmospheric:arid_garden/petrified_garden/petrified_garden_5",
+        "processors": "atmospheric:petrified_arid_garden",
+        "projection": "rigid"
+      },
+      "weight": 1
+    }
+  ],
+  "fallback": "minecraft:empty"
+}

@@ -18,10 +18,10 @@
     "StructureTemplateMixin",
     "SwordItemMixin"
   ],
+  "client": [
+    "client.CamelRendererMixin"
+  ],
   "injectors": {
     "defaultRequire": 1
-  },
-  "client": [
-    "CamelRendererMixin"
-  ]
+  }
 }
