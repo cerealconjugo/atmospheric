@@ -1,12 +1,12 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_forsythia": {
+    "has_carmine_husk": {
       "conditions": {
         "items": [
           {
             "items": [
-              "atmospheric:forsythia"
+              "atmospheric:carmine_husk"
             ]
           }
         ]
@@ -15,20 +15,20 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:yellow_dye_from_forsythia"
+        "recipe": "atmospheric:carmine_block"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
   },
   "requirements": [
     [
-      "has_forsythia",
+      "has_carmine_husk",
       "has_the_recipe"
     ]
   ],
   "rewards": {
     "recipes": [
-      "minecraft:yellow_dye_from_forsythia"
+      "atmospheric:carmine_block"
     ]
   },
   "sends_telemetry_event": false

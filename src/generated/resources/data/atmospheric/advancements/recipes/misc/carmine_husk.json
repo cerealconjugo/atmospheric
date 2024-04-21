@@ -1,12 +1,12 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_carmine_husk": {
+    "has_carmine_block": {
       "conditions": {
         "items": [
           {
             "items": [
-              "atmospheric:carmine_husk"
+              "atmospheric:carmine_block"
             ]
           }
         ]
@@ -15,20 +15,20 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:red_dye_from_carmine_husk"
+        "recipe": "atmospheric:carmine_husk"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
   },
   "requirements": [
     [
-      "has_carmine_husk",
+      "has_carmine_block",
       "has_the_recipe"
     ]
   ],
   "rewards": {
     "recipes": [
-      "minecraft:red_dye_from_carmine_husk"
+      "atmospheric:carmine_husk"
     ]
   },
   "sends_telemetry_event": false

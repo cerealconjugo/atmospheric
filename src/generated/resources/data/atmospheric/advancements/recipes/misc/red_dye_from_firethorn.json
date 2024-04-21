@@ -15,7 +15,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:red_dye_from_firethorn"
+        "recipe": "atmospheric:red_dye_from_firethorn"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -28,7 +28,7 @@
   ],
   "rewards": {
     "recipes": [
-      "minecraft:red_dye_from_firethorn"
+      "atmospheric:red_dye_from_firethorn"
     ]
   },
   "sends_telemetry_event": false

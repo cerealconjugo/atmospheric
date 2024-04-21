@@ -182,17 +182,28 @@ public class AtmosphericRecipeProvider extends RecipeProvider {
 		WoodworksRecipeProvider.leafPileRecipes(consumer, GRIMWOOD_LEAVES.get(), GRIMWOOD_LEAF_PILE.get(), Atmospheric.MOD_ID);
 	}
 
-	public static ShapelessRecipeBuilder oneToOneConversionRecipe(RecipeCategory category, ItemLike output, ItemLike input, int count) {
-		return ShapelessRecipeBuilder.shapeless(category, output, count).requires(input).unlockedBy(getHasName(input), has(input));
+	public static void nineBlockStorageRecipes(Consumer<FinishedRecipe> consumer, RecipeCategory itemCategory, ItemLike item, RecipeCategory storageCategory, ItemLike storage) {
+		nineBlockStorageRecipes(consumer, itemCategory, item, storageCategory, storage, Atmospheric.MOD_ID + ":" + getSimpleRecipeName(storage), null, Atmospheric.MOD_ID + ":" + getSimpleRecipeName(item), null);
+	}
+
+	public static void oneToOneConversionRecipe(Consumer<FinishedRecipe> consumer, ItemLike input, ItemLike output, @Nullable String group) {
+		oneToOneConversionRecipe(consumer, input, output, group, 1);
+	}
+
+	public static void oneToOneConversionRecipe(Consumer<FinishedRecipe> consumer, ItemLike input, ItemLike output, @Nullable String group, int count) {
+		oneToOneConversionRecipe(consumer, RecipeCategory.MISC, input, output, group, count);
+	}
+
+	public static void oneToOneConversionRecipe(Consumer<FinishedRecipe> consumer, RecipeCategory category, ItemLike input, ItemLike output, @Nullable String group, int count) {
+		ShapelessRecipeBuilder.shapeless(category, input, count).requires(output).group(group).unlockedBy(getHasName(output), has(output)).save(consumer, getModConversionRecipeName(input, output));
 	}
 
 	private static ResourceLocation getModConversionRecipeName(ItemLike result, ItemLike input) {
 		return Atmospheric.location(getConversionRecipeName(result, input));
 	}
 
-
 	public static void conditionalNineBlockStorageRecipesWithCustomUnpacking(Consumer<FinishedRecipe> consumer, ICondition condition, RecipeCategory itemCategory, ItemLike item, RecipeCategory storageCategory, ItemLike storage, String shapelessName, String shapelessGroup) {
-		conditionalNineBlockStorageRecipes(consumer, condition, itemCategory, item, storageCategory, storage, Atmospheric.MOD_ID + ":" + getSimpleRecipeName(storage), null, shapelessName, shapelessGroup);
+		conditionalNineBlockStorageRecipes(consumer, condition, itemCategory, item, storageCategory, storage, Atmospheric.MOD_ID + ":" + getSimpleRecipeName(storage), null, Atmospheric.MOD_ID + ":" + shapelessName, shapelessGroup);
 	}
 
 	public static void conditionalNineBlockStorageRecipes(Consumer<FinishedRecipe> consumer, ICondition condition, RecipeCategory itemCategory, ItemLike item, RecipeCategory storageCategory, ItemLike storage) {

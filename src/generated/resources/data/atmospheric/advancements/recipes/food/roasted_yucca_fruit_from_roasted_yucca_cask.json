@@ -18,7 +18,7 @@
           },
           "has_the_recipe": {
             "conditions": {
-              "recipe": "minecraft:roasted_yucca_fruit_from_roasted_yucca_cask"
+              "recipe": "atmospheric:roasted_yucca_fruit_from_roasted_yucca_cask"
             },
             "trigger": "minecraft:recipe_unlocked"
           }
@@ -31,7 +31,7 @@
         ],
         "rewards": {
           "recipes": [
-            "minecraft:roasted_yucca_fruit_from_roasted_yucca_cask"
+            "atmospheric:roasted_yucca_fruit_from_roasted_yucca_cask"
           ]
         },
         "sends_telemetry_event": false

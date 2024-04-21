@@ -4,12 +4,12 @@
       "advancement": {
         "parent": "minecraft:recipes/root",
         "criteria": {
-          "has_shimmering_passion_fruit_crate": {
+          "has_golden_dragon_fruit_crate": {
             "conditions": {
               "items": [
                 {
                   "items": [
-                    "atmospheric:shimmering_passion_fruit_crate"
+                    "atmospheric:golden_dragon_fruit_crate"
                   ]
                 }
               ]
@@ -18,20 +18,20 @@
           },
           "has_the_recipe": {
             "conditions": {
-              "recipe": "minecraft:shimmering_passion_fruit_from_shimmering_passion_fruit_crate"
+              "recipe": "atmospheric:golden_dragon_fruit_from_golden_dragon_fruit_crate"
             },
             "trigger": "minecraft:recipe_unlocked"
           }
         },
         "requirements": [
           [
-            "has_shimmering_passion_fruit_crate",
+            "has_golden_dragon_fruit_crate",
             "has_the_recipe"
           ]
         ],
         "rewards": {
           "recipes": [
-            "minecraft:shimmering_passion_fruit_from_shimmering_passion_fruit_crate"
+            "atmospheric:golden_dragon_fruit_from_golden_dragon_fruit_crate"
           ]
         },
         "sends_telemetry_event": false

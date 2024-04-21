@@ -1,12 +1,12 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_dragon_fruit": {
+    "has_carmine_husk": {
       "conditions": {
         "items": [
           {
             "items": [
-              "atmospheric:dragon_fruit"
+              "atmospheric:carmine_husk"
             ]
           }
         ]
@@ -15,20 +15,20 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:pink_dye_from_dragon_fruit"
+        "recipe": "atmospheric:red_dye_from_carmine_husk"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
   },
   "requirements": [
     [
-      "has_dragon_fruit",
+      "has_carmine_husk",
       "has_the_recipe"
     ]
   ],
   "rewards": {
     "recipes": [
-      "minecraft:pink_dye_from_dragon_fruit"
+      "atmospheric:red_dye_from_carmine_husk"
     ]
   },
   "sends_telemetry_event": false
