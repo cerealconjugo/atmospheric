@@ -1,11 +1,11 @@
 package com.teamabnormals.atmospheric.common.block;
 
 import com.teamabnormals.atmospheric.core.other.AtmosphericCriteriaTriggers;
-import com.teamabnormals.atmospheric.core.registry.builtin.AtmosphericDamageTypes;
 import com.teamabnormals.atmospheric.core.other.tags.AtmosphericBlockTags;
 import com.teamabnormals.atmospheric.core.other.tags.AtmosphericEntityTypeTags;
 import com.teamabnormals.atmospheric.core.registry.AtmosphericItems;
 import com.teamabnormals.atmospheric.core.registry.AtmosphericMobEffects;
+import com.teamabnormals.atmospheric.core.registry.builtin.AtmosphericDamageTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Direction.Plane;

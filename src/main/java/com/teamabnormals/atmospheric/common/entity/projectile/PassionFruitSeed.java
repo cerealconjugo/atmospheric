@@ -1,7 +1,7 @@
 package com.teamabnormals.atmospheric.common.entity.projectile;
 
-import com.teamabnormals.atmospheric.core.registry.builtin.AtmosphericDamageTypes;
 import com.teamabnormals.atmospheric.core.registry.AtmosphericEntityTypes;
+import com.teamabnormals.atmospheric.core.registry.builtin.AtmosphericDamageTypes;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;

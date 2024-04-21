@@ -2,7 +2,6 @@ package com.teamabnormals.atmospheric.common.effect;
 
 import com.teamabnormals.atmospheric.common.entity.projectile.PassionFruitSeed;
 import com.teamabnormals.atmospheric.core.registry.AtmosphericSoundEvents;
-import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.effect.MobEffect;

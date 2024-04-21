@@ -2,7 +2,6 @@ package com.teamabnormals.atmospheric.core.registry;
 
 import com.teamabnormals.atmospheric.common.levelgen.structure.processor.PreventWaterloggingSpreadProcessor;
 import com.teamabnormals.atmospheric.core.Atmospheric;
-import net.minecraft.core.Registry;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessorType;
 import net.minecraftforge.registries.DeferredRegister;

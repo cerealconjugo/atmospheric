@@ -78,10 +78,10 @@ public class CochinealAttachToCactusGoal extends Goal {
 		BlockPos blockpos = this.cochineal.blockPosition();
 		BlockPos.MutableBlockPos mutable = new BlockPos.MutableBlockPos();
 
-		for(int r = 0; r < 12; ++r) {
-			for(int x = 0; x <= r; x = x > 0 ? -x : 1 - x) {
-				for(int z = x < r && x > -r ? r : 0; z <= r; z = z > 0 ? -z : 1 - z) {
-					for(int y = 0; y <= 2; y = y > 0 ? -y : 1 - y) {
+		for (int r = 0; r < 12; ++r) {
+			for (int x = 0; x <= r; x = x > 0 ? -x : 1 - x) {
+				for (int z = x < r && x > -r ? r : 0; z <= r; z = z > 0 ? -z : 1 - z) {
+					for (int y = 0; y <= 2; y = y > 0 ? -y : 1 - y) {
 						mutable.setWithOffset(blockpos, x, y, z);
 						if (this.cochineal.isSuckleable(mutable)) {
 							List<BlockPos> list = Lists.newArrayList();

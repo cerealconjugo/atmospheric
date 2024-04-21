@@ -10,7 +10,6 @@ import com.teamabnormals.atmospheric.integration.boatload.AtmosphericBoatTypes;
 import com.teamabnormals.blueprint.core.util.item.CreativeModeTabContentsPopulator;
 import com.teamabnormals.blueprint.core.util.registry.BlockSubRegistryHelper;
 import com.teamabnormals.blueprint.core.util.registry.ItemSubRegistryHelper;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
@@ -20,14 +19,12 @@ import net.minecraft.world.level.ItemLike;
 import net.minecraftforge.common.ForgeSpawnEggItem;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
-import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
 import java.util.function.Predicate;
 
 import static com.teamabnormals.blueprint.core.util.item.ItemStackUtil.is;
 import static net.minecraft.world.item.CreativeModeTabs.*;
-import static net.minecraft.world.item.CreativeModeTabs.SPAWN_EGGS;
 import static net.minecraft.world.item.crafting.Ingredient.of;
 
 @EventBusSubscriber(modid = Atmospheric.MOD_ID, bus = EventBusSubscriber.Bus.MOD)
@@ -139,7 +136,7 @@ public class AtmosphericItems {
 				.addItemsBefore(of(Items.BAMBOO_RAFT), GRIMWOOD_BOAT.getFirst(), GRIMWOOD_BOAT.getSecond())
 				.addItemsBefore(modLoaded(Items.BAMBOO_RAFT, "boatload"), GRIMWOOD_FURNACE_BOAT, LARGE_GRIMWOOD_BOAT)
 				.tab(SPAWN_EGGS)
-				.addItemsAlphabetically(is(SpawnEggItem.class),COCHINEAL_SPAWN_EGG);
+				.addItemsAlphabetically(is(SpawnEggItem.class), COCHINEAL_SPAWN_EGG);
 	}
 
 	public static Predicate<ItemStack> modLoaded(ItemLike item, String... modids) {

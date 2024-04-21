@@ -1,10 +1,10 @@
 package com.teamabnormals.atmospheric.common.block;
 
 import com.teamabnormals.atmospheric.core.other.AtmosphericCriteriaTriggers;
-import com.teamabnormals.atmospheric.core.registry.builtin.AtmosphericDamageTypes;
 import com.teamabnormals.atmospheric.core.other.tags.AtmosphericBlockTags;
 import com.teamabnormals.atmospheric.core.registry.AtmosphericBlocks;
 import com.teamabnormals.atmospheric.core.registry.AtmosphericItems;
+import com.teamabnormals.atmospheric.core.registry.builtin.AtmosphericDamageTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
