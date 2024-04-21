@@ -1,20 +1,6 @@
 {
   "values": [
     "atmospheric:shimmering_passion_fruit_crate",
-    "atmospheric:golden_dragon_fruit_crate",
-    "atmospheric:rosewood_chest",
-    "atmospheric:trapped_rosewood_chest",
-    "atmospheric:morado_chest",
-    "atmospheric:trapped_morado_chest",
-    "atmospheric:yucca_chest",
-    "atmospheric:trapped_yucca_chest",
-    "atmospheric:kousa_chest",
-    "atmospheric:trapped_kousa_chest",
-    "atmospheric:aspen_chest",
-    "atmospheric:trapped_aspen_chest",
-    "atmospheric:grimwood_chest",
-    "atmospheric:trapped_grimwood_chest",
-    "atmospheric:laurel_chest",
-    "atmospheric:trapped_laurel_chest"
+    "atmospheric:golden_dragon_fruit_crate"
   ]
 }
