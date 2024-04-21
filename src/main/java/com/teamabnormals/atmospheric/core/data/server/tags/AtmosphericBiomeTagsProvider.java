@@ -36,7 +36,8 @@ public class AtmosphericBiomeTagsProvider extends BiomeTagsProvider {
 		this.tag(BiomeTags.SPAWNS_COLD_VARIANT_FROGS).add(KOUSA_JUNGLE, SNOWY_SCRUBLAND);
 		this.tag(BiomeTags.SPAWNS_WARM_VARIANT_FROGS).addTag(AtmosphericBiomeTags.IS_RAINFOREST).addTag(AtmosphericBiomeTags.IS_DUNES).add(SCRUBLAND, SPINY_THICKET);
 		this.tag(BiomeTags.WATER_ON_MAP_OUTLINES).add(RAINFOREST_BASIN, SPARSE_RAINFOREST_BASIN);
-		this.tag(BiomeTags.SPAWNS_GOLD_RABBITS).addTag(AtmosphericBiomeTags.IS_DUNES).add(SPINY_THICKET, SCRUBLAND, SNOWY_SCRUBLAND);
+		this.tag(BiomeTags.SPAWNS_GOLD_RABBITS).addTag(AtmosphericBiomeTags.IS_DUNES).add(SPINY_THICKET, SCRUBLAND);
+		this.tag(BiomeTags.SPAWNS_WHITE_RABBITS).add(SNOWY_SCRUBLAND, KOUSA_JUNGLE);
 		this.tag(BiomeTags.SPAWNS_SNOW_FOXES).add(KOUSA_JUNGLE, SNOWY_SCRUBLAND);
 
 		this.tag(AtmosphericBiomeTags.IS_RAINFOREST).add(RAINFOREST, SPARSE_RAINFOREST, RAINFOREST_BASIN, SPARSE_RAINFOREST_BASIN);

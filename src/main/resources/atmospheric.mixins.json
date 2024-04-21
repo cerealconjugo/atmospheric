@@ -10,7 +10,6 @@
     "CamelMixin",
     "EntityMixin",
     "PistonBaseBlockMixin",
-    "RabbitMixin",
     "ServerLevelMixin",
     "ShearsItemMixin",
     "SnowAndFreezeFeatureMixin",
