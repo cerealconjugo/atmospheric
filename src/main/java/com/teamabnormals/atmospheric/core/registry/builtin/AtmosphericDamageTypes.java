@@ -1,4 +1,4 @@
-package com.teamabnormals.atmospheric.core.other;
+package com.teamabnormals.atmospheric.core.registry.builtin;
 
 import com.teamabnormals.atmospheric.core.Atmospheric;
 import net.minecraft.core.Holder.Reference;

@@ -44,6 +44,15 @@
         "projection": "rigid"
       },
       "weight": 1
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "atmospheric:arid_garden/petrified_garden/petrified_garden_6",
+        "processors": "atmospheric:petrified_arid_garden",
+        "projection": "rigid"
+      },
+      "weight": 1
     }
   ],
   "fallback": "minecraft:empty"

@@ -117,32 +117,32 @@ public class Atmospheric {
 		CompletableFuture<Provider> provider = event.getLookupProvider();
 		ExistingFileHelper helper = event.getExistingFileHelper();
 
-		boolean includeServer = event.includeServer();
+		boolean server = event.includeServer();
 
 		AtmosphericDatapackBuiltinEntriesProvider datapackEntries = new AtmosphericDatapackBuiltinEntriesProvider(output, provider);
-		generator.addProvider(includeServer, datapackEntries);
+		generator.addProvider(server, datapackEntries);
 		provider = datapackEntries.getRegistryProvider();
 
 		AtmosphericBlockTagsProvider blockTags = new AtmosphericBlockTagsProvider(output, provider, helper);
-		generator.addProvider(includeServer, blockTags);
-		generator.addProvider(includeServer, new AtmosphericItemTagsProvider(output, provider, blockTags.contentsGetter(), helper));
-		generator.addProvider(includeServer, new AtmosphericEntityTypeTagsProvider(output, provider, helper));
-		generator.addProvider(includeServer, new AtmosphericBiomeTagsProvider(output, provider, helper));
-		generator.addProvider(includeServer, new AtmosphericBannerPatternTagsProvider(output, provider, helper));
-		generator.addProvider(includeServer, new AtmosphericStructureTagsProvider(output, provider, helper));
-		generator.addProvider(includeServer, new AtmosphericDamageTypeTagsProvider(output, provider, helper));
-		generator.addProvider(includeServer, new AtmosphericPaintingVariantTagsProvider(output, provider, helper));
-		generator.addProvider(includeServer, new AtmosphericLootTableProvider(output));
-		generator.addProvider(includeServer, new AtmosphericRecipeProvider(output));
-		generator.addProvider(includeServer, AtmosphericAdvancementProvider.create(output, provider, helper));
-		generator.addProvider(includeServer, new AtmosphericAdvancementModifierProvider(output, provider));
-		generator.addProvider(includeServer, new AtmosphericLootModifierProvider(output, provider));
-		generator.addProvider(includeServer, new AtmosphericChunkGeneratorModifierProvider(output, provider));
+		generator.addProvider(server, blockTags);
+		generator.addProvider(server, new AtmosphericItemTagsProvider(output, provider, blockTags.contentsGetter(), helper));
+		generator.addProvider(server, new AtmosphericEntityTypeTagsProvider(output, provider, helper));
+		generator.addProvider(server, new AtmosphericBiomeTagsProvider(output, provider, helper));
+		generator.addProvider(server, new AtmosphericBannerPatternTagsProvider(output, provider, helper));
+		generator.addProvider(server, new AtmosphericStructureTagsProvider(output, provider, helper));
+		generator.addProvider(server, new AtmosphericDamageTypeTagsProvider(output, provider, helper));
+		generator.addProvider(server, new AtmosphericPaintingVariantTagsProvider(output, provider, helper));
+		generator.addProvider(server, new AtmosphericLootTableProvider(output));
+		generator.addProvider(server, new AtmosphericRecipeProvider(output));
+		generator.addProvider(server, AtmosphericAdvancementProvider.create(output, provider, helper));
+		generator.addProvider(server, new AtmosphericAdvancementModifierProvider(output, provider));
+		generator.addProvider(server, new AtmosphericLootModifierProvider(output, provider));
+		generator.addProvider(server, new AtmosphericChunkGeneratorModifierProvider(output, provider));
 
-		boolean includeClient = event.includeClient();
-		generator.addProvider(includeClient, new AtmosphericBlockStateProvider(output, helper));
-		generator.addProvider(includeClient, new AtmosphericItemModelProvider(output, helper));
-		generator.addProvider(includeClient, new AtmosphericSpriteSourceProvider(output, helper));
+		boolean client = event.includeClient();
+		generator.addProvider(client, new AtmosphericBlockStateProvider(output, helper));
+		generator.addProvider(client, new AtmosphericItemModelProvider(output, helper));
+		generator.addProvider(client, new AtmosphericSpriteSourceProvider(output, helper));
 	}
 
 	@OnlyIn(Dist.CLIENT)

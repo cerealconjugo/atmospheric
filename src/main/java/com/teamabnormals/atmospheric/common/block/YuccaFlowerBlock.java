@@ -1,7 +1,7 @@
 package com.teamabnormals.atmospheric.common.block;
 
 import com.google.common.base.Supplier;
-import com.teamabnormals.atmospheric.core.other.AtmosphericDamageTypes;
+import com.teamabnormals.atmospheric.core.registry.builtin.AtmosphericDamageTypes;
 import com.teamabnormals.atmospheric.core.other.tags.AtmosphericBlockTags;
 import com.teamabnormals.atmospheric.core.registry.AtmosphericBlocks;
 import net.minecraft.core.BlockPos;

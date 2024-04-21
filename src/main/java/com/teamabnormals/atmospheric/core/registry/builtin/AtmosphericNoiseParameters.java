@@ -1,4 +1,4 @@
-package com.teamabnormals.atmospheric.core.registry;
+package com.teamabnormals.atmospheric.core.registry.builtin;
 
 import com.teamabnormals.atmospheric.core.Atmospheric;
 import net.minecraft.core.registries.Registries;
@@ -12,7 +12,6 @@ public class AtmosphericNoiseParameters {
 
 	public static void bootstrap(BootstapContext<NoiseParameters> context) {
 		context.register(FLOOR_RAISE_RADIUS_OFFSET, new NoiseParameters(-4, 1.0D, 1.0D));
-
 	}
 
 	public static ResourceKey<NoiseParameters> createKey(String name) {

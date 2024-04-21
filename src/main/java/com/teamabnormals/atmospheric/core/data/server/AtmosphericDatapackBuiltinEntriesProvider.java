@@ -1,8 +1,8 @@
 package com.teamabnormals.atmospheric.core.data.server;
 
 import com.teamabnormals.atmospheric.core.Atmospheric;
-import com.teamabnormals.atmospheric.core.other.AtmosphericDamageTypes;
-import com.teamabnormals.atmospheric.core.registry.AtmosphericNoiseParameters;
+import com.teamabnormals.atmospheric.core.registry.builtin.AtmosphericDamageTypes;
+import com.teamabnormals.atmospheric.core.registry.builtin.AtmosphericNoiseParameters;
 import com.teamabnormals.atmospheric.core.registry.builtin.*;
 import com.teamabnormals.atmospheric.core.other.AtmosphericBiomeSlices;
 import com.teamabnormals.atmospheric.core.registry.AtmosphericFeatures.AtmosphericConfiguredFeatures;

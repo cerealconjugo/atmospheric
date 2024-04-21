@@ -1,7 +1,7 @@
 package com.teamabnormals.atmospheric.common.item;
 
 import com.teamabnormals.atmospheric.core.other.AtmosphericCriteriaTriggers;
-import com.teamabnormals.atmospheric.core.other.AtmosphericDamageTypes;
+import com.teamabnormals.atmospheric.core.registry.builtin.AtmosphericDamageTypes;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.LivingEntity;
