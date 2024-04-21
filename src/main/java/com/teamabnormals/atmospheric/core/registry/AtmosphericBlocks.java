@@ -298,7 +298,7 @@ public class AtmosphericBlocks {
 	public static final RegistryObject<Block> GOLDEN_GROWTHS = HELPER.createBlock("golden_growths", () -> new GoldenGrowthsBlock(AtmosphericProperties.GOLDEN_GROWTHS));
 	public static final RegistryObject<Block> POTTED_GOLDEN_GROWTHS = HELPER.createBlockNoItem("potted_golden_growths", () -> new FlowerPotBlock(GOLDEN_GROWTHS.get(), PropertyUtil.flowerPot()));
 
-	public static final RegistryObject<Block> CRUSTOSE = HELPER.createBlock("crustose", () -> new CrustoseBlock(Block.Properties.copy(Blocks.GRASS_BLOCK).randomTicks()));
+	public static final RegistryObject<Block> CRUSTOSE = HELPER.createBlock("crustose", () -> new CrustoseBlock(AtmosphericProperties.CRUSTOSE));
 	public static final RegistryObject<Block> CRUSTOSE_PATH = HELPER.createBlock("crustose_path", () -> new DirtPathBlock(AtmosphericProperties.CRUSTOSE_PATH));
 	public static final RegistryObject<Block> CRUSTOSE_LOG = HELPER.createBlock("crustose_log", () -> new CrustoseLogBlock(ASPEN_LOG::get, AtmosphericProperties.ASPEN.log().randomTicks()));
 	public static final RegistryObject<Block> CRUSTOSE_WOOD = HELPER.createBlock("crustose_wood", () -> new CrustoseLogBlock(ASPEN_WOOD::get, AtmosphericProperties.ASPEN.log().randomTicks()));
