@@ -11,14 +11,14 @@
   },
   "conditions": [
     {
-      "type": "forge:and",
+      "type": "blueprint:and",
       "values": [
         {
           "type": "forge:mod_loaded",
           "modid": "quark"
         },
         {
-          "type": "blueprint:quark_flag",
+          "type": "quark:flag",
           "flag": "cactus_block"
         }
       ]
