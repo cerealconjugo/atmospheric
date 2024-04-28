@@ -4,7 +4,6 @@ import com.teamabnormals.atmospheric.core.Atmospheric;
 import com.teamabnormals.atmospheric.core.registry.AtmosphericBiomes;
 import net.minecraft.world.entity.npc.VillagerTrades;
 import net.minecraft.world.entity.npc.VillagerType;
-import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 
 public class AtmosphericVillagers {
 

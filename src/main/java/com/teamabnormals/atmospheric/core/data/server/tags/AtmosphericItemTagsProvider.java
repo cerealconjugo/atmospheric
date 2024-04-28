@@ -3,10 +3,10 @@ package com.teamabnormals.atmospheric.core.data.server.tags;
 import com.teamabnormals.atmospheric.core.Atmospheric;
 import com.teamabnormals.atmospheric.core.other.tags.AtmosphericBlockTags;
 import com.teamabnormals.atmospheric.core.registry.AtmosphericItems;
+import com.teamabnormals.blueprint.core.data.server.tags.BlueprintItemTagsProvider;
 import com.teamabnormals.blueprint.core.other.tags.BlueprintItemTags;
 import net.minecraft.core.HolderLookup.Provider;
 import net.minecraft.data.PackOutput;
-import net.minecraft.data.tags.ItemTagsProvider;
 import net.minecraft.data.tags.TagsProvider;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
@@ -19,14 +19,16 @@ import java.util.concurrent.CompletableFuture;
 import static com.teamabnormals.atmospheric.core.other.tags.AtmosphericItemTags.*;
 import static com.teamabnormals.atmospheric.core.registry.AtmosphericBlocks.*;
 
-public class AtmosphericItemTagsProvider extends ItemTagsProvider {
+public class AtmosphericItemTagsProvider extends BlueprintItemTagsProvider {
 
 	public AtmosphericItemTagsProvider(PackOutput output, CompletableFuture<Provider> provider, CompletableFuture<TagsProvider.TagLookup<Block>> lookup, ExistingFileHelper helper) {
-		super(output, provider, lookup, Atmospheric.MOD_ID, helper);
+		super(Atmospheric.MOD_ID, output, provider, lookup, helper);
 	}
 
 	@Override
 	public void addTags(Provider provider) {
+		this.copyWoodsetTags();
+
 		this.tag(COCHINEAL_FOOD).add(AtmosphericItems.DRAGON_FRUIT.get()).addTag(COCHINEAL_SUPER_LOVE_FOOD);
 		this.tag(COCHINEAL_SUPER_LOVE_FOOD).add(AtmosphericItems.GOLDEN_DRAGON_FRUIT.get());
 
@@ -39,21 +41,10 @@ public class AtmosphericItemTagsProvider extends ItemTagsProvider {
 		this.copy(AtmosphericBlockTags.LAUREL_LOGS, LAUREL_LOGS);
 		this.copy(AtmosphericBlockTags.TRAVERTINE, TRAVERTINE);
 
-		this.copy(BlockTags.PLANKS, ItemTags.PLANKS);
-		this.copy(BlockTags.WOODEN_BUTTONS, ItemTags.WOODEN_BUTTONS);
-		this.copy(BlockTags.WOODEN_DOORS, ItemTags.WOODEN_DOORS);
-		this.copy(BlockTags.WOODEN_STAIRS, ItemTags.WOODEN_STAIRS);
-		this.copy(BlockTags.WOODEN_SLABS, ItemTags.WOODEN_SLABS);
-		this.copy(BlockTags.WOODEN_FENCES, ItemTags.WOODEN_FENCES);
-		this.copy(BlockTags.WOODEN_PRESSURE_PLATES, ItemTags.WOODEN_PRESSURE_PLATES);
-		this.copy(BlockTags.SAPLINGS, ItemTags.SAPLINGS);
-		this.copy(BlockTags.LOGS_THAT_BURN, ItemTags.LOGS_THAT_BURN);
 		this.copy(BlockTags.SAND, ItemTags.SAND);
 		this.copy(BlockTags.SLABS, ItemTags.SLABS);
 		this.copy(BlockTags.WALLS, ItemTags.WALLS);
 		this.copy(BlockTags.STAIRS, ItemTags.STAIRS);
-		this.copy(BlockTags.LEAVES, ItemTags.LEAVES);
-		this.copy(BlockTags.WOODEN_TRAPDOORS, ItemTags.WOODEN_TRAPDOORS);
 		this.tag(MONKEY_BRUSH).add(WARM_MONKEY_BRUSH.get().asItem(), HOT_MONKEY_BRUSH.get().asItem(), SCALDING_MONKEY_BRUSH.get().asItem());
 		this.copy(BlockTags.SMALL_FLOWERS, ItemTags.SMALL_FLOWERS);
 		this.copy(BlockTags.TALL_FLOWERS, ItemTags.TALL_FLOWERS);
@@ -71,10 +62,6 @@ public class AtmosphericItemTagsProvider extends ItemTagsProvider {
 		this.tag(ItemTags.DECORATED_POT_SHERDS).add(AtmosphericItems.SCYTHE_POTTERY_SHERD.get(), AtmosphericItems.SUCCULENT_POTTERY_SHERD.get(), AtmosphericItems.SUN_POTTERY_SHERD.get());
 		this.tag(ItemTags.TRIM_TEMPLATES).add(AtmosphericItems.APOSTLE_ARMOR_TRIM_SMITHING_TEMPLATE.get(), AtmosphericItems.DRUID_ARMOR_TRIM_SMITHING_TEMPLATE.get(), AtmosphericItems.PETRIFIED_ARMOR_TRIM_SMITHING_TEMPLATE.get());
 
-		this.copy(Tags.Blocks.CHESTS_WOODEN, Tags.Items.CHESTS_WOODEN);
-		this.copy(Tags.Blocks.CHESTS_TRAPPED, Tags.Items.CHESTS_TRAPPED);
-		this.copy(Tags.Blocks.FENCE_GATES_WOODEN, Tags.Items.FENCE_GATES_WOODEN);
-		this.copy(Tags.Blocks.FENCES_WOODEN, Tags.Items.FENCES_WOODEN);
 		this.copy(Tags.Blocks.SAND_COLORLESS, Tags.Items.SAND_COLORLESS);
 		this.copy(Tags.Blocks.SAND_RED, Tags.Items.SAND_RED);
 		this.copy(Tags.Blocks.SANDSTONE, Tags.Items.SANDSTONE);

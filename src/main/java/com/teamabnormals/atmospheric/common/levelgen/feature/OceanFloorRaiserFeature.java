@@ -1,7 +1,7 @@
 package com.teamabnormals.atmospheric.common.levelgen.feature;
 
 import com.mojang.serialization.Codec;
-import com.teamabnormals.atmospheric.core.registry.AtmosphericNoiseParameters;
+import com.teamabnormals.atmospheric.core.registry.builtin.AtmosphericNoiseParameters;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.tags.BlockTags;

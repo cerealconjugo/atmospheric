@@ -1,13 +1,11 @@
 package com.teamabnormals.atmospheric.core.data.server;
 
 import com.teamabnormals.atmospheric.core.Atmospheric;
-import com.teamabnormals.atmospheric.core.other.AtmosphericDamageTypes;
-import com.teamabnormals.atmospheric.core.registry.AtmosphericNoiseParameters;
-import com.teamabnormals.atmospheric.core.registry.builtin.*;
 import com.teamabnormals.atmospheric.core.other.AtmosphericBiomeSlices;
+import com.teamabnormals.atmospheric.core.registry.AtmosphericBiomes;
 import com.teamabnormals.atmospheric.core.registry.AtmosphericFeatures.AtmosphericConfiguredFeatures;
 import com.teamabnormals.atmospheric.core.registry.AtmosphericFeatures.AtmosphericPlacedFeatures;
-import com.teamabnormals.atmospheric.core.registry.AtmosphericBiomes;
+import com.teamabnormals.atmospheric.core.registry.builtin.*;
 import com.teamabnormals.blueprint.core.registry.BlueprintDataPackRegistries;
 import net.minecraft.core.HolderLookup.Provider;
 import net.minecraft.core.RegistrySetBuilder;

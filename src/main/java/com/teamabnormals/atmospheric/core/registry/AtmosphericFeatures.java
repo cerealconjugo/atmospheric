@@ -586,7 +586,6 @@ public class AtmosphericFeatures {
 		public static <FC extends FeatureConfiguration, F extends Feature<FC>> void register(BootstapContext<ConfiguredFeature<?, ?>> context, ResourceKey<ConfiguredFeature<?, ?>> key, F feature, FC config) {
 			context.register(key, new ConfiguredFeature<>(feature, config));
 		}
-
 	}
 
 	public static final class AtmosphericPlacedFeatures {

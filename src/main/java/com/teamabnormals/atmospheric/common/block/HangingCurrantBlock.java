@@ -53,7 +53,7 @@ public class HangingCurrantBlock extends BushBlock implements Fallable {
 
 	@Override
 	public BlockState updateShape(BlockState state, Direction direction, BlockState facingState, LevelAccessor level, BlockPos pos, BlockPos facingPos) {
-		if (!state.canSurvive(level, pos)){
+		if (!state.canSurvive(level, pos)) {
 			this.destroy(level, pos, state);
 			return Blocks.AIR.defaultBlockState();
 		}
