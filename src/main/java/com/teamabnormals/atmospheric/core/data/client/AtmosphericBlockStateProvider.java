@@ -68,6 +68,8 @@ public class AtmosphericBlockStateProvider extends BlueprintBlockStateProvider {
 		this.directionalBlock(YUCCA_CASK);
 		this.directionalBlockSharedSide(ROASTED_YUCCA_CASK, YUCCA_CASK);
 
+		this.flowerPotBlock(POTTED_ALOE_VERA);
+
 		this.brushableBlock(SUSPICIOUS_ARID_SAND);
 		this.brushableBlock(SUSPICIOUS_RED_ARID_SAND);
 
@@ -204,5 +206,13 @@ public class AtmosphericBlockStateProvider extends BlueprintBlockStateProvider {
 				}
 			}
 		});
+	}
+
+	public void flowerPotBlock(RegistryObject<Block> flowerPot, ResourceLocation potTexture) {
+		this.simpleBlock(flowerPot.get(), models().singleTexture(name(flowerPot.get()), new ResourceLocation("block/flower_pot_cross"), "plant", potTexture));
+	}
+
+	public void flowerPotBlock(RegistryObject<Block> flowerPot) {
+		this.flowerPotBlock(flowerPot, blockTexture(flowerPot.get()));
 	}
 }

@@ -99,6 +99,7 @@ public class AtmosphericLootTableProvider extends LootTableProvider {
 			this.add(TALL_ALOE_VERA.get(), this::createTallAloeVeraDrops);
 			this.dropSelf(ALOE_BUNDLE.get());
 			this.dropSelf(ALOE_GEL_BLOCK.get());
+			this.dropPottedContents(POTTED_ALOE_VERA.get());
 			this.add(BARREL_CACTUS.get(), this::createBarrelCactusDrops);
 			this.add(SNOWY_BARREL_CACTUS.get(), this::createBarrelCactusDrops);
 			this.dropOther(SNOWY_CACTUS.get(), Blocks.CACTUS);
