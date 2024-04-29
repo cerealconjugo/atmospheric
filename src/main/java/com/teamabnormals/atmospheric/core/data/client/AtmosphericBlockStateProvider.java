@@ -146,6 +146,7 @@ public class AtmosphericBlockStateProvider extends BlueprintBlockStateProvider {
 
 		this.directionalBlock(CARMINE_BLOCK);
 		this.blockFamily(AtmosphericBlockFamilies.CARMINE_SHINGLES_FAMILY);
+		this.block(CHISELED_CARMINE_SHINGLES.get());
 		this.blockFamily(AtmosphericBlockFamilies.CARMINE_PAVEMENT_FAMILY);
 		this.crossBlockWithPot(FIRETHORN, POTTED_FIRETHORN);
 		this.crossBlockWithPot(FORSYTHIA, POTTED_FORSYTHIA);

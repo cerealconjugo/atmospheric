@@ -20,8 +20,8 @@ public class AtmosphericEntityTypeTagsProvider extends EntityTypeTagsProvider {
 
 	@Override
 	public void addTags(Provider provider) {
-		this.tag(AtmosphericEntityTypeTags.YUCCA_IMMUNE).add(EntityType.BEE, EntityType.HUSK, AtmosphericEntityTypes.COCHINEAL.get());
-		this.tag(AtmosphericEntityTypeTags.CACTUS_IMMUNE).add(EntityType.HUSK, AtmosphericEntityTypes.COCHINEAL.get());
+		this.tag(AtmosphericEntityTypeTags.YUCCA_IMMUNE).add(EntityType.BEE, EntityType.HUSK, EntityType.CAMEL, AtmosphericEntityTypes.COCHINEAL.get());
+		this.tag(AtmosphericEntityTypeTags.CACTUS_IMMUNE).add(EntityType.HUSK, EntityType.CAMEL, AtmosphericEntityTypes.COCHINEAL.get());
 		this.tag(EntityTypeTags.IMPACT_PROJECTILES).add(AtmosphericEntityTypes.PASSION_FRUIT_SEED.get());
 	}
 }
