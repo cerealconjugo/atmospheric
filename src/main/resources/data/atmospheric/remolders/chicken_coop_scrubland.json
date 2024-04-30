@@ -1,0 +1,30 @@
+{
+  "molding": "json",
+  "remolder": {
+    "type": "add",
+    "target": "elements[]",
+    "value": {
+      "element": {
+        "element_type": "minecraft:legacy_single_pool_element",
+        "location": "atmospheric:village/scrubland/houses/scrubland_chicken_coop_1",
+        "processors": {
+          "processors": []
+        },
+        "projection": "rigid"
+      },
+      "weight": 2
+    }
+  },
+  "selector": {
+    "type": "names",
+    "conditions": [
+      {
+        "type": "forge:mod_loaded",
+        "modid": "incubation"
+      }
+    ],
+    "config": [
+      "atmospheric:worldgen/template_pool/village/scrubland/houses"
+    ]
+  }
+}
