@@ -27,6 +27,7 @@ public class AtmosphericBiomeTagsProvider extends BiomeTagsProvider {
 		this.tag(BiomeTags.HAS_MINESHAFT).addTag(AtmosphericBiomeTags.IS_DUNES).add(ASPEN_PARKLAND, KOUSA_JUNGLE, SCRUBLAND, SNOWY_SCRUBLAND, SPINY_THICKET, GRIMWOODS);
 		this.tag(BiomeTags.IS_OVERWORLD).addTag(AtmosphericBiomeTags.IS_RAINFOREST).addTag(AtmosphericBiomeTags.IS_DUNES).add(ASPEN_PARKLAND, KOUSA_JUNGLE, SCRUBLAND, SNOWY_SCRUBLAND, SPINY_THICKET, GRIMWOODS);
 		this.tag(BiomeTags.STRONGHOLD_BIASED_TO).addTag(AtmosphericBiomeTags.IS_RAINFOREST).addTag(AtmosphericBiomeTags.IS_DUNES).add(ASPEN_PARKLAND, KOUSA_JUNGLE, SCRUBLAND, SNOWY_SCRUBLAND, SPINY_THICKET, GRIMWOODS);
+		this.tag(BiomeTags.HAS_TRAIL_RUINS).add(RAINFOREST, ASPEN_PARKLAND, KOUSA_JUNGLE);
 
 		this.tag(BiomeTags.IS_FOREST).addTag(AtmosphericBiomeTags.IS_RAINFOREST).add(LAUREL_FOREST, GRIMWOODS);
 		this.tag(BlueprintBiomeTags.IS_DESERT).addTag(AtmosphericBiomeTags.IS_DUNES).add(SCRUBLAND, SNOWY_SCRUBLAND, SPINY_THICKET);
@@ -37,8 +38,10 @@ public class AtmosphericBiomeTagsProvider extends BiomeTagsProvider {
 		this.tag(BiomeTags.SPAWNS_WARM_VARIANT_FROGS).addTag(AtmosphericBiomeTags.IS_RAINFOREST).addTag(AtmosphericBiomeTags.IS_DUNES).add(SCRUBLAND, SPINY_THICKET);
 		this.tag(BiomeTags.WATER_ON_MAP_OUTLINES).add(RAINFOREST_BASIN, SPARSE_RAINFOREST_BASIN);
 		this.tag(BiomeTags.SPAWNS_GOLD_RABBITS).addTag(AtmosphericBiomeTags.IS_DUNES).add(SPINY_THICKET, SCRUBLAND);
-		this.tag(BiomeTags.SPAWNS_WHITE_RABBITS).add(SNOWY_SCRUBLAND, KOUSA_JUNGLE);
+		this.tag(BiomeTags.SPAWNS_WHITE_RABBITS).add(KOUSA_JUNGLE, SNOWY_SCRUBLAND);
 		this.tag(BiomeTags.SPAWNS_SNOW_FOXES).add(KOUSA_JUNGLE, SNOWY_SCRUBLAND);
+		this.tag(BiomeTags.SNOW_GOLEM_MELTS).addTag(AtmosphericBiomeTags.IS_DUNES).add(SCRUBLAND, SPINY_THICKET);
+		this.tag(BiomeTags.INCREASED_FIRE_BURNOUT).add(RAINFOREST);
 
 		this.tag(AtmosphericBiomeTags.IS_RAINFOREST).add(RAINFOREST, SPARSE_RAINFOREST, RAINFOREST_BASIN, SPARSE_RAINFOREST_BASIN);
 		this.tag(AtmosphericBiomeTags.IS_DUNES).add(DUNES, FLOURISHING_DUNES, ROCKY_DUNES, PETRIFIED_DUNES);

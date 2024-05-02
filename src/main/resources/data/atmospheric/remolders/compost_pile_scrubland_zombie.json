@@ -1,0 +1,28 @@
+{
+  "molding": "json",
+  "remolder": {
+    "type": "add",
+    "target": "elements[]",
+    "value": {
+      "element": {
+        "element_type": "minecraft:legacy_single_pool_element",
+        "location": "atmospheric:village/scrubland/houses/scrubland_compost_pile_1",
+        "processors": "atmospheric:zombie_scrubland",
+        "projection": "rigid"
+      },
+      "weight": 3
+    }
+  },
+  "selector": {
+    "type": "names",
+    "conditions": [
+      {
+        "type": "forge:mod_loaded",
+        "modid": "abnormals_delight"
+      }
+    ],
+    "config": [
+      "atmospheric:worldgen/template_pool/village/scrubland/zombie/houses"
+    ]
+  }
+}

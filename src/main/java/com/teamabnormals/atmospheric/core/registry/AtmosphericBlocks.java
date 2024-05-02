@@ -245,6 +245,7 @@ public class AtmosphericBlocks {
 	public static final RegistryObject<Block> TALL_ALOE_VERA = HELPER.createBlockNoItem("tall_aloe_vera", () -> new AloeVeraTallBlock(AtmosphericProperties.ALOE_VERA));
 	public static final RegistryObject<Block> ALOE_BUNDLE = HELPER.createBlock("aloe_bundle", () -> new RotatedPillarBlock(Block.Properties.copy(Blocks.DRIED_KELP_BLOCK)));
 	public static final RegistryObject<Block> ALOE_GEL_BLOCK = HELPER.createBlock("aloe_gel_block", () -> new AloeGelBlock(Block.Properties.copy(Blocks.SLIME_BLOCK).isSuffocating(PropertyUtil::never)));
+	public static final RegistryObject<Block> POTTED_ALOE_VERA = HELPER.createBlockNoItem("potted_aloe_vera", () -> new FlowerPotBlock(ALOE_VERA.get(), PropertyUtil.flowerPot()));
 	public static final RegistryObject<Block> BARREL_CACTUS = HELPER.createBlockNoItem("barrel_cactus", () -> new BarrelCactusBlock(Block.Properties.copy(Blocks.CACTUS)));
 	public static final RegistryObject<Block> POTTED_BARREL_CACTUS = HELPER.createBlockNoItem("potted_barrel_cactus", () -> new FlowerPotBlock(BARREL_CACTUS.get(), Block.Properties.copy(Blocks.POTTED_CACTUS)));
 	public static final RegistryObject<Block> SNOWY_BARREL_CACTUS = HELPER.createBlockNoItem("snowy_barrel_cactus", () -> new BarrelCactusBlock(Block.Properties.copy(Blocks.CACTUS)));
