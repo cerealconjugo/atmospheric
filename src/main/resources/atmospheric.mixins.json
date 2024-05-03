@@ -18,7 +18,8 @@
     "SwordItemMixin"
   ],
   "client": [
-    "client.CamelRendererMixin"
+    "client.CamelRendererMixin",
+    "client.LevelRendererMixin"
   ],
   "injectors": {
     "defaultRequire": 1
