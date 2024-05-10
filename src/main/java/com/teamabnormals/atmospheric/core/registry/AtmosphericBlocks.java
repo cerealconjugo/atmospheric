@@ -104,10 +104,10 @@ public class AtmosphericBlocks {
 	public static final RegistryObject<Block> FLOWERING_MORADO_LEAVES = HELPER.createBlock("flowering_morado_leaves", () -> new FloweringMoradoLeavesBlock(AtmosphericProperties.MORADO.leaves()));
 	public static final RegistryObject<Block> FLOWERING_MORADO_LEAF_PILE = HELPER.createBlock("flowering_morado_leaf_pile", () -> new LeafPileBlock(AtmosphericProperties.MORADO.leafPile()));
 
-	public static final RegistryObject<Block> PASSION_VINE = HELPER.createBlock("passion_vine", () -> new PassionVineBlock(Block.Properties.of().noCollission().randomTicks().instabreak().sound(SoundType.VINE)));
+	public static final RegistryObject<Block> PASSION_VINE = HELPER.createBlock("passion_vine", () -> new PassionVineBlock(Block.Properties.of().noCollission().randomTicks().instabreak().sound(SoundType.VINE).pushReaction(PushReaction.DESTROY)));
 	public static final RegistryObject<Block> PASSION_VINE_BUNDLE = HELPER.createBlock("passion_vine_bundle", () -> new PassionVineBundleBlock(Block.Properties.of().mapColor(MapColor.COLOR_GREEN).strength(0.5F, 2.5F).sound(SoundType.GRASS)));
 
-	public static final RegistryObject<Block> WATER_HYACINTH = HELPER.createBlockNoItem("water_hyacinth", () -> new WaterHyacinthBlock(Block.Properties.of().noCollission().instabreak().sound(SoundType.VINE)));
+	public static final RegistryObject<Block> WATER_HYACINTH = HELPER.createBlockNoItem("water_hyacinth", () -> new WaterHyacinthBlock(Block.Properties.of().noCollission().instabreak().sound(SoundType.VINE).pushReaction(PushReaction.DESTROY)));
 
 	public static final RegistryObject<Block> WARM_MONKEY_BRUSH = HELPER.createBlockNoItem("warm_monkey_brush", () -> new MonkeyBrushBlock(PropertyUtil.flower()));
 	public static final RegistryObject<Block> HOT_MONKEY_BRUSH = HELPER.createBlockNoItem("hot_monkey_brush", () -> new MonkeyBrushBlock(PropertyUtil.flower()));
@@ -253,9 +253,9 @@ public class AtmosphericBlocks {
 	public static final RegistryObject<Block> SNOWY_CACTUS = HELPER.createBlockNoItem("snowy_cactus", () -> new SnowyCactusBlock(Block.Properties.copy(Blocks.CACTUS)));
 	public static final RegistryObject<Block> POTTED_SNOWY_CACTUS = HELPER.createBlockNoItem("potted_snowy_cactus", () -> new SnowyFlowerPotBlock(SNOWY_CACTUS.get(), () -> Blocks.CACTUS, Block.Properties.copy(Blocks.POTTED_CACTUS)));
 
-	public static final RegistryObject<Block> YUCCA_CASK = HELPER.createBlock("yucca_cask", () -> new BlueprintDirectionalBlock(Block.Properties.of().mapColor(MapColor.COLOR_GREEN).strength(1.5F).sound(SoundType.WOOD)));
-	public static final RegistryObject<Block> ROASTED_YUCCA_CASK = HELPER.createBlock("roasted_yucca_cask", () -> new BlueprintDirectionalBlock(Block.Properties.of().mapColor(MapColor.COLOR_BROWN).strength(1.5F).sound(SoundType.WOOD)));
-	public static final RegistryObject<Block> BARREL_CACTUS_BATCH = HELPER.createBlock("barrel_cactus_batch", () -> new RotatedPillarBlock(Block.Properties.of().mapColor(MapColor.COLOR_GREEN).strength(0.5F).sound(SoundType.WOOD)));
+	public static final RegistryObject<Block> YUCCA_CASK = HELPER.createBlock("yucca_cask", () -> new BlueprintDirectionalBlock(Block.Properties.of().mapColor(MapColor.COLOR_GREEN).strength(1.5F).sound(SoundType.WOOD).ignitedByLava()));
+	public static final RegistryObject<Block> ROASTED_YUCCA_CASK = HELPER.createBlock("roasted_yucca_cask", () -> new BlueprintDirectionalBlock(Block.Properties.of().mapColor(MapColor.COLOR_BROWN).strength(1.5F).sound(SoundType.WOOD).ignitedByLava()));
+	public static final RegistryObject<Block> BARREL_CACTUS_BATCH = HELPER.createBlock("barrel_cactus_batch", () -> new RotatedPillarBlock(Block.Properties.of().mapColor(MapColor.COLOR_GREEN).strength(0.5F).sound(SoundType.WOOD).ignitedByLava()));
 
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -342,8 +342,8 @@ public class AtmosphericBlocks {
 	public static final RegistryObject<Block> ORANGE = HELPER.createBlockNoItem("orange", () -> new OrangeBlock(AtmosphericProperties.ORANGE));
 	public static final RegistryObject<Block> BLOOD_ORANGE = HELPER.createBlockNoItem("blood_orange", () -> new OrangeBlock(AtmosphericProperties.ORANGE));
 
-	public static final RegistryObject<Block> ORANGE_CRATE = HELPER.createBlock("orange_crate", () -> new BlueprintDirectionalBlock(Block.Properties.of().mapColor(MapColor.COLOR_ORANGE).strength(1.5F).sound(SoundType.WOOD)));
-	public static final RegistryObject<Block> BLOOD_ORANGE_CRATE = HELPER.createBlock("blood_orange_crate", () -> new BlueprintDirectionalBlock(Block.Properties.of().mapColor(MapColor.COLOR_RED).strength(1.5F).sound(SoundType.WOOD)));
+	public static final RegistryObject<Block> ORANGE_CRATE = HELPER.createBlock("orange_crate", () -> new BlueprintDirectionalBlock(Block.Properties.of().mapColor(MapColor.COLOR_ORANGE).strength(1.5F).sound(SoundType.WOOD).ignitedByLava()));
+	public static final RegistryObject<Block> BLOOD_ORANGE_CRATE = HELPER.createBlock("blood_orange_crate", () -> new BlueprintDirectionalBlock(Block.Properties.of().mapColor(MapColor.COLOR_RED).strength(1.5F).sound(SoundType.WOOD).ignitedByLava()));
 
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -386,7 +386,7 @@ public class AtmosphericBlocks {
 	public static final RegistryObject<Block> CURRANT_SEEDLING = HELPER.createBlock("currant_seedling", () -> new CurrantSeedlingBlock(AtmosphericProperties.CURRANT.sapling()));
 	public static final RegistryObject<Block> POTTED_CURRANT_SEEDLING = HELPER.createBlockNoItem("potted_currant_seedling", () -> new FlowerPotBlock(CURRANT_SEEDLING.get(), PropertyUtil.flowerPot()));
 	public static final RegistryObject<Block> CURRANT_LEAF_PILE = HELPER.createBlock("currant_leaf_pile", () -> new LeafPileBlock(AtmosphericProperties.CURRANT.leafPile()));
-	public static final RegistryObject<Block> CURRANT_CRATE = HELPER.createBlock("currant_crate", () -> new BlueprintDirectionalBlock(Block.Properties.of().mapColor(MapColor.TERRACOTTA_CYAN).strength(1.5F).sound(SoundType.WOOD)));
+	public static final RegistryObject<Block> CURRANT_CRATE = HELPER.createBlock("currant_crate", () -> new BlueprintDirectionalBlock(Block.Properties.of().mapColor(MapColor.TERRACOTTA_CYAN).strength(1.5F).sound(SoundType.WOOD).ignitedByLava()));
 
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -433,7 +433,7 @@ public class AtmosphericBlocks {
 	public static final RegistryObject<Block> CARMINE_PAVEMENT_SLAB = HELPER.createBlock("carmine_pavement_slab", () -> new SlabBlock(AtmosphericProperties.CARMINE_BLOCK));
 	public static final RegistryObject<Block> CARMINE_PAVEMENT_WALL = HELPER.createBlock("carmine_pavement_wall", () -> new WallBlock(AtmosphericProperties.CARMINE_BLOCK));
 
-	public static final RegistryObject<Block> DRAGON_ROOTS = HELPER.createBlock("dragon_roots", () -> new DragonRootsBlock(Block.Properties.of().mapColor(MapColor.TERRACOTTA_MAGENTA).strength(1.5F).randomTicks().noCollission().sound(SoundType.AZALEA_LEAVES)));
+	public static final RegistryObject<Block> DRAGON_ROOTS = HELPER.createBlock("dragon_roots", () -> new DragonRootsBlock(Block.Properties.of().mapColor(MapColor.TERRACOTTA_MAGENTA).strength(1.5F).randomTicks().noCollission().sound(SoundType.AZALEA_LEAVES).pushReaction(PushReaction.DESTROY)));
 
 	public static final RegistryObject<Block> FIRETHORN = HELPER.createBlock("firethorn", () -> new DesertFlowerBlock(() -> MobEffects.MOVEMENT_SPEED, 9, PropertyUtil.flower()));
 	public static final RegistryObject<Block> POTTED_FIRETHORN = HELPER.createBlockNoItem("potted_firethorn", () -> new FlowerPotBlock(FIRETHORN.get(), PropertyUtil.flowerPot()));
@@ -441,8 +441,8 @@ public class AtmosphericBlocks {
 	public static final RegistryObject<Block> FORSYTHIA = HELPER.createBlock("forsythia", () -> new DesertFlowerBlock(() -> MobEffects.MOVEMENT_SPEED, 9, PropertyUtil.flower()));
 	public static final RegistryObject<Block> POTTED_FORSYTHIA = HELPER.createBlockNoItem("potted_forsythia", () -> new FlowerPotBlock(FORSYTHIA.get(), PropertyUtil.flowerPot()));
 
-	public static final RegistryObject<Block> DRAGON_FRUIT_CRATE = HELPER.createBlock("dragon_fruit_crate", () -> new BlueprintDirectionalBlock(Block.Properties.of().mapColor(MapColor.TERRACOTTA_MAGENTA).strength(1.5F).sound(SoundType.WOOD)));
-	public static final RegistryObject<Block> GOLDEN_DRAGON_FRUIT_CRATE = HELPER.createBlock("golden_dragon_fruit_crate", () -> new BlueprintDirectionalBlock(Block.Properties.of().mapColor(MapColor.GOLD).strength(1.5F).sound(SoundType.WOOD)));
+	public static final RegistryObject<Block> DRAGON_FRUIT_CRATE = HELPER.createBlock("dragon_fruit_crate", () -> new BlueprintDirectionalBlock(Block.Properties.of().mapColor(MapColor.TERRACOTTA_MAGENTA).strength(1.5F).sound(SoundType.WOOD).ignitedByLava()));
+	public static final RegistryObject<Block> GOLDEN_DRAGON_FRUIT_CRATE = HELPER.createBlock("golden_dragon_fruit_crate", () -> new BlueprintDirectionalBlock(Block.Properties.of().mapColor(MapColor.GOLD).strength(1.5F).sound(SoundType.WOOD).ignitedByLava()));
 
 	public static void setupTabEditors() {
 		CreativeModeTabContentsPopulator.mod(Atmospheric.MOD_ID)
