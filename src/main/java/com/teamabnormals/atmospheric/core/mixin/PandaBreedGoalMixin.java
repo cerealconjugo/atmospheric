@@ -18,7 +18,7 @@ public abstract class PandaBreedGoalMixin extends BreedGoal {
 	}
 
 	@Inject(method = "canFindBamboo", at = @At(value = "INVOKE", target = "Lnet/minecraft/core/BlockPos$MutableBlockPos;setWithOffset(Lnet/minecraft/core/Vec3i;III)Lnet/minecraft/core/BlockPos$MutableBlockPos;", shift = At.Shift.AFTER), cancellable = true, locals = LocalCapture.CAPTURE_FAILHARD)
-	private void canFindBamboo(CallbackInfoReturnable<Boolean> cir, BlockPos blockPos, BlockPos.MutableBlockPos blockpos$mutableblockpos, int i, int j, int k, int l) {
+	private void canFindBamboo(CallbackInfoReturnable<Boolean> cir, BlockPos blockPos, BlockPos.MutableBlockPos blockpos$mutableblockpos) {
 		if (this.level.getBlockState(blockpos$mutableblockpos).is(AtmosphericBlocks.SNOWY_BAMBOO.get())) {
 			cir.setReturnValue(true);
 		}
