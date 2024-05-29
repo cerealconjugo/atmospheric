@@ -12,6 +12,7 @@ import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
 import net.minecraft.world.level.block.state.properties.WoodType;
 import net.minecraft.world.level.material.MapColor;
+import net.minecraft.world.level.material.PushReaction;
 
 public class AtmosphericProperties {
 	public static final BlockSetType ROSEWOOD_BLOCK_SET = blockSetType("rosewood");
@@ -43,13 +44,13 @@ public class AtmosphericProperties {
 
 	public static final Properties ARID_SAND = Properties.of().mapColor(MapColor.SAND).strength(0.5F).sound(SoundType.SAND);
 	public static final Properties RED_ARID_SAND = Properties.of().mapColor(MapColor.TERRACOTTA_ORANGE).strength(0.5F).sound(SoundType.SAND);
-	public static final Properties YUCCA_FLOWER = Properties.of().noCollission().strength(0.5F).sound(SoundType.GRASS).offsetType(OffsetType.XZ);
-	public static final Properties ARID_SPROUTS = Properties.of().mapColor(MapColor.SAND).noCollission().instabreak().sound(SoundType.NETHER_SPROUTS).offsetType(OffsetType.XYZ);
+	public static final Properties YUCCA_FLOWER = Properties.of().noCollission().strength(0.5F).sound(SoundType.GRASS).offsetType(OffsetType.XZ).pushReaction(PushReaction.DESTROY);
+	public static final Properties ARID_SPROUTS = Properties.of().mapColor(MapColor.SAND).replaceable().noCollission().instabreak().sound(SoundType.NETHER_SPROUTS).offsetType(OffsetType.XYZ).ignitedByLava().pushReaction(PushReaction.DESTROY);
 
-	public static final Properties AGAVE = Properties.of().mapColor(MapColor.TERRACOTTA_CYAN).noCollission().instabreak().sound(SoundType.GRASS).offsetType(OffsetType.XYZ);
-	public static final Properties GOLDEN_GROWTHS = Properties.of().mapColor(MapColor.GOLD).noCollission().instabreak().sound(SoundType.NETHER_SPROUTS).offsetType(OffsetType.XYZ);
+	public static final Properties AGAVE = Properties.of().mapColor(MapColor.TERRACOTTA_CYAN).replaceable().noCollission().instabreak().sound(SoundType.GRASS).offsetType(OffsetType.XYZ).ignitedByLava().pushReaction(PushReaction.DESTROY);
+	public static final Properties GOLDEN_GROWTHS = Properties.of().mapColor(MapColor.GOLD).replaceable().noCollission().instabreak().sound(SoundType.NETHER_SPROUTS).offsetType(OffsetType.XYZ).ignitedByLava().pushReaction(PushReaction.DESTROY);
 	public static final Properties CRUSTOSE = BlockBehaviour.Properties.of().mapColor(MapColor.GOLD).randomTicks().strength(0.6F).sound(SoundType.GRASS);
-	public static final Properties CRUSTOSE_PATH = Properties.of().mapColor(MapColor.GOLD).strength(0.65F).sound(SoundType.GRASS).isViewBlocking(PropertyUtil::never).isViewBlocking(PropertyUtil::never);
+	public static final Properties CRUSTOSE_PATH = Properties.of().mapColor(MapColor.GOLD).strength(0.65F).sound(SoundType.GRASS).isViewBlocking(PropertyUtil::always).isSuffocating(PropertyUtil::always);
 
 	public static final Properties IVORY_TRAVERTINE = Properties.of().mapColor(MapColor.TERRACOTTA_WHITE).requiresCorrectToolForDrops().strength(3.5F, 6.0F);
 	public static final Properties PEACH_TRAVERTINE = Properties.of().mapColor(MapColor.TERRACOTTA_PINK).requiresCorrectToolForDrops().strength(3.5F, 6.0F);
@@ -59,8 +60,8 @@ public class AtmosphericProperties {
 
 	public static final Properties CARMINE_BLOCK = Properties.of().mapColor(MapColor.COLOR_RED).sound(SoundType.TUFF).strength(0.5F);
 
-	public static final Properties ALOE_VERA = Properties.of().noCollission().instabreak().randomTicks().sound(SoundType.CROP);
-	public static final Properties ORANGE = Properties.of().mapColor(MapColor.COLOR_ORANGE).instabreak().sound(SoundType.HONEY_BLOCK);
+	public static final Properties ALOE_VERA = Properties.of().noCollission().instabreak().randomTicks().sound(SoundType.CROP).pushReaction(PushReaction.DESTROY);
+	public static final Properties ORANGE = Properties.of().mapColor(MapColor.COLOR_ORANGE).instabreak().sound(SoundType.HONEY_BLOCK).pushReaction(PushReaction.DESTROY);
 
 	public static BlockSetType blockSetType(String name) {
 		return BlockSetTypeRegistryHelper.register(new BlockSetType(Atmospheric.MOD_ID + ":" + name));
